@@ -7,7 +7,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")
                 }
-            Text("AddView")
+            AddView()
                 .tabItem { 
                     Label("Add", systemImage: "plus.app")
                 }
@@ -25,6 +25,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView()
+//}
