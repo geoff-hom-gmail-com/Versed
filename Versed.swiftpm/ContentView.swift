@@ -11,7 +11,7 @@ struct ContentView: View {
                 .tabItem { 
                     Label("Add", systemImage: "plus.app")
                 }
-            Text("EncodeView")
+            EncodeView()
                 .badge("new")
                 .tabItem { 
                     Label("Encode", systemImage: "brain.head.profile")

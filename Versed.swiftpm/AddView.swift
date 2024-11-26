@@ -3,6 +3,15 @@ import SwiftUI
 struct AddView: View {
     var body: some View {
         Text("Add")
+        // so maybe a Vstack
+        // and some lines; with a blank line in between
+        // and a multiline text editor
+        // and a button
+        
+        // how hard to rig the button so that when done it will trigger/increase the encode badge? probably should just code it to add it lol
+        // also need a way to delete texts/verses. I guess that's the Encode list. though if doing similar texts, one might want to copy/dup a text in the add tab. 
+        // yeah, would make sense to be able to see a list of texts in AddView, especially like an Example, then select Duplicate or Add Text from
+        // for non-examples, it would be like Duplicate. Hmm; maybe wait until MVP. though will def need Delete verse function by then.
     }
 }
 
