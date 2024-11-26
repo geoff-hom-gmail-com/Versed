@@ -31,6 +31,7 @@ struct HelpView: View {
                 @State var vibrateOnRing = true
                 @State var toggleSetting2 = false
 
+                // use Form? SettingsView
                 Toggle(isOn: $toggleSetting2) {
                     Text("hmm")
                 }
