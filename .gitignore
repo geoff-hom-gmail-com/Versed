@@ -2,6 +2,9 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+## should have been included by default but GitHub didn't
+.DS_Store
+
 ## User settings
 xcuserdata/
 
