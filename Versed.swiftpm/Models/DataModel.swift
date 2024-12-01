@@ -4,9 +4,11 @@ import SwiftUI
 //class DataModel: ObservableObject {
 
 class DataModel {
+    // what does @Published property wrapper do?
     @Published var myVerses: [Verse] = []
     @Published var exampleVerses: [Verse] = []
     
+    // since this is let, what does that mean? can we still change data inside?
     static let shared: DataModel = DataModel()
     
     private init() {
@@ -19,8 +21,6 @@ let tempMyVerses: [Verse] = [
     Verse(text: "For God so loved …")
 ]
 
-// hmm I may be confusing prompts with jogs/clues. Prompts are what we use to prompt recitation. Jogs/clues are if we get stuck. But we can have multiple prompts, since the same verse can be triggered multiple ways. 
-// Jogs/clues should be Q&A, but not prompts. They would be just prompts, or perhaps with specifiers
 let builtInExamples: [Verse] = [
     // Satan said, "If you are the Son of God, tell these stones to become bread.”
     // Jesus replied, "Man shall not live on bread alone, but on every word that comes from the mouth of God."

@@ -16,9 +16,11 @@ let package = Package(
         .iOSApplication(
             name: "Versed",
             targets: ["AppModule"],
+            bundleIdentifier: "com.geoff-hom.versed",
+            teamIdentifier: "5A92XSL5CB",
             displayVersion: "0.01",
-            bundleVersion: "1",
-            appIcon: .placeholder(icon: .bird),
+            bundleVersion: "2",
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.cyan),
             supportedDeviceFamilies: [
                 .pad,

@@ -36,3 +36,14 @@ struct EncodeView: View {
 #Preview {
     EncodeView()
 }
+
+// not working/compiling; can try again later if really desired
+//#Preview("my verse") {
+//    
+//    let tempMyVerses: [Verse] = [
+//        Verse(text: "For God so loved …")
+//    ]
+//    var dataModel = DataModel.shared
+//    EncodeView()
+//    
+//}
