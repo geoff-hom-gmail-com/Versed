@@ -16,7 +16,7 @@ struct ContentView: View {
                 .tabItem { 
                     Label("Encode", systemImage: "brain.head.profile")
                 }
-            Text("ReciteView")
+            ReciteView()
                 .badge("3")
                 .tabItem { 
                     Label("Recite", systemImage: "mouth")

@@ -4,6 +4,7 @@ struct AddView: View {
     @State private var fullText: String = ""
 
     var body: some View {
+        // For input, use Form. 
         Form {
 //            Text("Add")
             Text("Enter text to remember:")

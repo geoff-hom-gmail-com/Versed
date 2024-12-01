@@ -7,17 +7,12 @@ struct HelpView: View {
             WelcomeToView()
             // note: eventually all this should be localized
             DisclosureGroup("Newbie Guide") {
-                Text("1. Add a verse.\("\n")") + 
-                Text("2. Encode it in your mind.\("\n")") +
-                Text("3. Recite it.\("\n")") +
-                Text("    a. Test when notified. Not before.")
-
-//                Text("""
-//                1. Add a verse.
-//                2. Encode it in your mind.
-//                3. Recite it.
-//                  a. Test when notified. Not before.
-//                """)
+                Text("""
+                1. Add a verse.
+                2. Encode it in your mind.
+                3. Recite it.
+                    a. When notified, test. Not before.
+                """)
             }
             DisclosureGroup("FAQ") {
                 DisclosureGroup("<question 1 here>") {
@@ -40,13 +35,13 @@ struct HelpView: View {
                 }
             }
             DisclosureGroup("Donate") {
-                Text("disclosed!")
+                Text("TBD")
             }
             DisclosureGroup("Code") {
                 Text("This app's code is available on GitHub: <link>.")
             }
             DisclosureGroup("Contact") {
-                Text("disclosed!")
+                Text("TBD")
             }
 
         }
