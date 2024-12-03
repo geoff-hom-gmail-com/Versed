@@ -23,6 +23,7 @@ struct HelpView: View {
                 }
             }
             DisclosureGroup("Settings") {
+                // if this fails to stick, may need to be outside body; also, want to store these persistently pre-MVP
                 @State var vibrateOnRing = true
                 @State var toggleSetting2 = false
 

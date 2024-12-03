@@ -12,6 +12,14 @@ import SwiftUI
     init() {
 //        myVerses = tempMyVerses
     }
+    
+    // The verse with the earliest due date. Could be past due or coming up.
+    // If (new) user hasn't encoded any verses, then no verses will be due. Return nil.
+    var earliestDueDateVerse: Verse? {
+        // Get only verses with due dates. Then get earliest. 
+        let dueDatedVerses = myVerses.filter { $0.dueDate != nil }
+        return dueDatedVerses.min(by: { $0.dueDate! < $1.dueDate! })
+    }
 }
 
 let tempMyVerses: [Verse] = [

@@ -2,15 +2,18 @@ import SwiftUI
 
 struct AddView: View {
     @State private var fullText: String = ""
-    
+
     @Environment(Verses.self) private var verses
 
     var body: some View {
+//        let _ = Self._printChanges()
+
         // For input, use Form. 
         Form {
 //            Text("Add")
             Text("Enter text to remember:")
-            TextField("The Kingdom of God is like …", text: $fullText, axis: .vertical)
+            TextField("The Kingdom of God is like …", 
+                      text: $fullText, axis: .vertical)
                 .lineLimit(3...)
             Button("Done") {
                 verses.myVerses.append(

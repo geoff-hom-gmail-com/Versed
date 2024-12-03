@@ -15,6 +15,8 @@ struct EncodeView: View {
                         // Separate the view from the data. 
                         NavigationLink(verse.rowTitle, value: verse)
                         // how do we truncate long texts/prompts to one line with …? Figure out after we have nav/etc.
+                        // later, probably want a fancier NavLink. Instead of just a text title, a custom row with two lines, so the second line can have encoding score and recite scores (or maybe recite is on the third line). 
+                        // That way, you can see at a glance where you may want to improve the encoding (low encoding score), or how strong encoding may be linked to strong recite scores
                     }
                 }
                 
