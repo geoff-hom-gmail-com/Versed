@@ -3,25 +3,27 @@ import SwiftUI
 struct VerseDetail: View {
     @State private var beatsAreExpanded: Bool = true
 
-    // ugh is this bindable or state? If bindable, then observable means Verse has to be a class, which adds an init() and I may need to rework hashable, etc.
-    // verse.$text not working
-    // ok, we will be changing a lot of the verse in this view. But maybe we can assign one to another. 
-    // like, pass in a verse without a binding; then no, that's messy
-    // 
+    // This was a bit tricky to get working with parent views. 
+    // If problems later, could use Environment more. E.g., pass in the index/ID/verse without binding. Then, use Environment to get Verses and find the matching verse. 
+    // Which makes the most sense, top-down? Readability? Maintainability?
     @Binding var verse: Verse
     
-    @State private var tempText: String = "test"
+//    @State private var tempText: String = "test"
     
     var body: some View {
 //        Text("VerseDetail")
         Form {
+            // where do we put navbar title? try with Text; later, should be the prompt/rowTitle?
             Section(isExpanded: $beatsAreExpanded) {
-                // which do I want? TextEditor or TextField? which can you resize manually?
+                // TextEditor might sound better at first. But I like having a minimum text size. 
+                // lineLimit() works differently here than in TextField. Here, the min doesn't seem to work. 
 //                TextEditor(text: $verse.text)
-                TextEditor(text: $tempText)
-//                TextField(<#LocalizedStringKey#>, text: verse.$text, axis: .vertical)
-//                .lineLimit(3...)
+//                    .lineLimit(3...)
+
+                TextField("", text: $verse.text, axis: .vertical)
+                    .lineLimit(3...)
             } header: {
+                // wrap in HStack? Add button with help symbol?
                 Text("Beats")
             }
             

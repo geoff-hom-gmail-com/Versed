@@ -12,8 +12,6 @@ struct Verse: Identifiable, Hashable {
     // Nil reasons: 1) No prompt set. 2) Example verses.
     var dueDate: Date?
     
-//    init() {}
-    
     // A summary of the verse, in one row. 
     // Preference is prompts, because that's how they're recalled. Else, text. 
     var rowTitle: String {
