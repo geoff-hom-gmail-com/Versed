@@ -10,7 +10,8 @@ import SwiftUI
     var exampleVerses = builtInExamples
     
     init() {
-//        myVerses = tempMyVerses
+        // for testing; not sure how to do this better
+        myVerses = tempMyVerses
     }
     
     // The verse with the earliest due date. Could be past due or coming up.

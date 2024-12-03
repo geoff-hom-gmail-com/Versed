@@ -2,7 +2,7 @@ import SwiftUI
 
 // Goal: User knows when next verse is due.
 struct NextVerseDueView: View {
-    var verse: Verse?
+    let verse: Verse?
     
     var body: some View {
         VStack {
@@ -11,7 +11,7 @@ struct NextVerseDueView: View {
                 Text("n/a")
             } else {
                 // If no verses due, then show when next. (days/hours/min)
-
+                // ToDo (call difference between verse.dueDate and now) (and format) (may be some built-in functions for this) (else, can check packages, including from Apple)
                 Text("3 days")
             }
         }
@@ -19,5 +19,5 @@ struct NextVerseDueView: View {
 }
 
 #Preview {
-    NextVerseDueView()
+    NextVerseDueView(verse: nil)
 }

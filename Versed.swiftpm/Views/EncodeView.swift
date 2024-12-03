@@ -13,6 +13,8 @@ struct EncodeView: View {
                 Section("My Texts", isExpanded: $myTextsAreExpanded) {
                     ForEach(verses.myVerses) { verse in
                         // Separate the view from the data. 
+                        // WILO
+                        // ugh, navDestination seems not to work well with bindings. So maybe use other form of NavLink?
                         NavigationLink(verse.rowTitle, value: verse)
                         // how do we truncate long texts/prompts to one line with …? Figure out after we have nav/etc.
                         // later, probably want a fancier NavLink. Instead of just a text title, a custom row with two lines, so the second line can have encoding score and recite scores (or maybe recite is on the third line). 
@@ -27,6 +29,7 @@ struct EncodeView: View {
                 }
             }
             .listStyle(.sidebar)
+            // how does this work? and .constant() is a temp hack as it doesn't allow verse to be changed, so we can't change verse.text, etc.
             .navigationDestination(for: Verse.self) { verse in
                 VerseDetail(verse: verse)
             }
