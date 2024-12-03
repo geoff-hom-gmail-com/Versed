@@ -2,6 +2,8 @@ import SwiftUI
 
 struct AddView: View {
     @State private var fullText: String = ""
+    
+    @Environment(Verses.self) private var verses
 
     var body: some View {
         // For input, use Form. 
@@ -11,10 +13,13 @@ struct AddView: View {
             TextField("The Kingdom of God is like …", text: $fullText, axis: .vertical)
                 .lineLimit(3...)
             Button("Done") {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/ /*@END_MENU_TOKEN@*/
+                verses.myVerses.append(
+                    Verse(text: fullText))
+//                Verse(text: "For God so loved …"))
             }
-
         }
+        
+        // after adding, should have some feedback so user knows. Like, a pop-up to confirm. Then after confirming, reset the textfield. 
         
         // how hard to rig the button so that when done it will trigger/increase the encode badge? probably should just code it to add it lol
         // also need a way to delete texts/verses. I guess that's the Encode list. though if doing similar texts, one might want to copy/dup a text in the add tab. 
@@ -23,6 +28,6 @@ struct AddView: View {
     }
 }
 
-#Preview {
-    AddView()
-}
+//#Preview {
+//    AddView()
+//}

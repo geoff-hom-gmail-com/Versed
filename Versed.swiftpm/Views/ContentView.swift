@@ -25,6 +25,8 @@ struct ContentView: View {
     }
 }
 
+// The preview crashes because the data model (Verses) isn't in the environment. Would have to init it. And later also work with SwiftData. 
 //#Preview {
 //    ContentView()
+//        .environment(verses)
 //}

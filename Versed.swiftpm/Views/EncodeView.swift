@@ -4,15 +4,14 @@ struct EncodeView: View {
     @State private var myTextsAreExpanded: Bool = true
     @State private var examplesAreExpanded: Bool = true
     
-    // why doesn't this have @State, private, etc? Look up when we figure out data model. 
-    var dataModel = DataModel.shared
+    @Environment(Verses.self) private var verses
 
     var body: some View {
 //        Text("Encode")
         NavigationStack {
             List {
                 Section("My Texts", isExpanded: $myTextsAreExpanded) {
-                    ForEach(dataModel.myVerses) { verse in
+                    ForEach(verses.myVerses) { verse in
                         // Separate the view from the data. 
                         NavigationLink(verse.rowTitle, value: verse)
                         // how do we truncate long texts/prompts to one line with …? Figure out after we have nav/etc.
@@ -20,7 +19,7 @@ struct EncodeView: View {
                 }
                 
                 Section("Examples", isExpanded: $examplesAreExpanded) {
-                    ForEach(dataModel.exampleVerses) { verse in
+                    ForEach(verses.exampleVerses) { verse in
                         NavigationLink(verse.rowTitle, value: verse)
                     }
                 }
@@ -33,17 +32,6 @@ struct EncodeView: View {
     }
 }
 
-#Preview {
-    EncodeView()
-}
-
-// not working/compiling; can try again later if really desired
-//#Preview("my verse") {
-//    
-//    let tempMyVerses: [Verse] = [
-//        Verse(text: "For God so loved …")
-//    ]
-//    var dataModel = DataModel.shared
+//#Preview {
 //    EncodeView()
-//    
 //}

@@ -49,6 +49,6 @@ struct HelpView: View {
     }
 }
 
-//#Preview {
-//    HelpView()
-//}
+#Preview {
+    HelpView()
+}

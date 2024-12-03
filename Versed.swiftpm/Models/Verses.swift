@@ -1,19 +1,16 @@
 import SwiftUI
 
-// why observ?
-//class DataModel: ObservableObject {
+// how do we store data to disk? Sounds like SwiftData
+// came out in iOS 17 but sample code is iOS 18
+// swiftdata is "unobtrusive by design" so can worry about later
 
-class DataModel {
-    // what does @Published property wrapper do?
-    @Published var myVerses: [Verse] = []
-    @Published var exampleVerses: [Verse] = []
+// All the user's verses. Including examples. 
+@Observable final class Verses {
+    var myVerses: [Verse] = []
+    var exampleVerses = builtInExamples
     
-    // since this is let, what does that mean? can we still change data inside?
-    static let shared: DataModel = DataModel()
-    
-    private init() {
+    init() {
 //        myVerses = tempMyVerses
-        exampleVerses = builtInExamples
     }
 }
 
