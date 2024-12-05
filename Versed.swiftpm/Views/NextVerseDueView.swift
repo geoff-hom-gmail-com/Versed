@@ -5,8 +5,11 @@ struct NextVerseDueView: View {
     let verse: Verse?
     
     var body: some View {
-        VStack {
-            Text("Next verse due in:")
+        VStack() {
+            HStack {
+                Text("Next verse due in:")
+                Spacer()
+            }
             if verse == nil {
                 Text("n/a")
             } else {
@@ -14,7 +17,9 @@ struct NextVerseDueView: View {
                 // ToDo (call difference between verse.dueDate and now) (and format) (may be some built-in functions for this) (else, can check packages, including from Apple)
                 Text("3 days")
             }
+            Spacer()
         }
+        .padding()
     }
 }
 

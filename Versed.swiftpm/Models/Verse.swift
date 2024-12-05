@@ -27,3 +27,10 @@ struct Verse: Identifiable, Hashable {
         return title
     }
 }
+
+// Was going to remove argument label for "text." But, it seems like we'd need an init for every combo of variables. Not worth the trouble.
+//extension Verse {
+//    init(_ text: String) {
+//        self.text = text
+//    }
+//}

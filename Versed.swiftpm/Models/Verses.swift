@@ -12,6 +12,8 @@ import SwiftUI
     init() {
         // for testing; not sure how to do this better
         myVerses = tempMyVerses
+//        myVerses = tempMyVerses2
+        myVerses = tempMyVerses3
     }
     
     // The verse with the earliest due date. Could be past due or coming up.
@@ -27,6 +29,17 @@ let tempMyVerses: [Verse] = [
 //    Verse(text: "For God so loved …")
     Verse(text: "For God so loved the world, he gave his one and only begotton Son, that whosoever")
 
+]
+
+// For testing. 
+let tempMyVerses2: [Verse] = [
+    // Due date in future. 
+    Verse(text: "future text", dueDate: Date.distantFuture)
+]
+
+let tempMyVerses3: [Verse] = [
+    // Due date in past.
+    Verse(text: "past text", dueDate: Date.distantPast)
 ]
 
 let builtInExamples: [Verse] = [
