@@ -24,7 +24,9 @@ import SwiftUI
 }
 
 let tempMyVerses: [Verse] = [
-    Verse(text: "For God so loved …")
+//    Verse(text: "For God so loved …")
+    Verse(text: "For God so loved the world, he gave his one and only begotton Son, that whosoever")
+
 ]
 
 let builtInExamples: [Verse] = [
