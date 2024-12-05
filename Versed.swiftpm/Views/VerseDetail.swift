@@ -1,9 +1,6 @@
 import SwiftUI
 
 struct VerseDetail: View {
-//    @State private var areBeatsExpanded: Bool = true
-//    @State private var arePromptsExpanded: Bool = true
-
     // This was a bit tricky to get working with parent views. 
     // If problems later, could use Environment more. E.g., pass in the index/ID/verse without binding. Then, use Environment to get Verses and find the matching verse. 
     // Which makes the most sense, top-down? Readability? Maintainability?
@@ -67,7 +64,7 @@ struct VerseDetail: View {
                 }
             }
             
-            Section("Clue 3", isExpanded: $arePromptsExpanded) {
+            Section("Clue 3") {
                 TextField("Question", text: .constant(""))
                 HStack {
                     Spacer()
