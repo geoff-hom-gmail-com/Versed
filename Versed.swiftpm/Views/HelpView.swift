@@ -39,10 +39,12 @@ struct HelpView: View {
                 Text("TBD")
             }
             DisclosureGroup("Code") {
-                Text("This app's code is available on GitHub: <link>.")
+                // The URL is automatically made into a working link!
+                Text("The code for Versed is available on GitHub: https://github.com/geoff-hom-gmail-com/Versed.")
             }
             DisclosureGroup("Contact") {
-                Text("TBD")
+                Text("Versed was created by…<Geoff and Dave?>")
+                Text("Feedback may be sent to <Geoff>?")
             }
 
         }
