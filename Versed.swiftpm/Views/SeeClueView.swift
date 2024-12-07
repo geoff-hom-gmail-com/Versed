@@ -1,9 +1,11 @@
 import SwiftUI
 
 // Goal: The user can see a clue. Tap question and answer buttons to show/hide.
+// (MVP-post) (ToDo?) (Could start with just Q icon) (Tap to reveal question, and show A icon) (Tap Q again to hide both) (could have disclosure/animation, or not) (That way, you can't see an answer before a question)
 struct SeeClueView: View {
     var clue: Clue
     
+    // By default, both question and answer are hidden. (Less noise.)
     @State private var shouldShowQuestion = false
     @State private var shouldShowAnswer = false
     
@@ -18,6 +20,7 @@ struct SeeClueView: View {
     }
     
     var body: some View {
+        // Image goals: User should think of question and answer. Or, conversation.
         HStack {
             Button() {
                 shouldShowQuestion.toggle()

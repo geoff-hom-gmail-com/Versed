@@ -45,14 +45,13 @@ struct TestAVerseView: View {
                 if wasPromptMePressed {
                     switch selectedSense {
                     case .ears:
-                        HearView()
+                        HearPromptAndCluesView(verse: verse)
                     case .eyes:
-                        SeePromptView(verse: verse)
+                        SeePromptAndCluesView(verse: verse)
                     }
                 }
             }
             
-            // ToDo: toggle view depending on picker (state not event!)
             if wasPromptMePressed {
                 HStack {
                     // (ToDo) (spacer doesn't seem to be working) (how do we stop Picker from taking whole width?)
