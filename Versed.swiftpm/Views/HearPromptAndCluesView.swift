@@ -30,13 +30,6 @@ struct HearPromptAndCluesView: View {
                     HearClueView(clue: clue)
                 }
             }
-//            HearClueView(clue: 1)
-//            Spacer()
-//            HearClueView(clue: 2)
-//            Spacer()
-//            HearClueView(clue: 3)
-//            Spacer()
-//            HearClueView(clue: 4)
         } label: {
             // (ToDo) (could DRY) (e.g., CluesIconLabel)
             Spacer()
@@ -44,24 +37,5 @@ struct HearPromptAndCluesView: View {
             // Image goal: The user thinks "clues."
             Image(systemName: "sparkle.magnifyingglass")
         }
-        
-//        DisclosureGroup("Clues") {
-//            HearClueView(clue: 1)
-//            Spacer()
-//            HearClueView(clue: 2)
-//            Spacer()
-//            HearClueView(clue: 3)
-//            Spacer()
-//            HearClueView(clue: 4)
-//        }
-//        DisclosureGroup() {
-//            SeeCluesView(clues: verse.clues)
-//        } label: {
-//            Spacer()
-//                .frame(maxWidth: .infinity)
-//            // Image goal: The user thinks "clues."
-//            Image(systemName: "sparkle.magnifyingglass")
-//        }
-            
     }
 }
