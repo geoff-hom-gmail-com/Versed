@@ -12,7 +12,7 @@ struct ReciteView: View {
 //        Text("Recite")
         // is it calculating this a lot? check with log
         let earliestDueDateVerse = verses.earliestDueDateVerse
-        let _ = Self._printChanges()
+//        let _ = Self._printChanges()
 
 //        if (earliestDueDateVerse == nil) {
 //            NextVerseDueView(verse: nil)

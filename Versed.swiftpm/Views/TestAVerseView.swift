@@ -15,9 +15,10 @@ struct TestAVerseView: View {
     }
     @State private var selectedInputMode: InputMode = .mouth
     @State private var shouldShowInputArea = false
-    @State private var inputModeString: String
-    @State private var recitedText: String = ""
-    @State private var wasComparePressed: Bool = false
+    @State private var inputModeString = ""
+    @State private var recitedText = ""
+    
+    @State private var shouldShowVerse = false
     
     var body: some View {
         // Form or more like a VStack?
@@ -48,6 +49,7 @@ struct TestAVerseView: View {
                 }
             }
             
+            // Along with showing prompt and clues, show the input-mode picker.
             if shouldShowPromptAndClues {
                 Section() {
                     HStack {
@@ -71,34 +73,31 @@ struct TestAVerseView: View {
                         }
                     }
                     if shouldShowInputArea {
-                        switch selectedInputMode {
-                        case .mouth:
-//                            SpeakVerseView(verse: verse)
-                            inputModeString = "Speak"
-                        case .touch:
-                            // TypeVerseView(verse: verse)
-                            inputModeString = "Type"
+                        TextField(text: $recitedText, axis: .vertical) {
+                            switch selectedInputMode {
+                            case .mouth:
+                                Text("Speak")
+                            case .touch:
+                                Text("Type")
+                            }
                         }
-                        
-                        TextField(inputModeString, text: $recitedText, axis: .vertical)
-                            .lineLimit(3...)
+                        .lineLimit(3...)
                         HStack {
                             Spacer()
                             // (ToDo) (test on iPhone) (if user taps left of button (e.g. anywhere in row) (does it still trigger?) 
                             // (if so, it becomes an issue since a tap in empty part of row triggers the Button and the Help)
                             // (and can't tap Help separately)
                             Button("Compare") {
-                                wasComparePressed = true
+                                shouldShowVerse = true
                             }
-                            .disabled(wasComparePressed)
+                            .disabled(shouldShowVerse)
                             HelpButton(popoverText: "(ToDo) not automatic")
                         }
                     }
                 }
             }
-            
                         
-            if wasComparePressed {
+            if shouldShowVerse {
                 Section() {
                     TextField("", text: .constant(verse.text), axis: .vertical)
                         .lineLimit(3...)
