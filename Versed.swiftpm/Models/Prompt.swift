@@ -8,4 +8,14 @@ struct Prompt: Hashable {
     
     // A situation may prompt multiple verses. But, the app tests a user only when a verse is due. To clarify which verse is intended, prompts can have a clarifier.
     var clarifier: String?
+    
+    // The prompt in "prompt (clarifier)" format. 
+    var fullPrompt: String {
+        var fullPrompt = text
+        if let clarifier = clarifier {
+            fullPrompt += " (\(clarifier))"
+        }
+        
+        return fullPrompt
+    }
 }

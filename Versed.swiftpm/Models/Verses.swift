@@ -39,7 +39,11 @@ let tempMyVerses2: [Verse] = [
 
 let tempMyVerses3: [Verse] = [
     // Due date in past.
-    Verse(text: "past text", dueDate: Date.distantPast)
+//    Verse(text: "past text", prompts: [Prompt(text: "Hungry for food")], dueDate: Date.distantPast)
+//    Verse(text: "past text", prompts: [Prompt(text: "Asked to prove God's providence", clarifier: "Massah")], dueDate: Date.distantPast)
+//    Verse(text: "past text", prompts: [Prompt(text: "Hungry for food")], clues: [Clue(q: "Book?", a: "Deuteronomy")], dueDate: Date.distantPast)
+    Verse(text: "past text", prompts: [Prompt(text: "Hungry for food")], clues: [Clue(q: "Book?", a: "Deuteronomy"), Clue(q: "q2", a: "a2"), Clue(q: "q3", a: "a3")], dueDate: Date.distantPast)
+
 ]
 
 let builtInExamples: [Verse] = [
