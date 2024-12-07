@@ -32,7 +32,8 @@ struct VerseDetail: View {
                 // ToDo: figure out bindings here. $verse.prompts may be empty. Similarly, $verse.clues may be empty, have 1, 2, 3, etc.
                 //     !           TextField("", text: $verse.prompts.first?.text)
                 TextField("Prompt", text: .constant(""))
-                TextField("(Clarifier)", text: .constant(""))                
+                TextField("(Clarifier)", text: .constant(""))
+                    .padding(.leading)                               
             } header: {
                 HStack {
                     Text("Prompt (Clarifier)")
@@ -43,10 +44,8 @@ struct VerseDetail: View {
             
             Section() {
                 TextField("Question", text: .constant(""))
-                HStack {
-                    Spacer()
-                    TextField("Answer", text: .constant(""))
-                }
+                TextField("Answer", text: .constant(""))
+                    .padding(.leading)               
             } header: {
                 HStack {
                     Text("Clue 1")
@@ -57,25 +56,20 @@ struct VerseDetail: View {
             
             Section("Clue 2") {
                 TextField("Question", text: .constant(""))
-                HStack {
-                    Spacer()
-                    Spacer()
-                    TextField("Answer", text: .constant(""))
-                }
+                TextField("Answer", text: .constant(""))
+                    .padding(.leading)               
             }
             
             Section("Clue 3") {
                 TextField("Question", text: .constant(""))
-                HStack {
-                    Spacer()
-                    TextField("Answer", text: .constant(""))
-                }
-                .padding(.horizontal)
+                TextField("Answer", text: .constant(""))
+                    .padding(.leading)               
             }
             
             Section("Clue 4") {
                 TextField("Question", text: .constant(""))
                 TextField("Answer", text: .constant(""))
+                    .padding(.leading)               
             } 
            
             
