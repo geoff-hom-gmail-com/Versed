@@ -1,10 +1,13 @@
 import SwiftUI
 
+// (UX) The user can edit any aspect of the given verse.
 struct VerseDetail: View {
     // This was a bit tricky to get working with parent views. 
     // If problems later, could use Environment more. E.g., pass in the index/ID/verse without binding. Then, use Environment to get Verses and find the matching verse. 
     // Which makes the most sense, top-down? Readability? Maintainability?
-    @Binding var verse: Verse
+//    @Binding var verse: Verse
+    
+    @Bindable var verse: Verse
         
     var body: some View {
 //        Text("VerseDetail")

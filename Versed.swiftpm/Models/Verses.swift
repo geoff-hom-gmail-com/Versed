@@ -1,11 +1,14 @@
 import SwiftUI
+import SwiftData
 
 // how do we store data to disk? Sounds like SwiftData
 // came out in iOS 17 but sample code is iOS 18
 // swiftdata is "unobtrusive by design" so can worry about later
 
-// All the user's verses. Including examples. 
-@Observable final class Verses {
+// All of the user's verses. Including examples. 
+//@Model
+@Observable
+final class Verses {
     var myVerses: [Verse] = []
     var exampleVerses = builtInExamples
     
@@ -42,7 +45,12 @@ let tempMyVerses3: [Verse] = [
 //    Verse(text: "past text", prompts: [Prompt(text: "Hungry for food")], dueDate: Date.distantPast)
 //    Verse(text: "past text", prompts: [Prompt(text: "Asked to prove God's providence", clarifier: "Massah")], dueDate: Date.distantPast)
 //    Verse(text: "past text", prompts: [Prompt(text: "Hungry for food")], clues: [Clue(q: "Book?", a: "Deuteronomy")], dueDate: Date.distantPast)
-    Verse(text: "past text", prompts: [Prompt(text: "Hungry for food")], clues: [Clue(q: "Book?", a: "Deuteronomy"), Clue(q: "q2", a: "a2"), Clue(q: "q3", a: "a3")], dueDate: Date.distantPast)
+    Verse(text: "past text", 
+          prompts: [Prompt(text: "Hungry for food")], 
+          clues: [Clue(q: "Book?", a: "Deuteronomy"), 
+                  Clue(q: "q2", a: "a2"), 
+                  Clue(q: "q3", a: "a3")], 
+          dueDate: Date.distantPast)
 
 ]
 

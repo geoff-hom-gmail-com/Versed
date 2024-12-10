@@ -19,7 +19,7 @@ let package = Package(
             bundleIdentifier: "com.geoff-hom.versed",
             teamIdentifier: "5A92XSL5CB",
             displayVersion: "0.01",
-            bundleVersion: "2",
+            bundleVersion: "3",
             appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.cyan),
             supportedDeviceFamilies: [

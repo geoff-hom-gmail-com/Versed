@@ -7,6 +7,7 @@ struct VersedApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+//                .modelContainer(for: Verses.self)
                 .environment(verses)
         }
     }
