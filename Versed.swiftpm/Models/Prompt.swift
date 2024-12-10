@@ -1,15 +1,23 @@
 import SwiftUI
 
-// How does a user know which verse to recite? Not by notation (e.g., Rev 12:2). Rather, by what might realistically prompt recitation. 
-
+// (Goal) In the future, life happens to the user. Her brain has already associated that context/prompt with a verse she has memorized. She can recite the verse as needed.
+// (final) (inheritance not considered)
+// (class) (SwiftData)
 // (Hashable) (required by Verse to be Hashable)
-struct Prompt: Hashable {
+final class Prompt: Hashable {
     var text: String
     
-    // A situation may prompt multiple verses. But, the app tests a user only when a verse is due. To clarify which verse is intended, prompts can have a clarifier.
+    // (Goal) The user envisions a situation where multiple verses apply. For memorization (spaced repetition), she knows which verse to recite. 
     var clarifier: String?
     
-    // The prompt in "prompt (clarifier)" format. 
+    init(text: String, clarifier: String? = nil) {
+        self.text = text
+        self.clarifier = clarifier
+    }
+    
+    // (Goal) The user sees a one-line reference to a verse. The reference is in line with how she will associate that verse in real life. She knows which verse it refers to.
+    // We could simply use the verse's text. But, we hope the user will benefit more in the long run, via practice of seeing first the prompt.
+    // Current implementation: "prompt (clarifier)." 
     var fullPrompt: String {
         var fullPrompt = text
         if let clarifier = clarifier {
@@ -17,5 +25,16 @@ struct Prompt: Hashable {
         }
         
         return fullPrompt
+    }
+    
+    // MARK: Hashable
+    static func == (lhs: Prompt, rhs: Prompt) -> Bool {
+        return (lhs.text == rhs.text) && 
+        (lhs.clarifier == rhs.clarifier)
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(text)
+        hasher.combine(clarifier)
     }
 }

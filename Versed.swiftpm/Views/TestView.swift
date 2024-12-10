@@ -1,5 +1,7 @@
 import SwiftUI
 
+// not used in app
+// temp using to test code stuff
 struct TestView: View {
     @Environment(Verse.self) private var verse
     @State private var verses = [Verse(text:"")]

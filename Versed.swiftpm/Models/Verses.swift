@@ -1,11 +1,9 @@
 import SwiftUI
 import SwiftData
 
-// how do we store data to disk? Sounds like SwiftData
-// came out in iOS 17 but sample code is iOS 18
-// swiftdata is "unobtrusive by design" so can worry about later
-
-// All of the user's verses. Including examples. 
+// (Goal) The user can memorize their collection of verses. Also, she can learn how to use the app, from examples. 
+// (final) (inheritance not considered)
+// (class) (SwiftData)
 //@Model
 @Observable
 final class Verses {

@@ -1,18 +1,20 @@
 import SwiftUI
 import SwiftData
 
-// The text to be recited. 
+// (Goal) The user can memorize a custom verse/text. She can edit the verse's text, layout, prompts, and clues. Each verse is due for recitation at a custom date, as determined by spaced repetition.
+// (final) (inheritance not considered)
+// (class) (SwiftData)
 // (Identifiable) (required by ForEach)
 // (Hashable) (required by NavigationLink(_:value:))
-// making a class Hashable is pretty easy; we do Equatable, then Hashable with the same properties (https://developer.apple.com/documentation/swift/hashable)
 //@Model
 @Observable
-class Verse: Identifiable, Hashable {
+final class Verse: Identifiable, Hashable {
     let id = UUID()
     var text: String
     var prompts: [Prompt]
     var clues: [Clue]
     
+    // (Goal) ??
     // Nil reasons: 1) No prompt set. 2) Example verses.
     var dueDate: Date?
     
