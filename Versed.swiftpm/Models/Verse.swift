@@ -11,33 +11,29 @@ import SwiftData
 final class Verse: Identifiable, Hashable {
     let id = UUID()
     var text: String
+    
+    // (MVP-post) Currently, the user can set only one prompt per verse. But one can imagine multiple prompts. 
     var prompts: [Prompt]
     var clues: [Clue]
     
-    // (Goal) ??
-    // Nil reasons: 1) No prompt set. 2) Example verses.
+    // (Goal) The user recites a verse according to its due date. The date is first set, after the prompt is set. The date is updated by spaced repetition. 
+    // Example verses have no due date. 
     var dueDate: Date?
     
-//    init(text: String) {
-//        self.text = text
-//    }
-    
-    init(text: String, prompts: [Prompt] = [], clues: [Clue] = [], dueDate: Date? = nil) {
+    init(_ text: String, prompts: [Prompt] = [], clues: [Clue] = [], dueDate: Date? = nil) {
         self.text = text
         self.prompts = prompts
         self.clues = clues
         self.dueDate = dueDate
     }
     
-    // A summary of the verse, in one row. 
-    // Preference is prompts, because that's how they're recalled. Else, text. 
+    // (Goal) The user sees a one-line reference to a verse. The reference is in line with how she will associate that verse in real life. She knows which verse it refers to.
+    // We could simply use the verse's text. But, we hope the user will benefit more in the long run, via practice of seeing first the prompt.
+    // If no prompt, show the verse's text. E.g., when a verse is first added.
     var rowTitle: String {
         var title: String;
         if let firstPrompt = prompts.first {
-            title = firstPrompt.text
-            if let clarifier = firstPrompt.clarifier {
-                title += " (\(clarifier))"
-            }
+            title = firstPrompt.fullPrompt
         } else {
             title = text
         }
@@ -45,6 +41,7 @@ final class Verse: Identifiable, Hashable {
     }
     
     // MARK: Hashable
+    // Avoiding extensions, thanks to this discussion (https://www.reddit.com/r/iOSProgramming/comments/1dz99la/comment/lcea4zo/).
     static func == (lhs: Verse, rhs: Verse) -> Bool {
         return lhs.id == rhs.id
     }
@@ -53,10 +50,3 @@ final class Verse: Identifiable, Hashable {
         hasher.combine(id)
     }
 }
-
-// Was going to remove argument label for "text." But, it seems like we'd need an init for every combo of variables. Not worth the trouble.
-//extension Verse {
-//    init(_ text: String) {
-//        self.text = text
-//    }
-//}

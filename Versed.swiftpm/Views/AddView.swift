@@ -17,8 +17,7 @@ struct AddView: View {
                 .lineLimit(3...)
             Button("Done") {
                 verses.myVerses.append(
-                    Verse(text: fullText))
-//                Verse(text: "For God so loved …"))
+                    Verse(fullText))
             }
         }
         

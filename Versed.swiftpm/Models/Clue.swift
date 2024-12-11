@@ -22,6 +22,7 @@ final class Clue: Hashable, Identifiable {
     }
     
     // MARK: Hashable
+    // Avoiding extensions, thanks to this discussion (https://www.reddit.com/r/iOSProgramming/comments/1dz99la/comment/lcea4zo/).
     static func == (lhs: Clue, rhs: Clue) -> Bool {
         return (lhs.q == rhs.q) && 
         (lhs.a == rhs.a)

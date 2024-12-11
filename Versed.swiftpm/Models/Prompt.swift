@@ -15,8 +15,7 @@ final class Prompt: Hashable {
         self.clarifier = clarifier
     }
     
-    // (Goal) The user sees a one-line reference to a verse. The reference is in line with how she will associate that verse in real life. She knows which verse it refers to.
-    // We could simply use the verse's text. But, we hope the user will benefit more in the long run, via practice of seeing first the prompt.
+    // (Goal) The user sees a one-line version of the prompt + clarifier. She knows which verse it refers to.
     // Current implementation: "prompt (clarifier)." 
     var fullPrompt: String {
         var fullPrompt = text
@@ -28,6 +27,7 @@ final class Prompt: Hashable {
     }
     
     // MARK: Hashable
+    // Avoiding extensions, thanks to this discussion (https://www.reddit.com/r/iOSProgramming/comments/1dz99la/comment/lcea4zo/).
     static func == (lhs: Prompt, rhs: Prompt) -> Bool {
         return (lhs.text == rhs.text) && 
         (lhs.clarifier == rhs.clarifier)

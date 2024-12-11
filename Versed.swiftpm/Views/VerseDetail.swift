@@ -1,12 +1,10 @@
 import SwiftUI
 
-// (UX) The user can edit any aspect of the given verse.
-struct VerseDetail: View {
-    // This was a bit tricky to get working with parent views. 
-    // If problems later, could use Environment more. E.g., pass in the index/ID/verse without binding. Then, use Environment to get Verses and find the matching verse. 
-    // Which makes the most sense, top-down? Readability? Maintainability?
-//    @Binding var verse: Verse
-    
+// (Goal) The user can edit any aspect of the given verse.
+// (ToDo) (Goal) The user knows that examples can't be edited. And she can't edit them. 
+// (ToDo) How do I want this to look? Start top-down with Recite and work backwards. But remember that even an expert will start by adding a verse, then encoding it. 
+// Use more SF symbols? Again, start top-down.
+struct VerseDetail: View {    
     @Bindable var verse: Verse
         
     var body: some View {

@@ -4,7 +4,7 @@ import SwiftUI
 // temp using to test code stuff
 struct TestView: View {
     @Environment(Verse.self) private var verse
-    @State private var verses = [Verse(text:"")]
+    @State private var verses = [Verse("")]
 
     
     
