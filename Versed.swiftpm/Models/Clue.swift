@@ -1,12 +1,15 @@
 import SwiftUI
+import SwiftData
 
 // (Goal) The user knows which verse to recite. But, she has trouble getting started. Or, she gets stuck in the middle. She uses specific clues to help her.
 // (final) (inheritance not considered)
 // (class) (SwiftData)
 // (Hashable) (required by Verse to be Hashable)
 // (Identifiable) (required by ForEach)
+@Model
 final class Clue: Hashable, Identifiable {
-    let id = UUID()
+    // todo comment (can't use let in Swift 6 and SwiftData or compiler warning)
+    private(set) var id = UUID()
     
     // Ideally, a clue helps not only when using the app, but also in real life. Perhaps because the clue strengthened the verse's encoding.
     // Research has shown that memory is strengthened by testing, but not by review. (See FAQ.) For that reason, each Clue is not a single statement, but a question-answer pair. 
