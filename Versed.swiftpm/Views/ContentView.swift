@@ -3,6 +3,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
+            DebugView()
+                .tabItem {
+                    Text("Debug")
+                }
             HelpView()
                 .tabItem {
                     Label("Help", systemImage: "questionmark.circle")

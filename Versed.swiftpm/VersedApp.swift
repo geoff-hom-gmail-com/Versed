@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct VersedApp: App {
+    // todo: remove after SwiftData working
 //    var verses = Verses()
     
     var body: some Scene {
@@ -14,7 +15,7 @@ struct VersedApp: App {
     }
 }
 
-// (Xcode compiler warning)
+// (Xcode compiler warning) (16.1)
 // "Skipping duplicate build file in Compile Sources build phase: /Users/geoff-hom/work/apps/Versed/Versed.swiftpm/Assets.xcassets"
 // No idea where/how that is. Couldn't find any such reference to build phase, or dupe lines, in the entire Versed.swiftpm. Including hidden files.
 // Can't access build phase in Xcode, for a Swift Playground.
