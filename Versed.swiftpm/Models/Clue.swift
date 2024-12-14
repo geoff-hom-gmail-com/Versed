@@ -8,7 +8,7 @@ import SwiftData
 // (Identifiable) (required by ForEach)
 @Model
 final class Clue: Hashable, Identifiable {
-    // todo comment (can't use let in Swift 6 and SwiftData or compiler warning)
+    // (Goal) Remove compiler warning. Was "let." Apparently bad in SwiftData with Swift 6.
     private(set) var id = UUID()
     
     // Ideally, a clue helps not only when using the app, but also in real life. Perhaps because the clue strengthened the verse's encoding.

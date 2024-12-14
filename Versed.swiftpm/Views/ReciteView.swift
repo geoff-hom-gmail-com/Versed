@@ -1,46 +1,43 @@
 import SwiftUI
+import SwiftData
 
-// Recite the most-due verse.
+// (Goal) The user can recite (test) her due verses. In order of due date.
 struct ReciteView: View {
-//    @Environment(Verses.self) private var verses
-    // hmm not compiling; this also fails
-    // could try onAppear
-    // let mostDueVerse = verses.mostDue
-//    @State private var mostDueVerse = verses.mostDue
+    @Environment(\.modelContext) private var modelContext
+    
+    // (Goal) The user can recite her most-due verse.
+    // We'll get all user verses with due dates. Then, we just need the min().
+    @Query(filter: #Predicate<Verse> {
+        ($0.isExample == false) && ($0.dueDate != nil)
+    })
+    private var versesDueSomeday: [Verse]
+    
+    // (ToDo) (later) After one verse is recited, the due dates may change; I mean, the other due dates will be the same, but the one just tested could be next. Or not.
 
     var body: some View {
-        Text("Recite")
-//        let earliestDueDateVerse = verses.earliestDueDateVerse
-
-        // old?
-//        if (earliestDueDateVerse == nil) {
-//            NextVerseDueView(verse: nil)
-//        
-//        // If no verses due, then show when next.
-//        } else if let dueDate = earliestDueDateVerse?.dueDate,
-//           dueDate > Date.now {
-//            NextVerseDueView(verse: earliestDueDateVerse)
-//            
-//        // Else, show most-due verse.
-//        } else {
-//            TestAVerseView(verse: earliestDueDateVerse!)
-//        }
+//        Text("Recite")
         
-        // If there's a verse with a due date, then the due date isn't nil. 
-//        if let verse = earliestDueDateVerse,
-//           let dueDate = verse.dueDate {
-//            // If due, test it. Else, show when due. 
-//            if dueDate < Date.now {
-//                TestAVerseView(verse: verse)
-//            } else {
-//                NextVerseDueView(verse: verse)
-//            }
-//        } else {
-//            // Goal: User knows nothing is due, because either no verses have been added, or no verses have a prompt.
-//            // ToDo (MVP-post)
-//            // could just make this a Text.
-//            NextVerseDueView(verse: nil)
-//        }
+        let mostDueVerse = versesDueSomeday.min {
+            // Nil dates were skipped via the predicate.
+            $0.dueDate! < $1.dueDate!
+        }
+
+        // (Goal) The user knows the due-date situation:
+        // 1) The next verse is due, so she can recite.
+        // 2) The next verse is due later.
+        // 3) No verse has a due date. And how to fix.
+        if let verse = mostDueVerse {
+            // There's a verse, so it has a date.
+            if verse.dueDate! < Date.now {
+                TestAVerseView(verse: verse)
+            } else {
+                NextVerseDueView(verse: verse)
+            }
+        } else {
+            // (toDo) last case may need some clarity, esp for beginners; but it's only at the start, until 1 verse is added and given a prompt.
+            // KISS: ToDo: just make this a text or other view vs calling NextVerseDueView? (consider during coding-for-beginner-user) (probably; top-down)
+            NextVerseDueView(verse: nil)
+        }
     }
 }
 

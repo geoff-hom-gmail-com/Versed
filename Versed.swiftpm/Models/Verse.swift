@@ -2,21 +2,17 @@ import SwiftUI
 import SwiftData
 
 // (Goal) The user can memorize a custom verse/text. She can edit the verse's text, layout, prompts, and clues. Each verse is due for recitation at a custom date, as determined by spaced repetition.
-// (@Observable?) (todo) (Model would replace)
 // (final) (inheritance not considered)
 // (class) (SwiftData)
 // (Identifiable) (required by ForEach)
 // (Hashable) (required by NavigationLink(_:value:))
 @Model
-//@Observable
 final class Verse: Identifiable, Hashable {
-    // todo comment (can't use let in Swift 6 and SwiftData or compiler warning)
+    // (Goal) Remove compiler warning. Was "let." Apparently bad in SwiftData with Swift 6.
     private(set) var id = UUID()
     
-    //testing
-//    var testEnum: TestEnum
-    
     // (Goal) The user can see example verses, to learn the app. But, she can't edit them.
+    // This was an enum/category. E.g., .example, .user. But, enums don't work well with SwiftData Predicates. (as of Xcode 16.1)
     var isExample: Bool
     
     // (Goal) The user sees verses in a list in the same order. She can also reorder them.
@@ -40,8 +36,6 @@ final class Verse: Identifiable, Hashable {
         self.prompts = prompts
         self.clues = clues
         self.dueDate = dueDate
-        
-//        self.testEnum = testEnum
     }
     
     // (Goal) The user sees a one-line reference to a verse. The reference is in line with how she will associate that verse in real life. She knows which verse it refers to.
@@ -57,19 +51,6 @@ final class Verse: Identifiable, Hashable {
         return title
     }
     
-    // MARK: VerseCategory
-    // (Codable) (why?) (I think SwiftData needs it)
-    // (String) (need rawValue for predicate hack)
-//    enum VerseCategory: String, Codable {
-//        case example
-//        case user
-//    }
-//    
-//    enum TestEnum: Codable {
-//        case test1
-//        case test2
-//    }
-    
     // MARK: Hashable
     // Avoiding extensions, thanks to this discussion (https://www.reddit.com/r/iOSProgramming/comments/1dz99la/comment/lcea4zo/).
     static func == (lhs: Verse, rhs: Verse) -> Bool {
@@ -80,10 +61,3 @@ final class Verse: Identifiable, Hashable {
         hasher.combine(id)
     }
 }
-
-//extension Verse {
-//    enum TestEnum: Codable {
-//        case test1
-//        case test2
-//    }
-//}

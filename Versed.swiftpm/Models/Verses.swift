@@ -10,18 +10,15 @@ import SwiftData
 @Model
 //@Observable
 final class Verses {
-    // todo: more people use [Verse]() ??
-    var myVerses: [Verse] = []
-    // todo comment (can't use let in Swift 6 and SwiftData or compiler warning)
-//    var exampleVerses = builtInExamples
-    private(set) var exampleVerses: [Verse]
-    var testDate: Date = Date.now
+    var myVerses = [Verse]()
+    
+//    var testDate: Date = Date.now
 
-    // crashes preview and simulator
+    // crashes preview and simulator; have to assign in init()
 //        var testClue: Clue = Clue(q: "q", a: "a")
     
     // doesn't crash
-    var testClue: Clue
+//    var testClue: Clue
 
     
     init() {
@@ -29,20 +26,10 @@ final class Verses {
         myVerses = tempMyVerses
 //        myVerses = tempMyVerses2
         myVerses = tempMyVerses3
-        
-        exampleVerses = builtInExamples
-        
-        testClue = Clue(q: "q", a: "a")
+                
+//        testClue = Clue(q: "q", a: "a")
     }
     
-    // (Goal) The user goes to recite her due verses. She 
-    // The verse with the earliest due date. Could be past due or coming up.
-    // If (new) user hasn't encoded any verses, then no verses will be due. Return nil.
-    var earliestDueDateVerse: Verse? {
-        // Get only verses with due dates. Then get earliest. 
-        let dueDatedVerses = myVerses.filter { $0.dueDate != nil }
-        return dueDatedVerses.min(by: { $0.dueDate! < $1.dueDate! })
-    }
 }
 
 let tempMyVerses: [Verse] = [
@@ -69,38 +56,4 @@ let tempMyVerses3: [Verse] = [
                   Clue(q: "q3", a: "a3")], 
           dueDate: Date.distantPast)
 
-]
-
-//let builtInExamples2 = [Verse]()
-//let builtInExamples2: [Verse] = []
-let builtInExamples2: [Verse] = [
-    Verse("… man shall not live on bread alone, but on …")
-]
-
-
-let builtInExamples: [Verse] = [
-    // Satan said, "If you are the Son of God, tell these stones to become bread.”
-    // Jesus replied, "Man shall not live on bread alone, but on every word that comes from the mouth of God."
-    Verse("… man shall not live on bread alone, but on …",
-          prompts: [Prompt(text: "Hungry for food")],
-//          prompts: [Prompt(q: "Bread vs. ___", a: "God's word")],
-
-          clues: [Clue(q: "Book?", a: "Deuteronomy")]),
-
-    // Satan said, "If you are the Son of God, throw yourself down. For it is written: …"
-    // Jesus replied, "Do not put the Lord your God to the test."
-    Verse("Do not put the Lord your God to the test as you did at Massah.",
-          prompts: [Prompt(text: "Asked to prove God's providence", clarifier: "Massah")],
-//          prompts: [Prompt(q: "Test God?", a: "No")],
-
-          clues: [Clue(q: "Book?", a: "Deuteronomy")]),
-
-
-    // Satan said, "bow down and worship me." 
-    // Jesus replied, "Worship the Lord your God, and serve him only."
-    Verse("Fear the LORD your God, serve him only …",
-//          prompts: [Prompt(q: "Fear/worship whom?", a: "Only God")],
-
-          prompts: [Prompt(text: "Told to worship another")],
-          clues: [Clue(q: "Book?", a: "Deuteronomy")]),
 ]
