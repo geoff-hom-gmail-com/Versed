@@ -2,15 +2,10 @@ import SwiftUI
 
 @main
 struct VersedApp: App {
-    // todo: remove after SwiftData working
-//    var verses = Verses()
-    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .modelContainer(for: Verses.self)
-            // ToDo (do we still need this? try removing after swiftdata works
-//                .environment(verses)
+                .modelContainer(for: Verse.self)
         }
     }
 }

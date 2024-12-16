@@ -28,6 +28,51 @@ struct DebugView: View {
                 let verse = Verse("A message from the past", dueDate: Date.distantPast)
                 modelContext.insert(verse)
             }
+            Spacer()
+            
+            // (Goal) The coder can add a realistic verse with a past-due date.
+            Button("Add realistic verse. With past-due date") {
+                // (GNT) (Mark 1:40)
+                // (This disease was considered to make a person ritually unclean.)
+                // (pity; some manuscripts have anger.)
+                // short ver should be ??
+                let text = """
+                    A man suffering from a dreaded skin disease came to Jesus, knelt down, and begged him for help. 
+
+                    “If you want to,” he said, “you can make me clean.”
+                                  
+                    Jesus was filled with pity, and reached out and touched him. 
+
+                    “I do want to,” he answered.
+                    """
+                let beats = """
+                    A man suffering from 
+                    
+                    a dreaded skin disease 
+                    
+                    came to Jesus, 
+                    
+                    knelt down, and 
+                    
+                    begged him for help. 
+
+                    “If you want to,” he said, 
+                    
+                    “you can make me clean.”
+                                  
+                    Jesus was filled with pity, and 
+                    
+                    reached out and touched him. 
+
+                    “I do want to,” he answered.
+                    """
+                // what's the context? unclean, touch, Jesus' clean > my unclean, had to yell unclean, unsafe, fear,
+                let prompts = [Prompt(text: "When people are afraid of me.", clarifier: "A leper goes to Jesus.")]
+                let verse = Verse(beats, prompts: prompts,
+                                  dueDate: Date.distantPast)
+                modelContext.insert(verse)
+            }
+            Spacer()
         }
         .padding(.vertical)
 

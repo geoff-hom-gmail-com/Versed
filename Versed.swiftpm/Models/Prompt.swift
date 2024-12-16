@@ -11,9 +11,9 @@ final class Prompt: Hashable {
     var text: String
     
     // (Goal) The user envisions a situation where multiple verses apply. For memorization (spaced repetition), she knows which verse to recite. 
-    var clarifier: String?
+    var clarifier: String
     
-    init(text: String, clarifier: String? = nil) {
+    init(text: String = String(), clarifier: String = String()) {
         self.text = text
         self.clarifier = clarifier
     }
@@ -22,10 +22,9 @@ final class Prompt: Hashable {
     // Current implementation: "prompt (clarifier)." 
     var fullPrompt: String {
         var fullPrompt = text
-        if let clarifier = clarifier {
+        if !clarifier.isEmpty {
             fullPrompt += " (\(clarifier))"
         }
-        
         return fullPrompt
     }
     

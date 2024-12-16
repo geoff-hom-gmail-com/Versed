@@ -31,6 +31,7 @@ struct ReciteView: View {
             if verse.dueDate! < Date.now {
                 TestAVerseView(verse: verse)
             } else {
+                // (ToDo) Pass in only what a view needs. (just due date?)
                 NextVerseDueView(verse: verse)
             }
         } else {

@@ -6,6 +6,8 @@ import SwiftUI
 // Use more SF symbols? Again, start top-down.
 struct VerseDetail: View {    
     @Bindable var verse: Verse
+    
+    @State private var isClueExpanded: Bool = false
         
     var body: some View {
 //        Text("VerseDetail")
@@ -13,34 +15,78 @@ struct VerseDetail: View {
         // DisclosureGroup works. Not sure the UI is ideal. Consider Post-MVP.
         Form {
             // where do we put navbar title? try with Text; later, should be the prompt/rowTitle?
-            Section() {
-                // TextEditor might sound better at first. But I like having a minimum text size. 
-                // lineLimit() works differently here than in TextField. Here, the min doesn't seem to work. 
-                //                TextEditor(text: $verse.text)
-                //                    .lineLimit(3...)
-                
-                TextField("", text: $verse.text, axis: .vertical)
-                    .lineLimit(3...)
-            } header: {
-                HStack {
-                    Text("Beats")
-                    HelpButton(popoverText: "Divide text into memorable beats.")
-                    Spacer()
-                }
-            }
             
+            
+            // foreach prompt, show prompt
+
             Section() {
-                // ToDo: figure out bindings here. $verse.prompts may be empty. Similarly, $verse.clues may be empty, have 1, 2, 3, etc.
-                //     !           TextField("", text: $verse.prompts.first?.text)
-                TextField("Prompt", text: .constant(""))
-                TextField("(Clarifier)", text: .constant(""))
-                    .padding(.leading)                               
+                // ToDo: figure out bindings here. $verse.prompts may be empty. A prompt may exist but not its clarifier. Similarly, $verse.clues may be empty, have 1, 2, 3, etc.
+                // changing it up: if we display it, then it's not empty; eg if we display it, add it
+                // If empty, we don't want constant binding; we want blank text that we can edit
+                // we may not want a binding to the verse itself, but to a temp var; then on save, we can transfer
+                // but for now we can do constants of it
+                // very not DRY, nor editable
+                // could also do private var computed like promptBinding or binding(for:)
+                // can handle nil case via first or can check if array is empty; hmm
+//                if let prompt = verse.prompts.first {
+////                    TextField("Prompt", text: $verse.prompts.first!.text)
+//                    
+//                    // error cannot find $prompt in scope
+////                    TextField("hmm", text: $prompt.text)
+//                    // this won't crash because we checked if let = .first; but it's annoying we're repeating prompts call
+//                    TextField("hmm", text: $verse.prompts[0].text)
+//                    
+//                    TextField("Prompt", text: .constant(prompt.text))
+//                    // todo display properly; if empty clarifier, should show (Clarifier) (currently shows ())
+//                    TextField("(Clarifier)", text: .constant( "(\(prompt.clarifier))" ))
+//                            .padding(.leading)
+//                }
+                ForEach($verse.prompts) { $prompt in
+                    TextField("Prompt", text: $prompt.text)
+                    // todo display properly; if empty clarifier, should show (Clarifier) (currently shows ())
+                    TextField("(Clarifier)", text: $prompt.clarifier)
+                        .padding(.leading)
+                }
+                 
+                
+//                TextField("Prompt", text: promptBinding)
+//                TextField("Prompt", text: .constant(""))
+//                TextField("(Clarifier)", text: .constant(""))
+//                    .padding(.leading)                               
             } header: {
                 HStack {
                     Text("Prompt (Clarifier)")
                     HelpButton(popoverText: "What are prompt/clarifier? Etc. Answer here.")
                     Spacer()
                 }
+            }
+            
+            // forEach clue, show clue section, numbered
+            ForEach($verse.clues) { $clue in
+                Section("Clue") {
+                    TextField("Question", text: $clue.q)
+                    TextField("Answer", text: $clue.a)
+                        .padding(.leading)
+                }
+                
+//                DisclosureGroup(isExpanded: $isClueExpanded) {
+//                    TextField("Question", text: .constant(""))
+//                    TextField("Answer", text: .constant(""))
+//                        .padding(.leading)
+//                } label: {
+//                    Text("Clue X2")
+//                }
+                // OutlineGroup? maybe that will have a better UI and still work with isExpanded
+                // also, we may want disclosure for each clue and all clues; and how do we do this programmatically for arbitrary number of clues? each needs separate binding Bool
+                // and we want a help button for the first clue (or the entire clues section)
+                
+//                Section(isExpanded: $isClueExpanded) {
+//                    TextField("Question", text: .constant(""))
+//                    TextField("Answer", text: .constant(""))
+//                        .padding(.leading)
+//                } header: {
+//                    Text("Clue X")
+//                }
             }
             
             Section() {
@@ -55,24 +101,39 @@ struct VerseDetail: View {
                 }
             }
             
-            Section("Clue 2") {
-                TextField("Question", text: .constant(""))
-                TextField("Answer", text: .constant(""))
-                    .padding(.leading)               
-            }
-            
-            Section("Clue 3") {
-                TextField("Question", text: .constant(""))
-                TextField("Answer", text: .constant(""))
-                    .padding(.leading)               
-            }
-            
-            Section("Clue 4") {
-                TextField("Question", text: .constant(""))
-                TextField("Answer", text: .constant(""))
-                    .padding(.leading)               
-            } 
+//            Section("Clue 2") {
+//                TextField("Question", text: .constant(""))
+//                TextField("Answer", text: .constant(""))
+//                    .padding(.leading)               
+//            }
+//            
+//            Section("Clue 3") {
+//                TextField("Question", text: .constant(""))
+//                TextField("Answer", text: .constant(""))
+//                    .padding(.leading)               
+//            }
+//            
+//            Section("Clue 4") {
+//                TextField("Question", text: .constant(""))
+//                TextField("Answer", text: .constant(""))
+//                    .padding(.leading)               
+//            } 
            
+            Section() {
+                // TextEditor might sound better at first. But I like having a minimum text size.
+                // lineLimit() works differently here than in TextField. Here, the min doesn't seem to work.
+                //                TextEditor(text: $verse.text)
+                //                    .lineLimit(3...)
+                
+                TextField("", text: $verse.text, axis: .vertical)
+                    .lineLimit(3...)
+            } header: {
+                HStack {
+                    Text("Beats")
+                    HelpButton(popoverText: "Divide text into memorable beats.")
+                    Spacer()
+                }
+            }
             
             // May try something like this in the future. If we want a permanent label for the TextField. 
             // (Also see: https://mic.st/blog/labeled-textfield-in-swiftui/)

@@ -19,7 +19,7 @@ final class Clue: Hashable, Identifiable {
     var q: String
     var a: String
     
-    init(q: String, a: String) {
+    init(q: String = String(), a: String = String()) {
         self.q = q
         self.a = a
     }
