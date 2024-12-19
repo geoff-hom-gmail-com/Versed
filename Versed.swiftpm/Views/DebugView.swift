@@ -43,7 +43,8 @@ struct DebugView: View {
                     """
                 let cues = [Prompt(text: "I forgot Jesus.", clarifier: "NIV")]
                 let clues = [Clue(q: "What metaphor does Jesus use?", a: "Jesus is the vine. We are the branches."),
-                             Clue(q: "Without Jesus, what can't we do?", a: "We can't bear fruit.")]
+                             Clue(q: "Without Jesus, what can't we do?", a: "We can't bear fruit."),
+                             Clue(q: "What's the first word?", a: "Apart")]
                 let verse = Verse(beats, prompts: cues, clues: clues,
                                   dueDate: Date.distantPast)
                 modelContext.insert(verse)

@@ -26,30 +26,22 @@ struct TestAVerseView: View {
             Text("A verse is due!")
             
             Section() {
-                // (ToDo) (this picker/seg looks a little wonky) (probably because it's in a form) (try VStack etc later?)
                 HStack {
                     Picker("Sense", selection: $selectedSense) {
-                        // (ToDo) (icons instead of text?) (ear.badge.waveform)
-//                        Text("Hear").tag(Sense.ears)
+
                         // (Goal) The user thinks hear/audio.
                         Image(systemName: "ear.badge.waveform").tag(Sense.ears)
 
                         // (Goal) The user thinks see/read.
                         Image(systemName: "eye").tag(Sense.eyes)
-
-//                        Text("See").tag(Sense.eyes)
                     }
                     .pickerStyle(.segmented)
                     Spacer()
-                    // sf symbol: lightbulb?
                     Button() {
                         shouldShowPromptAndClues = true
                     } label: {
                         Image(systemName: "lightbulb.max")
                     }
-//                    Button("Prompt") {
-//                        shouldShowPromptAndClues = true
-//                    }
                 }
                 if shouldShowPromptAndClues {
                     switch selectedSense {

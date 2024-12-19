@@ -20,7 +20,7 @@ struct SeeClueView: View {
     }
     
     var body: some View {
-        // Image goals: User should think of question and answer. Or, conversation.
+        // (Goal) The user should think "question/answer." Or, "conversation."
         HStack {
             Button() {
                 shouldShowQuestion.toggle()
