@@ -1,7 +1,7 @@
 import SwiftUI
 import SwiftData
 
-// (Goal) In the future, life happens to the user. Her brain has already associated that context/prompt with a verse she has memorized. She can recite the verse as needed.
+// (Goal) In the future, life happens to the user. Her brain has already associated that context/prompt/cue with a verse she has memorized. She can recite the verse as needed.
 // (toDo) rename prompt to context? verseContext?
 // (final) (inheritance not considered)
 // (class) (SwiftData)

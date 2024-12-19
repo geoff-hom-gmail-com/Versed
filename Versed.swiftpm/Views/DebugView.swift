@@ -30,6 +30,26 @@ struct DebugView: View {
             }
             Spacer()
             
+            // (Goal) The coder can add a shorter, realistic verse with a past-due date.
+            Button("Add realistic verse. Shorter. With past-due date") {
+                // (NIV) (John 15)
+                let text = """
+                    Apart from me you can do nothing. 
+                    """
+                let beats = """
+                    Apart from me 
+                    
+                    you can do nothing.
+                    """
+                let cues = [Prompt(text: "I forgot Jesus.", clarifier: "NIV")]
+                let clues = [Clue(q: "What metaphor does Jesus use?", a: "Jesus is the vine. We are the branches."),
+                             Clue(q: "Without Jesus, what can't we do?", a: "We can't bear fruit.")]
+                let verse = Verse(beats, prompts: cues, clues: clues,
+                                  dueDate: Date.distantPast)
+                modelContext.insert(verse)
+            }
+            Spacer()
+            
             // (Goal) The coder can add a realistic verse with a past-due date.
             Button("Add realistic verse. With past-due date") {
                 // (GNT) (Mark 1:40)
