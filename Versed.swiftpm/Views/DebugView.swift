@@ -37,11 +37,11 @@ struct DebugView: View {
                     Apart from me you can do nothing. 
                     """
                 let beats = """
-                    Apart from me 
+                    "Apart from me 
                     
-                    you can do nothing.
+                    you can do nothing."
                     """
-                let cues = [Prompt(text: "I forget about Jesus.", clarifier: "NIV")]
+                let cues = [Prompt(text: "When I forget about Jesus.", clarifier: "")]
                 let clues = [Clue(q: "Who is speaking? And to whom?", a: "Jesus is speaking to his disciples."),
                              Clue(q: "Where are they?", a: "The Last Supper."),
                              Clue(q: "What metaphor is Jesus using?", a: "He is the vine. We are the branches."),

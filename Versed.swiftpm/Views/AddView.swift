@@ -20,6 +20,7 @@ struct AddView: View {
 //                    Verse(fullText))
             }
         }
+        .scrollDismissesKeyboard(.immediately)
         
         // after adding, should have some feedback so user knows. Like, a pop-up to confirm. Then after confirming, reset the textfield. 
         
