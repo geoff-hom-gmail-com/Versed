@@ -42,10 +42,13 @@ struct DebugView: View {
                     you can do nothing."
                     """
                 let cues = [Prompt(text: "When I forget about Jesus.", clarifier: "")]
-                let clues = [Clue(q: "Who is speaking? And to whom?", a: "Jesus is speaking to his disciples."),
+                let clues = [Clue(q: "Who is speaking? And to whom?",
+                                  a: "Jesus is speaking to his disciples."),
                              Clue(q: "Where are they?", a: "The Last Supper."),
-                             Clue(q: "What metaphor is Jesus using?", a: "He is the vine. We are the branches."),
-                             Clue(q: "Without Jesus, what can't we do?", a: "We can't bear fruit."),
+                             Clue(q: "What metaphor is Jesus using?",
+                                  a: "He is the vine. We are the branches."),
+                             Clue(q: "Without Jesus, what can't we do?",
+                                  a: "We can't bear fruit."),
                              Clue(q: "What's the first word?", a: "Apart")]
                 let verse = Verse(beats, prompts: cues, clues: clues,
                                   dueDate: Date.distantPast)

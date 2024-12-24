@@ -1,60 +1,64 @@
 import SwiftUI
 
-// Goal: User can test recitation of a verse.
+// (Goal) The user can test recitation of a verse.
 struct TestAVerseView: View {
     var verse: Verse
     
-    enum Sense: String {
-        case ears, eyes
-    }
-    @State private var selectedSense: Sense = .ears
-    @State private var shouldShowPromptAndClues = false
+    // Default: Hearing. Not reading.
+    @State private var selectedSense: Sense = .hear
+    
+    // The user hasn't made a conscious choice yet.
+    @State private var isSensePicked = false
     
     enum InputMode: String {
         case mouth, touch
     }
+    
+    // Default: Speaking. Not typing.
     @State private var selectedInputMode: InputMode = .mouth
-    @State private var shouldShowInputArea = false
+    
+    @State private var isInputModePicked = false
     @State private var inputModeString = ""
     @State private var recitedText = ""
     
     @State private var shouldShowVerse = false
     
     var body: some View {
-        // Form or more like a VStack?
+        // Stick with form, or try more like a VStack?
         Form {
             Text("A verse is due!")
             
             Section() {
+                // First, the user picks a sense.
                 HStack {
                     Picker("Sense", selection: $selectedSense) {
-
-                        // (Goal) The user thinks hear/audio.
-                        Image(systemName: "ear.badge.waveform").tag(Sense.ears)
-
-                        // (Goal) The user thinks see/read.
-                        Image(systemName: "eye").tag(Sense.eyes)
+                        Image(systemName: SFSymbols.hear).tag(Sense.hear)
+                        Image(systemName: SFSymbols.see).tag(Sense.see)
                     }
                     .pickerStyle(.segmented)
                     Spacer()
                     Button() {
-                        shouldShowPromptAndClues = true
+                        isSensePicked = true
                     } label: {
-                        Image(systemName: "lightbulb.max")
+                        Image(systemName: SFSymbols.cue)
                     }
                 }
-                if shouldShowPromptAndClues {
+                
+                // Then, the user gets the cue. And, she can get clues.
+                if isSensePicked {
+                    // (ToDo) (beginner UX?) (can DRY?) (CueView(verse:sense:)?)
                     switch selectedSense {
-                    case .ears:
-                        HearPromptAndCluesView(verse: verse)
-                    case .eyes:
-                        SeePromptAndCluesView(verse: verse)
+                    case .hear:
+                        HearCueView(verse: verse)
+                    case .see:
+                        SeeCueView(verse: verse)
                     }
+                    CluesView(verse: verse, sense: selectedSense)
                 }
             }
             
             // show the input-mode picker.
-            if shouldShowPromptAndClues {
+            if isSensePicked {
                 Section() {
                     HStack {
                         // (ToDo) (spacer doesn't seem to be working) (how do we stop Picker from taking whole width?)
@@ -73,10 +77,10 @@ struct TestAVerseView: View {
                         // Is the dictation live, or after stop? What's ideal?
                         // What if the user wants to hear it back?
                         Button("Start") {
-                            shouldShowInputArea = true
+                            isInputModePicked = true
                         }
                     }
-                    if shouldShowInputArea {
+                    if isInputModePicked {
                         TextField(text: $recitedText, axis: .vertical) {
                             switch selectedInputMode {
                             case .mouth:

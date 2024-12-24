@@ -1,9 +1,9 @@
 import SwiftUI
 import AVFoundation
 
-// (Goal) The user can tap to hear the given text. The button shows an icon for "play," and the given image.
-// Technically, this can take any view. Future proofing. Also, .environment() returns some View.
-struct HearTextButton<Content: View>: View {
+// (Goal) The user thinks, "To hear <image>, tap here." If she taps, the text is spoken.
+// Technically, this can take any view. Future proofing. Also, .environment() returns "some View."
+struct HearButton<Content: View>: View {
     var image: Content
     var text: String
     
@@ -18,10 +18,8 @@ struct HearTextButton<Content: View>: View {
         } label: {
             // (ToDo) (animate properly) (user knows when playing, when stopped)
             // can google best practices (could use waveform) (play -> pause) (what about stop?)
-
-            // (Goal) The user thinks, "play X."
             HStack {
-                Image(systemName: "play")
+                Image(systemName: SFSymbols.play)
                 image
             }
         }
