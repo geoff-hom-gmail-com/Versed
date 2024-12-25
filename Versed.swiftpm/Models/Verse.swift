@@ -17,7 +17,7 @@ final class Verse: Identifiable, Hashable {
     
     // (Goal) The user sees verses in a list in the same order. She can also reorder them.
     // SwiftData does not store array order for model objects. 
-    var order: Int
+    var index: Int
     
     var text: String
     
@@ -33,14 +33,20 @@ final class Verse: Identifiable, Hashable {
     var dueDate: Date?
     
     // (Goal) The user adds a verse. It includes an empty prompt and clue x4. (4: chunking)
-    init(_ text: String, isExample: Bool = false, order: Int = 0,
+    init(_ text: String, isExample: Bool = false, index: Int = 0,
          prompts: [Prompt] = [Prompt()],
          clues: [Clue] = [Clue(), Clue(), Clue(), Clue()],
          dueDate: Date? = nil) {
         self.text = text
         self.isExample = isExample
-        self.order = order
+        self.index = index
         self.prompts = prompts
+        
+        // Assign clue index automatically.
+        for (index, clue) in clues.enumerated() {
+            clue.index = index
+        }
+        
         self.clues = clues
         self.dueDate = dueDate
     }

@@ -13,9 +13,14 @@ final class Prompt: Hashable {
     // (Goal) The user envisions a situation where multiple verses apply. For memorization (spaced repetition), she knows which verse to recite. 
     var clarifier: String
     
-    init(text: String = String(), clarifier: String = String()) {
+    // (Goal) The user sees cues in a list in the same order. She can also reorder them.
+    // SwiftData does not store array order for model objects.
+    var index: Int
+    
+    init(text: String = String(), clarifier: String = String(), index: Int = 0) {
         self.text = text
         self.clarifier = clarifier
+        self.index = index
     }
     
     // (Goal) The user sees a one-line version of the prompt + clarifier. She knows which verse it refers to.

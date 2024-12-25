@@ -19,9 +19,14 @@ final class Clue: Hashable, Identifiable {
     var q: String
     var a: String
     
-    init(q: String = String(), a: String = String()) {
+    // (Goal) The user sees clues in a list in the same order. She can also reorder them.
+    // SwiftData does not store array order for model objects.
+    var index: Int
+    
+    init(q: String = String(), a: String = String(), index: Int = 0) {
         self.q = q
         self.a = a
+        self.index = index
     }
     
     // MARK: Hashable

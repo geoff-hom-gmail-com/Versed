@@ -1,6 +1,6 @@
 import SwiftUI
 
-// (Goal) The user can test recitation of a verse.
+// (Goal) The user can test a verse by reciting it.
 struct TestAVerseView: View {
     var verse: Verse
     

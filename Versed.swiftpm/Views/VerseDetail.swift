@@ -61,7 +61,8 @@ struct VerseDetail: View {
                 }
             }
             
-            // forEach clue, show clue section, numbered
+            // forEach clue, show clue section, numbered(?)
+            // (ToDo) figure out how to show the clues in order, while also letting user edit them
             ForEach($verse.clues) { $clue in
                 Section("Clue") {
                     TextField("Question", text: $clue.q)

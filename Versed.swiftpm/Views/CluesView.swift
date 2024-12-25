@@ -14,7 +14,10 @@ struct CluesView: View {
             if verse.clues.isEmpty {
                 Text("No clues. Encode some!")
             } else {
-                ForEach(verse.clues) {
+                let sortedClues = verse.clues.sorted {
+                    $0.index < $1.index
+                }
+                ForEach(sortedClues) {
                     if !$0.q.isEmpty {
                         ClueView(clue: $0, sense: sense)
                     }

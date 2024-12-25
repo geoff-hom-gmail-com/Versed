@@ -8,12 +8,12 @@ struct EncodeView: View {
     
     // (Goal) The user can see her verses, in order.
     @Query(filter: #Predicate<Verse> { $0.isExample == false },
-           sort: \.order)
+           sort: \.index)
     private var userVerses: [Verse]
     
     // (Goal) The user can see example verses, in learning order.
     @Query(filter: #Predicate<Verse> { $0.isExample == true },
-           sort: \.order)
+           sort: \.index)
     private var exampleVerses: [Verse]
         
     // (Goal) The user can shrink either section of verses, for focus.
