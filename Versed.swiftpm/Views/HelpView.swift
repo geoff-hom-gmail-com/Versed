@@ -3,7 +3,6 @@ import SwiftUI
 struct HelpView: View {
     var body: some View {
         List {
-//            Text("Help")
             WelcomeToView()
             // note: eventually all this should be localized
             DisclosureGroup("Newbie Guide") {
@@ -40,11 +39,25 @@ struct HelpView: View {
             }
             DisclosureGroup("Code") {
                 // The URL is automatically made into a working link!
-                Text("The code for Versed is available on GitHub: https://github.com/geoff-hom-gmail-com/Versed.")
+                Text("""
+                Versed's code is on GitHub:
+                
+                    https://github.com/geoff-hom-gmail-com/Versed.
+                """)
             }
             DisclosureGroup("Contact") {
-                Text("Versed was created by…<Geoff and Dave?>")
-                Text("Feedback may be sent to <Geoff>?")
+                Text("""
+                Versed was created by:
+                
+                    Dave Bradley (production)
+                    Geoff Hom (design) (code)
+                """)
+                Text("""
+                Feedback may be sent to: 
+                
+                    (?) geoff.hom@gmail.com? 
+                    versed@gmail.com?
+                """)
             }
 
         }
