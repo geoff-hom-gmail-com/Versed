@@ -21,8 +21,8 @@ struct ClueView: View {
     var body: some View {
         switch sense {
         case .hear:
-            HearButton(image: questionImage, text: clue.q)
-            HearButton(image: answerImage, text: clue.a)
+            HearButton(view: questionImage, text: clue.q)
+            HearButton(view: answerImage, text: clue.a)
                 .padding(.leading)
         case .see:
             // (ToDo) (when doing see route) (DRY) (SeeButton(image:text:)?)

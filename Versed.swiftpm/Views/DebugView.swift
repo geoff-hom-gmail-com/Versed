@@ -1,12 +1,21 @@
 import SwiftUI
+import AVFAudio
 
 // (Goal) The coder/tester can tweak stuff.
 struct DebugView: View {
     @Environment(\.modelContext) private var modelContext
-
+    
     var body: some View {
         VStack {
-            //        Text("debug")
+            // (Goal) The coder can check available voices.
+            // (note: 1.2.25) This was done to see how to use higher-quality voices (e.g., Siri voices) for TTS. So far, Siri voices are unavailable. The user can download enhanced/premium voices. Also, she can make Personal Voices.
+            Button("Print available voices") {
+                let voices = AVSpeechSynthesisVoice.speechVoices()
+                voices.forEach {
+                    print($0)
+                }
+            }
+            Spacer()
             
             // (Goal) The coder can delete all persistent data without going thru Terminal and deleting all preview data. Latter takes 30" to rebuild.
             Button("Delete all persistent data") {
