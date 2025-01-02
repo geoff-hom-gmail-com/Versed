@@ -69,9 +69,7 @@ struct TestAVerseView: View {
                         }
                         .pickerStyle(.segmented)
                         Spacer()
-                        // (ToDo) (need to work on this UI practically)
-                        // (and keep in mind latest features of iOS 18 vs what I have access to in Playgrounds)
-                        // Ideally, user taps Transcribe button. User knows when transcription is happening and when stopped. 
+                        // Ideally, user taps Transcribe button. User knows when transcription is happening and when stopped.
                         // User can pause to think. Unpause to resume. (or maybe that's MVP-post)
                         // Does it stop transcribing automatically, and/or when user taps a stop button? Or just a button?
                         // Is the dictation live, or after stop? What's ideal?
@@ -80,6 +78,7 @@ struct TestAVerseView: View {
                             isInputModePicked = true
                         }
                     }
+                    
                     if isInputModePicked {
                         TextField(text: $recitedText, axis: .vertical) {
                             switch selectedInputMode {
