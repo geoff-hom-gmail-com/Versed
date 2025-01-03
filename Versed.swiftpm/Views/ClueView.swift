@@ -12,9 +12,9 @@ struct ClueView: View {
     @State private var shouldShowQuestion = false
     @State private var shouldShowAnswer = false
 
-    let questionImage = Image(systemName: SFSymbols.question)
+    let questionImage = Image(systemName: AppStrings.SFSymbols.question)
     var answerImage: some View {
-        Image(systemName: SFSymbols.answer)
+        Image(systemName: AppStrings.SFSymbols.answer)
             .environment(\.layoutDirection, .rightToLeft)
     }
     

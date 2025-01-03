@@ -26,7 +26,7 @@ struct CluesView: View {
         } label: {
             Spacer()
                 .frame(maxWidth: .infinity)            
-            Image(systemName: SFSymbols.clues)
+            Image(systemName: AppStrings.SFSymbols.clues)
         }
     }
 }

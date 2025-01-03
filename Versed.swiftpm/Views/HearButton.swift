@@ -25,7 +25,7 @@ struct HearButton<Content: View>: View {
             // (ToDo) (animate properly) (user knows when playing, when stopped)
             // can google best practices (could use waveform) (play -> pause) (what about stop?)
             HStack {
-                Image(systemName: SFSymbols.play)
+                Image(systemName: AppStrings.SFSymbols.play)
                 view
             }
         }
