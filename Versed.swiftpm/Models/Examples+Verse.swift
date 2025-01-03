@@ -2,8 +2,9 @@ import Foundation
 import SwiftData
 
 // (Goal) The user can see examples of verses. These help her understand how the app works. Especially encoding.
+
+// ToDo (move/refactor this under AppStrings?!)
 extension Verse {
-    
     static let examples = [
         // toDo  make prompt way more obvious/clear
         // Satan said, "If you are the Son of God, tell these stones to become bread.”

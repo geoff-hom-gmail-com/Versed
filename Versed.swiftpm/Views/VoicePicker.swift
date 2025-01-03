@@ -7,27 +7,34 @@ struct VoicePicker: View {
     
     @State private var selectedVoice: AVSpeechSynthesisVoice?
     
+    @State private var selectedLine: TestLine = AppStrings.TestLines.defaultLine
+    
     var body: some View {
         // (MVP-post) generalize for all/most languages
         let englishVoices = AVSpeechSynthesisVoice.speechVoices().filter {
             $0.language.hasPrefix("en")
         }
         
-        // ToDo: Make a better test line; something that captures most sounds.
-        HearButton(view: Text("Test voice"), text: "This is a test.")
+        HearButton(view: Text("Test voice"), text: selectedLine.line)
         
         Picker("Voice", selection: $selectedVoice) {
             ForEach(englishVoices, id:\.identifier) {
                 Text("\($0.name) \($0.language)").tag($0)
             }
         }
-        .onAppear {
+        .task {
             // (Goal) The user can see her last-picked voice. Even after restarting the app.
             selectedVoice = AVSpeechSynthesisVoice(identifier: voiceID)
         }
         .onChange(of: selectedVoice) {
             if let id = selectedVoice?.identifier {
                 voiceID = id
+            }
+        }
+        
+        Picker("Line", selection: $selectedLine) {
+            ForEach(AppStrings.TestLines.all, id:\.id) {
+                Text("(\($0.why)) \($0.line)").tag($0)
             }
         }
     }
