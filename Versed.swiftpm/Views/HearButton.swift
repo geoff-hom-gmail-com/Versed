@@ -9,7 +9,7 @@ struct HearButton<Content: View>: View {
     let synthesizer = AVSpeechSynthesizer()
     
     // (Goal) The user hears her preferred TTS voice.
-    @AppStorage(AppStrings.StorageKeys.voiceID) var voiceID: String = ""
+    @AppStorage(AppString.StorageKey.voiceID) var voiceID: String = ""
     
     var body: some View {
         Button() {
@@ -25,7 +25,7 @@ struct HearButton<Content: View>: View {
             // (ToDo) (animate properly) (user knows when playing, when stopped)
             // can google best practices (could use waveform) (play -> pause) (what about stop?)
             HStack {
-                Image(systemName: AppStrings.SFSymbols.play)
+                Image(systemName: AppString.SFSymbol.play)
                 view
             }
         }

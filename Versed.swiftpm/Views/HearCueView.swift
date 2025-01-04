@@ -7,11 +7,11 @@ struct HearCueView: View {
     var body: some View {
         // (ForEach) May have multiple prompts someday. Also avoids .first's optional.
         ForEach(verse.prompts) { prompt in
-            HearButton(view: Image(systemName: AppStrings.SFSymbols.cue),
+            HearButton(view: Image(systemName: AppString.SFSymbol.cue),
                            text: prompt.text)
             
             if !prompt.clarifier.isEmpty {
-                HearButton(view: Image(systemName: AppStrings.SFSymbols.clarifier),
+                HearButton(view: Image(systemName: AppString.SFSymbol.clarifier),
                                text: prompt.clarifier)
                 .padding(.leading)
             }

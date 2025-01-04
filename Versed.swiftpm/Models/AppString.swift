@@ -1,6 +1,6 @@
 // (Goal) The dev can edit strings DRY-ly.
-struct AppStrings {
-    struct SFSymbols {
+struct AppString {
+    struct SFSymbol {
         // Flip Image horizontally: .environment(\.layoutDirection, .rightToLeft).
         static let answer = "exclamationmark.bubble"
         
@@ -20,17 +20,17 @@ struct AppStrings {
         static let see = "eye"
     }
     
-    struct StorageKeys {
+    struct StorageKey {
         static let voiceID = "voiceID"
     }
     
-    struct TestLines {
+    struct TestLine {
         // (Goal) The user can test a voice without having to first pick a line.
-        static let defaultLine = TestLine(why: "narrative", line: "In the beginning, God created the heavens and the earth.")
-        
-        static let all = [
+        static let defaultLine = GlobalTestLine(why: "narrative", line: "In the beginning, God created the heavens and the earth.")
+
+        static let allLines = [
             defaultLine,
-            TestLine(why: "conversational", line: "\"Do to others as you would have them do to you.\"")
+            GlobalTestLine(why: "conversational", line: "\"Do to others as you would have them do to you.\"")
         ]
     }
 }

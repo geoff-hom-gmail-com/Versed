@@ -1,13 +1,13 @@
 import SwiftUI
-import AVFoundation
+import AVFAudio
 
 // (Goal) The user can pick the voice for TTS.
 struct VoicePicker: View {
-    @AppStorage(AppStrings.StorageKeys.voiceID) var voiceID: String = ""
+    @AppStorage(AppString.StorageKey.voiceID) var voiceID: String = ""
     
     @State private var selectedVoice: AVSpeechSynthesisVoice?
     
-    @State private var selectedLine: TestLine = AppStrings.TestLines.defaultLine
+    @State private var selectedLine: TestLine = AppString.TestLine.defaultLine
     
     var body: some View {
         // (MVP-post) generalize for all/most languages
@@ -33,7 +33,7 @@ struct VoicePicker: View {
         }
         
         Picker("Line", selection: $selectedLine) {
-            ForEach(AppStrings.TestLines.all, id:\.id) {
+            ForEach(AppString.TestLine.allLines, id:\.id) {
                 Text("(\($0.why)) \($0.line)").tag($0)
             }
         }

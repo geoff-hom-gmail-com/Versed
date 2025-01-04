@@ -13,3 +13,6 @@ struct TestLine: Identifiable, Hashable {
     
     var line: String
 }
+
+// (Goal) Dev can call AppString.TestLine.allLines. Not AppString.TestLines.all. Inside AppString.TestLine, we call GlobalTestLine. So we need this alias. (Tried MyApp/VersedApp/Versed.TestLine, but it didn't work. Not sure why.)
+typealias GlobalTestLine = TestLine
