@@ -12,18 +12,11 @@ struct VoicePicker: View {
     
     @State private var selectedVoice: AVSpeechSynthesisVoice?
     
+    @State private var englishVoices: [AVSpeechSynthesisVoice] = []
+    
     @State private var selectedLine: TestLine = AppString.TestLine.defaultLine
     
     var body: some View {
-        // (MVP-post) generalize for all/most languages
-        let englishVoices = AVSpeechSynthesisVoice.speechVoices()
-            .filter {
-                $0.language.hasPrefix("en")
-            }
-            .sorted {
-                $0.name < $1.name
-            }
-        
         HearButton(view: Text("Test voice"), text: selectedLine.line)
         
         Picker("Voice", selection: $selectedVoice) {
@@ -34,6 +27,15 @@ struct VoicePicker: View {
         .task {
             // (Goal) The user can see her last-picked voice. Even after restarting the app.
             selectedVoice = AVSpeechSynthesisVoice(identifier: voiceID)
+            
+            // (MVP-post) generalize for all/most languages
+            englishVoices = AVSpeechSynthesisVoice.speechVoices()
+                .filter {
+                    $0.language.hasPrefix("en")
+                }
+                .sorted {
+                    $0.name < $1.name
+                }
         }
         .onChange(of: selectedVoice) {
             if let id = selectedVoice?.identifier {
