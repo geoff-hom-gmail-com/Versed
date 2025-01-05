@@ -19,6 +19,9 @@ struct VoicePicker: View {
     var body: some View {
         HearButton(view: Text("Test voice"), text: selectedLine.line)
         
+        // (Note) (as of Xcode 16.1) This picker works in Xcode, etc., but not in Playgrounds for Mac. Nor Playgrounds for iPad. Nor Playgrounds for iPad -> TestFlight -> iPhone.
+        // But it does work for Xcode -> iPhone. And Xcode -> TestFlight -> iPhone.
+        // The voiceID seems to be read for HearButton, as I can hear the previously stored voice. But, the picker doesn't show that selected voice. Nor does it reflect picking other voices. 
         Picker("Voice", selection: $selectedVoice) {
             ForEach(englishVoices, id:\.identifier) {
                 Text("\($0.name) \($0.language)").tag($0)
