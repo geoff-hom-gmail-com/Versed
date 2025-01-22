@@ -1,9 +1,14 @@
 // (Goal) The dev can edit strings DRY-ly.
 struct AppString {
     struct SFSymbol {
+        // The user sees a "+" in a rounded rectangle. Rounded rectangle is homage to Steve Jobs and the Mac. Also varies more from circle used for help.
+        static let add = "plus.app.fill"
+        
         // Flip Image horizontally: .environment(\.layoutDirection, .rightToLeft).
         static let answer = "exclamationmark.bubble"
         
+        static let arrow = "arrow.right"
+        static let brain = "brain.head.profile.fill"
         static let clarifier = "info.circle"
         static let clues = "sparkle.magnifyingglass"
         static let cue = "lightbulb.max"
@@ -11,13 +16,18 @@ struct AppString {
         // Or "audio."
         static let hear = "ear.badge.waveform"
         
+        static let help = "questionmark.circle.fill"
         static let play = "play"
         
         // Or "conversation." (use with "answer")
         static let question = "questionmark.bubble"
         
+        static let say = "mouth"
+        
         // Or "read."
         static let see = "eye"
+        
+        static let text = "book.pages"
     }
     
     struct StorageKey {
