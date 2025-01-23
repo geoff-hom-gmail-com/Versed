@@ -12,6 +12,7 @@ struct AppString {
         static let clarifier = "info.circle"
         static let clues = "sparkle.magnifyingglass"
         static let cue = "lightbulb.max"
+//        static let flag = "flag.fill"
         
         // Or "audio."
         static let hear = "ear.badge.waveform"
@@ -27,6 +28,7 @@ struct AppString {
         // Or "read."
         static let see = "eye"
         
+        static let tap = "hand.tap"
         static let text = "book.pages"
     }
     

@@ -15,6 +15,7 @@ struct ClueView: View {
     let questionImage = Image(systemName: AppString.SFSymbol.question)
     var answerImage: some View {
         Image(systemName: AppString.SFSymbol.answer)
+        // (todo) (try instead) .scaleEffect(x: -1)
             .environment(\.layoutDirection, .rightToLeft)
     }
     
