@@ -7,14 +7,14 @@ struct WelcomeToView: View {
         // (toDo) Maybe old-school font.
         GroupBox(label: Text("Welcome to …")) {
             Spacer()
-            // (Keep) The dev can see the Spacer.
+            // (Keep) (Goal) The dev can see the vertical Spacer.
 //                .background(Color.yellow.frame(minWidth: 10))
 
             Spacer()
 //                .background(Color.blue.frame(minWidth: 10))
             Text("Versed")
-                .font(.title)
-                .scaleEffect(1.4)
+                .font(.largeTitle)
+//                .font(.system(size: 36))
             Spacer()
 //                .background(Color.blue.frame(minWidth: 10))
             HStack {
