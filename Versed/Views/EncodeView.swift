@@ -63,6 +63,8 @@ struct EncodeView: View {
     }
 }
 
+// also need a way to delete texts/verses.
+
 //#Preview {
 //    EncodeView()
 //}

@@ -1,13 +1,47 @@
 // (Goal) The dev can edit strings DRY-ly.
 struct AppString {
+    struct Label {
+        static let after = "After"
+        static let info = "Info"
+    }
+    
+    struct Prompt {
+//        static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers; such branches are picked up, thrown into the fire and burned.\""
+        static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
+
+        static let afterTest = """
+            If you do not remain in me,
+            you are like a branch
+            that is thrown away
+            and withers;
+            such branches are picked up,
+            thrown into the fire
+            and burned.”
+            """
+        
+//        static let before = "\"I am the vine; you are the branches.\""
+        static let before = "\"If you remain in me and I in you, you will bear much fruit …\""
+
+//        static let goal = "\"If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.\""
+        static let goal = "\"… apart from me you can do nothing.\""
+        
+        static let reference = "(John) (NIV)"
+    }
+    
     struct SFSymbol {
         // The user sees a "+" in a rounded rectangle. Rounded rectangle is homage to Steve Jobs and the Mac. Also varies more from circle used for help.
         static let add = "plus.app.fill"
+        
+        static let after = "text.line.last.and.arrowtriangle.forward"
         
         // Flip Image horizontally: .environment(\.layoutDirection, .rightToLeft).
         static let answer = "exclamationmark.bubble"
         
         static let arrow = "arrow.right"
+        
+        // Not "top" or "start." 
+        static let before = "text.line.first.and.arrowtriangle.forward"
+        
         static let brain = "brain.head.profile.fill"
         static let clarifier = "info.circle"
         static let clues = "sparkle.magnifyingglass"
@@ -18,6 +52,7 @@ struct AppString {
         static let hear = "ear.badge.waveform"
         
         static let help = "questionmark.circle.fill"
+        static let info = "info.circle"
         static let play = "play"
         
         // Or "conversation." (use with "answer")
