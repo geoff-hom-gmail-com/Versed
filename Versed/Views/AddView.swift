@@ -2,7 +2,20 @@ import SwiftUI
 
 // (Goal) The user can add text to know.
 struct AddView: View {
-    @State private var fullText: String = ""
+    @State private var beforeText: String = ""
+    @State private var goalText: String = ""
+    @State private var afterText: String = ""
+    @State private var referenceText: String = ""
+    
+    // (Note) Why not [String]? Won't work in reset().
+    private var inputTexts: [Binding<String>] {
+        [$beforeText, $goalText, $afterText, $referenceText]
+    }
+    
+    // (Goal) Buttons are disabled, if no text.
+    private var isNoText: Bool {
+        inputTexts.allSatisfy { $0.wrappedValue.isEmpty }
+    }
     
     //    @Environment(Verses.self) private var verses
     
@@ -18,7 +31,7 @@ struct AddView: View {
                     // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
                     // (Note) (axis: and .lineLimit() both needed for that appearance.
                     TextField(AppString.Label.before,
-                              text: $fullText,
+                              text: $beforeText,
                               prompt: Text(AppString.Prompt.before),
                               axis: .vertical)
                     .lineLimit(3...)
@@ -36,7 +49,7 @@ struct AddView: View {
                 
                 Section() {
                     TextField(AppString.Label.goal,
-                              text: $fullText,
+                              text: $goalText,
                               prompt: Text(AppString.Prompt.goal),
                               axis: .vertical)
                     .lineLimit(6...)
@@ -54,7 +67,7 @@ struct AddView: View {
                 
                 Section() {
                     TextField(AppString.Label.after,
-                              text: $fullText,
+                              text: $afterText,
                               prompt: Text(AppString.Prompt.after),
                               axis: .vertical)
                     .lineLimit(3...)
@@ -70,7 +83,7 @@ struct AddView: View {
                 
                 Section() {
                     TextField(AppString.Label.reference,
-                              text: $fullText,
+                              text: $referenceText,
                               prompt: Text(AppString.Prompt.reference),
                               axis: .vertical)
                     .lineLimit(2...)
@@ -86,9 +99,9 @@ struct AddView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(AppString.Label.reset) {
-                        // (todo) (reset disabled while all texts empty?)
+                        reset()
                     }
-                    .disabled(true)
+                    .disabled(isNoText)
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(AppString.Label.done) {
@@ -98,10 +111,16 @@ struct AddView: View {
                         // (toDo) after adding/saving, user gets feedback. (a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield. It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
                     }
                     // (Todo) (done disabled until … in theory, one can edit it later, so … disable until goal text entered at least?)
-                    .disabled(true)
+                    .disabled(isNoText)
                 }
             }
         }
+    }
+    
+    // (Goal) The user sees the view reset.
+    // (Note) Was worried about this being too abrupt. But seems okay.
+    private func reset() {
+        inputTexts.forEach { $0.wrappedValue = "" }
     }
 }
 
