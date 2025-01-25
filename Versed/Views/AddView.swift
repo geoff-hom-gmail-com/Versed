@@ -1,6 +1,6 @@
 import SwiftUI
 
-// (Goal) The user can add text to learn.
+// (Goal) The user can add text to know.
 struct AddView: View {
     @State private var fullText: String = ""
     
@@ -21,16 +21,14 @@ struct AddView: View {
                               prompt: Text(AppString.Prompt.before),
                               axis: .vertical)
                     .lineLimit(3...)
-                    // if we have labels, they should be what's most often. So not "end" or "how does Mark start?" but actual verses before and after. What's a good example? vine?
                 } header: {
-                    //
                     HStack {
-                        Image(systemName: AppString.SFSymbol.before)
-//                        Text("Before")
-//                        // (Goal) The user isn't turned off by ALL CAPS in Form Section headings.
-//                            .textCase(nil)
-                        InfoButton(popoverText: "How to make textCase nil?")
+                        Text("\(Image(systemName: AppString.SFSymbol.before)) Before")
+                        Spacer()
+                        InfoButton(popoverText: "Before your goal, some text. Used to cue.")
                     }
+                    // (Goal) The user isn't turned off by ALL CAPS in Form Section headings.
+                    .textCase(nil)
                 }
                 
                 Section() {
@@ -42,10 +40,13 @@ struct AddView: View {
                 } header: {
                     // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
                     HStack {
-                        Text("Goal").textCase(nil)
-                        InfoButton(popoverText: "How to make textCase nil?")
-                        //                    Spacer()
+                        Text(AppString.Emoji.soccerBall)
+                        Image(systemName: AppString.SFSymbol.arrow)
+                        Text(AppString.Emoji.goalNet)
+                        Spacer()
+                        InfoButton(popoverText: "Your goal text.")
                     }
+                    .textCase(nil)
                 }
                 
                 Section() {
@@ -55,8 +56,13 @@ struct AddView: View {
                               axis: .vertical)
                     .lineLimit(3...)
                 } header: {
-                    Image(systemName: AppString.SFSymbol.after)
-//                    Text(AppString.Label.after).textCase(nil)
+                    HStack {
+                        Image(systemName: AppString.SFSymbol.after)
+                        Text(AppString.Label.after)
+                        Spacer()
+                        InfoButton(popoverText: "After your goal, some text. Used to cue.")
+                    }
+                    .textCase(nil)
                 }
                 
                 Section() {
@@ -66,20 +72,17 @@ struct AddView: View {
                               axis: .vertical)
                     .lineLimit(2...)
                 } header: {
-                    Text("Reference / Notes").textCase(nil)
+                    HStack {
+                        Image(systemName: "text.book.closed.fill")
+                        Text("Reference / notes")
+                    }
+                    .textCase(nil)
                 }
                 
-                // (Todo) (done disabled until all 3 entered?) (though in theory, one can edit it later, so … disable until Text entered at least?)
                 
-                
-                //            Text("Add a verse")
-                //            Text("Enter text to remember:")
-                //            TextField("The Kingdom of God is like …",
-                //                      text: $fullText, axis: .vertical)
-                //                .lineLimit(3...)
                 //            Button("Done") {
-                ////                verses.myVerses.append(
-                ////                    Verse(fullText))
+                //                verses.myVerses.append(
+                //                    Verse(fullText))
                 //            }
             }
             .scrollDismissesKeyboard(.immediately)
@@ -93,11 +96,12 @@ struct AddView: View {
                     Button("Done") {
                         
                     }
+                    // (Todo) (done disabled until … in theory, one can edit it later, so … disable until goal text entered at least?)
                     .disabled(true)
                 }
             }
             
-            // after adding, should have some feedback so user knows. Like, a pop-up to confirm. Or the badge on Encode ("!", "new" etc) Then after confirming, reset the textfield.
+            // (toDo) after adding/saving, should have some feedback so user knows. Like, a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield.
             
             
         }

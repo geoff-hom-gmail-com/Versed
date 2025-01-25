@@ -57,7 +57,7 @@ struct VerseDetail: View {
                 HStack {
                     Text("Prompt (Clarifier)")
                     HelpButton(popoverText: "What are prompt/clarifier? Etc. Answer here.")
-                    Spacer()
+//                    Spacer()
                 }
             }
             

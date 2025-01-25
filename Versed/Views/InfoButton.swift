@@ -7,7 +7,7 @@ struct InfoButton: View {
     @State private var isShowingHelp: Bool = false
     
     var body: some View {
-        // (todo) how to make popover text textcase nil?
+        // (Goal) The user doesn't feel overwhelmed by questions. ("i" vs "?")
         Button(AppString.Label.info, systemImage: AppString.SFSymbol.info) {
             self.isShowingHelp = true
         }
