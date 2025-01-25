@@ -7,13 +7,23 @@ struct AppString {
         static let soccerBall = "⚽️"
     }
     
+    struct Info {
+        static let after = "After your goal, some text. Used to cue."
+        static let before = "Before your goal, some text. Used to cue."
+        static let goal = "Your goal text."
+    }
+    
     struct Label {
         static let after = "After"
+        static let before = "Before"
+        static let done = "Done"
+        static let goal = "Goal"
         static let info = "Info"
+        static let reference = "Reference / notes"
+        static let reset = "Reset"
     }
     
     struct Prompt {
-//        static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers; such branches are picked up, thrown into the fire and burned.\""
         static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
 
         // maybe Encode will use beats prompts
@@ -29,10 +39,8 @@ struct AppString {
         
         // (Goal) The user sees a prompt of a typical use case.
         static let before = "\"… Neither can you bear fruit unless you remain in me.\""
-//        static let before = "\"If you remain in me and I in you, you will bear much fruit …\""
 
         static let goal = "\"I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.\""
-//        static let goal = "\"… apart from me you can do nothing.\""
         
         static let reference = "(John) (NIV)"
     }
@@ -48,14 +56,13 @@ struct AppString {
         
         static let arrow = "arrow.right"
         
-        // Not "top" or "start."
+        // Not "top" or "start." (Pair with text.)
         static let before = "text.line.first.and.arrowtriangle.forward"
         
         static let brain = "brain.head.profile.fill"
         static let clarifier = "info.circle"
         static let clues = "sparkle.magnifyingglass"
         static let cue = "lightbulb.max"
-//        static let flag = "flag.fill"
         
         // Or "audio."
         static let hear = "ear.badge.waveform"
@@ -67,6 +74,7 @@ struct AppString {
         // Or "conversation." (use with "answer")
         static let question = "questionmark.bubble"
         
+        static let reference = "text.book.closed.fill"
         static let say = "mouth"
         
         // Or "read."

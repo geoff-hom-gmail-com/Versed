@@ -11,28 +11,31 @@ struct AddView: View {
             //        let _ = Self._printChanges()
             
             // (Note) Why use TextField vs TextEditor? (ToDo) for now, we like the rounded rectangles of TF. TF also has built-in placeholder. hopefully will still work pasting multi-paragraph text.
-            // (todo) (this looks similar UI to Encode verseDetail) (even the prompts might be similar) (I guess Encode focuses on beats/stanzas, so that prompt would be different)
+            
+            // (todo) (this view is similar UI to Encode verseDetail) (even the prompts might be similar) (I guess Encode focuses on beats/stanzas, so that prompt would be different) (DRY)
             Form {
                 Section() {
                     // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
                     // (Note) (axis: and .lineLimit() both needed for that appearance.
-                    TextField("Before",
+                    TextField(AppString.Label.before,
                               text: $fullText,
                               prompt: Text(AppString.Prompt.before),
                               axis: .vertical)
                     .lineLimit(3...)
                 } header: {
                     HStack {
-                        Text("\(Image(systemName: AppString.SFSymbol.before)) Before")
+                        // (Goal) The user sees the symbol just one space from its label. (HStack spacing is wider.)
+                        Text(Image(systemName: AppString.SFSymbol.before))
+                            + Text(" \(AppString.Label.before)")
                         Spacer()
-                        InfoButton(popoverText: "Before your goal, some text. Used to cue.")
+                        InfoButton(popoverText: AppString.Info.before)
                     }
                     // (Goal) The user isn't turned off by ALL CAPS in Form Section headings.
                     .textCase(nil)
                 }
                 
                 Section() {
-                    TextField("Goal",
+                    TextField(AppString.Label.goal,
                               text: $fullText,
                               prompt: Text(AppString.Prompt.goal),
                               axis: .vertical)
@@ -41,10 +44,10 @@ struct AddView: View {
                     // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
                     HStack {
                         Text(AppString.Emoji.soccerBall)
-                        Image(systemName: AppString.SFSymbol.arrow)
-                        Text(AppString.Emoji.goalNet)
+                            + Text(" \(Image(systemName: AppString.SFSymbol.arrow))")
+                            + Text(" \(AppString.Emoji.goalNet)")
                         Spacer()
-                        InfoButton(popoverText: "Your goal text.")
+                        InfoButton(popoverText: AppString.Info.goal)
                     }
                     .textCase(nil)
                 }
@@ -57,53 +60,47 @@ struct AddView: View {
                     .lineLimit(3...)
                 } header: {
                     HStack {
-                        Image(systemName: AppString.SFSymbol.after)
-                        Text(AppString.Label.after)
+                        Text(Image(systemName: AppString.SFSymbol.after))
+                            + Text(" \(AppString.Label.after)")
                         Spacer()
-                        InfoButton(popoverText: "After your goal, some text. Used to cue.")
+                        InfoButton(popoverText: AppString.Info.after)
                     }
                     .textCase(nil)
                 }
                 
                 Section() {
-                    TextField("",
+                    TextField(AppString.Label.reference,
                               text: $fullText,
                               prompt: Text(AppString.Prompt.reference),
                               axis: .vertical)
                     .lineLimit(2...)
                 } header: {
                     HStack {
-                        Image(systemName: "text.book.closed.fill")
-                        Text("Reference / notes")
+                        Text(Image(systemName: AppString.SFSymbol.reference))
+                            + Text(" \(AppString.Label.reference)")
                     }
                     .textCase(nil)
                 }
-                
-                
-                //            Button("Done") {
-                //                verses.myVerses.append(
-                //                    Verse(fullText))
-                //            }
             }
             .scrollDismissesKeyboard(.immediately)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Reset") {
-                        
+                    Button(AppString.Label.reset) {
+                        // (todo) (reset disabled while all texts empty?)
                     }
+                    .disabled(true)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
-                        
+                    Button(AppString.Label.done) {
+                        //                verses.myVerses.append(
+                        //                    Verse(fullText))
+
+                        // (toDo) after adding/saving, user gets feedback. (a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield. It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
                     }
                     // (Todo) (done disabled until … in theory, one can edit it later, so … disable until goal text entered at least?)
                     .disabled(true)
                 }
             }
-            
-            // (toDo) after adding/saving, should have some feedback so user knows. Like, a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield.
-            
-            
         }
     }
 }
