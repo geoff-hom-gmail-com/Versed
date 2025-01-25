@@ -8,8 +8,8 @@ struct AppString {
     }
     
     struct Info {
-        static let after = "After your goal, some text. Used to cue."
-        static let before = "Before your goal, some text. Used to cue."
+        static let after = "Some text after your goal. Used to cue."
+        static let before = "Some text before your goal. Used to cue."
         static let goal = "Your goal text."
     }
     
