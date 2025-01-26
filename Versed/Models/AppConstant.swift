@@ -32,8 +32,12 @@ struct AppConstant {
     }
     
     struct Info {
+        // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
         static let after = "Some text after your goal. Used to cue."
+        
+        // (Note) What's our preferred cue? Some text before the goal. (vs notation like John 3:16) (vs questions) Why? It's contextual. Not arbitrary. Less prone to interference. It scales naturally.
         static let before = "Some text before your goal. Used to cue."
+        
         static let examples = ""
         static let goal = "The text you want to know."
         static let myTexts = "Listed by before-cue."
