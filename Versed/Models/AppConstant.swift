@@ -3,25 +3,33 @@ import SwiftUI
 
 // (Goal) The dev can edit constants DRY-ly.
 struct AppConstant {
+    struct Badge {
+        static let new = "New"
+    }
+    
     struct Emoji {
-        static let goalNet = "🥅"
-        static let soccerBall = "⚽️"
+//        static let goalNet = "🥅"
+//        static let soccerBall = "⚽️"
     }
     
     struct Info {
         static let after = "Some text after your goal. Used to cue."
         static let before = "Some text before your goal. Used to cue."
-        static let goal = "Your goal text."
+        static let goal = "The text you want to know."
     }
     
     struct Label {
+        static let add = "Add"
         static let after = "After"
         static let before = "Before"
         static let done = "Done"
         static let goal = "Goal"
+        static let help = "Help"
         static let info = "Info"
+        static let know = "Know"
         static let reference = "Reference / notes"
         static let reset = "Reset"
+        static let verses = "Verses"
     }
     
     struct Prompt {
@@ -65,6 +73,8 @@ struct AppConstant {
         static let clues = "sparkle.magnifyingglass"
         static let cue = "lightbulb.max"
         
+        static let goalText = "book.pages"
+
         // Or "audio."
         static let hear = "ear.badge.waveform"
         
@@ -82,7 +92,6 @@ struct AppConstant {
         static let see = "eye"
         
         static let tap = "hand.tap"
-        static let text = "book.pages"
     }
     
     struct StorageKey {

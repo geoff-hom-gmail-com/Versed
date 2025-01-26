@@ -56,9 +56,10 @@ struct AddView: View {
                 } header: {
                     // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
                     HStack {
-                        Text(AppConstant.Emoji.soccerBall)
-                            + Text(" \(Image(systemName: AppConstant.SFSymbol.arrow))")
-                            + Text(" \(AppConstant.Emoji.goalNet)")
+//                        Text(AppConstant.Emoji.soccerBall)
+//                            + Text(" \(Image(systemName: AppConstant.SFSymbol.arrow))")
+//                            + Text(" \(AppConstant.Emoji.goalNet)")
+                        Image(systemName: AppConstant.SFSymbol.goalText)
                         Spacer()
                         InfoButton(popoverText: AppConstant.Info.goal)
                     }

@@ -18,7 +18,7 @@ struct WelcomeToView: View {
             Spacer()
 //                .background(Color.blue.frame(minWidth: 10))
             HStack {
-                Image(systemName: AppConstant.SFSymbol.text)
+                Image(systemName: AppConstant.SFSymbol.goalText)
                 Image(systemName: AppConstant.SFSymbol.arrow)
                 Image(systemName: AppConstant.SFSymbol.brain)
             }
