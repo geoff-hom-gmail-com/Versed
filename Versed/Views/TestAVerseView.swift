@@ -32,15 +32,15 @@ struct TestAVerseView: View {
                 // First, the user picks a sense.
                 HStack {
                     Picker("Sense", selection: $selectedSense) {
-                        Image(systemName: AppString.SFSymbol.hear).tag(Sense.hear)
-                        Image(systemName: AppString.SFSymbol.see).tag(Sense.see)
+                        Image(systemName: AppConstant.SFSymbol.hear).tag(Sense.hear)
+                        Image(systemName: AppConstant.SFSymbol.see).tag(Sense.see)
                     }
                     .pickerStyle(.segmented)
                     Spacer()
                     Button() {
                         isSensePicked = true
                     } label: {
-                        Image(systemName: AppString.SFSymbol.cue)
+                        Image(systemName: AppConstant.SFSymbol.cue)
                     }
                 }
                 

@@ -8,7 +8,7 @@ struct InfoButton: View {
     
     var body: some View {
         // (Goal) The user doesn't feel overwhelmed by questions. ("i" vs "?")
-        Button(AppString.Label.info, systemImage: AppString.SFSymbol.info) {
+        Button(AppConstant.Label.info, systemImage: AppConstant.SFSymbol.info) {
             self.isShowingHelp = true
         }
         .labelStyle(.iconOnly)

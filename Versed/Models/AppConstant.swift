@@ -1,7 +1,8 @@
+// (Note) May not need this import, technically. But then we lose pinned preview. (Xcode 16.1)
 import SwiftUI
 
-// (Goal) The dev can edit strings DRY-ly.
-struct AppString {
+// (Goal) The dev can edit constants DRY-ly.
+struct AppConstant {
     struct Emoji {
         static let goalNet = "🥅"
         static let soccerBall = "⚽️"

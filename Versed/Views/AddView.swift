@@ -30,67 +30,67 @@ struct AddView: View {
                 Section() {
                     // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
                     // (Note) (axis: and .lineLimit() both needed for that appearance.
-                    TextField(AppString.Label.before,
+                    TextField(AppConstant.Label.before,
                               text: $beforeText,
-                              prompt: Text(AppString.Prompt.before),
+                              prompt: Text(AppConstant.Prompt.before),
                               axis: .vertical)
                     .lineLimit(3...)
                 } header: {
                     HStack {
                         // (Goal) The user sees the symbol just one space from its label. (HStack spacing is wider.)
-                        Text(Image(systemName: AppString.SFSymbol.before))
-                            + Text(" \(AppString.Label.before)")
+                        Text(Image(systemName: AppConstant.SFSymbol.before))
+                            + Text(" \(AppConstant.Label.before)")
                         Spacer()
-                        InfoButton(popoverText: AppString.Info.before)
+                        InfoButton(popoverText: AppConstant.Info.before)
                     }
                     // (Goal) The user isn't turned off by ALL CAPS in Form Section headings.
                     .textCase(nil)
                 }
                 
                 Section() {
-                    TextField(AppString.Label.goal,
+                    TextField(AppConstant.Label.goal,
                               text: $goalText,
-                              prompt: Text(AppString.Prompt.goal),
+                              prompt: Text(AppConstant.Prompt.goal),
                               axis: .vertical)
                     .lineLimit(6...)
                 } header: {
                     // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
                     HStack {
-                        Text(AppString.Emoji.soccerBall)
-                            + Text(" \(Image(systemName: AppString.SFSymbol.arrow))")
-                            + Text(" \(AppString.Emoji.goalNet)")
+                        Text(AppConstant.Emoji.soccerBall)
+                            + Text(" \(Image(systemName: AppConstant.SFSymbol.arrow))")
+                            + Text(" \(AppConstant.Emoji.goalNet)")
                         Spacer()
-                        InfoButton(popoverText: AppString.Info.goal)
+                        InfoButton(popoverText: AppConstant.Info.goal)
                     }
                     .textCase(nil)
                 }
                 
                 Section() {
-                    TextField(AppString.Label.after,
+                    TextField(AppConstant.Label.after,
                               text: $afterText,
-                              prompt: Text(AppString.Prompt.after),
+                              prompt: Text(AppConstant.Prompt.after),
                               axis: .vertical)
                     .lineLimit(3...)
                 } header: {
                     HStack {
-                        Text(Image(systemName: AppString.SFSymbol.after))
-                            + Text(" \(AppString.Label.after)")
+                        Text(Image(systemName: AppConstant.SFSymbol.after))
+                            + Text(" \(AppConstant.Label.after)")
                         Spacer()
-                        InfoButton(popoverText: AppString.Info.after)
+                        InfoButton(popoverText: AppConstant.Info.after)
                     }
                     .textCase(nil)
                 }
                 
                 Section() {
-                    TextField(AppString.Label.reference,
+                    TextField(AppConstant.Label.reference,
                               text: $referenceText,
-                              prompt: Text(AppString.Prompt.reference),
+                              prompt: Text(AppConstant.Prompt.reference),
                               axis: .vertical)
                     .lineLimit(2...)
                 } header: {
                     HStack {
-                        Text(Image(systemName: AppString.SFSymbol.reference))
-                            + Text(" \(AppString.Label.reference)")
+                        Text(Image(systemName: AppConstant.SFSymbol.reference))
+                            + Text(" \(AppConstant.Label.reference)")
                     }
                     .textCase(nil)
                 }
@@ -98,13 +98,13 @@ struct AddView: View {
             .scrollDismissesKeyboard(.immediately)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(AppString.Label.reset) {
+                    Button(AppConstant.Label.reset) {
                         reset()
                     }
                     .disabled(isNoText)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(AppString.Label.done) {
+                    Button(AppConstant.Label.done) {
                         //                verses.myVerses.append(
                         //                    Verse(fullText))
 

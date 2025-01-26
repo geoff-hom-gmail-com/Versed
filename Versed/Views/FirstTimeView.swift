@@ -6,8 +6,8 @@ struct FirstTimeView: View {
         // She thinks, "I start by tapping the matching icon." Which is in the tab bar.
         HStack {
             Text("First time?")
-            Image(systemName: AppString.SFSymbol.tap)
-            Image(systemName: AppString.SFSymbol.add)
+            Image(systemName: AppConstant.SFSymbol.tap)
+            Image(systemName: AppConstant.SFSymbol.add)
         }
     }
 }

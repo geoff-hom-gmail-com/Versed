@@ -8,13 +8,13 @@ import AVFAudio
 // Even better might be Siri voices, but those can't be used by third-party apps.
 // Personal Voices are an option, but I haven't tried.
 struct VoicePicker: View {
-    @AppStorage(AppString.StorageKey.voiceID) var voiceID: String = ""
+    @AppStorage(AppConstant.StorageKey.voiceID) var voiceID: String = ""
     
     @State private var selectedVoice: AVSpeechSynthesisVoice?
     
     @State private var englishVoices: [AVSpeechSynthesisVoice] = []
     
-    @State private var selectedLine: TestLine = AppString.TestLine.defaultLine
+    @State private var selectedLine: TestLine = AppConstant.TestLine.defaultLine
     
     var body: some View {
         HearButton(view: Text("Test voice"), text: selectedLine.line)
@@ -47,7 +47,7 @@ struct VoicePicker: View {
         }
         
         Picker("Line", selection: $selectedLine) {
-            ForEach(AppString.TestLine.allLines, id:\.id) {
+            ForEach(AppConstant.TestLine.allLines, id:\.id) {
                 Text("(\($0.why)) \($0.line)").tag($0)
             }
         }

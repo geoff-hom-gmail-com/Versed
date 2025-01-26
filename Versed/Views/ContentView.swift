@@ -9,21 +9,21 @@ struct ContentView: View {
                 }
             HelpView()
                 .tabItem {
-                    Label("Help", systemImage: AppString.SFSymbol.help)
+                    Label("Help", systemImage: AppConstant.SFSymbol.help)
                 }
             AddView()
                 .tabItem { 
-                    Label("Add", systemImage: AppString.SFSymbol.add)
+                    Label("Add", systemImage: AppConstant.SFSymbol.add)
                 }
             EncodeView()
                 .badge("new")
                 .tabItem { 
-                    Label("Encode", systemImage: AppString.SFSymbol.brain)
+                    Label("Encode", systemImage: AppConstant.SFSymbol.brain)
                 }
             ReciteView()
                 .badge("3")
                 .tabItem { 
-                    Label("Recite", systemImage: AppString.SFSymbol.say)
+                    Label("Recite", systemImage: AppConstant.SFSymbol.say)
                 }
         }
     }
