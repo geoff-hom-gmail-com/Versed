@@ -12,10 +12,31 @@ struct AppConstant {
 //        static let soccerBall = "⚽️"
     }
     
+    struct ExampleText {
+        // (Goal) The user sees how to update text for the most common example: multiple verses.
+        static let multiverse = Passage(isExample: true,
+            before: "(multiverse) \"… Neither can you bear fruit unless you remain in me.\"",
+            goal: "some multiverse text",
+            after: "",
+            reference: "notes explaining example more fully here")
+        
+        // (Goal) The user sees how to update text from the start of a book.
+        static let start = Passage(isExample: true,
+            before: "(start of Book) How does John start?",
+            goal: "")
+        
+        // (Goal) The user sees how to update text from the end of a book.
+        static let end = Passage(isExample: true,
+            before: "(end of Book) ??",
+            after: "(end)")
+    }
+    
     struct Info {
         static let after = "Some text after your goal. Used to cue."
         static let before = "Some text before your goal. Used to cue."
+        static let examples = ""
         static let goal = "The text you want to know."
+        static let myTexts = "Listed by before-cue."
     }
     
     struct Label {
@@ -23,13 +44,28 @@ struct AppConstant {
         static let after = "After"
         static let before = "Before"
         static let done = "Done"
+        static let examples = "Examples"
         static let goal = "Goal"
         static let help = "Help"
         static let info = "Info"
         static let know = "Know"
         static let reference = "Reference / notes"
         static let reset = "Reset"
-        static let verses = "Verses"
+        static let texts = "Texts"
+    }
+    
+    struct LineLimit {
+        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
+        static let after = 3
+        
+        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
+        static let before = 3
+        
+        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt. She knows this is more important than the other fields, by its size.
+        static let goal = 6
+        
+        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
+        static let reference = 2
     }
     
     struct Prompt {

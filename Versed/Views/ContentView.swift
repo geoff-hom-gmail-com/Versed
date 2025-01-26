@@ -15,10 +15,10 @@ struct ContentView: View {
                 .tabItem { 
                     Label(AppConstant.Label.add, systemImage: AppConstant.SFSymbol.add)
                 }
-            EncodeView()
+            TextsView()
 //                .badge(AppConstant.Badge.new)
                 .tabItem {
-                    Label(AppConstant.Label.verses, systemImage: AppConstant.SFSymbol.goalText)
+                    Label(AppConstant.Label.texts, systemImage: AppConstant.SFSymbol.goalText)
                 }
             ReciteView()
 //                .badge("2")
@@ -32,5 +32,7 @@ struct ContentView: View {
 // (Goal) The dev can preview the app without the simulator. Includes interaction, subviews, and SwiftData!
 #Preview {
     ContentView()
-        .modelContainer(for: Verse.self)
+    // todo deprecate verse?
+        .modelContainer(for: [Passage.self, Verse.self])
+//        .modelContainer(for: Passage.self)
 }

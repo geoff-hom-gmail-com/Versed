@@ -1,10 +1,21 @@
 import SwiftUI
 import SwiftData
 
-// (Goal) The user can edit any of her verses to improve encoding/retrieval. 
-struct EncodeView: View {
+// (Goal) The user can manage her texts: Parse into stanzas. Edit. Delete. See learning stats.
+struct TextsView: View {
     //
     @Environment(\.modelContext) private var modelContext
+    
+    // (Goal) The user can see her texts, in order.
+    @Query(filter: #Predicate<Passage> { $0.isExample == false },
+           sort: \.index)
+     private var userTexts: [Passage]
+
+    // (Goal) The user can see example texts, in learning order.
+    @Query(filter: #Predicate<Passage> { $0.isExample == true },
+           sort: \.index)
+    private var exampleTexts: [Passage]
+    
     
     // (Goal) The user can see her verses, in order.
     @Query(filter: #Predicate<Verse> { $0.isExample == false },
@@ -21,9 +32,39 @@ struct EncodeView: View {
     @State private var isExamplesExpanded: Bool = true
     
     var body: some View {
-//        Text("Encode")
         NavigationStack {
             List {
+                Section(isExpanded: $isMyTextsExpanded) {
+                    
+                } header: {
+                    HStack {
+                        Text(AppConstant.Label.texts)
+                        InfoButton(popoverText: AppConstant.Info.myTexts)
+                    }
+                    .textCase(nil)
+                }
+                
+                Section(isExpanded: $isExamplesExpanded) {
+                    ForEach(exampleTexts) { passage in
+                        NavigationLink(value: passage) {
+                            Text(passage.beforeText)
+                        }
+                    }
+                } header: {
+                    HStack {
+                        Text(AppConstant.Label.examples)
+                        InfoButton(popoverText: AppConstant.Info.examples)
+                    }
+                    .textCase(nil)
+                }
+                .task {
+                    print("TextsView 1")
+                    if exampleTexts.isEmpty {
+                        print("TextsView 2")
+                        Passage.insertExamples(modelContext: modelContext)
+                    }
+                }
+                
                 Section("My Texts", isExpanded: $isMyTextsExpanded) {
                     ForEach(userVerses) { verse in
                         
@@ -44,6 +85,7 @@ struct EncodeView: View {
                     ForEach(exampleVerses) { verse in
                         NavigationLink(value: verse) {
                             Text(verse.rowTitle)
+//                                .badge("New")
                         }
                     }
                 }
@@ -53,9 +95,13 @@ struct EncodeView: View {
                     }
                 }
             }
+            // (ToDo) why do we have these mods?
             .listStyle(.sidebar)
             .lineLimit(1)
             .truncationMode(.tail)
+            .navigationDestination(for: Passage.self) {
+                TextDetail(passage: $0)
+            }
             .navigationDestination(for: Verse.self) {
                 VerseDetail(verse: $0)
             }
@@ -63,8 +109,7 @@ struct EncodeView: View {
     }
 }
 
-// also need a way to delete texts/verses.
-
-//#Preview {
-//    EncodeView()
-//}
+#Preview {
+    TextsView()
+        .modelContainer(for: Passage.self)
+}

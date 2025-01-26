@@ -1,6 +1,7 @@
 import SwiftUI
 
 // (Goal) The user can add text to know.
+// (Goal) The user adds everything from her reference now. (e.g., Bible app) Then, she can focus on our app. (e.g., stanzas)
 struct AddView: View {
     @State private var beforeText: String = ""
     @State private var goalText: String = ""
@@ -28,13 +29,13 @@ struct AddView: View {
             // (todo) (this view is similar UI to Encode verseDetail) (even the prompts might be similar) (I guess Encode focuses on beats/stanzas, so that prompt would be different) (DRY)
             Form {
                 Section() {
-                    // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-                    // (Note) (axis: and .lineLimit() both needed for that appearance.
                     TextField(AppConstant.Label.before,
                               text: $beforeText,
                               prompt: Text(AppConstant.Prompt.before),
+                              
+                              // (Note) (axis: needed for multiline lineLimit().
                               axis: .vertical)
-                    .lineLimit(3...)
+                    .lineLimit(AppConstant.LineLimit.before...)
                 } header: {
                     HStack {
                         // (Goal) The user sees the symbol just one space from its label. (HStack spacing is wider.)
@@ -52,13 +53,10 @@ struct AddView: View {
                               text: $goalText,
                               prompt: Text(AppConstant.Prompt.goal),
                               axis: .vertical)
-                    .lineLimit(6...)
+                    .lineLimit(AppConstant.LineLimit.goal...)
                 } header: {
                     // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
                     HStack {
-//                        Text(AppConstant.Emoji.soccerBall)
-//                            + Text(" \(Image(systemName: AppConstant.SFSymbol.arrow))")
-//                            + Text(" \(AppConstant.Emoji.goalNet)")
                         Image(systemName: AppConstant.SFSymbol.goalText)
                         Spacer()
                         InfoButton(popoverText: AppConstant.Info.goal)
@@ -71,7 +69,7 @@ struct AddView: View {
                               text: $afterText,
                               prompt: Text(AppConstant.Prompt.after),
                               axis: .vertical)
-                    .lineLimit(3...)
+                    .lineLimit(AppConstant.LineLimit.after...)
                 } header: {
                     HStack {
                         Text(Image(systemName: AppConstant.SFSymbol.after))
@@ -87,7 +85,7 @@ struct AddView: View {
                               text: $referenceText,
                               prompt: Text(AppConstant.Prompt.reference),
                               axis: .vertical)
-                    .lineLimit(2...)
+                    .lineLimit(AppConstant.LineLimit.reference...)
                 } header: {
                     HStack {
                         Text(Image(systemName: AppConstant.SFSymbol.reference))
