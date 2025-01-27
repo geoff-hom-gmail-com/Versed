@@ -16,30 +16,79 @@ struct AppConstant {
         // (Goal) The user sees how to update text for the most common example: multiple verses.
         static let multiverse = Passage(isExample: true,
             before: "(multiverse) \"… Neither can you bear fruit unless you remain in me.\"",
-            goal: "some multiverse text",
-            after: "",
-            reference: "notes explaining example more fully here")
+            goal: """
+                \"I am the 
+                vine; 
+                you are the 
+                branches. 
+                
+                If you remain in me 
+                and I in you, 
+                you will bear 
+                much fruit; 
+                
+                apart from me 
+                you can do 
+                nothing.\"
+                """,
+            after: "\"If you do not remain in me, you are like a branch that is thrown away and withers …\"",
+            reference: """
+                Make a goal easier: parse it into beats, and paragraphs. 
+                
+                Each paragraph is quizzed separately. So, you'll need to know only one paragraph at a time.
+                
+                (example is from John) (NIV)
+                """)
         
         // (Goal) The user sees how to update text from the start of a book.
         static let start = Passage(isExample: true,
-            before: "(start of Book) How does John start?",
-            goal: "")
+            before: "(Book start) How does the Book of John start?",
+            goal: """
+                In the beginning was 
+                the Word, 
+                and the Word was 
+                with God, 
+                and the Word was 
+                God. 
+                """,
+            after: "He was with God in the beginning. Through him all things were made; without him nothing was made that has been made.",
+            reference: """
+                A goal includes a Book's start. What's the before-cue? 
+                
+                Try "How does <title> start?"
+                
+                (example is from John) (NIV)
+                """)
         
         // (Goal) The user sees how to update text from the end of a book.
         static let end = Passage(isExample: true,
-            before: "(end of Book) ??",
-            after: "(end)")
+            before: "(Book end) \"… teaching them to obey everything I have commanded you.\"",
+            goal: """
+                "And surely 
+                I am with you 
+                always, 
+                to the very end of the age."
+                """,
+            after: "(end)",
+            reference: """
+                A goal includes a Book's end. What's the after-cue? 
+                
+                Try "(end)."
+                
+                (example is from Matthew) (NIV)
+                """)
     }
     
     struct Info {
         // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
-        static let after = "Some text after your goal. Used to cue."
+        static let after = "Some text after your goal. Why? To cue."
         
         // (Note) What's our preferred cue? Some text before the goal. (vs notation like John 3:16) (vs questions) Why? It's contextual. Not arbitrary. Less prone to interference. It scales naturally.
-        static let before = "Some text before your goal. Used to cue."
+        static let before = "Some text before your goal. Why? To cue."
         
         static let examples = ""
         static let goal = "The text you want to know."
+        static let goalBeats = "The text you want to know. Each paragraph is quizzed separately. Magically."
         static let myTexts = "Listed by before-cue."
     }
     
@@ -75,15 +124,20 @@ struct AppConstant {
     struct Prompt {
         static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
 
-        // maybe Encode will use beats prompts
-        static let afterTemp = """
-            If you do not remain in me,
-            you are like a branch
-            that is thrown away
-            and withers;
-            such branches are picked up,
-            thrown into the fire
-            and burned.”
+        static let goalBeats = """
+            \"I am the 
+            vine; 
+            you are the 
+            branches. 
+            
+            If you remain in me 
+            and I in you, 
+            you will bear 
+            much fruit; 
+            
+            apart from me 
+            you can do 
+            nothing.\"
             """
         
         // (Goal) The user sees a prompt of a typical use case.
