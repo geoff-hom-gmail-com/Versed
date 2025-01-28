@@ -44,7 +44,7 @@ struct TextDetail: View {
                           axis: .vertical)
                 .lineLimit(AppConstant.LineLimit.goal...)
             } header: {
-                // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
+                // (Goal) The user thinks, "I should divide this up into beats, and paragraphs."
                 HStack {
                     Text(Image(systemName: AppConstant.SFSymbol.goalText))
                         + Text(" (parse beats, paragraphs)")

@@ -14,8 +14,13 @@ struct AppConstant {
     
     struct ExampleText {
         // (Goal) The user sees how to update text for the most common example: multiple verses.
+        // (toDo) how much longer should this be? if I really end up using longer ones by default, I should have an example since that's real. So wait for testing. Hopefully it'll just work throwing a whole page/chapter in. Though a chapter would be a lot to parse at once.
         static let multiverse = Passage(isExample: true,
-            before: "(multiverse) \"… Neither can you bear fruit unless you remain in me.\"",
+            before: """
+                (multiverse) 
+                
+                \"… Neither can you bear fruit unless you remain in me.\"
+                """,
             goal: """
                 \"I am the 
                 vine; 
@@ -33,16 +38,40 @@ struct AppConstant {
                 """,
             after: "\"If you do not remain in me, you are like a branch that is thrown away and withers …\"",
             reference: """
-                Make a goal easier: parse it into beats, and paragraphs. 
+                Make a long goal easier: parse it into beats, and paragraphs. 
                 
                 Each paragraph is quizzed separately. So, you'll need to know only one paragraph at a time.
                 
                 (example is from John) (NIV)
                 """)
         
-        // (Goal) The user sees how to update text from the start of a book.
+        // (Goal) The user sees how to update text for a single verse/paragraph.
+        static let shortVerse = Passage(isExample: true,
+            before: """
+                (short verse) 
+                
+                ??How does the Book of John start?
+                """,
+            goal: """
+                ??In the beginning was 
+                the Word, 
+                and the Word was 
+                with God, 
+                and the Word was 
+                God. 
+                """,
+            after: "He was with God in the beginning …",
+            reference: """
+                (example is from John) (NIV)
+                """)
+        
+        // (Goal) The user sees how to update text for a Book's start.
         static let start = Passage(isExample: true,
-            before: "(Book start) How does the Book of John start?",
+            before: """
+                (Book start) 
+                
+                How does the Book of John start?
+                """,
             goal: """
                 In the beginning was 
                 the Word, 
@@ -51,7 +80,7 @@ struct AppConstant {
                 and the Word was 
                 God. 
                 """,
-            after: "He was with God in the beginning. Through him all things were made; without him nothing was made that has been made.",
+            after: "He was with God in the beginning …",
             reference: """
                 A goal includes a Book's start. What's the before-cue? 
                 
@@ -60,9 +89,13 @@ struct AppConstant {
                 (example is from John) (NIV)
                 """)
         
-        // (Goal) The user sees how to update text from the end of a book.
+        // (Goal) The user sees how to update text for a Book's end.
         static let end = Passage(isExample: true,
-            before: "(Book end) \"… teaching them to obey everything I have commanded you.\"",
+            before: """
+                (Book end) 
+                
+                \"… teaching them to obey everything I have commanded you.\"
+                """,
             goal: """
                 "And surely 
                 I am with you 
@@ -77,6 +110,78 @@ struct AppConstant {
                 
                 (example is from Matthew) (NIV)
                 """)
+        
+        // (Goal) The user sees how to update text for a Psalm.
+        static let psalm = Passage(isExample: true,
+            before: """
+                (Psalm) 
+                
+                How does Psalm 23 start?
+                """,
+            goal: """
+                The Lord is my 
+                shepherd, 
+                I lack 
+                nothing.
+                """,
+            after: "He makes me lie down in green pastures …",
+            reference: """
+                In most Books, the chapter numbers are arbitrary and divisive. In Psalms, it makes more sense.
+                
+                (example is from Psalm 23) (NIV)
+                """)
+        
+        // (Goal) The user sees how to update text for overlapping/consecutive multiverses.
+        // should be long enough to make sense; not so short that it's confusing where the overlap is
+        static let serialMultiverse1 = ""
+        
+        static let serialMultiverse2 = ""
+        
+        // (Goal) The user sees how to update text for secular work.
+        static let secularLong = Passage(isExample: true,
+            before: """
+                (secular) (long)
+                
+                (official) 
+                
+
+                It is not the critic who counts; not the man who points out how the strong man stumbles or where the doer of deeds could have done them better. 
+                
+                The credit belongs to the man who is actually in the arena, whose face is marred by dust and sweat and blood; who strives valiantly; who errs, and comes short again and again, because there is no effort without error and shortcoming; but who does actually strive to do the deeds; who knows the great enthusiasms, the great devotions; who spends himself in a worthy cause; who at the best knows in the end the triumph of high achievement, and who at the worst, if he fails, at least fails while daring greatly, so that his place shall never be with those cold and timid souls who know neither victory nor defeat. 
+                
+                Shame on the man of cultivated taste who permits refinement to develop into a fastidiousness that unfits him for doing the rough work of a workaday world! 
+                
+                ”
+                """,
+            goal: """
+                (supermemo) (replace)
+                The credit belongs to the man who’s actually in the arena, whose face is marred by dust and sweat; a man who knows the great enthusiasm and the great devotions, who spends himself in a worthy cause, who in the end knows the triumph of high achievement, so that his place shall never be with those cold and timid souls who know neither victory nor defeat
+                """,
+            after: "He makes me lie down in green pastures …",
+            reference: """
+                This app was designed for the Bible. But secular writing can be done.
+                
+                (example is from Teddy Roosevelt)
+                """)
+        
+        // (Goal) The user sees how to update text for secular work. In this case, an isolated quote. (The Bible has none.)
+        static let secularShort = Passage(isExample: true,
+            before: """
+                (secular) (short)
+                
+                question?
+                """,
+            goal: """
+                a smooth sea 
+                never made 
+                a skilled sailor
+                """,
+            after: "",
+            reference: """
+                This app was designed for the Bible. But secular writing can be done.
+                """)
+        
+        
     }
     
     struct Info {
