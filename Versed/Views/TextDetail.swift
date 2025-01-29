@@ -37,6 +37,16 @@ struct TextDetail: View {
                 .textCase(nil)
             }
             
+            TextFieldSection(
+                headerImage: Image(systemName: AppConstant.SFSymbol.goalText),
+                headerLabel: AppConstant.Label.goalBeats,
+                infoText: AppConstant.Info.goalBeats,
+                textFieldLabel: AppConstant.Label.goalBeats,
+                textFieldText: $passage.goalText,
+                textFieldPrompt: AppConstant.Prompt.goalBeats,
+                textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
+            )
+            
             Section() {
                 TextField(AppConstant.Label.goal,
                           text: $passage.goalText,
@@ -47,7 +57,7 @@ struct TextDetail: View {
                 // (Goal) The user thinks, "I should divide this up into beats, and paragraphs."
                 HStack {
                     Text(Image(systemName: AppConstant.SFSymbol.goalText))
-                        + Text(" (parse beats, paragraphs)")
+                        + Text(" \(AppConstant.Label.goalBeats)")
                     Spacer()
                     InfoButton(popoverText: AppConstant.Info.goalBeats)
                 }

@@ -15,7 +15,8 @@ struct AppConstant {
     struct ExampleText {
         // (Goal) The user sees how to update text for the most common example: multiple verses.
         // (toDo) how much longer should this be? if I really end up using longer ones by default, I should have an example since that's real. So wait for testing. Hopefully it'll just work throwing a whole page/chapter in. Though a chapter would be a lot to parse at once.
-        static let multiverse = Passage(isExample: true,
+        static let multiverse = Passage(
+            isExample: true,
             before: """
                 (multiverse) 
                 
@@ -43,10 +44,12 @@ struct AppConstant {
                 Each paragraph is quizzed separately. So, you'll need to know only one paragraph at a time.
                 
                 (example is from John) (NIV)
-                """)
+                """
+        )
         
         // (Goal) The user sees how to update text for a single verse/paragraph.
-        static let shortVerse = Passage(isExample: true,
+        static let shortVerse = Passage(
+            isExample: true,
             before: """
                 (short verse) 
                 
@@ -63,10 +66,12 @@ struct AppConstant {
             after: "He was with God in the beginning …",
             reference: """
                 (example is from John) (NIV)
-                """)
+                """
+        )
         
         // (Goal) The user sees how to update text for a Book's start.
-        static let start = Passage(isExample: true,
+        static let start = Passage(
+            isExample: true,
             before: """
                 (Book start) 
                 
@@ -87,10 +92,12 @@ struct AppConstant {
                 Try "How does <title> start?"
                 
                 (example is from John) (NIV)
-                """)
+                """
+        )
         
         // (Goal) The user sees how to update text for a Book's end.
-        static let end = Passage(isExample: true,
+        static let end = Passage(
+            isExample: true,
             before: """
                 (Book end) 
                 
@@ -109,7 +116,8 @@ struct AppConstant {
                 Try "(end)."
                 
                 (example is from Matthew) (NIV)
-                """)
+                """
+        )
         
         // (Goal) The user sees how to update text for a Psalm.
         static let psalm = Passage(isExample: true,
@@ -204,6 +212,7 @@ struct AppConstant {
         static let done = "Done"
         static let examples = "Examples"
         static let goal = "Goal"
+        static let goalBeats = "(parse beats, paragraphs)"
         static let help = "Help"
         static let info = "Info"
         static let know = "Know"
@@ -214,16 +223,32 @@ struct AppConstant {
     
     struct LineLimit {
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let after = 3
+        // (Note) Each limit is +1 from what I'd normally do, because of scrollHintPadding. We could try to use scrollHintPadding only when text is too long. E.g., geometry reader. If so, update these. 
+        static let after = 4
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let before = 3
+        static let before = 4
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt. She knows this is more important than the other fields, by its size.
-        static let goal = 6
+        static let goal = 7
+        
+        // (Goal) If the user has long text, she can still navigate to other fields readily.
+        // (Goal) If the text is long enough to scroll, the user knows that.
+        //
+        // One way is to have orphan text. Especially if that line is partly cut off.
+        //
+        // What if the last visible line is a paragraph break? We can at least guess what line limit may avoid that most. Assume the ideal chunking is 4 lines. So paragraph breaks would be mod 5. And the middle would be mod 5 = 2.
+        //
+        // (Note) To have the last line partly cut off, reduce the view's bottom padding.
+        //
+        // (Note) Another option is having scrollbars always visible. But, that isn't an easy option in iOS. (Xcode 16.1)
+        static let max = 12
+        
+        // (Goal) If the text is long enough to scroll, the user knows that. See comment for "max."
+        static let scrollHintPadding: CGFloat = -17
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let reference = 2
+        static let reference = 3
     }
     
     struct Prompt {

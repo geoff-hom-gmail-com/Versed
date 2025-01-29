@@ -19,80 +19,50 @@ struct AddView: View {
     }
     
     //    @Environment(Verses.self) private var verses
-    
+    //    @Environment(??Verses.self) private var verses
+
     var body: some View {
         NavigationStack {
-            //        let _ = Self._printChanges()
-            
-            // (Note) Why use TextField vs TextEditor? (ToDo) for now, we like the rounded rectangles of TF. TF also has built-in placeholder. hopefully will still work pasting multi-paragraph text.
-            
-            // (todo) (this view is similar UI to Encode verseDetail) (even the prompts might be similar) (I guess Encode focuses on beats/stanzas, so that prompt would be different) (DRY)
             Form {
-                Section() {
-                    TextField(AppConstant.Label.before,
-                              text: $beforeText,
-                              prompt: Text(AppConstant.Prompt.before),
-                              
-                              // (Note) (axis: needed for multiline lineLimit().
-                              axis: .vertical)
-                    .lineLimit(AppConstant.LineLimit.before...)
-                } header: {
-                    HStack {
-                        // (Goal) The user sees the symbol just one space from its label. (HStack spacing is wider.)
-                        Text(Image(systemName: AppConstant.SFSymbol.before))
-                            + Text(" \(AppConstant.Label.before)")
-                        Spacer()
-                        InfoButton(popoverText: AppConstant.Info.before)
-                    }
-                    // (Goal) The user isn't turned off by ALL CAPS in Form Section headings.
-                    .textCase(nil)
-                }
+                TextFieldSection(
+                    headerImage: Image(systemName: AppConstant.SFSymbol.before),
+                    headerLabel: AppConstant.Label.before,
+                    infoText: AppConstant.Info.before,
+                    textFieldLabel: AppConstant.Label.before,
+                    textFieldText: $beforeText,
+                    textFieldPrompt: AppConstant.Prompt.before,
+                    textFieldLineLimit: AppConstant.LineLimit.before...AppConstant.LineLimit.max
+                )
                 
-                Section() {
-                    TextField(AppConstant.Label.goal,
-                              text: $goalText,
-                              prompt: Text(AppConstant.Prompt.goal),
-                              axis: .vertical)
-                    .lineLimit(AppConstant.LineLimit.goal...)
-                } header: {
-                    // (Goal) The user thinks, "I start here, with what I want to learn. I enter it myself. Or, paste from another app."
-                    HStack {
-                        Image(systemName: AppConstant.SFSymbol.goalText)
-                        Spacer()
-                        InfoButton(popoverText: AppConstant.Info.goal)
-                    }
-                    .textCase(nil)
-                }
+                TextFieldSection(
+                    // (Goal) The user thinks, "I start here, with my goal. I can copy my text from another app into here."
+                    headerImage: Image(systemName: AppConstant.SFSymbol.goalText),
+                    infoText: AppConstant.Info.goal,
+                    
+                    textFieldLabel: AppConstant.Label.goal,
+                    textFieldText: $goalText,
+                    textFieldPrompt: AppConstant.Prompt.goal,
+                    textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
+                )
                 
-                Section() {
-                    TextField(AppConstant.Label.after,
-                              text: $afterText,
-                              prompt: Text(AppConstant.Prompt.after),
-                              axis: .vertical)
-                    .lineLimit(AppConstant.LineLimit.after...)
-                } header: {
-                    HStack {
-                        Text(Image(systemName: AppConstant.SFSymbol.after))
-                            + Text(" \(AppConstant.Label.after)")
-                        Spacer()
-                        InfoButton(popoverText: AppConstant.Info.after)
-                    }
-                    .textCase(nil)
-                }
+                TextFieldSection(
+                    headerImage: Image(systemName: AppConstant.SFSymbol.after),
+                    headerLabel: AppConstant.Label.after,
+                    infoText: AppConstant.Info.after,
+                    textFieldLabel: AppConstant.Label.after,
+                    textFieldText: $afterText,
+                    textFieldPrompt: AppConstant.Prompt.after,
+                    textFieldLineLimit: AppConstant.LineLimit.after...AppConstant.LineLimit.max
+                )
                 
-                Section() {
-                    TextField(AppConstant.Label.reference,
-                              text: $referenceText,
-                              prompt: Text(AppConstant.Prompt.reference),
-                              axis: .vertical)
-                    .lineLimit(AppConstant.LineLimit.reference...)
-                } header: {
-                    HStack {
-                        Text(Image(systemName: AppConstant.SFSymbol.reference))
-                            + Text(" \(AppConstant.Label.reference)")
-                    }
-                    .textCase(nil)
-                }
+                TextFieldSection(
+                    headerImage: Image(systemName: AppConstant.SFSymbol.reference),
+                    headerLabel: AppConstant.Label.reference,
+                    textFieldLabel: AppConstant.Label.reference,
+                    textFieldText: $referenceText,
+                    textFieldPrompt: AppConstant.Prompt.reference,
+                    textFieldLineLimit: AppConstant.LineLimit.reference...AppConstant.LineLimit.max
+                )
             }
             .scrollDismissesKeyboard(.immediately)
             .toolbar {
