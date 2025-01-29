@@ -20,6 +20,7 @@ struct TextDetail: View {
             // (info text)
             // (header)
         Form {
+            // Before.
             TextFieldSection(
                 headerImage: Image(systemName: AppConstant.SFSymbol.before),
                 headerLabel: AppConstant.Label.before,
@@ -30,6 +31,7 @@ struct TextDetail: View {
                 textFieldLineLimit: AppConstant.LineLimit.before...AppConstant.LineLimit.max
             )
             
+            // Goal.
             TextFieldSection(
                 headerImage: Image(systemName: AppConstant.SFSymbol.goalText),
                 headerLabel: AppConstant.Label.goalBeats,
@@ -40,6 +42,7 @@ struct TextDetail: View {
                 textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
             )
             
+            // After.
             TextFieldSection(
                 headerImage: Image(systemName: AppConstant.SFSymbol.after),
                 headerLabel: AppConstant.Label.after,
@@ -50,6 +53,7 @@ struct TextDetail: View {
                 textFieldLineLimit: AppConstant.LineLimit.after...AppConstant.LineLimit.max
             )
             
+            // Reference.
             TextFieldSection(
                 headerImage: Image(systemName: AppConstant.SFSymbol.reference),
                 headerLabel: AppConstant.Label.reference,

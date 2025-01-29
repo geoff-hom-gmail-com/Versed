@@ -23,6 +23,7 @@ struct AddView: View {
     var body: some View {
         NavigationStack {
             Form {
+                // Before.
                 TextFieldSection(
                     headerImage: Image(systemName: AppConstant.SFSymbol.before),
                     headerLabel: AppConstant.Label.before,
@@ -33,6 +34,7 @@ struct AddView: View {
                     textFieldLineLimit: AppConstant.LineLimit.before...AppConstant.LineLimit.max
                 )
                 
+                // Goal.
                 TextFieldSection(
                     // (Goal) The user thinks, "I start here, with my goal. I can copy my text from another app into here."
                     headerImage: Image(systemName: AppConstant.SFSymbol.goalText),
@@ -44,6 +46,7 @@ struct AddView: View {
                     textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
                 )
                 
+                // After.
                 TextFieldSection(
                     headerImage: Image(systemName: AppConstant.SFSymbol.after),
                     headerLabel: AppConstant.Label.after,
@@ -54,6 +57,7 @@ struct AddView: View {
                     textFieldLineLimit: AppConstant.LineLimit.after...AppConstant.LineLimit.max
                 )
                 
+                // Reference.
                 TextFieldSection(
                     headerImage: Image(systemName: AppConstant.SFSymbol.reference),
                     headerLabel: AppConstant.Label.reference,
