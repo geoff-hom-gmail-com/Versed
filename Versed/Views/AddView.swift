@@ -18,8 +18,7 @@ struct AddView: View {
         inputTexts.allSatisfy { $0.wrappedValue.isEmpty }
     }
     
-    //    @Environment(Verses.self) private var verses
-    //    @Environment(??Verses.self) private var verses
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         NavigationStack {
@@ -74,12 +73,14 @@ struct AddView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(AppConstant.Label.done) {
-                        //                verses.myVerses.append(
-                        //                    Verse(fullText))
-
-                        // (toDo) after adding/saving, user gets feedback. (a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield. It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
+                        let passage = Passage(before: beforeText, goal: goalText, after: afterText, reference: referenceText)
+                        modelContext.insert(passage)
+                        
+                        // (ToDo) how to add badge to tabview from here? asked chatG
+                        
+                        reset()
+                        // (toDo) after adding/saving, user gets feedback. (a badge on Texts ("!", "new" etc)  It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
                     }
-                    // (Todo) (done disabled until … in theory, one can edit it later, so … disable until goal text entered at least?)
                     .disabled(isNoText)
                 }
             }
