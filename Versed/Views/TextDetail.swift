@@ -10,32 +10,25 @@ struct TextDetail: View {
         // (Note) In a List, the disclosure triangles work with Section(isExpanded:). But with Form, they don't seem to. Even with header empty.
         // DisclosureGroup works. Not sure the UI is ideal. Consider Post-MVP.
         
+        // (MVP-post?) (still have a lot to do here, including differences between myText and examples) (then stats)
         // (what's the same/diff between here and addview?)
-        // (addview is wrapped in navStack) (textDetail has bindable passage)
-        // (each section takes different text (beforeText vs passage.beforeText)
-        // (prompts may be different (especiall goaltext)
-        // (info button may be different) (esp goaltext)
-        // (header different) (esp goaltext: may add "Beats/Stanzas")
+        // (addview is wrapped in navStack)
+        // (textDetail has bindable passage)
+            // (beforeText vs passage.beforeText)
+        // (goal vs goalBeats)
+            // (prompt)
+            // (info text)
+            // (header)
         Form {
-            Section() {
-                TextField(AppConstant.Label.before,
-                          text: $passage.beforeText,
-                          prompt: Text(AppConstant.Prompt.before),
-                          
-                          // (Note) (axis: needed for multiline lineLimit().
-                          axis: .vertical)
-                .lineLimit(AppConstant.LineLimit.before...)
-            } header: {
-                HStack {
-                    // (Goal) The user sees the symbol just one space from its label. (HStack spacing is wider.)
-                    Text(Image(systemName: AppConstant.SFSymbol.before))
-                        + Text(" \(AppConstant.Label.before)")
-                    Spacer()
-                    InfoButton(popoverText: AppConstant.Info.before)
-                }
-                // (Goal) The user isn't turned off by ALL CAPS in Form Section headings.
-                .textCase(nil)
-            }
+            TextFieldSection(
+                headerImage: Image(systemName: AppConstant.SFSymbol.before),
+                headerLabel: AppConstant.Label.before,
+                infoText: AppConstant.Info.before,
+                textFieldLabel: AppConstant.Label.before,
+                textFieldText: $passage.beforeText,
+                textFieldPrompt: AppConstant.Prompt.before,
+                textFieldLineLimit: AppConstant.LineLimit.before...AppConstant.LineLimit.max
+            )
             
             TextFieldSection(
                 headerImage: Image(systemName: AppConstant.SFSymbol.goalText),
@@ -47,52 +40,24 @@ struct TextDetail: View {
                 textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
             )
             
-            Section() {
-                TextField(AppConstant.Label.goal,
-                          text: $passage.goalText,
-                          prompt: Text(AppConstant.Prompt.goalBeats),
-                          axis: .vertical)
-                .lineLimit(AppConstant.LineLimit.goal...)
-            } header: {
-                // (Goal) The user thinks, "I should divide this up into beats, and paragraphs."
-                HStack {
-                    Text(Image(systemName: AppConstant.SFSymbol.goalText))
-                        + Text(" \(AppConstant.Label.goalBeats)")
-                    Spacer()
-                    InfoButton(popoverText: AppConstant.Info.goalBeats)
-                }
-                .textCase(nil)
-            }
+            TextFieldSection(
+                headerImage: Image(systemName: AppConstant.SFSymbol.after),
+                headerLabel: AppConstant.Label.after,
+                infoText: AppConstant.Info.after,
+                textFieldLabel: AppConstant.Label.after,
+                textFieldText: $passage.afterText,
+                textFieldPrompt: AppConstant.Prompt.after,
+                textFieldLineLimit: AppConstant.LineLimit.after...AppConstant.LineLimit.max
+            )
             
-            Section() {
-                TextField(AppConstant.Label.after,
-                          text: $passage.afterText,
-                          prompt: Text(AppConstant.Prompt.after),
-                          axis: .vertical)
-                .lineLimit(AppConstant.LineLimit.after...)
-            } header: {
-                HStack {
-                    Text(Image(systemName: AppConstant.SFSymbol.after))
-                        + Text(" \(AppConstant.Label.after)")
-                    Spacer()
-                    InfoButton(popoverText: AppConstant.Info.after)
-                }
-                .textCase(nil)
-            }
-            
-            Section() {
-                TextField(AppConstant.Label.reference,
-                          text: $passage.referenceText,
-                          prompt: Text(AppConstant.Prompt.reference),
-                          axis: .vertical)
-                .lineLimit(AppConstant.LineLimit.reference...)
-            } header: {
-                HStack {
-                    Text(Image(systemName: AppConstant.SFSymbol.reference))
-                        + Text(" \(AppConstant.Label.reference)")
-                }
-                .textCase(nil)
-            }
+            TextFieldSection(
+                headerImage: Image(systemName: AppConstant.SFSymbol.reference),
+                headerLabel: AppConstant.Label.reference,
+                textFieldLabel: AppConstant.Label.reference,
+                textFieldText: $passage.referenceText,
+                textFieldPrompt: AppConstant.Prompt.reference,
+                textFieldLineLimit: AppConstant.LineLimit.reference...AppConstant.LineLimit.max
+            )
             
             //            Section() {
             // ToDo: figure out bindings here. $verse.prompts may be empty. A prompt may exist but not its clarifier. Similarly, $verse.clues may be empty, have 1, 2, 3, etc.

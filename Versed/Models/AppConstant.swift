@@ -223,32 +223,29 @@ struct AppConstant {
     
     struct LineLimit {
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        // (Note) Each limit is +1 from what I'd normally do, because of scrollHintPadding. We could try to use scrollHintPadding only when text is too long. E.g., geometry reader. If so, update these. 
-        static let after = 4
+        static let after = 3
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let before = 4
+        static let before = 3
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt. She knows this is more important than the other fields, by its size.
-        static let goal = 7
+        static let goal = 6
         
         // (Goal) If the user has long text, she can still navigate to other fields readily.
         // (Goal) If the text is long enough to scroll, the user knows that.
         //
-        // One way is to have orphan text. Especially if that line is partly cut off.
+        // One way is to have orphan text.
         //
         // What if the last visible line is a paragraph break? We can at least guess what line limit may avoid that most. Assume the ideal chunking is 4 lines. So paragraph breaks would be mod 5. And the middle would be mod 5 = 2.
-        //
-        // (Note) To have the last line partly cut off, reduce the view's bottom padding.
         //
         // (Note) Another option is having scrollbars always visible. But, that isn't an easy option in iOS. (Xcode 16.1)
         static let max = 12
         
-        // (Goal) If the text is long enough to scroll, the user knows that. See comment for "max."
+        // (Goal) If the text is long enough to scroll, the user knows that. Because the last line is partly hidden.
         static let scrollHintPadding: CGFloat = -17
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let reference = 3
+        static let reference = 2
     }
     
     struct Prompt {
