@@ -9,7 +9,6 @@ import SwiftData
 // Which ones are new and still need to be encoded.
 // A custom row with encoding/recite data/scores/gauges? (Understanding? Stamina? symbols? What options are there for Vstack with symbol and text? Maybe Label can already do that, or LabeledContent)
 struct TextsView: View {
-    //
     @Environment(\.modelContext) private var modelContext
     
     // (Goal) The user can see her texts, in order. (newest: top)
@@ -40,12 +39,13 @@ struct TextsView: View {
     var body: some View {
         NavigationStack {
             List {
+                // (ToDo) (DRY?)
                 Section(isExpanded: $isMyTextsExpanded) {
                     ForEach(userTexts) { passage in
                         // (Goal) This NavigationLink separates the view from the data.
                         NavigationLink(value: passage) {
                             Text(passage.beforeText)
-                                .badge("")
+                                .badge(passage.isNew ? AppConstant.Badge.new : nil)
                         }
                     }
                 } header: {
@@ -60,7 +60,7 @@ struct TextsView: View {
                     ForEach(exampleTexts) { passage in
                         NavigationLink(value: passage) {
                             Text(passage.beforeText)
-                                .badge("New")
+                                .badge(passage.isNew ? AppConstant.Badge.new : nil)
                         }
                     }
                 } header: {
@@ -71,40 +71,12 @@ struct TextsView: View {
                     .textCase(nil)
                 }
                 .task {
-                    print("TextsView 1")
                     if exampleTexts.isEmpty {
-                        print("TextsView 2")
                         Passage.insertExamples(modelContext: modelContext)
                     }
                 }
-                
-//                Section("My Texts", isExpanded: $isMyTextsExpanded) {
-//                    ForEach(userVerses) { verse in
-//                        
-//                        // This NavigationLink separates the view from the data.
-//                        NavigationLink(value: verse) {
-//                            Text(verse.rowTitle)
-//                            
-//                        }
-//                    }
-//                }
-                
-//                (ToDo) This section is similar to above. DRY?
-//                Section("Examples", isExpanded: $isExamplesExpanded) {
-//                    ForEach(exampleVerses) { verse in
-//                        NavigationLink(value: verse) {
-//                            Text(verse.rowTitle)
-////                                .badge("New")
-//                        }
-//                    }
-//                }
-//                .task {
-//                    if exampleVerses.isEmpty {
-//                        Verse.insertExamples(modelContext: modelContext)
-//                    }
-//                }
             }
-            // (ToDo) why do we have this mod?
+            // (Goal) The user can see disclosure indicators.
             .listStyle(.sidebar)
             
             .lineLimit(1)
@@ -112,9 +84,6 @@ struct TextsView: View {
             .navigationDestination(for: Passage.self) {
                 TextDetail(passage: $0)
             }
-//            .navigationDestination(for: Verse.self) {
-//                VerseDetail(verse: $0)
-//            }
         }
     }
 }
