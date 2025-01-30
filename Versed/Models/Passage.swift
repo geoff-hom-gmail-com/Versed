@@ -22,24 +22,30 @@ final class Passage {
     var afterText: String
     var referenceText: String
     
+    @Relationship(deleteRule: .cascade)
+    var paragraphs: [Paragraph]
+    
     // (Goal) The user adds a text. Fields may be empty, as she can edit them later.
     init(
         isExample: Bool = false,
+        index: Int = 0,
         before: String = String(),
         goal: String = String(),
         after: String = String(),
         reference: String = String(),
-        index: Int = 0,
+        paragraphs: [Paragraph] = [Paragraph()],
         
         // (todo) not used yet; maybe in Know tab?
         dueDate: Date? = nil
     ) {
         self.isExample = isExample
+        self.index = index
         self.beforeText = before
         self.goalText = goal
         self.afterText = after
         self.referenceText = reference
-        self.index = index
+        self.paragraphs = paragraphs
+
 //        self.dueDate = dueDate
     }
     

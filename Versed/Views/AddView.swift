@@ -21,7 +21,7 @@ struct AddView: View {
     
     @Environment(\.modelContext) private var modelContext
 
-    // (Goal) The dev can calculate the index for new texts.
+    // (Goal) The app can calculate the index for new texts.
     @Query(filter: #Predicate<Passage> { $0.isExample == false },
            sort: \.index, order: .reverse)
     var userTextsOrderReversed: [Passage]
@@ -88,7 +88,7 @@ struct AddView: View {
                             newIndex = maxIndex + 1
                         }
                         
-                        let passage = Passage(before: beforeText, goal: goalText, after: afterText, reference: referenceText, index: newIndex)
+                        let passage = Passage(index: newIndex, before: beforeText, goal: goalText, after: afterText, reference: referenceText)
                         modelContext.insert(passage)
                         
                         // (Note) Not sure if needed on device. But, in Xcode preview, helps.
