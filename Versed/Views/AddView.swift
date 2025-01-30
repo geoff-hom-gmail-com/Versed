@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 // (Goal) The user can add text to know.
 // (Goal) The user adds everything from her reference now. (e.g., Bible app) Then, she can focus on our app. (e.g., stanzas)
@@ -20,6 +21,11 @@ struct AddView: View {
     
     @Environment(\.modelContext) private var modelContext
 
+    // (Goal) The dev can calculate the index for new texts.
+    @Query(filter: #Predicate<Passage> { $0.isExample == false },
+           sort: \.index, order: .reverse)
+    var userTextsOrderReversed: [Passage]
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -77,13 +83,25 @@ struct AddView: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(AppConstant.Label.done) {
-                        let passage = Passage(before: beforeText, goal: goalText, after: afterText, reference: referenceText)
+                        var newIndex = 0
+                        if let maxIndex = userTextsOrderReversed.first?.index {
+                            newIndex = maxIndex + 1
+                        }
+                        
+                        let passage = Passage(before: beforeText, goal: goalText, after: afterText, reference: referenceText, index: newIndex)
                         modelContext.insert(passage)
                         
-                        // (ToDo) how to add badge to tabview from here? asked chatG
+                        // (Note) Not sure if needed on device. But, in Xcode preview, helps.
+                        do {
+                            try modelContext.save()
+                        } catch {
+                            print("Failed to save: \(error)")
+                        }
+                        
+                        // (ToDo) how to add badge to tabview from here? asked chatG (state, not event)
                         
                         reset()
-                        // (toDo) after adding/saving, user gets feedback. (a badge on Texts ("!", "new" etc)  It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
+                        // (toDo) after adding/saving, user gets feedback. (a badge on Texts ("!", "new" etc)  It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Texts.
                     }
                     .disabled(isNoText)
                 }

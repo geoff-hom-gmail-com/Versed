@@ -12,10 +12,10 @@ struct TextsView: View {
     //
     @Environment(\.modelContext) private var modelContext
     
-    // (Goal) The user can see her texts, in order.
+    // (Goal) The user can see her texts, in order. (newest: top)
     @Query(filter: #Predicate<Passage> { $0.isExample == false },
-           sort: \.index)
-     private var userTexts: [Passage]
+           sort: \.index, order: .reverse)
+    private var userTexts: [Passage]
 
     // (Goal) The user can see example texts, in learning order.
     @Query(filter: #Predicate<Passage> { $0.isExample == true },
@@ -45,6 +45,7 @@ struct TextsView: View {
                         // (Goal) This NavigationLink separates the view from the data.
                         NavigationLink(value: passage) {
                             Text(passage.beforeText)
+                                .badge("")
                         }
                     }
                 } header: {
@@ -59,6 +60,7 @@ struct TextsView: View {
                     ForEach(exampleTexts) { passage in
                         NavigationLink(value: passage) {
                             Text(passage.beforeText)
+                                .badge("New")
                         }
                     }
                 } header: {

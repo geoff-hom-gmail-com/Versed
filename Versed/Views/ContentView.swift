@@ -20,6 +20,7 @@ struct ContentView: View {
                 .tabItem {
                     Label(AppConstant.Label.texts, systemImage: AppConstant.SFSymbol.goalText)
                 }
+            // todo: make new KnowView()
             ReciteView()
 //                .badge("2")
                 .tabItem {

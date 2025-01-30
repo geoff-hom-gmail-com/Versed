@@ -22,6 +22,13 @@ struct DebugView: View {
                 // deprecated; iOS 18+ use erase()
                 // Works. But may crash preview.
                 modelContext.container.deleteAllData()
+                
+                // (Note) Not sure if needed on device. But, in Xcode preview, helps? (maybe? can try erase() later) (and this is just for debugging)
+                do {
+                    try modelContext.save()
+                } catch {
+                    print("Failed to save: \(error)")
+                }
             }
             Spacer()
             

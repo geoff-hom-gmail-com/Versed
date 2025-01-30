@@ -6,11 +6,12 @@ import SwiftData
 // (class) (SwiftData)
 @Model
 final class Passage {
-//    final class Passage: Observable, Hashable, Identifiable {
-
     // (Goal) The user can see examples, to learn the app. But, she can't edit them.
     // This was an enum/category. E.g., .example, .user. But, enums don't work well with SwiftData Predicates. (as of Xcode 16.1)
     var isExample: Bool
+    
+    // (Goal) The user can easily find the text they just added. And know which examples they haven't seen.
+    var isNew = true
     
     // (Goal) The user sees listed texts in the same order. She can also reorder.
     // (Note) SwiftData does not store array order for model objects.
@@ -21,15 +22,18 @@ final class Passage {
     var afterText: String
     var referenceText: String
     
-    // (Goal) The user adds a text. It includes an empty prompt and clue x4. (4: chunking)
-    init(isExample: Bool = false,
-         before: String = String(),
-         goal: String = String(),
-         after: String = String(),
-         reference: String = String(),
-         index: Int = 0,
-         
-         dueDate: Date? = nil) {
+    // (Goal) The user adds a text. Fields may be empty, as she can edit them later.
+    init(
+        isExample: Bool = false,
+        before: String = String(),
+        goal: String = String(),
+        after: String = String(),
+        reference: String = String(),
+        index: Int = 0,
+        
+        // (todo) not used yet; maybe in Know tab?
+        dueDate: Date? = nil
+    ) {
         self.isExample = isExample
         self.beforeText = before
         self.goalText = goal
@@ -58,15 +62,19 @@ final class Passage {
     
     // (Goal) The user sees examples for how to update her texts before quizzing.
     static func insertExamples(modelContext: ModelContext) {
-        let examples = [AppConstant.ExampleText.multiverse,
-                        AppConstant.ExampleText.start,
-                        AppConstant.ExampleText.end]
+        let examples = [
+            AppConstant.ExampleText.multiverse,
+            AppConstant.ExampleText.start,
+            AppConstant.ExampleText.end
+        ]
         
         // Assign indices automatically.
         for (index, example) in examples.enumerated() {
             example.index = index
         }
         
-        examples.forEach { modelContext.insert($0) }
+        examples.forEach {
+            modelContext.insert($0)
+        }
     }
 }
