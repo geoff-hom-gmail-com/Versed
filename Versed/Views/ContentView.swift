@@ -12,12 +12,18 @@ struct ContentView: View {
     })
     private var userTextsNew: [Passage]
     
-    // (Goal) ??
-    // KISS query for passagees non-ex first, then filter for paragraphs
-//    @Query(filter: #Predicate<Paragraph> {
-//        $0.passage.isExample == false
-//    })
-//    private var userParagraphs: [Paragraph]
+    // (Goal) The app can get all user paragraphs.
+    @Query(filter: #Predicate<Passage> {
+        $0.isExample == false
+    })
+    private var userTexts: [Passage]
+    
+    // ?? (todo) figure this out more after we have actual paragraphs and isDue
+    // isDue should be state, but then how often does it check? this tab view is always around, but it can't/shouldn't check every ms, should it?
+    // I guess we can check when we add a text. When we update text. And then every … minute??
+    private var userParagraphs: [Paragraph] {
+        userTexts.flatMap { $0.paragraphs }
+    }
     
     var body: some View {
         TabView {

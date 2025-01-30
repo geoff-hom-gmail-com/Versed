@@ -23,7 +23,7 @@ final class Passage {
     var referenceText: String
     
     @Relationship(deleteRule: .cascade)
-    var paragraphs: [Paragraph]
+    var paragraphs = [Paragraph()]
     
     // (Goal) The user adds a text. Fields may be empty, as she can edit them later.
     init(
@@ -33,9 +33,8 @@ final class Passage {
         goal: String = String(),
         after: String = String(),
         reference: String = String(),
-        paragraphs: [Paragraph] = [Paragraph()],
         
-        // (todo) not used yet; maybe in Know tab?
+        // (todo) not used yet; maybe in Know tab? (actually paragraphs have due dates, not text)
         dueDate: Date? = nil
     ) {
         self.isExample = isExample
@@ -44,7 +43,11 @@ final class Passage {
         self.goalText = goal
         self.afterText = after
         self.referenceText = reference
-        self.paragraphs = paragraphs
+        
+        // (ToDo) create paras from goal
+//        let paragraphs = goalText.components(separatedBy: "\n\n")
+        // still have to make each Paragraph(), then into an array
+//        self.paragraphs = ??paragraphs
 
 //        self.dueDate = dueDate
     }
