@@ -41,6 +41,10 @@ struct ContentView: View {
                 .tabItem {
                     Text("Debug")
                 }
+            // HelpView().tabConfig(.help)
+            // (no) HelpTab (struct below?)
+            // (maybe) Tab.for(.help) (ext below?)
+            // (or just) @ViewBuilder for each?) (eg https://www.reddit.com/r/SwiftUI/comments/1do397m/is_it_worth_splitting_big_view_into_smaller/)
             HelpView()
                 .tabItem {
                     Label(AppConstant.Label.help, systemImage: AppConstant.SFSymbol.help)
@@ -82,3 +86,13 @@ struct ContentView: View {
 //        .modelContainer(for: [Passage.self, Verse.self])
         .modelContainer(for: Passage.self)
 }
+
+//enum TabConfig {
+//    case help
+//}
+//
+//extension View {
+//    func tab() -> some View {
+//        self.tabItem(<#T##label: () -> View##() -> View#>)
+//    }
+//}
