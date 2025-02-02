@@ -22,7 +22,17 @@ struct ContentView: View {
     // isDue should be state, but then how often does it check? this tab view is always around, but it can't/shouldn't check every ms, should it?
     // I guess we can check when we add a text. When we update text. And then every … minute??
     private var userParagraphs: [Paragraph] {
-        userTexts.flatMap { $0.paragraphs }
+        print("userParagraphs computed")
+        return userTexts.flatMap { $0.paragraphs }
+    }
+    
+    private var userParagraphsDue: Int {
+        print("userParagraphsuserParagraphsDue computed")
+        let paragraphs = userTexts.flatMap { $0.paragraphs }
+        return paragraphs
+            .filter { $0.dueDate < Date.now }
+            .count
+//        return userTexts.flatMap { $0.paragraphs }
     }
     
     var body: some View {
@@ -47,6 +57,7 @@ struct ContentView: View {
                 }
             // todo: make new KnowView()
             KnowView()
+                .badge(userParagraphsDue)
                 .tabItem {
                     Label(AppConstant.Label.know, systemImage: AppConstant.SFSymbol.brain)
                 }

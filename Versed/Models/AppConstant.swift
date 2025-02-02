@@ -202,7 +202,7 @@ struct AppConstant {
         static let examples = ""
         static let goal = "The text you want to know."
         static let goalBeats = "The text you want to know. Each paragraph is quizzed separately. Magically."
-        static let myTexts = "Listed by before-cue."
+        static let myTexts = "Each text shows its before-cue."
     }
     
     struct Label {

@@ -6,11 +6,23 @@ import SwiftUI
 struct TextDetail: View {
     @Bindable var passage: Passage
     
+    // (Goal) The user can discard text edits.
+    // (Note) We could use SwiftData's rollback(), or (https://www.hackingwithswift.com/quick-start/swiftdata/how-to-discard-changes-to-a-swiftdata-object).
+    // But this seems KISS. Also, don't like how "live editing" makes the Know badge recalculate on every keystroke.
+    @State private var beforeText: String
+//    private var goalBeats: String
+//    private var afterText: String
+//    
     @Environment(\.modelContext) private var modelContext
+    
+    init(passage: Passage) {
+        self.passage = passage
+        self.beforeText = passage.beforeText
+    }
     
     var body: some View {
         // (Note) In a List, the disclosure triangles work with Section(isExpanded:). But with Form, they don't seem to. Even with header empty.
-        // DisclosureGroup works. Not sure the UI is ideal. Consider Post-MVP.
+        // DisclosureGroup works. Not sure the UI is ideal. Consider MVP-post.
         
         // (MVP-post?) (still have a lot to do here, including differences between myText and examples) (then stats)
         // (what's the same/diff between here and addview?)
@@ -22,13 +34,17 @@ struct TextDetail: View {
             // (info text)
             // (header)
         Form {
+            // BeforeTextFieldSection($beforeText)
             // Before.
             TextFieldSection(
                 headerImage: Image(systemName: AppConstant.SFSymbol.before),
                 headerLabel: AppConstant.Label.before,
                 infoText: AppConstant.Info.before,
                 textFieldLabel: AppConstant.Label.before,
-                textFieldText: $passage.beforeText,
+                
+//                textFieldText: $passage.beforeText,
+                textFieldText: $beforeText,
+
                 textFieldPrompt: AppConstant.Prompt.before,
                 textFieldLineLimit: AppConstant.LineLimit.before...AppConstant.LineLimit.max
             )
@@ -39,7 +55,9 @@ struct TextDetail: View {
                 headerLabel: AppConstant.Label.goalBeats,
                 infoText: AppConstant.Info.goalBeats,
                 textFieldLabel: AppConstant.Label.goalBeats,
+                
                 textFieldText: $passage.goalText,
+                
                 textFieldPrompt: AppConstant.Prompt.goalBeats,
                 textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
             )
@@ -50,7 +68,9 @@ struct TextDetail: View {
                 headerLabel: AppConstant.Label.after,
                 infoText: AppConstant.Info.after,
                 textFieldLabel: AppConstant.Label.after,
+                
                 textFieldText: $passage.afterText,
+                
                 textFieldPrompt: AppConstant.Prompt.after,
                 textFieldLineLimit: AppConstant.LineLimit.after...AppConstant.LineLimit.max
             )
@@ -60,7 +80,9 @@ struct TextDetail: View {
                 headerImage: Image(systemName: AppConstant.SFSymbol.reference),
                 headerLabel: AppConstant.Label.reference,
                 textFieldLabel: AppConstant.Label.reference,
+                
                 textFieldText: $passage.referenceText,
+                
                 textFieldPrompt: AppConstant.Prompt.reference,
                 textFieldLineLimit: AppConstant.LineLimit.reference...AppConstant.LineLimit.max
             )
@@ -85,12 +107,9 @@ struct TextDetail: View {
             ToolbarItem(placement: .confirmationAction) {
                 // (toDo) (if example, don't show button) (or, if not example, button visible )
                 Button("Update") {
-                    //                verses.myVerses.append(
-                    //                    Verse(fullText))
                     
                     // (toDo) after adding/saving, user gets feedback. (a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield. It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
                 }
-                // (Todo) (done disabled until … in theory, one can edit it later, so … disable until goal text entered at least?)
                 //                    .disabled(isNoText)
             }
         }

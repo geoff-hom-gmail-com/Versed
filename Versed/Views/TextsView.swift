@@ -20,17 +20,6 @@ struct TextsView: View {
     @Query(filter: #Predicate<Passage> { $0.isExample == true },
            sort: \.index)
     private var exampleTexts: [Passage]
-    
-    
-    // (Goal) The user can see her verses, in order.
-//    @Query(filter: #Predicate<Verse> { $0.isExample == false },
-//           sort: \.index)
-//    private var userVerses: [Verse]
-//    
-    // (Goal) The user can see example verses, in learning order.
-//    @Query(filter: #Predicate<Verse> { $0.isExample == true },
-//           sort: \.index)
-//    private var exampleVerses: [Verse]
         
     // (Goal) The user can shrink either section of verses, for focus.
     @State private var isMyTextsExpanded: Bool = true
@@ -51,7 +40,9 @@ struct TextsView: View {
                 } header: {
                     HStack {
                         Text(AppConstant.Label.texts)
-//                        InfoButton(popoverText: AppConstant.Info.myTexts)
+                        
+                        // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
+                        InfoButton(popoverText: AppConstant.Info.myTexts)
                     }
                     .textCase(nil)
                 }
