@@ -72,6 +72,7 @@ struct TextsView: View {
                 }
                 .task {
                     if exampleTexts.isEmpty {
+//                        print("examples: insert")
                         Passage.insertExamples(modelContext: modelContext)
                     }
                 }

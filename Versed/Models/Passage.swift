@@ -23,7 +23,7 @@ final class Passage {
     var referenceText: String
     
     @Relationship(deleteRule: .cascade)
-    var paragraphs = [Paragraph()]
+    var paragraphs: [Paragraph]
     
     // (Goal) The user adds a text. Fields may be empty, as she can edit them later.
     init(
@@ -32,10 +32,7 @@ final class Passage {
         before: String = String(),
         goal: String = String(),
         after: String = String(),
-        reference: String = String(),
-        
-        // (todo) not used yet; maybe in Know tab? (actually paragraphs have due dates, not text)
-        dueDate: Date? = nil
+        reference: String = String()
     ) {
         self.isExample = isExample
         self.index = index
@@ -44,12 +41,9 @@ final class Passage {
         self.afterText = after
         self.referenceText = reference
         
-        // (ToDo) create paras from goal
-//        let paragraphs = goalText.components(separatedBy: "\n\n")
-        // still have to make each Paragraph(), then into an array
-//        self.paragraphs = ??paragraphs
-
-//        self.dueDate = dueDate
+        let rawParagraphs = goal.components(separatedBy: "\n\n")
+        print(rawParagraphs)
+        self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
     }
     
     // (Goal) The user sees a one-line cue to a text. She knows which verse it refers to.

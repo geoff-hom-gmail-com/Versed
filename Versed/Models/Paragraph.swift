@@ -1,3 +1,4 @@
+import Foundation
 import SwiftData
 
 // (Goal) The user can be quizzed on each paragraph in a text, independently.
@@ -5,15 +6,12 @@ import SwiftData
 // (class) (SwiftData)
 @Model
 final class Paragraph {
+    var text: String
     
-    // para has text, duh
-    // var text: String
+    // (Goal) The user can be quizzed on her paragraph immediately.
+    var dueDate = Date.now
     
-    // (toDo) when a para is created, it has a due date of now.
-    // var dueDate = Date.now
-    
-    // we just need text? Paragraph(text)? (due date should be auto)
-    init() {
-        
+    init(text: String) {
+        self.text = text
     }
 }
