@@ -37,45 +37,43 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            DebugView()
-                .tabItem {
-                    Text("Debug")
-                }
+            Tab("Debug", systemImage: "") {
+                DebugView()
+            }
+            Tab(AppConstant.Label.help, systemImage: AppConstant.SFSymbol.help) {
+                HelpView()
+            }
+            Tab(AppConstant.Label.add, systemImage: AppConstant.SFSymbol.add) {
+                AddView()
+            }
             // HelpView().tabConfig(.help)
             // (no) HelpTab (struct below?)
             // (maybe) Tab.for(.help) (ext below?)
             // (or just) @ViewBuilder for each?) (eg https://www.reddit.com/r/SwiftUI/comments/1do397m/is_it_worth_splitting_big_view_into_smaller/)
-            HelpView()
-                .tabItem {
-                    Label(AppConstant.Label.help, systemImage: AppConstant.SFSymbol.help)
-                }
-            AddView()
-                .tabItem { 
-                    Label(AppConstant.Label.add, systemImage: AppConstant.SFSymbol.add)
-                }
-            TextsView()
-                // (Goal) The user adds a text. Then, she has a hint where to go next.
-                .badge(userTextsNew.isEmpty ? nil : AppConstant.Badge.new)
-                .tabItem {
-                    Label(AppConstant.Label.texts, systemImage: AppConstant.SFSymbol.goalText)
-                }
-            // todo: make new KnowView()
-            KnowView()
-                .badge(userParagraphsDue)
-                .tabItem {
-                    Label(AppConstant.Label.know, systemImage: AppConstant.SFSymbol.brain)
-                }
-            // (todo) (Goal) The user knows how many quizzes are ready.
-            // (state, not event) (we want all user texts, or at least paragraphs) (the number due is the badge) (or nil)
-            // we could maybe just query all paragraphs; except we'd need to avoid examples
-            
-//                .badge(
-            //                .badge("2")
 
-            ReciteView()
-                .tabItem {
-                    Label("recite", systemImage: AppConstant.SFSymbol.brain)
-                }
+//            TextsView()
+//                // (Goal) The user adds a text. Then, she has a hint where to go next.
+//                .badge(userTextsNew.isEmpty ? nil : AppConstant.Badge.new)
+//                .tabItem {
+//                    Label(AppConstant.Label.texts, systemImage: AppConstant.SFSymbol.goalText)
+//                }
+//            // todo: make new KnowView()
+//            KnowView()
+//                .badge(userParagraphsDue)
+//                .tabItem {
+//                    Label(AppConstant.Label.know, systemImage: AppConstant.SFSymbol.brain)
+//                }
+//            // (todo) (Goal) The user knows how many quizzes are ready.
+//            // (state, not event) (we want all user texts, or at least paragraphs) (the number due is the badge) (or nil)
+//            // we could maybe just query all paragraphs; except we'd need to avoid examples
+//            
+////                .badge(
+//            //                .badge("2")
+//
+//            ReciteView()
+//                .tabItem {
+//                    Label("recite", systemImage: AppConstant.SFSymbol.brain)
+//                }
         }
     }
 }
