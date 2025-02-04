@@ -209,6 +209,7 @@ struct AppConstant {
         static let add = "Add"
         static let after = "After"
         static let before = "Before"
+        static let debug = "Debug"
         static let done = "Done"
         static let examples = "Examples"
         static let goal = "Goal"
