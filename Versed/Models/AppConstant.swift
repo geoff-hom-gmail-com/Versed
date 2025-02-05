@@ -2,17 +2,17 @@
 import SwiftUI
 
 // (Goal) The dev can edit constants DRY-ly.
-struct AppConstant {
-    struct Badge {
+enum AppConstant {
+    enum Badge {
         static let new = "New"
     }
     
-    struct Emoji {
+    enum Emoji {
 //        static let goalNet = "🥅"
 //        static let soccerBall = "⚽️"
     }
     
-    struct ExampleText {
+    enum ExampleText {
         // (Goal) The user sees how to update text for the most common example: multiple verses.
         // (toDo) how much longer should this be? if I really end up using longer ones by default, I should have an example since that's real. So wait for testing. Hopefully it'll just work throwing a whole page/chapter in. Though a chapter would be a lot to parse at once.
         static let multiverse = Passage(
@@ -192,7 +192,7 @@ struct AppConstant {
         
     }
     
-    struct Info {
+    enum Info {
         // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
         static let after = "Some text after your goal. Why? To cue."
         
@@ -205,7 +205,7 @@ struct AppConstant {
         static let myTexts = "Each text shows its before-cue."
     }
     
-    struct Label {
+    enum Label {
         static let add = "Add"
         static let after = "After"
         static let before = "Before"
@@ -222,7 +222,7 @@ struct AppConstant {
         static let texts = "Texts"
     }
     
-    struct LineLimit {
+    enum LineLimit {
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
         static let after = 3
         
@@ -249,7 +249,7 @@ struct AppConstant {
         static let reference = 2
     }
     
-    struct Prompt {
+    enum Prompt {
         static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
 
         static let goalBeats = """
@@ -276,7 +276,7 @@ struct AppConstant {
         static let reference = "(John) (NIV)"
     }
     
-    struct SFSymbol {
+    enum SFSymbol {
         // The user sees a "+" in a rounded rectangle. Rounded rectangle is homage to Steve Jobs and the Mac. Also varies more from circle used for help.
         static let add = "plus.app.fill"
         
@@ -316,11 +316,11 @@ struct AppConstant {
         static let tap = "hand.tap"
     }
     
-    struct StorageKey {
+    enum StorageKey {
         static let voiceID = "voiceID"
     }
     
-    struct TestLine {
+    enum TestLine {
         // (Goal) The user can test a voice without having to first pick a line.
         static let defaultLine = GlobalTestLine(why: "Harvard 2.1", line: "The boy was there when the sun rose.")
 
