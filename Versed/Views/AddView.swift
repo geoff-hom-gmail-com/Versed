@@ -5,70 +5,18 @@ import SwiftData
 // (Goal) The user adds everything from her reference now. (e.g., Bible app) Then, she can focus on our app. (e.g., stanzas)
 struct AddView: View {
     // MARK: - (body)
-
     var body: some View {
         // (Note) NavigationStack used so the dev can easily have buttons to save/reset.
         NavigationStack {
             Form {
-                // (confusing) (not as clear what's shared)
-                // BeforeTextFieldSection($beforeText)
-                // AfterTextFieldSection($afterText)
-                // ReferenceTextFieldSection($beforeText)
-                
-                // TextFieldSection.for(.before, text: $beforeText)
-                // TextFieldSection.for(.after, text: $afterText)
-
-                // (too general) (TextDetail also will call it)
-                // TextFieldSection.for(.before)
-                // TextFieldSection.for(.after)
-                // TextFieldSection.for(.reference)
-                
-                // Before.
-                TextFieldSection(
-                    headerImage: Image(systemName: AppConstant.SFSymbol.before),
-                    headerLabel: AppConstant.Label.before,
-                    infoText: AppConstant.Info.before,
-                    textFieldLabel: AppConstant.Label.before,
-                    textFieldText: $beforeText,
-                    textFieldPrompt: AppConstant.Prompt.before,
-                    textFieldLineLimit: AppConstant.LineLimit.before...AppConstant.LineLimit.max
-                )
-                
-                // Goal.
-                TextFieldSection(
-                    // (Goal) The user thinks, "I start here, with my goal. I can copy my text from another app into here."
-                    headerImage: Image(systemName: AppConstant.SFSymbol.goalText),
-                    infoText: AppConstant.Info.goal,
-                    
-                    textFieldLabel: AppConstant.Label.goal,
-                    textFieldText: $goalText,
-                    textFieldPrompt: AppConstant.Prompt.goal,
-                    textFieldLineLimit: AppConstant.LineLimit.goal...AppConstant.LineLimit.max
-                )
-                
-                // After.
-                TextFieldSection(
-                    headerImage: Image(systemName: AppConstant.SFSymbol.after),
-                    headerLabel: AppConstant.Label.after,
-                    infoText: AppConstant.Info.after,
-                    textFieldLabel: AppConstant.Label.after,
-                    textFieldText: $afterText,
-                    textFieldPrompt: AppConstant.Prompt.after,
-                    textFieldLineLimit: AppConstant.LineLimit.after...AppConstant.LineLimit.max
-                )
-                
-                // Reference.
-                TextFieldSection(
-                    headerImage: Image(systemName: AppConstant.SFSymbol.reference),
-                    headerLabel: AppConstant.Label.reference,
-                    textFieldLabel: AppConstant.Label.reference,
-                    textFieldText: $referenceText,
-                    textFieldPrompt: AppConstant.Prompt.reference,
-                    textFieldLineLimit: AppConstant.LineLimit.reference...AppConstant.LineLimit.max
-                )
+                TextFieldSection(for: .before, text: $beforeText)
+                TextFieldSection(for: .goal, text: $goalText)
+                TextFieldSection(for: .after, text: $afterText)
+                TextFieldSection(for: .reference, text: $referenceText)
             }
             .scrollDismissesKeyboard(.immediately)
             .toolbar {
+                // TODO: - make more browsable?
                 ToolbarItem(placement: .cancellationAction) {
                     Button(AppConstant.Label.reset) {
                         reset()
@@ -91,9 +39,7 @@ struct AddView: View {
                         } catch {
                             print("Failed to save: \(error)")
                         }
-                        
-                        // (ToDo) how to add badge to tabview from here? asked chatG (state, not event)
-                        
+                                                
                         reset()
                         // (toDo) after adding/saving, user gets feedback. (a badge on Texts ("!", "new" etc)  It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Texts.
                     }
@@ -103,6 +49,9 @@ struct AddView: View {
         }
     }
     
+    // MARK: - (parameters?)
+    // TODO: - tidy marks below
+
     @State private var beforeText: String = ""
     @State private var goalText: String = ""
     @State private var afterText: String = ""
@@ -134,7 +83,6 @@ struct AddView: View {
 }
 
 // MARK: - (preview)
-
 #Preview {
     AddView()
 }

@@ -5,7 +5,6 @@ import SwiftData
 // (Note) The Xcode template calls this ContentView, so leaving as-is.
 struct ContentView: View {
     // MARK: - (body)
-    
     var body: some View {
         TabView {
             DebugView().withTab()
@@ -63,10 +62,9 @@ struct ContentView: View {
 }
 
 // MARK: - (withTab())
-
-// (Goal) The dev can use tabs in a human-browsable way.
-// Given a specific view, return it wrapped in its tab.
+// (Goal) The dev can make tabs in a human-browsable way.
 private extension View {
+    // Given a specific view, return it wrapped in its tab.
     func withTab() -> Tab<Never, Self, DefaultTabLabel> {
         switch self {
         case is DebugView:
@@ -86,7 +84,6 @@ private extension View {
 }
 
 // MARK: - (preview)
-
 #Preview {
     ContentView()
     
