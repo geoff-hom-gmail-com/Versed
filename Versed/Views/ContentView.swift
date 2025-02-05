@@ -8,13 +8,13 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            DebugView().withTab(.debug)
-            HelpView().withTab(.help)
-            AddView().withTab(.add)
-            TextsView().withTab(.texts)
+            DebugView().withTab()
+            HelpView().withTab()
+            AddView().withTab()
+            TextsView().withTab()
                 // (Goal) The user adds a text. Then, she sees a hint where to go next.
                 .badge(ifNewTexts)
-            KnowView().withTab(.know)
+            KnowView().withTab()
                 // (Goal) The user knows how many quizzes are ready.
             
                 // TODO: - when texts edit fixed, switch
@@ -22,10 +22,7 @@ struct ContentView: View {
 //                .badge(paragraphsDue)
             
             // TODO: - when reciteview deprecated, remove
-//            ReciteView()
-//                .tabItem {
-//                    Label("recite", systemImage: AppConstant.SFSymbol.brain)
-//                }
+//            ReciteView().withTab()
         }
     }
     
@@ -65,28 +62,27 @@ struct ContentView: View {
     private var userTexts: [Passage]
 }
 
-// MARK: - (withTab(_:))
+// MARK: - (withTab())
 
 // (Goal) The dev can use tabs in a human-browsable way.
+// Given a specific view, return it wrapped in its tab.
 private extension View {
-    func withTab(_ config: TabConfig) -> Tab<Never, Self, DefaultTabLabel> {
-        switch config {
-        case .debug:
+    func withTab() -> Tab<Never, Self, DefaultTabLabel> {
+        switch self {
+        case is DebugView:
             Tab(AppConstant.Label.debug, systemImage: String()) { self }
-        case .help:
+        case is HelpView:
             Tab(AppConstant.Label.help, systemImage: AppConstant.SFSymbol.help) { self }
-        case .add:
+        case is AddView:
             Tab(AppConstant.Label.add, systemImage: AppConstant.SFSymbol.add) { self }
-        case .texts:
+        case is TextsView:
             Tab(AppConstant.Label.texts, systemImage: AppConstant.SFSymbol.goalText) { self }
-        case .know:
+        case is KnowView:
             Tab(AppConstant.Label.know, systemImage: AppConstant.SFSymbol.brain) { self }
+        default:
+            Tab(AppConstant.Label.unknown, systemImage: String()) { self }
         }
     }
-}
-
-private enum TabConfig {
-    case debug, help, add, texts, know
 }
 
 // MARK: - (preview)

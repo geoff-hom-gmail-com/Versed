@@ -229,6 +229,7 @@ enum AppConstant {
         static let reference = "Reference / notes"
         static let reset = "Reset"
         static let texts = "Texts"
+        static let unknown = "Unknown"
     }
     
     // MARK: - (LineLimit)
