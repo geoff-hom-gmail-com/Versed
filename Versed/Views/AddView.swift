@@ -10,12 +10,15 @@ struct AddView: View {
         // (Note) NavigationStack used so the dev can easily have buttons to save/reset.
         NavigationStack {
             Form {
+                // (confusing) (not as clear what's shared)
                 // BeforeTextFieldSection($beforeText)
                 // AfterTextFieldSection($afterText)
                 // ReferenceTextFieldSection($beforeText)
                 
                 // TextFieldSection.for(.before, text: $beforeText)
-                
+                // TextFieldSection.for(.after, text: $afterText)
+
+                // (too general) (TextDetail also will call it)
                 // TextFieldSection.for(.before)
                 // TextFieldSection.for(.after)
                 // TextFieldSection.for(.reference)
