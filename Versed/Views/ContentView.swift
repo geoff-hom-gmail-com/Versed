@@ -34,7 +34,8 @@ struct ContentView: View {
     private var ifNewTexts: Text? {
         let hasNewTexts = !newTexts.isEmpty
         
-        // (Note) Use Text() not String() for nil bug:  (https://developer.apple.com/forums/thread/766000)
+        // (Note) For nil, use Text() not String():
+        // (bug) (https://developer.apple.com/forums/thread/766000)
         return hasNewTexts ? Text(AppConstant.Badge.new) : nil
     }
     
@@ -46,7 +47,8 @@ struct ContentView: View {
     // MARK: - (badge) (paragraphs due)
     
     // TODO: - check if updates in realtime
-    // (e.g. due in 10"; does it change in 10"?) (if not, set timer to check every x" and then once working, make it 60")
+    // (e.g. due in 10"; does it change in 10"?)
+    // (if not, set timer to check every x" and then once working, make it 60")
     private var paragraphsDue: Int {
         // TODO: - (when working) (delete)
         print("paragraphsDue computed")

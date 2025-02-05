@@ -4,7 +4,7 @@ import SwiftData
 // (Goal) The user can add text to know.
 // (Goal) The user adds everything from her reference now. (e.g., Bible app) Then, she can focus on our app. (e.g., stanzas)
 struct AddView: View {
-    // MARK: - body
+    // MARK: - (body)
 
     var body: some View {
         // (Note) NavigationStack used so the dev can easily have buttons to save/reset.
@@ -130,7 +130,7 @@ struct AddView: View {
     }
 }
 
-// MARK: - preview
+// MARK: - (preview)
 
 #Preview {
     AddView()

@@ -3,18 +3,23 @@ import SwiftUI
 
 // (Goal) The dev can edit constants DRY-ly.
 enum AppConstant {
+    // MARK: - (Badge)
     enum Badge {
         static let new = "New"
     }
     
+    // MARK: - (Emoji)
     enum Emoji {
 //        static let goalNet = "🥅"
 //        static let soccerBall = "⚽️"
     }
     
+    // MARK: - (ExampleText)
     enum ExampleText {
         // (Goal) The user sees how to update text for the most common example: multiple verses.
-        // (toDo) how much longer should this be? if I really end up using longer ones by default, I should have an example since that's real. So wait for testing. Hopefully it'll just work throwing a whole page/chapter in. Though a chapter would be a lot to parse at once.
+        
+        // TODO: - how much longer should this example be?
+        // (toDo) if I really end up using longer ones by default, I should have an example since that's real. So wait for testing. Hopefully it'll just work throwing a whole page/chapter in. Though a chapter would be a lot to parse at once.
         static let multiverse = Passage(
             isExample: true,
             before: """
@@ -46,6 +51,8 @@ enum AppConstant {
                 (example is from John) (NIV)
                 """
         )
+        
+        // TODO: - finish/fix examples (only multi, start, end have seen prime time)
         
         // (Goal) The user sees how to update text for a single verse/paragraph.
         static let shortVerse = Passage(
@@ -192,6 +199,7 @@ enum AppConstant {
         
     }
     
+    // MARK: - (Info)
     enum Info {
         // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
         static let after = "Some text after your goal. Why? To cue."
@@ -205,6 +213,7 @@ enum AppConstant {
         static let myTexts = "Each text shows its before-cue."
     }
     
+    // MARK: - (Label)
     enum Label {
         static let add = "Add"
         static let after = "After"
@@ -222,6 +231,7 @@ enum AppConstant {
         static let texts = "Texts"
     }
     
+    // MARK: - (LineLimit)
     enum LineLimit {
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
         static let after = 3
@@ -249,6 +259,7 @@ enum AppConstant {
         static let reference = 2
     }
     
+    // MARK: - (Prompt)
     enum Prompt {
         static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
 
@@ -276,6 +287,7 @@ enum AppConstant {
         static let reference = "(John) (NIV)"
     }
     
+    // MARK: - (SFSymbol)
     enum SFSymbol {
         // The user sees a "+" in a rounded rectangle. Rounded rectangle is homage to Steve Jobs and the Mac. Also varies more from circle used for help.
         static let add = "plus.app.fill"
@@ -315,6 +327,9 @@ enum AppConstant {
         
         static let tap = "hand.tap"
     }
+    
+    // TODO: - when Verse et al. deprecated, remove?
+    // StorageKey, TestLine
     
     enum StorageKey {
         static let voiceID = "voiceID"
