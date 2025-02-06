@@ -64,22 +64,31 @@ struct ContentView: View {
 // MARK: - (inTab())
 // (Goal) The dev can make tabs in a human-browsable way.
 private extension View {
-    // Given a specific view, return it wrapped in its tab.
+    // Returns a tab with the view.
     func inTab() -> Tab<Never, Self, DefaultTabLabel> {
+        var label = AppConstant.Label.unknown
+        var symbol = String()
+
         switch self {
         case is DebugView:
-            Tab(AppConstant.Label.debug, systemImage: String()) { self }
+            label = AppConstant.Label.debug
         case is HelpView:
-            Tab(AppConstant.Label.help, systemImage: AppConstant.SFSymbol.help) { self }
+            label = AppConstant.Label.help
+            symbol = AppConstant.SFSymbol.help
         case is AddView:
-            Tab(AppConstant.Label.add, systemImage: AppConstant.SFSymbol.add) { self }
+            label = AppConstant.Label.add
+            symbol = AppConstant.SFSymbol.add
         case is TextsView:
-            Tab(AppConstant.Label.texts, systemImage: AppConstant.SFSymbol.goalText) { self }
+            label = AppConstant.Label.texts
+            symbol = AppConstant.SFSymbol.goalText
         case is KnowView:
-            Tab(AppConstant.Label.know, systemImage: AppConstant.SFSymbol.brain) { self }
+            label = AppConstant.Label.know
+            symbol = AppConstant.SFSymbol.brain
         default:
-            Tab(AppConstant.Label.unknown, systemImage: String()) { self }
+            symbol = String()
         }
+        
+        return Tab(label, systemImage: symbol) { self }
     }
 }
 
