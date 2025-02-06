@@ -1,6 +1,6 @@
 import SwiftUI
 
-// MARK: - (init(_:text:))
+// MARK: - (TextFieldSection.init(_:text:))
 // (Goal) The dev can make sections with a text field in a human-browsable way.
 extension TextFieldSection {
     enum SectionType {
@@ -47,6 +47,7 @@ extension TextFieldSection {
     }
 }
 
+// MARK: - (TextFieldSection)
 // (Goal) The dev can DRYly make a section with a header, info button, and text field.
 struct TextFieldSection: View {
     // MARK: - (body)
@@ -73,10 +74,10 @@ struct TextFieldSection: View {
             HStack {
                 // (Goal) The user sees the image only one space from its label. (HStack spacing is wider.)
                 Text(headerImage) + Text(" \(headerLabel)")
+                
                 Spacer()
-                if !infoText.isEmpty {
-                    InfoButton(popoverText: infoText)
-                }
+                InfoButton(popoverText: infoText)
+                    .opacity(infoText.isEmpty ? 0 : 1)
             }
             // (Goal) The user isn't turned off by ALL CAPS in Form -> Section headings.
             .textCase(nil)

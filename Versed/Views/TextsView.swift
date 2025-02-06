@@ -63,8 +63,6 @@ private struct TextsSection: View {
         } header: {
             HStack {
                 Text(label)
-                
-                // TODO: - fix in textfieldsection too?
                 InfoButton(popoverText: infoText)
                     .opacity(infoText.isEmpty ? 0 : 1)
             }
