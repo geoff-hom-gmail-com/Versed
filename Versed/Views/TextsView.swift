@@ -17,8 +17,8 @@ struct TextsView: View {
                 // we have two list sections, both with headers
                 // headers slightly different
                 // the lists are very similar; one is usertexts and one examples; that's the key
-//                Section(for: .user)
-//                Section(for: .example)
+//                TextsSection(.user)
+//                TextsSection(for: .example)
                 // (ToDo) (DRY?)
                 Section(isExpanded: $isMyTextsExpanded) {
                     ForEach(userTexts) { passage in
@@ -87,6 +87,41 @@ struct TextsView: View {
     // (Goal) The user can shrink either section of verses, for focus.
     @State private var isMyTextsExpanded: Bool = true
     @State private var isExamplesExpanded: Bool = false
+}
+
+private struct TextsSection: View {
+    var body: some View {
+        Section(isExpanded: $isMyTextsExpanded) {
+            ForEach(userTexts) { passage in
+                // (Goal) This NavigationLink separates the view from the data.
+                NavigationLink(value: passage) {
+                    Text(passage.beforeText)
+                        .badge(passage.isNew ? AppConstant.Badge.new : nil)
+                }
+            }
+        } header: {
+            HStack {
+                Text(AppConstant.Label.texts)
+                
+                // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
+                InfoButton(popoverText: AppConstant.Info.myTexts)
+            }
+            .textCase(nil)
+        }
+    }
+    
+//    init(isMyTextsExpanded: Bool, userTexts: [Passage]) {
+//        self.isMyTextsExpanded = isMyTextsExpanded
+//        self.userTexts = userTexts
+//    }
+    
+    @State private var isMyTextsExpanded: Bool = true
+    
+    // (Goal) The user can see her texts, in order. (newest: top)
+    @Query(filter: #Predicate<Passage> { $0.isExample == false },
+           sort: \.index, order: .reverse)
+    private var userTexts: [Passage]
+
 }
 
 private extension Section {

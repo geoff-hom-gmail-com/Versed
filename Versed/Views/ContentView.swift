@@ -7,13 +7,13 @@ struct ContentView: View {
     // MARK: - (body)
     var body: some View {
         TabView {
-            DebugView().withTab()
-            HelpView().withTab()
-            AddView().withTab()
-            TextsView().withTab()
+            DebugView().inTab()
+            HelpView().inTab()
+            AddView().inTab()
+            TextsView().inTab()
                 // (Goal) The user adds a text. Then, she sees a hint where to go next.
                 .badge(ifNewTexts)
-            KnowView().withTab()
+            KnowView().inTab()
                 // (Goal) The user knows how many quizzes are ready.
             
                 // TODO: - when texts edit fixed, switch
@@ -61,11 +61,11 @@ struct ContentView: View {
     private var userTexts: [Passage]
 }
 
-// MARK: - (withTab())
+// MARK: - (inTab())
 // (Goal) The dev can make tabs in a human-browsable way.
 private extension View {
     // Given a specific view, return it wrapped in its tab.
-    func withTab() -> Tab<Never, Self, DefaultTabLabel> {
+    func inTab() -> Tab<Never, Self, DefaultTabLabel> {
         switch self {
         case is DebugView:
             Tab(AppConstant.Label.debug, systemImage: String()) { self }

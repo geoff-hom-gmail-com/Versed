@@ -3,8 +3,8 @@ import SwiftUI
 // MARK: - (init(for:text:))
 // (Goal) The dev can make sections with a text field in a human-browsable way.
 extension TextFieldSection {
-    // Configure for the given section type.
-    init(for type: SectionType, text: Binding<String>) {
+    // For the given type: configure.
+    init(_ type: SectionType, text: Binding<String>) {
         switch type {
         case .before:
             self.headerImage = Image(systemName: AppConstant.SFSymbol.before)

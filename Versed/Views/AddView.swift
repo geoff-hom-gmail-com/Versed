@@ -9,10 +9,10 @@ struct AddView: View {
         // (Note) NavigationStack used so the dev can easily have buttons to save/reset.
         NavigationStack {
             Form {
-                TextFieldSection(for: .before, text: $beforeText)
-                TextFieldSection(for: .goal, text: $goalText)
-                TextFieldSection(for: .after, text: $afterText)
-                TextFieldSection(for: .reference, text: $referenceText)
+                TextFieldSection(.before, text: $beforeText)
+                TextFieldSection(.goal, text: $goalText)
+                TextFieldSection(.after, text: $afterText)
+                TextFieldSection(.reference, text: $referenceText)
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
