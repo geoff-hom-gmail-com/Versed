@@ -63,7 +63,7 @@ final class Passage {
 //        return title
 //    }
     
-    // (Goal) The user sees examples for how to update her texts before quizzing.
+    // (Goal) The user can see example texts, in learning order.
     static func insertExamples(modelContext: ModelContext) {
         let examples = [
             AppConstant.ExampleText.multiverse,
@@ -78,6 +78,13 @@ final class Passage {
         
         examples.forEach {
             modelContext.insert($0)
+        }
+        
+        // (Note) Not sure if needed on device. But, in Xcode preview, helps?
+        do {
+            try modelContext.save()
+        } catch {
+            print("Failed to save: \(error)")
         }
     }
 }

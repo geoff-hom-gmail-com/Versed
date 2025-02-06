@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - (AddView)
 // (Goal) The user can add text to know.
 // (Goal) The user adds everything from her reference now. (e.g., Bible app) Then, she can focus on our app. (e.g., stanzas)
 struct AddView: View {

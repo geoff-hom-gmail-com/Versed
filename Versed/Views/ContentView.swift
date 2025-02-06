@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - (ContentView)
 // (Goal) The user sees the starting tab. She can go to other tabs.
 // (Note) The Xcode template calls this ContentView, so leaving as-is.
 struct ContentView: View {
@@ -61,7 +62,7 @@ struct ContentView: View {
     private var userTexts: [Passage]
 }
 
-// MARK: - (inTab())
+// MARK: - (View.inTab())
 // (Goal) The dev can make tabs in a human-browsable way.
 private extension View {
     // Returns a tab with the view.
@@ -95,9 +96,8 @@ private extension View {
 // MARK: - (preview)
 #Preview {
     ContentView()
-    
+        .modelContainer(for: Passage.self)
+
     // TODO: - when verse deprecated, remove
 //        .modelContainer(for: [Passage.self, Verse.self])
-    
-        .modelContainer(for: Passage.self)
 }

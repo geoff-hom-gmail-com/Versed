@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - (TextsView)
 // (Goal) The user can manage her texts: Parse into stanzas. Edit. Delete. See learning stats.
 
 // TODO: - The user can see at a glance how she's doing with her texts.
@@ -14,51 +15,8 @@ struct TextsView: View {
     var body: some View {
         NavigationStack {
             List {
-                // we have two list sections, both with headers
-                // headers slightly different
-                // example has a .task() how do we do that?
-                // the lists are very similar; one is usertexts and one examples; that's the key
                 TextsSection(.user)
                 TextsSection(.example)
-                // (ToDo) (DRY?)
-                Section(isExpanded: $isMyTextsExpanded) {
-                    ForEach(userTexts) { passage in
-                        // (Goal) This NavigationLink separates the view from the data.
-                        NavigationLink(value: passage) {
-                            Text(passage.beforeText)
-                                .badge(passage.isNew ? AppConstant.Badge.new : nil)
-                        }
-                    }
-                } header: {
-                    HStack {
-                        Text(AppConstant.Label.texts)
-                        
-                        // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
-                        InfoButton(popoverText: AppConstant.Info.myTexts)
-                    }
-                    .textCase(nil)
-                }
-                
-                Section(isExpanded: $isExamplesExpanded) {
-                    ForEach(exampleTexts) { passage in
-                        NavigationLink(value: passage) {
-                            Text(passage.beforeText)
-                                .badge(passage.isNew ? AppConstant.Badge.new : nil)
-                        }
-                    }
-                } header: {
-                    HStack {
-                        Text(AppConstant.Label.examples)
-//                        InfoButton(popoverText: AppConstant.Info.examples)
-                    }
-                    .textCase(nil)
-                }
-                .task {
-                    if exampleTexts.isEmpty {
-//                        print("examples: insert")
-                        Passage.insertExamples(modelContext: modelContext)
-                    }
-                }
             }
             // (Goal) The user can see disclosure indicators.
             .listStyle(.sidebar)
@@ -68,31 +26,31 @@ struct TextsView: View {
             .navigationDestination(for: Passage.self) {
                 TextDetail(passage: $0)
             }
+            .task {
+                insertExamples()
+            }
         }
     }
     
-    // MARK: - (??)
+    // MARK: - (insertExamples())
 
-    @Environment(\.modelContext) private var modelContext
+    private func insertExamples() {
+        if examples.isEmpty {
+            Passage.insertExamples(modelContext: modelContext)
+        }
+    }
+
+    @Query(filter: #Predicate<Passage> { $0.isExample == true })
+    private var examples: [Passage]
     
-    // (Goal) The user can see her texts, in order. (newest: top)
-    @Query(filter: #Predicate<Passage> { $0.isExample == false },
-           sort: \.index, order: .reverse)
-    private var userTexts: [Passage]
-
-    // (Goal) The user can see example texts, in learning order.
-    @Query(filter: #Predicate<Passage> { $0.isExample == true },
-           sort: \.index)
-    private var exampleTexts: [Passage]
-        
-    // (Goal) The user can shrink either section of verses, for focus.
-    @State private var isMyTextsExpanded: Bool = true
-    @State private var isExamplesExpanded: Bool = false
+    @Environment(\.modelContext) private var modelContext
 }
 
-// (Goal) The dev can make list sections in a human-browsable way.
-// This section has a header, and a list of texts.
+// MARK: - (TextsSection)
+// (Goal) The dev can make list-sections in a human-browsable way.
+// This section has a list of texts.
 private struct TextsSection: View {
+    // MARK: - (body)
     var body: some View {
         Section(isExpanded: $isExpanded) {
             ForEach(texts) { passage in
@@ -105,16 +63,17 @@ private struct TextsSection: View {
         } header: {
             HStack {
                 Text(label)
-                infoButton
-//                infoButton2
+                
+                // TODO: - fix in textfieldsection too?
+                InfoButton(popoverText: infoText)
+                    .opacity(infoText.isEmpty ? 0 : 1)
             }
             .textCase(nil)
         }
-        .task {
-            
-        }
     }
     
+    // MARK: - (init(_:))
+
     enum SectionType {
         case user, example
     }
@@ -124,33 +83,28 @@ private struct TextsSection: View {
         case .user:
             self.isExpanded = true
             self.label = AppConstant.Label.texts
-//            self.infoButton2 = InfoButton(popoverText: AppConstant.Info.myTexts)
+            self.infoText = AppConstant.Info.myTexts
         case .example:
             self.isExpanded = false
             self.label = AppConstant.Label.examples
-//            self.infoButton2 = EmptyView()
         }
+        
         self.type = type
     }
     
-//    @ViewBuilder
-//    private var infoButton2: some View
+    // MARK: - (properties)
     
-    @ViewBuilder
-    private var infoButton: some View {
-        switch type {
-        case .user:
-            // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
-            InfoButton(popoverText: AppConstant.Info.myTexts)
-        case .example:
-            EmptyView()
-        }
-    }
+    // (Goal) The user can shrink sections, for focus.
+    @State private var isExpanded: Bool
     
     private var label: String
+    private var infoText = String()
     
-    // (Goal) The user can see her texts, in order. (newest: top)
-    // (Note) SwiftData does not support dynamic queries yet (Xcode 16.1).
+    // MARK: - (SwiftData)
+
+    private let type: SectionType
+    
+    // (Note) Would assign in init(_:), but can't assign property wrappers. (Xcode 16.1)
     private var texts: [Passage] {
         switch type {
         case .user:
@@ -159,12 +113,7 @@ private struct TextsSection: View {
             exampleTexts
         }
     }
-    
-    private let type: SectionType
-    
-
-    @State private var isExpanded: Bool
-    
+  
     // (Goal) The user can see her texts, in order. (newest: top)
     @Query(filter: #Predicate<Passage> { $0.isExample == false },
            sort: \.index, order: .reverse)
@@ -174,56 +123,6 @@ private struct TextsSection: View {
     @Query(filter: #Predicate<Passage> { $0.isExample == true },
            sort: \.index)
     private var exampleTexts: [Passage]
-     
-}
-
-private extension Section {
-    //
-//    init(for type: SectionType) {
-//        switch type {
-//        case .user:
-//            Section(isExpanded: $isMyTextsExpanded) {
-//                ForEach(userTexts) { passage in
-//                    // (Goal) This NavigationLink separates the view from the data.
-//                    NavigationLink(value: passage) {
-//                        Text(passage.beforeText)
-//                            .badge(passage.isNew ? AppConstant.Badge.new : nil)
-//                    }
-//                }
-//            } header: {
-//                HStack {
-//                    Text(AppConstant.Label.texts)
-//                    
-//                    // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
-//                    InfoButton(popoverText: AppConstant.Info.myTexts)
-//                }
-//                .textCase(nil)
-//            }
-//        case .example:
-//            Section(isExpanded: $isExamplesExpanded) {
-//                ForEach(exampleTexts) { passage in
-//                    NavigationLink(value: passage) {
-//                        Text(passage.beforeText)
-//                            .badge(passage.isNew ? AppConstant.Badge.new : nil)
-//                    }
-//                }
-//            } header: {
-//                HStack {
-//                    Text(AppConstant.Label.examples)
-////                        InfoButton(popoverText: AppConstant.Info.examples)
-//                }
-//                .textCase(nil)
-//            }
-//            .task {
-//                if exampleTexts.isEmpty {
-////                        print("examples: insert")
-//                    Passage.insertExamples(modelContext: modelContext)
-//                }
-//            }
-//        }
-//    }
-    
-    
 }
 
 // MARK: - (preview)
