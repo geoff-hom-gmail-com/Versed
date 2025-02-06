@@ -1,5 +1,52 @@
 import SwiftUI
 
+// MARK: - (init(for:text:))
+// (Goal) The dev can make sections with a text field in a human-browsable way.
+extension TextFieldSection {
+    // Configure for the given section type.
+    init(for type: SectionType, text: Binding<String>) {
+        switch type {
+        case .before:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.before)
+            self.headerLabel = AppConstant.Label.before
+            self.infoText = AppConstant.Info.before
+            self.textFieldLabel = self.headerLabel
+            self.textFieldText = text
+            self.textFieldPrompt = AppConstant.Prompt.before
+            self.textFieldLineLimit = AppConstant.LineLimit.before...AppConstant.LineLimit.max
+        case .goal:
+            // (Goal) The user thinks, "I start here, with my goal.
+            // I can copy-paste my text into here."
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.goalText)
+            self.infoText = AppConstant.Info.goal
+            self.textFieldLabel = AppConstant.Label.goal
+            self.textFieldText = text
+            self.textFieldPrompt = AppConstant.Prompt.goal
+            self.textFieldLineLimit = AppConstant.LineLimit.goal...AppConstant.LineLimit.max
+
+        case .after:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.after)
+            self.headerLabel = AppConstant.Label.after
+            self.infoText = AppConstant.Info.after
+            self.textFieldLabel = self.headerLabel
+            self.textFieldText = text
+            self.textFieldPrompt = AppConstant.Prompt.after
+            self.textFieldLineLimit = AppConstant.LineLimit.after...AppConstant.LineLimit.max
+        case .reference:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.reference)
+            self.headerLabel = AppConstant.Label.reference
+            self.textFieldLabel = self.headerLabel
+            self.textFieldText = text
+            self.textFieldPrompt = AppConstant.Prompt.reference
+            self.textFieldLineLimit = AppConstant.LineLimit.reference...AppConstant.LineLimit.max
+        }
+    }
+    
+    enum SectionType {
+        case before, goal, after, reference
+    }
+}
+
 // (Goal) The dev can DRYly make a section with a header, info button, and text field.
 struct TextFieldSection: View {
     // MARK: - (body)
@@ -48,51 +95,4 @@ struct TextFieldSection: View {
     var textFieldText: Binding<String>
     var textFieldPrompt: String
     var textFieldLineLimit: ClosedRange<Int>
-}
-
-// MARK: - (init(for:text:))
-// (Goal) The dev can make sections with a text field in a human-browsable way.
-extension TextFieldSection {
-    // Configure for the given section type.
-    init(for type: SectionType, text: Binding<String>) {
-        switch type {
-        case .before:
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.before)
-            self.headerLabel = AppConstant.Label.before
-            self.infoText = AppConstant.Info.before
-            self.textFieldLabel = self.headerLabel
-            self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.before
-            self.textFieldLineLimit = AppConstant.LineLimit.before...AppConstant.LineLimit.max
-        case .goal:
-            // (Goal) The user thinks, "I start here, with my goal.
-            // I can copy-paste my text into here."
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.goalText)
-            self.infoText = AppConstant.Info.goal
-            self.textFieldLabel = AppConstant.Label.goal
-            self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.goal
-            self.textFieldLineLimit = AppConstant.LineLimit.goal...AppConstant.LineLimit.max
-
-        case .after:
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.after)
-            self.headerLabel = AppConstant.Label.after
-            self.infoText = AppConstant.Info.after
-            self.textFieldLabel = self.headerLabel
-            self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.after
-            self.textFieldLineLimit = AppConstant.LineLimit.after...AppConstant.LineLimit.max
-        case .reference:
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.reference)
-            self.headerLabel = AppConstant.Label.reference
-            self.textFieldLabel = self.headerLabel
-            self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.reference
-            self.textFieldLineLimit = AppConstant.LineLimit.reference...AppConstant.LineLimit.max
-        }
-    }
-    
-    enum SectionType {
-        case before, goal, after, reference
-    }
 }
