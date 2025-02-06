@@ -1,5 +1,6 @@
 import SwiftUI
 
+// MARK: - (TextDetail)
 // (Goal) The user can update the given text. She can also see learning stats.
 // (todo) (can she delete (non-example) from here? probably) (can see UI for delete contact or something; there's usually a warning/please-confirm)
 // (ToDo) (Goal) The user knows that examples can't be edited. And she can't edit them.
@@ -20,6 +21,7 @@ struct TextDetail: View {
         self.beforeText = passage.beforeText
     }
     
+    // MARK: - (body)
     var body: some View {
         // (Note) In a List, the disclosure triangles work with Section(isExpanded:). But with Form, they don't seem to. Even with header empty.
         // DisclosureGroup works. Not sure the UI is ideal. Consider MVP-post.
@@ -125,6 +127,7 @@ struct TextDetail: View {
     }
 }
 
+// MARK: - (preview)
 #Preview {
     let passage = Passage()
     TextDetail(passage: passage)
