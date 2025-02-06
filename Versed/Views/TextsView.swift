@@ -16,9 +16,10 @@ struct TextsView: View {
             List {
                 // we have two list sections, both with headers
                 // headers slightly different
+                // example has a .task() how do we do that?
                 // the lists are very similar; one is usertexts and one examples; that's the key
-//                TextsSection(.user)
-//                TextsSection(for: .example)
+                TextsSection(.user)
+                TextsSection(.example)
                 // (ToDo) (DRY?)
                 Section(isExpanded: $isMyTextsExpanded) {
                     ForEach(userTexts) { passage in
@@ -89,10 +90,12 @@ struct TextsView: View {
     @State private var isExamplesExpanded: Bool = false
 }
 
+// (Goal) The dev can make list sections in a human-browsable way.
+// This section has a header, and a list of texts.
 private struct TextsSection: View {
     var body: some View {
-        Section(isExpanded: $isMyTextsExpanded) {
-            ForEach(userTexts) { passage in
+        Section(isExpanded: $isExpanded) {
+            ForEach(texts) { passage in
                 // (Goal) This NavigationLink separates the view from the data.
                 NavigationLink(value: passage) {
                     Text(passage.beforeText)
@@ -101,27 +104,77 @@ private struct TextsSection: View {
             }
         } header: {
             HStack {
-                Text(AppConstant.Label.texts)
-                
-                // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
-                InfoButton(popoverText: AppConstant.Info.myTexts)
+                Text(label)
+                infoButton
+//                infoButton2
             }
             .textCase(nil)
         }
+        .task {
+            
+        }
     }
     
-//    init(isMyTextsExpanded: Bool, userTexts: [Passage]) {
-//        self.isMyTextsExpanded = isMyTextsExpanded
-//        self.userTexts = userTexts
-//    }
+    enum SectionType {
+        case user, example
+    }
     
-    @State private var isMyTextsExpanded: Bool = true
+    init(_ type: SectionType) {
+        switch type {
+        case .user:
+            self.isExpanded = true
+            self.label = AppConstant.Label.texts
+//            self.infoButton2 = InfoButton(popoverText: AppConstant.Info.myTexts)
+        case .example:
+            self.isExpanded = false
+            self.label = AppConstant.Label.examples
+//            self.infoButton2 = EmptyView()
+        }
+        self.type = type
+    }
+    
+//    @ViewBuilder
+//    private var infoButton2: some View
+    
+    @ViewBuilder
+    private var infoButton: some View {
+        switch type {
+        case .user:
+            // (Goal) The user knows her listed texts show the before-cue (vs the goal text).
+            InfoButton(popoverText: AppConstant.Info.myTexts)
+        case .example:
+            EmptyView()
+        }
+    }
+    
+    private var label: String
+    
+    // (Goal) The user can see her texts, in order. (newest: top)
+    // (Note) SwiftData does not support dynamic queries yet (Xcode 16.1).
+    private var texts: [Passage] {
+        switch type {
+        case .user:
+            userTexts
+        case .example:
+            exampleTexts
+        }
+    }
+    
+    private let type: SectionType
+    
+
+    @State private var isExpanded: Bool
     
     // (Goal) The user can see her texts, in order. (newest: top)
     @Query(filter: #Predicate<Passage> { $0.isExample == false },
            sort: \.index, order: .reverse)
     private var userTexts: [Passage]
 
+    // (Goal) The user can see example texts, in learning order.
+    @Query(filter: #Predicate<Passage> { $0.isExample == true },
+           sort: \.index)
+    private var exampleTexts: [Passage]
+     
 }
 
 private extension Section {
@@ -170,10 +223,7 @@ private extension Section {
 //        }
 //    }
     
-    enum SectionType {
-        case user
-//        case user, example
-    }
+    
 }
 
 // MARK: - (preview)

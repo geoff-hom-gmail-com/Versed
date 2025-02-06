@@ -1,8 +1,12 @@
 import SwiftUI
 
-// MARK: - (init(for:text:))
+// MARK: - (init(_:text:))
 // (Goal) The dev can make sections with a text field in a human-browsable way.
 extension TextFieldSection {
+    enum SectionType {
+        case before, goal, after, reference
+    }
+    
     // For the given type: configure.
     init(_ type: SectionType, text: Binding<String>) {
         switch type {
@@ -40,10 +44,6 @@ extension TextFieldSection {
             self.textFieldPrompt = AppConstant.Prompt.reference
             self.textFieldLineLimit = AppConstant.LineLimit.reference...AppConstant.LineLimit.max
         }
-    }
-    
-    enum SectionType {
-        case before, goal, after, reference
     }
 }
 

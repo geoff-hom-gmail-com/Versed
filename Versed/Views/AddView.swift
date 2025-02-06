@@ -34,6 +34,7 @@ struct AddView: View {
 
     // MARK: - (buttons)
 
+    @ViewBuilder
     private var resetButton: some View {
         Button(AppConstant.Label.reset) {
             reset()
@@ -41,6 +42,7 @@ struct AddView: View {
         .disabled(isNoText)
     }
     
+    @ViewBuilder
     private var doneButton: some View {
         Button(AppConstant.Label.done) {
             // (Goal) The text has the right index.
