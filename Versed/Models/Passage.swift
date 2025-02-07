@@ -7,26 +7,8 @@ import SwiftData
 // (class) (SwiftData)
 @Model
 final class Passage {
-    // (Goal) The user can see examples, to learn the app. But, she can't edit them.
-    // This was an enum/category. E.g., .example, .user. But, enums don't work well with SwiftData Predicates. (as of Xcode 16.1)
-    var isExample: Bool
-    
-    // (Goal) The user can easily find the text they just added. And know which examples they haven't seen.
-    var isNew = true
-    
-    // (Goal) The user sees listed texts in the same order. She can also reorder.
-    // (Note) SwiftData does not store array order for model objects.
-    var index: Int
-    
-    var beforeText: String
-    var goalText: String
-    var afterText: String
-    var referenceText: String
-    
-    @Relationship(deleteRule: .cascade)
-    var paragraphs: [Paragraph]
-    
-    // (Goal) The user adds a text. Fields may be empty, as she can edit them later.
+    // MARK: - (init())
+    // (Note) Text fields may be empty, as user can edit them later.
     init(
         isExample: Bool = false,
         index: Int = 0,
@@ -43,29 +25,44 @@ final class Passage {
         self.referenceText = reference
         
         let rawParagraphs = goal.components(separatedBy: "\n\n")
-        print(rawParagraphs)
-        self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+//        print(rawParagraphs)
+        self.paragraphs = rawParagraphs.map { Paragraph($0) }
     }
     
-    // (Goal) The user sees a one-line cue to a text. She knows which verse it refers to.
-    // We could use the goal text. But, we hope the user will benefit more in the long run, via practicing with the cue.
-    // If no prompt, show the verse's text. E.g., when a verse is first added.
-//    var rowTitle: String {
-//        var title: String;
-//        if ((prompts.first?.text.isEmpty) != nil) {
-//            
-//        }
-//        if let firstPrompt = prompts.first,
-//           !firstPrompt.text.isEmpty {
-//            title = firstPrompt.fullPrompt
-//        } else {
-//            title = text
-//        }
-//        return title
-//    }
+    // MARK: - (properties)
     
+    // (Goal) The user can see examples, to learn the app. But, she can't edit them.
+    var isExample: Bool
+    
+    // (Goal) The user can easily find the text she just added. And know which examples she hasn't seen.
+    var isNew = true
+    
+    // (Goal) The user sees listed texts in the same order. She can also reorder.
+    // (Note) SwiftData does not store array order for model objects.
+    var index: Int
+    
+    // (Goal) The user can see a cue: what's before her text.
+    var beforeText: String
+    
+    // TODO: - (user can style text to help learn)
+    // (e.g., bold, italic) (any part, not just all or none)
+    // (Goal) The user can learn a text of arbitrary length. With arbitrary formatting / line breaks.
+    var goalText: String
+    
+    // (Goal) The user can see a cue: what's after her text.
+    var afterText: String
+    
+    // (Goal) The user can make notes about her text. Including the source/reference.
+    var referenceText: String
+    
+    // (Goal) The user can be quizzed on each paragraph in a text, independently.
+    @Relationship(deleteRule: .cascade)
+    var paragraphs: [Paragraph]
+    
+    // MARK: - (insertExamples(modelContext:))
     // (Goal) The user can see example texts, in learning order.
     static func insertExamples(modelContext: ModelContext) {
+        // TODO: - add remaining examples, in order
         let examples = [
             AppConstant.ExampleText.multiverse,
             AppConstant.ExampleText.start,
