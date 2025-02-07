@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - (Passage)
 // (Note) Was going to name Text, but that overwrites Text view. "Passage" is also a nod to Jason Rohrer's game.
 // (final) (inheritance not considered)
 // (class) (SwiftData)

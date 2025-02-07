@@ -28,7 +28,7 @@ struct TextsView: View {
             .lineLimit(1)
             .truncationMode(.tail)
             .navigationDestination(for: Passage.self) {
-                TextDetail(passage: $0)
+                TextDetail($0)
             }
             .task {
                 insertExamples()
