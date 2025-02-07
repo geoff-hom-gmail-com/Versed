@@ -13,6 +13,10 @@ import SwiftData
 struct TextsView: View {
     // MARK: - (body)
     var body: some View {
+        #if DEBUG
+//        let _ = Self._printChanges()
+        #endif
+        
         NavigationStack {
             List {
                 TextsSection(.user)
