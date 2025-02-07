@@ -63,6 +63,7 @@ final class Passage {
     // (Goal) The user can see example texts, in learning order.
     static func insertExamples(modelContext: ModelContext) {
         // TODO: - add remaining examples, in order
+        // (also) (explain learning order here) (it's about learning how to use the app) (what to put in what field)
         let examples = [
             AppConstant.ExampleText.multiverse,
             AppConstant.ExampleText.start,
