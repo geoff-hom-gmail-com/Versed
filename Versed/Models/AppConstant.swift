@@ -210,7 +210,7 @@ enum AppConstant {
         static let examples = ""
         static let goal = "The text you want to know."
         static let goalBeats = "The text you want to know. Each paragraph is quizzed separately. Magically."
-        static let myTexts = "Each text shows its before-cue."
+        static let myTexts = "Showing: before-cue."
     }
     
     // MARK: - (Label)
