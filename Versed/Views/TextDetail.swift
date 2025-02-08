@@ -1,22 +1,51 @@
 import SwiftUI
 
 // MARK: - (TextDetail)
-// (Goal) The user can update the given text. She can also see learning stats.
-// TODO: - ??
-// (todo) (can she delete (non-example) from here? probably) (can see UI for delete contact or something; there's usually a warning/please-confirm)
-// (ToDo) (Goal) The user knows that examples can't be edited. And she can't edit them.
+// (Goal) The user can see learning stats. She can also edit the text.
 struct TextDetail: View {
     // MARK: - (body)
     var body: some View {
-        // (Note) In a List, the disclosure triangles work with Section(isExpanded:). But with Form, they don't seem to. Even with header empty.
-        // DisclosureGroup works. Not sure the UI is ideal. Consider MVP-post.
-        
-        // (MVP-post?) (still have a lot to do here, including differences between myText and examples) (then stats)
+        // TODO: - (The user can view text, but to edit it, has to tap button.)
+        // (ToDo) (Goal) The user knows that text here can't be edited. Need to open sheet for that.
+        // Haven't found an ideal solution yet.
+        // For now, using a constant binding.
+        // How can we design our way out of this? Wait until ready to tackle stats view here? What's MVP?
+        // Issues:
+        // - (disabling TextField or TextEditor disables scrolling)
+        // - (constant binding on TextField still allows text to be entered, just not saved) (though no newlines)
+        // - (constant binding on TextEditor still shows cursor, and presumably keyboard)
+        // - (Text in ScrollView works, but not sure how to set frame height in a robust way) (GeometryReader?)
+        // - (Only TextField has placeholder built-in) (would need fake gray placeholders)
+        // - (need to include headers) (while keeping code browsable/DRY)
+        // - (probably do on-device testing to make sure scrolling is acceptable)
         Form {
-            TextFieldSection(.before, text: $beforeText)
-            TextFieldSection(.goalBeats, text: $goalText)
-            TextFieldSection(.after, text: $afterText)
-            TextFieldSection(.reference, text: $referenceText)
+            // temp example with Text()
+            ScrollView {
+                Text(goalText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            // todo; not fond of how it's just a number vs number of lines
+            .frame(maxHeight: 200)
+            
+            // temp example with TextEditor()
+            // this also has some arbitrary default height of like 9 lines
+            Section {
+                TextEditor(text: .constant(goalText))
+            }
+            
+            TextFieldSection(.before, text: .constant(beforeText))
+            TextFieldSection(.goalBeats, text: .constant(goalText))
+            TextFieldSection(.after, text: .constant(afterText))
+            TextFieldSection(.reference, text: .constant(referenceText))
+        }
+        // todo shouldn't need this; editing shouldn't be allowed
+//        .scrollDismissesKeyboard(.immediately)
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button(AppConstant.Label.edit) {
+                    // (toDo) open sheet
+                }
+            }
         }
         .onAppear {
             // (Goal) The user sees texts as "New," until seen once.
@@ -25,29 +54,9 @@ struct TextDetail: View {
                 save()
             }
         }
-        //        .listStyle(.sidebar)
-        //        .formStyle(.grouped)
-        .scrollDismissesKeyboard(.immediately)
-        .toolbar {
-            //                ToolbarItem(placement: .cancellationAction) {
-            //                    Button(AppConstant.Label.reset) {
-            //                        reset()
-            //                    }
-            //                    .disabled(isNoText)
-            //                }
-            ToolbarItem(placement: .confirmationAction) {
-                // (toDo) (if example, don't show button) (or, if not example, button visible )
-                Button("Update") {
-                    
-                    // (toDo) after adding/saving, user gets feedback. (a badge on Encode ("!", "new" etc) Then after confirming, reset the textfield. It depends, too. Usually, the text needs work like beats. But it's possible it's perfectly fine. In which case it's more like it's new and the user just has to okay it in Encode.
-                }
-                //                    .disabled(isNoText)
-            }
-        }
     }
     
     // MARK: - (init(_:))
-
     init(_ passage: Passage) {
         self.passage = passage
         self.beforeText = passage.beforeText
@@ -55,11 +64,6 @@ struct TextDetail: View {
         self.afterText = passage.afterText
         self.referenceText = passage.referenceText
     }
-    
-    
-    
-//
-    @Environment(\.modelContext) private var modelContext
     
     // MARK: - (state properties)
     
@@ -69,18 +73,14 @@ struct TextDetail: View {
     // that should work for passage.before/after/ref. goalText is trickier
     // Will have to do a calc in Passage to compare old and new goalText, or really old and new Paragraphs. Old ones keep interval data.
     @Bindable var passage: Passage
+    
+    private var beforeText: String
+    private var goalText: String
+    private var afterText: String
+    private var referenceText: String
 
-    // (Goal) The user can discard text edits.
-    // (Note) We could use SwiftData's rollback(), or (https://www.hackingwithswift.com/quick-start/swiftdata/how-to-discard-changes-to-a-swiftdata-object).
-    // But this seems KISS. Also, don't like how "live editing" makes the Know badge recalculate on every keystroke.
-    
-    
-    @State private var beforeText: String
-    @State private var goalText: String
-    @State private var afterText: String
-    @State private var referenceText: String
+    // MARK: - (save())
 
-    
     private func save() {
         // (Note) Not sure if needed on device. But, in Xcode preview, helps.
         do {
@@ -89,6 +89,8 @@ struct TextDetail: View {
             print("Failed to save: \(error)")
         }
     }
+    
+    @Environment(\.modelContext) private var modelContext
 }
 
 // MARK: - (preview)

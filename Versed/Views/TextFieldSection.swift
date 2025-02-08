@@ -61,7 +61,9 @@ struct TextFieldSection: View {
     var body: some View {
         Section() {
             // (Note) Why use TextField vs TextEditor?
-            // TextField is a rounded rectangle. TextField has a placeholder.
+            // TextField has a placeholder. (Though TextEditor can be hacked with one: https://www.cephalopod.studio/blog/improving-on-texteditor-in-swiftui)
+            // (or here) (tap gesture: https://developer.apple.com/forums/thread/653108)
+            // (or here) (ZStack: https://www.martinlasek.com/articles/how-to-add-a-placeholder-to-texteditor)
             TextField(
                 textFieldLabel,
                 text: textFieldText,

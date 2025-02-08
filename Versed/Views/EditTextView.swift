@@ -1,9 +1,9 @@
 import SwiftUI
 
 // MARK: - (EditTextView)
-// (Goal) The user can update the given text. She can also see learning stats.
+// (Goal) The user can update the given text.
 // TODO: - ??
-// (todo) (can she delete (non-example) from here? probably) (can see UI for delete contact or something; there's usually a warning/please-confirm)
+// (todo) ( she can delete from here?) ( see UI for delete Contact) (like a red button at bottom, with an alert)
 // (ToDo) (Goal) The user knows that examples can't be edited. And she can't edit them.
 struct EditTextView: View {
     // MARK: - (body)

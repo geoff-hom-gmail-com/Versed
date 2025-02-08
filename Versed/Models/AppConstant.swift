@@ -220,6 +220,7 @@ enum AppConstant {
         static let before = "Before"
         static let debug = "Debug"
         static let done = "Done"
+        static let edit = "Edit"
         static let examples = "Examples"
         static let goal = "Goal"
         static let goalBeats = "(parse beats, paragraphs)"
