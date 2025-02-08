@@ -38,22 +38,13 @@ struct TextDetail: View {
             TextFieldSection(.after, text: .constant(afterText))
             TextFieldSection(.reference, text: .constant(referenceText))
         }
-        // todo shouldn't need this; editing shouldn't be allowed
-//        .scrollDismissesKeyboard(.immediately)
         .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                Button(AppConstant.Label.edit) {
-                    // (toDo) open sheet
-                }
-            }
+            editButton
         }
         .onAppear {
-            // (Goal) The user sees texts as "New," until seen once.
-            if passage.isNew {
-                passage.isNew = false
-                save()
-            }
+            unNew()
         }
+        // TODO: - add .sheet()
     }
     
     // MARK: - (init(_:))
@@ -65,7 +56,7 @@ struct TextDetail: View {
         self.referenceText = passage.referenceText
     }
     
-    // MARK: - (state properties)
+    // MARK: - (properties)
     
     // todo may not even need/want bindable
     // we pass in passage, and then it gets edited but with temp vars
@@ -78,8 +69,28 @@ struct TextDetail: View {
     private var goalText: String
     private var afterText: String
     private var referenceText: String
+    
+    @State private var isShowingSheet = false
 
-    // MARK: - (save())
+    // MARK: - (editButton)
+    
+    private var editButton: ToolbarItem<Void, some View> {
+        ToolbarItem(placement: .confirmationAction) {
+            Button(AppConstant.Label.edit) {
+                isShowingSheet.toggle()
+            }
+        }
+    }
+    
+    // MARK: - (unNew())
+    
+    // (Goal) The user sees text as "New," until seen once.
+    private func unNew() {
+        if passage.isNew {
+            passage.isNew.toggle()
+            save()
+        }
+    }
 
     private func save() {
         // (Note) Not sure if needed on device. But, in Xcode preview, helps.

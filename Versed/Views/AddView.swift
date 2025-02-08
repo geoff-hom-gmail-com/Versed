@@ -16,6 +16,8 @@ struct AddView: View {
                 TextFieldSection(.reference, text: $referenceText)
             }
             .toolbar {
+                // TODO: - make more browsable?
+                // can encapsulate toolbaritem (see editButton in TextDetail)
                 ToolbarItem(placement: .cancellationAction) {
                     resetButton
                 }
