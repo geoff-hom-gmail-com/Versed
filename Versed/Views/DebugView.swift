@@ -156,18 +156,28 @@ struct DebugView: View {
     private var addUniverseButton: some View {
         Button("Add universe") {
             let text = Passage(
-                // TODO: - choose and format universe
-                // then also put into AppConstant.ExampleText
                 before: """
-                    ??
+                    \"… he calls his friends and neighbors together and says, 
+                    
+                    ‘Rejoice with me; 
+                    I have found my lost sheep.’ 
+                    
+                    I tell you 
+                    that in the same way …\"
                     """,
                 goal: """
-                    ??
-                    
+                    \"… there will be more 
+                    rejoicing in heaven 
+                    over
+                    one sinner who repents 
+                    than over 
+                    ninety-nine righteous persons …\"
                     """,
-                after: "?? …",
+                after: """
+                    \"… who do not need to repent.\"
+                    """,
                 reference: """
-                    (??John) (NIV)
+                    (Luke) (NIV)
                     """
             )
             modelContext.insert(text)

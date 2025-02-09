@@ -66,6 +66,7 @@ final class Passage {
         // (also) (explain learning order here) (it's about learning how to use the app) (what to put in what field)
         let examples = [
             AppConstant.ExampleText.multiverse,
+            AppConstant.ExampleText.universe,
             AppConstant.ExampleText.start,
             AppConstant.ExampleText.end
         ]

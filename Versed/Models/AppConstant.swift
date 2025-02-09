@@ -55,24 +55,34 @@ enum AppConstant {
         // TODO: - finish/fix examples (only multi, start, end have seen prime time)
         
         // (Goal) The user sees how to update text for a single verse/paragraph.
-        static let shortVerse = Passage(
+        static let universe = Passage(
             isExample: true,
             before: """
-                (short verse) 
+                (universe) 
                 
-                ??How does the Book of John start?
+                \"… he calls his friends and neighbors together and says, 
+                
+                ‘Rejoice with me; 
+                I have found my lost sheep.’ 
+                
+                I tell you 
+                that in the same way …\"
                 """,
             goal: """
-                ??In the beginning was 
-                the Word, 
-                and the Word was 
-                with God, 
-                and the Word was 
-                God. 
+                \"… there will be more 
+                rejoicing in heaven 
+                over
+                one sinner who repents 
+                than over 
+                ninety-nine righteous persons …\"
                 """,
-            after: "He was with God in the beginning …",
+            after: """
+                \"… who do not need to repent.\"
+                """,
             reference: """
-                (example is from John) (NIV)
+                (tip) Focus on exactly what you want to know.
+                
+                (Luke) (NIV)
                 """
         )
         
@@ -92,6 +102,7 @@ enum AppConstant {
                 and the Word was 
                 God. 
                 """,
+            // TODO: - update each with """
             after: "He was with God in the beginning …",
             reference: """
                 A goal includes a Book's start. What's the before-cue? 
