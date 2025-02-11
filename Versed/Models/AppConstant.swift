@@ -17,21 +17,20 @@ enum AppConstant {
     // MARK: - (ExampleText)
     enum ExampleText {
         static let examples = [
-//            AppConstant.ExampleText.multiverse,
+        // (goal) (user can learn how to update text for various uses)
+            AppConstant.ExampleText.multiverse,
             AppConstant.ExampleText.universe,
-//            AppConstant.ExampleText.start,
+            AppConstant.ExampleText.start,
             AppConstant.ExampleText.end
         ]
-        
-        // (Goal) The user sees how to update text for the most common example: multiple verses.
-        
-        // TODO: - how much longer should this example be?
-        // (toDo) if I really end up using longer ones by default, I should have an example since that's real. So wait for testing. Hopefully it'll just work throwing a whole page/chapter in. Though a chapter would be a lot to parse at once.
-        static let multiverse = Passage(
-            isExample: true,
-            before: """
-                (multiverse) 
-                
+        // (note) (example order is intentional) (multiverse is most common use case; related are universe, start, end)
+        // TODO: - finish/fix examples and add here
+
+        static let multiverse = Example(
+        // (goal) (user sees how to update text for the most common example) (multiple paragraphs)
+        // (note) (yes, I like the play on words of multiverse) (and universe)
+            type: "multiverse",
+            beforeCue: """
                 \"… Neither can you bear fruit unless you remain in me.\"
                 """,
             goal: """
@@ -49,19 +48,21 @@ enum AppConstant {
                 you can do 
                 nothing.\"
                 """,
-            after: "\"If you do not remain in me, you are like a branch that is thrown away and withers …\"",
-            reference: """
-                Make a long goal easier: parse it into beats, and paragraphs. 
+            afterCue: """
+                \"If you do not remain in me, you are like a branch that is thrown away and withers …\"
+                """,
+            notes: """
+                (John) (NIV)
+                """,
+            tip: """
+                Make a long text easier: parse it into beats, and paragraphs. 
                 
-                Each paragraph is quizzed separately. So, you'll need to know only one paragraph at a time.
-                
-                (example is from John) (NIV)
+                Each paragraph is quizzed separately. So, you need to know only a paragraph at a time.
                 """
         )
         
-        // TODO: - finish/fix examples (only multi, start, end have seen prime time)
-        
         static let universe = Example(
+        // (goal) (user sees how to update text for one paragraph)
             type: "universe",
             beforeCue: """
                 \"… he calls his friends and neighbors together and says, 
@@ -88,17 +89,14 @@ enum AppConstant {
             tip: """
                 Parse your text freely. 
                 
-                For example, according to your spoken rhythm.
+                For example, according to your spoken beats.
                 """
         )
-        // (goal) (user sees how to update text for one paragraph)
 
-        // (Goal) The user sees how to update text for a Book's start.
-        static let start = Passage(
-            isExample: true,
-            before: """
-                (Book start) 
-                
+        static let start = Example(
+        // (goal) (user sees how to update text for a Book's start)
+            type: "Book start",
+            beforeCue: """
                 How does the Book of John start?
                 """,
             goal: """
@@ -109,18 +107,21 @@ enum AppConstant {
                 and the Word was 
                 God. 
                 """,
-            // TODO: - update each with """
-            after: "He was with God in the beginning …",
-            reference: """
-                A goal includes a Book's start. What's the before-cue? 
+            afterCue: """
+                He was with God in the beginning …
+                """,
+            notes: """
+                (John) (NIV)
+                """,
+            tip: """
+                A text includes a Book's start. What's the before-cue? 
                 
-                Try "How does <title> start?"
-                
-                (example is from John) (NIV)
+                Try something simple, like "How does <title> start?"
                 """
         )
         
         static let end = Example(
+        // (goal) (user sees how to update text for a Book's end)
             type: "Book end",
             beforeCue: """
                 \"… teaching them to obey everything I have commanded you.\"
@@ -141,7 +142,6 @@ enum AppConstant {
                 Try something simple, like "(end)."
                 """
         )
-        // (goal) (user sees how to update text for a Book's end)
 
         // (Goal) The user sees how to update text for a Psalm.
         static let psalm = Passage(isExample: true,
@@ -156,7 +156,9 @@ enum AppConstant {
                 I lack 
                 nothing.
                 """,
-            after: "He makes me lie down in green pastures …",
+            after: """
+                He makes me lie down in green pastures …
+                """,
             reference: """
                 In most Books, the chapter numbers are arbitrary and divisive. In Psalms, it makes more sense.
                 
@@ -189,6 +191,8 @@ enum AppConstant {
                 (supermemo) (replace)
                 The credit belongs to the man who’s actually in the arena, whose face is marred by dust and sweat; a man who knows the great enthusiasm and the great devotions, who spends himself in a worthy cause, who in the end knows the triumph of high achievement, so that his place shall never be with those cold and timid souls who know neither victory nor defeat
                 """,
+                                         // TODO: - update each with """
+
             after: "He makes me lie down in green pastures …",
             reference: """
                 This app was designed for the Bible. But secular writing can be done.
