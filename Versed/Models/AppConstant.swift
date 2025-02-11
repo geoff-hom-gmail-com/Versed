@@ -18,9 +18,9 @@ enum AppConstant {
     enum ExampleText {
         static let examples = [
 //            AppConstant.ExampleText.multiverse,
-            AppConstant.ExampleText.universe
+            AppConstant.ExampleText.universe,
 //            AppConstant.ExampleText.start,
-//            AppConstant.ExampleText.end
+            AppConstant.ExampleText.end
         ]
         
         // (Goal) The user sees how to update text for the most common example: multiple verses.
@@ -62,8 +62,8 @@ enum AppConstant {
         // TODO: - finish/fix examples (only multi, start, end have seen prime time)
         
         static let universe = Example(
-            type: "(universe)",
-            before: """
+            type: "universe",
+            beforeCue: """
                 \"… he calls his friends and neighbors together and says, 
                 
                 ‘Rejoice with me; 
@@ -73,23 +73,25 @@ enum AppConstant {
                 that in the same way …\"
                 """,
             goal: """
-                \"… there will be more 
-                rejoicing in heaven 
+                \"… there will be more rejoicing in heaven 
                 over
                 one sinner who repents 
                 than over 
                 ninety-nine righteous persons …\"
                 """,
-            after: """
+            afterCue: """
                 \"… who do not need to repent.\"
                 """,
-            reference: """
-                (tip) Focus on exactly what you want to know.
-                
+            notes: """
                 (Luke) (NIV)
+                """,
+            tip: """
+                Parse your text freely. 
+                
+                For example, according to your spoken rhythm.
                 """
         )
-        // (Goal) The user sees how to update text for a single verse/paragraph.
+        // (goal) (user sees how to update text for one paragraph)
 
         // (Goal) The user sees how to update text for a Book's start.
         static let start = Passage(
@@ -118,12 +120,9 @@ enum AppConstant {
                 """
         )
         
-        // (Goal) The user sees how to update text for a Book's end.
-        static let end = Passage(
-            isExample: true,
-            before: """
-                (Book end) 
-                
+        static let end = Example(
+            type: "Book end",
+            beforeCue: """
                 \"… teaching them to obey everything I have commanded you.\"
                 """,
             goal: """
@@ -132,16 +131,18 @@ enum AppConstant {
                 always, 
                 to the very end of the age."
                 """,
-            after: "(end)",
-            reference: """
-                A goal includes a Book's end. What's the after-cue? 
-                
-                Try "(end)."
-                
-                (example is from Matthew) (NIV)
+            afterCue: "(end)",
+            notes: """
+                (Matthew) (NIV)
+                """,
+            tip: """
+                A text includes a Book's end. What's the after-cue? 
+                            
+                Try something simple, like "(end)."
                 """
         )
-        
+        // (goal) (user sees how to update text for a Book's end)
+
         // (Goal) The user sees how to update text for a Psalm.
         static let psalm = Passage(isExample: true,
             before: """
@@ -218,10 +219,10 @@ enum AppConstant {
     // MARK: - (Info)
     enum Info {
         // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
-        static let after = "Some text after your goal. Why? To cue."
+        static let afterCue = "Some text after your goal. Why? To cue."
         
         // (Note) What's our preferred cue? Some text before the goal. (vs notation like John 3:16) (vs questions) Why? It's contextual. Not arbitrary. Less prone to interference. It scales naturally.
-        static let before = "Some text before your goal. Why? To cue."
+        static let beforeCue = "Some text before your goal. Why? To cue."
         
         static let examples = ""
         static let goal = "The text you want to know."
@@ -232,8 +233,8 @@ enum AppConstant {
     // MARK: - (Label)
     enum Label {
         static let add = "Add"
-        static let after = "After"
-        static let before = "Before"
+        static let afterCue = "After"
+        static let beforeCue = "Before"
         static let debug = "Debug"
         static let done = "Done"
         static let edit = "Edit"
@@ -243,9 +244,10 @@ enum AppConstant {
         static let help = "Help"
         static let info = "Info"
         static let know = "Know"
-        static let reference = "Reference / notes"
+        static let notes = "Reference / notes"
         static let reset = "Reset"
         static let texts = "Texts"
+        static let tip = "Tip"
         static let unknown = "Unknown"
     }
     
@@ -274,12 +276,16 @@ enum AppConstant {
         static let scrollHintPadding: CGFloat = -17
         
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let reference = 2
+        static let notes = 2
+        
+        static let tip = 2
+        // (goal) (user sees a multiline text field. She knows she can enter more than just the prompt)
+        // (note) (this is temp and a hack) (tips are for examples, so there is no editing)
     }
     
     // MARK: - (Prompt)
     enum Prompt {
-        static let after = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
+        static let afterCue = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
 
         static let goalBeats = """
             \"I am the 
@@ -298,11 +304,11 @@ enum AppConstant {
             """
         
         // (Goal) The user sees a prompt of a typical use case.
-        static let before = "\"… Neither can you bear fruit unless you remain in me.\""
+        static let beforeCue = "\"… Neither can you bear fruit unless you remain in me.\""
 
         static let goal = "\"I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.\""
         
-        static let reference = "(John) (NIV)"
+        static let notes = "(John) (NIV)"
     }
     
     // MARK: - (SFSymbol)
@@ -310,7 +316,7 @@ enum AppConstant {
         // The user sees a "+" in a rounded rectangle. Rounded rectangle is homage to Steve Jobs and the Mac. Also varies more from circle used for help.
         static let add = "plus.app.fill"
         
-        static let after = "text.line.last.and.arrowtriangle.forward"
+        static let afterCue = "text.line.last.and.arrowtriangle.forward"
         
         // Flip Image horizontally: .environment(\.layoutDirection, .rightToLeft).
         static let answer = "exclamationmark.bubble"
@@ -318,7 +324,7 @@ enum AppConstant {
         static let arrow = "arrow.right"
         
         // Not "top" or "start." (Pair with text.)
-        static let before = "text.line.first.and.arrowtriangle.forward"
+        static let beforeCue = "text.line.first.and.arrowtriangle.forward"
         
         static let brain = "brain.head.profile.fill"
         static let clarifier = "info.circle"
@@ -332,18 +338,19 @@ enum AppConstant {
         
         static let help = "questionmark.circle.fill"
         static let info = "info.circle"
+        static let notes = "text.book.closed.fill"
         static let play = "play"
         
         // Or "conversation." (use with "answer")
         static let question = "questionmark.bubble"
         
-        static let reference = "text.book.closed.fill"
         static let say = "mouth"
         
         // Or "read."
         static let see = "eye"
         
         static let tap = "hand.tap"
+        static let tip = "lightbulb.max"
     }
     
     // TODO: - when Verse et al. deprecated, remove?

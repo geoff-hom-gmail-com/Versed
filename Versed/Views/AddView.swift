@@ -10,10 +10,10 @@ struct AddView: View {
         // (Note) NavigationStack used so the dev can easily have buttons to save/reset.
         NavigationStack {
             Form {
-                TextFieldSection(.before, text: $beforeText)
+                TextFieldSection(.beforeCue, text: $beforeText)
                 TextFieldSection(.goal, text: $goalText)
-                TextFieldSection(.after, text: $afterText)
-                TextFieldSection(.reference, text: $referenceText)
+                TextFieldSection(.afterCue, text: $afterText)
+                TextFieldSection(.notes, text: $referenceText)
             }
             .toolbar {
                 // TODO: - make more browsable?

@@ -36,7 +36,7 @@ final class Passage {
     var isExample: Bool
     
     var isNew = true
-    // (Goal) The user can easily find the text she just added. 
+    // (Goal) The user can easily find the text she just added.
     
     // (Goal) The user sees listed texts in the same order. She can also reorder.
     // (Note) SwiftData does not store array order for model objects.
@@ -63,29 +63,29 @@ final class Passage {
     // MARK: - (insertExamples(modelContext:))
     // (Goal) The user can see example texts, in learning order.
     static func insertExamples(modelContext: ModelContext) {
-        // TODO: - add remaining examples, in order
-        // (also) (explain learning order here) (it's about learning how to use the app) (what to put in what field)
-        let examples = [
-            AppConstant.ExampleText.multiverse,
-//            AppConstant.ExampleText.universe,
-            AppConstant.ExampleText.start,
-            AppConstant.ExampleText.end
-        ]
-        
-        // Assign indices automatically.
-        for (index, example) in examples.enumerated() {
-            example.index = index
-        }
-        
-        examples.forEach {
-            modelContext.insert($0)
-        }
-        
-        // (Note) Not sure if needed on device. But, in Xcode preview, helps?
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to save: \(error)")
-        }
+//        // TODO: - add remaining examples, in order
+//        // (also) (explain learning order here) (it's about learning how to use the app) (what to put in what field)
+//        let examples = [
+//            AppConstant.ExampleText.multiverse,
+////            AppConstant.ExampleText.universe,
+//            AppConstant.ExampleText.start,
+//            AppConstant.ExampleText.end
+//        ]
+//        
+//        // Assign indices automatically.
+//        for (index, example) in examples.enumerated() {
+//            example.index = index
+//        }
+//        
+//        examples.forEach {
+//            modelContext.insert($0)
+//        }
+//        
+//        // (Note) Not sure if needed on device. But, in Xcode preview, helps?
+//        do {
+//            try modelContext.save()
+//        } catch {
+//            print("Failed to save: \(error)")
+//        }
     }
 }

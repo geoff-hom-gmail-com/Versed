@@ -33,10 +33,10 @@ struct TextDetail: View {
                 TextEditor(text: .constant(goalText))
             }
             
-            TextFieldSection(.before, text: .constant(beforeText))
+            TextFieldSection(.beforeCue, text: .constant(beforeText))
             TextFieldSection(.goalBeats, text: .constant(goalText))
-            TextFieldSection(.after, text: .constant(afterText))
-            TextFieldSection(.reference, text: .constant(referenceText))
+            TextFieldSection(.afterCue, text: .constant(afterText))
+            TextFieldSection(.notes, text: .constant(referenceText))
         }
         .toolbar {
             editButton

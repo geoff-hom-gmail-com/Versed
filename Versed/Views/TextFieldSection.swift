@@ -4,19 +4,19 @@ import SwiftUI
 // (Goal) The dev can make sections with a text field in a human-browsable way.
 extension TextFieldSection {
     enum SectionType {
-        case before, goal, goalBeats, after, reference
+        case beforeCue, goal, goalBeats, afterCue, notes, tip
     }
     
     // For the given type: configure.
     init(_ type: SectionType, text: Binding<String>) {
         switch type {
-        case .before:
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.before)
-            self.headerLabel = AppConstant.Label.before
-            self.infoText = AppConstant.Info.before
+        case .beforeCue:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.beforeCue)
+            self.headerLabel = AppConstant.Label.beforeCue
+            self.infoText = AppConstant.Info.beforeCue
             self.textFieldLabel = self.headerLabel
             self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.before
+            self.textFieldPrompt = AppConstant.Prompt.beforeCue
             self.textFieldLineLimit = AppConstant.LineLimit.before...AppConstant.LineLimit.max
         case .goal:
             // (Goal) The user thinks, "I start here, with my goal.
@@ -35,21 +35,30 @@ extension TextFieldSection {
             self.textFieldText = text
             self.textFieldPrompt = AppConstant.Prompt.goalBeats
             self.textFieldLineLimit = AppConstant.LineLimit.goal...AppConstant.LineLimit.max
-        case .after:
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.after)
-            self.headerLabel = AppConstant.Label.after
-            self.infoText = AppConstant.Info.after
+        case .afterCue:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.afterCue)
+            self.headerLabel = AppConstant.Label.afterCue
+            self.infoText = AppConstant.Info.afterCue
             self.textFieldLabel = self.headerLabel
             self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.after
+            self.textFieldPrompt = AppConstant.Prompt.afterCue
             self.textFieldLineLimit = AppConstant.LineLimit.after...AppConstant.LineLimit.max
-        case .reference:
-            self.headerImage = Image(systemName: AppConstant.SFSymbol.reference)
-            self.headerLabel = AppConstant.Label.reference
+        case .notes:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.notes)
+            self.headerLabel = AppConstant.Label.notes
             self.textFieldLabel = self.headerLabel
             self.textFieldText = text
-            self.textFieldPrompt = AppConstant.Prompt.reference
-            self.textFieldLineLimit = AppConstant.LineLimit.reference...AppConstant.LineLimit.max
+            self.textFieldPrompt = AppConstant.Prompt.notes
+            self.textFieldLineLimit = AppConstant.LineLimit.notes...AppConstant.LineLimit.max
+        case .tip:
+            self.headerImage = Image(systemName: AppConstant.SFSymbol.tip)
+            // todo (no image? find one?)
+            self.headerLabel = AppConstant.Label.tip
+            self.textFieldLabel = self.headerLabel
+            self.textFieldText = text
+            self.textFieldPrompt = String()
+            self.textFieldLineLimit = AppConstant.LineLimit.tip...AppConstant.LineLimit.max
+        // (todo) (if we don't do tips this way later, remove)
         }
     }
 }

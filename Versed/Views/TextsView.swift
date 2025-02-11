@@ -2,7 +2,6 @@ import SwiftUI
 import SwiftData
 
 // MARK: - (TextsView)
-// (Goal) The user can manage her texts: Parse into stanzas. Edit. Delete. See learning stats.
 
 // TODO: - The user can see at a glance how she's doing with her texts.
 // (ToDo) (Goal) The user can see at a glance how she's doing with her texts.
@@ -11,6 +10,8 @@ import SwiftData
 // Which ones are new and still need to be encoded.
 // A custom row with encoding/recite data/scores/gauges? (Understanding? Stamina? symbols? What options are there for Vstack with symbol and text? Maybe Label can already do that, or LabeledContent)
 struct TextsView: View {
+// (goal) (user can manage her texts) (parse into stanzas. Edit. Delete. See learning stats)
+
     // MARK: - (body)
     var body: some View {
         #if DEBUG
@@ -57,6 +58,7 @@ struct TextsView: View {
 
 // MARK: - (ExamplesSection)
 private struct ExamplesSection: View {
+// (goal) (user can see examples) (to properly create texts)
     // MARK: - (body)
     var body: some View {
         Section(isExpanded: $isExpanded) {
@@ -67,7 +69,6 @@ private struct ExamplesSection: View {
             }
         } header: {
             Text(AppConstant.Label.examples)
-//                .textCase(nil)
         }
         .textCase(nil)
     }
@@ -79,7 +80,6 @@ private struct ExamplesSection: View {
     // (note) (hide examples by default) (let user focus on her texts)
 
     private var examples = AppConstant.ExampleText.examples
-
 }
 
 // MARK: - (TextsSection)

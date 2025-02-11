@@ -13,10 +13,10 @@ struct EditTextView: View {
         
         // (MVP-post?) (still have a lot to do here, including differences between myText and examples) (then stats)
         Form {
-            TextFieldSection(.before, text: $beforeText)
+            TextFieldSection(.beforeCue, text: $beforeText)
             TextFieldSection(.goalBeats, text: $goalText)
-            TextFieldSection(.after, text: $afterText)
-            TextFieldSection(.reference, text: $referenceText)
+            TextFieldSection(.afterCue, text: $afterText)
+            TextFieldSection(.notes, text: $referenceText)
         }
         .onAppear {
             // (Goal) The user sees texts as "New," until seen once.
