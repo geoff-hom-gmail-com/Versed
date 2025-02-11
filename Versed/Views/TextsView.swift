@@ -19,8 +19,10 @@ struct TextsView: View {
         
         NavigationStack {
             List {
-                TextsSection(.user)
-                TextsSection(.example)
+//                 TextsSection()
+                ExamplesSection()
+//                TextsSection(.user)
+//                TextsSection(.example)
             }
             // (Goal) The user can see disclosure indicators.
             .listStyle(.sidebar)
@@ -53,6 +55,33 @@ struct TextsView: View {
 //    @Environment(\.modelContext) private var modelContext
 }
 
+// MARK: - (ExamplesSection)
+private struct ExamplesSection: View {
+    // MARK: - (body)
+    var body: some View {
+        Section(isExpanded: $isExpanded) {
+            ForEach(examples) { example in
+                NavigationLink(value: example) {
+                    Text(example.type)
+                }
+            }
+        } header: {
+            Text(AppConstant.Label.examples)
+//                .textCase(nil)
+        }
+        .textCase(nil)
+    }
+
+    // MARK: - (properties)
+
+    @State private var isExpanded = false
+    // (goal) (the user can focus) (by collapsing an unneeded section)
+    // (note) (hide examples by default) (let user focus on her texts)
+
+    private var examples = AppConstant.ExampleText.examples
+
+}
+
 // MARK: - (TextsSection)
 // (Goal) The dev can make list-sections in a human-browsable way.
 // This section has a list of texts.
@@ -60,15 +89,16 @@ private struct TextsSection: View {
     // MARK: - (body)
     var body: some View {
         Section(isExpanded: $isExpanded) {
-            ForEach(texts) { text in
-                NavigationLink(value: text) {
-                // (Goal) This NavigationLink separates the view from the data.
-                    Text(text.beforeText)
-                        .badge(text.isNew ? AppConstant.Badge.new : nil)
-                        // how does this work for example, which has no isNew?
-                        // could check for type Passage; or use separate sections
-                }
-            }
+//            ForEach(texts) { text in
+//                NavigationLink(value: text) {
+//                // (Goal) This NavigationLink separates the view from the data.
+//                    Text(text.beforeText)
+//                    // this isn't right for examples; they'll use the type not before) (
+//                        .badge(text.isNew ? AppConstant.Badge.new : nil)
+//                        // how does this work for example, which has no isNew?
+//                        // could check for type Passage; or use separate sections
+//                }
+//            }
         } header: {
             HStack {
                 Text(label)
@@ -111,22 +141,21 @@ private struct TextsSection: View {
 
     private let type: SectionType
     
+//    private var texts: [Passage] {
+//        switch type {
+//        case .user:
+//            userTexts
+//        case .example:
+//            examples
+//        }
+//    }
     // (Note) Would assign in init(_:), but can't assign property wrappers. (Xcode 16.1)
-    private var texts: [Passage] {
-        switch type {
-        case .user:
-            userTexts
-        case .example:
-            examples
-        }
-    }
-  
+    
     // (Goal) The user can see her texts, in order. (newest: top)
     @Query(filter: #Predicate<Passage> { $0.isExample == false },
            sort: \.index, order: .reverse)
     private var userTexts: [Passage]
     
-    private var examples = AppConstant.ExampleText.examples
 
     // (Goal) The user can see example texts, in learning order.
 //    @Query(filter: #Predicate<Passage> { $0.isExample == true },
