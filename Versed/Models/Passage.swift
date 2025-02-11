@@ -7,6 +7,7 @@ import SwiftData
 // (class) (SwiftData)
 @Model
 final class Passage {
+// TODO: - comment class?
     // MARK: - (init())
     // (Note) Text fields may be empty, as user can edit them later.
     init(
@@ -34,8 +35,8 @@ final class Passage {
     // (Goal) The user can see examples, to learn the app. But, she can't edit them.
     var isExample: Bool
     
-    // (Goal) The user can easily find the text she just added. And know which examples she hasn't seen.
     var isNew = true
+    // (Goal) The user can easily find the text she just added. 
     
     // (Goal) The user sees listed texts in the same order. She can also reorder.
     // (Note) SwiftData does not store array order for model objects.
@@ -66,7 +67,7 @@ final class Passage {
         // (also) (explain learning order here) (it's about learning how to use the app) (what to put in what field)
         let examples = [
             AppConstant.ExampleText.multiverse,
-            AppConstant.ExampleText.universe,
+//            AppConstant.ExampleText.universe,
             AppConstant.ExampleText.start,
             AppConstant.ExampleText.end
         ]

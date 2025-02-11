@@ -30,24 +30,27 @@ struct TextsView: View {
             .navigationDestination(for: Passage.self) {
                 TextDetail($0)
             }
+            .navigationDestination(for: Example.self) {
+                ExampleDetail($0)
+            }
             .task {
-                insertExamples()
+//                insertExamples()
             }
         }
     }
     
     // MARK: - (insertExamples())
 
-    private func insertExamples() {
-        if examples.isEmpty {
-            Passage.insertExamples(modelContext: modelContext)
-        }
-    }
-
-    @Query(filter: #Predicate<Passage> { $0.isExample == true })
-    private var examples: [Passage]
-    
-    @Environment(\.modelContext) private var modelContext
+//    private func insertExamples() {
+//        if examples.isEmpty {
+//            Passage.insertExamples(modelContext: modelContext)
+//        }
+//    }
+//
+//    @Query(filter: #Predicate<Passage> { $0.isExample == true })
+//    private var examples: [Passage]
+//    
+//    @Environment(\.modelContext) private var modelContext
 }
 
 // MARK: - (TextsSection)
@@ -57,11 +60,13 @@ private struct TextsSection: View {
     // MARK: - (body)
     var body: some View {
         Section(isExpanded: $isExpanded) {
-            ForEach(texts) { passage in
+            ForEach(texts) { text in
+                NavigationLink(value: text) {
                 // (Goal) This NavigationLink separates the view from the data.
-                NavigationLink(value: passage) {
-                    Text(passage.beforeText)
-                        .badge(passage.isNew ? AppConstant.Badge.new : nil)
+                    Text(text.beforeText)
+                        .badge(text.isNew ? AppConstant.Badge.new : nil)
+                        // how does this work for example, which has no isNew?
+                        // could check for type Passage; or use separate sections
                 }
             }
         } header: {
@@ -112,7 +117,7 @@ private struct TextsSection: View {
         case .user:
             userTexts
         case .example:
-            exampleTexts
+            examples
         }
     }
   
@@ -120,11 +125,13 @@ private struct TextsSection: View {
     @Query(filter: #Predicate<Passage> { $0.isExample == false },
            sort: \.index, order: .reverse)
     private var userTexts: [Passage]
+    
+    private var examples = AppConstant.ExampleText.examples
 
     // (Goal) The user can see example texts, in learning order.
-    @Query(filter: #Predicate<Passage> { $0.isExample == true },
-           sort: \.index)
-    private var exampleTexts: [Passage]
+//    @Query(filter: #Predicate<Passage> { $0.isExample == true },
+//           sort: \.index)
+//    private var exampleTexts: [Passage]
 }
 
 // MARK: - (preview)

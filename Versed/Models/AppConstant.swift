@@ -16,6 +16,13 @@ enum AppConstant {
     
     // MARK: - (ExampleText)
     enum ExampleText {
+        static let examples = [
+//            AppConstant.ExampleText.multiverse,
+            AppConstant.ExampleText.universe
+//            AppConstant.ExampleText.start,
+//            AppConstant.ExampleText.end
+        ]
+        
         // (Goal) The user sees how to update text for the most common example: multiple verses.
         
         // TODO: - how much longer should this example be?
@@ -54,12 +61,9 @@ enum AppConstant {
         
         // TODO: - finish/fix examples (only multi, start, end have seen prime time)
         
-        // (Goal) The user sees how to update text for a single verse/paragraph.
-        static let universe = Passage(
-            isExample: true,
+        static let universe = Example(
+            type: "(universe)",
             before: """
-                (universe) 
-                
                 \"… he calls his friends and neighbors together and says, 
                 
                 ‘Rejoice with me; 
@@ -85,7 +89,8 @@ enum AppConstant {
                 (Luke) (NIV)
                 """
         )
-        
+        // (Goal) The user sees how to update text for a single verse/paragraph.
+
         // (Goal) The user sees how to update text for a Book's start.
         static let start = Passage(
             isExample: true,
