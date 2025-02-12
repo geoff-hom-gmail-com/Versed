@@ -39,3 +39,5 @@
  
  This is related to the idea of retrieval vs review: retrieval is just better. (see: "Make It Stick")
  */
+
+// (note) (this file is here vs README.md in GitHub) (because I want it viewable in Xcode) (I like ReadMe better than README) (I don't like Markdown) (my code/comments are all in Swift files, so this will look the same)
