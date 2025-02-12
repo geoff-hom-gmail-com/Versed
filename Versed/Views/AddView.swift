@@ -56,7 +56,7 @@ struct AddView: View {
 
     private func addText() {
         var newIndex = 0
-        if let maxIndex = userTextsOrderReversed.first?.index {
+        if let maxIndex = textsOrderReversed.first?.index {
             newIndex = maxIndex + 1
         }
         // (goal) (the text has the correct index)
@@ -80,9 +80,8 @@ struct AddView: View {
         inputTexts.allSatisfy { $0.wrappedValue.isEmpty }
     }
     
-    @Query(filter: #Predicate<Passage> { $0.isExample == false },
-           sort: \.index, order: .reverse)
-    var userTextsOrderReversed: [Passage]
+    @Query(sort: \Passage.index, order: .reverse)
+    private var textsOrderReversed: [Passage]
     
     @Environment(\.modelContext) private var modelContext
     

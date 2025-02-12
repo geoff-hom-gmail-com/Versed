@@ -34,9 +34,7 @@ struct MainView: View {
         // (https://developer.apple.com/forums/thread/766000)
     }
     
-    @Query(filter: #Predicate<Passage> {
-        $0.isExample == false && $0.isNew == true
-    })
+    @Query(filter: #Predicate<Passage> { $0.isNew == true })
     private var newTexts: [Passage]
 
     // MARK: - (paragraphsDue)
@@ -48,16 +46,14 @@ struct MainView: View {
         print("paragraphsDue computed")
         // TODO: - (when working) (delete)
                 
-        let paragraphs = userTexts.flatMap { $0.paragraphs }
+        let paragraphs = texts.flatMap { $0.paragraphs }
         return paragraphs
             .filter { $0.dueDate < Date.now }
             .count
     }
     
-    @Query(filter: #Predicate<Passage> {
-        $0.isExample == false
-    })
-    private var userTexts: [Passage]
+    @Query
+    private var texts: [Passage]
 }
 
 // MARK: - (.inTab())

@@ -144,7 +144,7 @@ enum AppConstant {
         )
 
         // (Goal) The user sees how to update text for a Psalm.
-        static let psalm = Passage(isExample: true,
+        static let psalm = Passage(
             before: """
                 (Psalm) 
                 
@@ -172,7 +172,7 @@ enum AppConstant {
         static let serialMultiverse2 = ""
         
         // (Goal) The user sees how to update text for secular work.
-        static let secularLong = Passage(isExample: true,
+        static let secularLong = Passage(
             before: """
                 (secular) (long)
                 
@@ -201,7 +201,7 @@ enum AppConstant {
                 """)
         
         // (Goal) The user sees how to update text for secular work. In this case, an isolated quote. (The Bible has none.)
-        static let secularShort = Passage(isExample: true,
+        static let secularShort = Passage(
             before: """
                 (secular) (short)
                 
