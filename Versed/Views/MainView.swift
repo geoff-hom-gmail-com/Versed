@@ -1,10 +1,9 @@
 import SwiftUI
 import SwiftData
 
-// MARK: - (ContentView)
-// (Goal) The user sees the starting tab. She can go to other tabs.
-// (Note) The Xcode template calls this ContentView, so leaving as-is.
-struct ContentView: View {
+// MARK: - (MainView)
+struct MainView: View {
+// (goal) (user sees the starting tab. She can go to other tabs)
     // MARK: - (body)
     var body: some View {
         TabView {
@@ -12,17 +11,16 @@ struct ContentView: View {
             HelpView().inTab()
             AddView().inTab()
             TextsView().inTab()
-                // (Goal) The user adds a text. Then, she sees a hint where to go next.
                 .badge(ifNewTexts)
+                // (goal) (user adds a text) (she sees a hint where to go next)
             KnowView().inTab()
-                // (Goal) The user knows how many quizzes are ready.
-            
-                // TODO: - when texts edit fixed, switch
                 .badge(2)
+                // TODO: - when user can edit text, switch
 //                .badge(paragraphsDue)
-            
-            // TODO: - when reciteview deprecated, remove
+                // (goal) (user knows how many quizzes are ready)
+
 //            ReciteView().withTab()
+            // TODO: - when reciteview deprecated, remove
         }
     }
     
@@ -31,9 +29,9 @@ struct ContentView: View {
     private var ifNewTexts: Text? {
         let hasNewTexts = !newTexts.isEmpty
         
-        // (Note) For nil, use Text() not String():
-        // (bug) (https://developer.apple.com/forums/thread/766000)
         return hasNewTexts ? Text(AppConstant.Badge.new) : nil
+        // (note) (for nil) (String doesn't work) (Text does)
+        // (https://developer.apple.com/forums/thread/766000)
     }
     
     @Query(filter: #Predicate<Passage> {
@@ -43,13 +41,13 @@ struct ContentView: View {
 
     // MARK: - (badge) (paragraphs due)
     
+    private var paragraphsDue: Int {
     // TODO: - check if updates in realtime
     // (e.g. due in 10"; does it change in 10"?)
-    // (if not, set timer to check every x" and then once working, make it 60")
-    private var paragraphsDue: Int {
-        // TODO: - (when working) (delete)
+    // (if not, set timer to check every x" and then once working, make it 60")        
         print("paragraphsDue computed")
-        
+        // TODO: - (when working) (delete)
+                
         let paragraphs = userTexts.flatMap { $0.paragraphs }
         return paragraphs
             .filter { $0.dueDate < Date.now }
@@ -63,10 +61,10 @@ struct ContentView: View {
 }
 
 // MARK: - (View.inTab())
-// (Goal) The dev can make tabs in a human-browsable way.
 private extension View {
-    // Returns a tab with the view.
+// (goal) (dev can browse the calling body)
     func inTab() -> Tab<Never, Self, DefaultTabLabel> {
+    // (note) (returns a tab with the view)
         var label = AppConstant.Label.unknown
         var symbol = String()
 
@@ -95,9 +93,8 @@ private extension View {
 
 // MARK: - (preview)
 #Preview {
-    ContentView()
+    MainView()
         .modelContainer(for: Passage.self)
-
-    // TODO: - when verse deprecated, remove
 //        .modelContainer(for: [Passage.self, Verse.self])
+        // TODO: - when verse deprecated, remove
 }

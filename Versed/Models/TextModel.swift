@@ -1,6 +1,7 @@
 // MARK: - (TextModel)
 protocol TextModel {
 // (goal) (user can know a custom text)
+    // MARK: - (properties)
 
     var beforeCue: String { get }
     // (goal) (user can see a cue) (what's before her text)
