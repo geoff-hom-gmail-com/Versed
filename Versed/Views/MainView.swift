@@ -24,7 +24,7 @@ struct MainView: View {
         }
     }
     
-    // MARK: - (badge) (if new texts)
+    // MARK: - (ifNewTexts)
     
     private var ifNewTexts: Text? {
         let hasNewTexts = !newTexts.isEmpty
@@ -39,12 +39,12 @@ struct MainView: View {
     })
     private var newTexts: [Passage]
 
-    // MARK: - (badge) (paragraphs due)
+    // MARK: - (paragraphsDue)
     
     private var paragraphsDue: Int {
     // TODO: - check if updates in realtime
     // (e.g. due in 10"; does it change in 10"?)
-    // (if not, set timer to check every x" and then once working, make it 60")        
+    // (if not, set timer to check every x" and then once working, make it 60")
         print("paragraphsDue computed")
         // TODO: - (when working) (delete)
                 
@@ -60,7 +60,7 @@ struct MainView: View {
     private var userTexts: [Passage]
 }
 
-// MARK: - (View.inTab())
+// MARK: - (.inTab())
 private extension View {
 // (goal) (dev can browse the calling body)
     func inTab() -> Tab<Never, Self, DefaultTabLabel> {

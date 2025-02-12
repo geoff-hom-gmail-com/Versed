@@ -32,6 +32,7 @@ struct TextDetail: View {
     // MARK: - (editButton)
     
     private var editButton: ToolbarItem<Void, some View> {
+    // (goal) (dev can browse the calling body)
         ToolbarItem(placement: .confirmationAction) {
             Button(AppConstant.Label.edit) {
                 isShowingSheet.toggle()
@@ -45,16 +46,7 @@ struct TextDetail: View {
     // (goal) (user sees text as "New," until seen once)
         if passage.isNew {
             passage.isNew.toggle()
-            save()
-        }
-    }
-
-    private func save() {
-    // (note) (unsure if needed on device. But, in Xcode preview, helps?)
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to save: \(error)")
+            DataManager.save(modelContext)
         }
     }
     

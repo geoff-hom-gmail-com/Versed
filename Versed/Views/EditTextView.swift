@@ -22,7 +22,7 @@ struct EditTextView: View {
             // (Goal) The user sees texts as "New," until seen once.
             if passage.isNew {
                 passage.isNew = false
-                save()
+                DataManager.save(modelContext)
             }
         }
         //        .listStyle(.sidebar)
@@ -79,16 +79,7 @@ struct EditTextView: View {
     @State private var goalText: String
     @State private var afterText: String
     @State private var referenceText: String
-
-    
-    private func save() {
-        // (Note) Not sure if needed on device. But, in Xcode preview, helps.
-        do {
-            try modelContext.save()
-        } catch {
-            print("Failed to save: \(error)")
-        }
-    }
+    // todo rename
 }
 
 // MARK: - (preview)
