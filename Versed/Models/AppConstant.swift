@@ -145,7 +145,7 @@ enum AppConstant {
 
         // (Goal) The user sees how to update text for a Psalm.
         static let psalm = Passage(
-            before: """
+            beforeCue: """
                 (Psalm) 
                 
                 How does Psalm 23 start?
@@ -156,10 +156,10 @@ enum AppConstant {
                 I lack 
                 nothing.
                 """,
-            after: """
+            afterCue: """
                 He makes me lie down in green pastures …
                 """,
-            reference: """
+            notes: """
                 In most Books, the chapter numbers are arbitrary and divisive. In Psalms, it makes more sense.
                 
                 (example is from Psalm 23) (NIV)
@@ -173,7 +173,7 @@ enum AppConstant {
         
         // (Goal) The user sees how to update text for secular work.
         static let secularLong = Passage(
-            before: """
+            beforeCue: """
                 (secular) (long)
                 
                 (official) 
@@ -193,8 +193,8 @@ enum AppConstant {
                 """,
                                          // TODO: - update each with """
 
-            after: "He makes me lie down in green pastures …",
-            reference: """
+            afterCue: "He makes me lie down in green pastures …",
+            notes: """
                 This app was designed for the Bible. But secular writing can be done.
                 
                 (example is from Teddy Roosevelt)
@@ -202,7 +202,7 @@ enum AppConstant {
         
         // (Goal) The user sees how to update text for secular work. In this case, an isolated quote. (The Bible has none.)
         static let secularShort = Passage(
-            before: """
+            beforeCue: """
                 (secular) (short)
                 
                 question?
@@ -212,8 +212,8 @@ enum AppConstant {
                 never made 
                 a skilled sailor
                 """,
-            after: "",
-            reference: """
+            afterCue: "",
+            notes: """
                 This app was designed for the Bible. But secular writing can be done.
                 """)
         

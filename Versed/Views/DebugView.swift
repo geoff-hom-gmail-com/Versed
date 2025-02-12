@@ -55,7 +55,7 @@ struct DebugView: View {
     // (goal) (tester can add a user text of multiple paragraphs)
         Button("Add multiverse") {
             let text = Passage(
-                before: """
+                beforeCue: """
                     \"… Neither can you bear fruit unless you remain in me.\"
                     """,
                 goal: """
@@ -73,8 +73,8 @@ struct DebugView: View {
                     you can do 
                     nothing.\"
                     """,
-                after: "\"If you do not remain in me, you are like a branch that is thrown away and withers …\"",
-                reference: """
+                afterCue: "\"If you do not remain in me, you are like a branch that is thrown away and withers …\"",
+                notes: """
                     (John) (NIV)
                     """
             )
@@ -88,7 +88,7 @@ struct DebugView: View {
     // (goal) (tester can add a user text of one paragraph)
         Button("Add universe") {
             let text = Passage(
-                before: """
+                beforeCue: """
                     \"… he calls his friends and neighbors together and says, 
                     
                     ‘Rejoice with me; 
@@ -105,10 +105,10 @@ struct DebugView: View {
                     than over 
                     ninety-nine righteous persons …\"
                     """,
-                after: """
+                afterCue: """
                     \"… who do not need to repent.\"
                     """,
-                reference: """
+                notes: """
                     (Luke) (NIV)
                     """
             )

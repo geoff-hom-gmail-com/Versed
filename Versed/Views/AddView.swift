@@ -61,11 +61,8 @@ struct AddView: View {
         }
         // (goal) (the text has the correct index)
         
-        let passage = Passage(index: newIndex,
-                              before: beforeCue,
-                              goal: goal,
-                              after: afterCue,
-                              reference: notes)
+        let passage = Passage(index: newIndex, beforeCue: beforeCue, goal: goal,
+                              afterCue: afterCue, notes: notes)
         modelContext.insert(passage)
         DataManager.save(modelContext)
     }

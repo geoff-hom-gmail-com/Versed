@@ -30,16 +30,16 @@ final class Passage: TextModel {
     init(
     // (note) (text fields may be empty) (user can edit later)
         index: Int = 0,
-        before: String = String(),
+        beforeCue: String = String(),
         goal: String = String(),
-        after: String = String(),
-        reference: String = String()
+        afterCue: String = String(),
+        notes: String = String()
     ) {
         self.index = index
-        self.beforeCue = before
+        self.beforeCue = beforeCue
         self.goal = goal
-        self.afterCue = after
-        self.notes = reference
+        self.afterCue = afterCue
+        self.notes = notes
         
         let rawParagraphs = goal.components(separatedBy: "\n\n")
 //        print(rawParagraphs)
