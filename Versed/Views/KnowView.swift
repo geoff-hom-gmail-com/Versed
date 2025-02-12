@@ -1,8 +1,8 @@
 import SwiftUI
 
 // MARK: - (KnowView)
-// (Goal) The user can get quizzed on her texts. To know them.
 struct KnowView: View {
+// (goal) (user can get quizzed on her texts) (to know them)
     // MARK: - (body)
     var body: some View {
         Text("Know")
@@ -33,14 +33,13 @@ struct KnowView: View {
     
     private var isParagraphDue: Bool {
         false
-        // hmm examples have paragraphs, but really they don't need to
-        // and paragraphs all have due dates, unless examples have paragraphs
+        //  paragraphs all have due dates
     }
     
     // (Goal) The user can recite her most-due verse.
     // We'll get all user verses with due dates. Then, we just need the min().
 //    @Query(filter: #Predicate<Verse> {
-//        ($0.isExample == false) && ($0.dueDate != nil)
+//        $0.dueDate != nil
 //    })
 //    private var versesDueSomeday: [Verse]
     
