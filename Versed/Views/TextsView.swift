@@ -46,7 +46,7 @@ private struct TextsSection: View {
         Section(isExpanded: $isExpanded) {
             ForEach(texts) { text in
                 NavigationLink(value: text) {
-                    Text(text.beforeText)
+                    Text(text.beforeCue)
                         .badge(text.isNew ? AppConstant.Badge.new : nil)
                 }
             }

@@ -50,10 +50,10 @@ struct EditTextView: View {
 
     init(_ passage: Passage) {
         self.passage = passage
-        self.beforeText = passage.beforeText
-        self.goalText = passage.goalText
-        self.afterText = passage.afterText
-        self.referenceText = passage.referenceText
+        self.beforeText = passage.beforeCue
+        self.goalText = passage.goal
+        self.afterText = passage.afterCue
+        self.referenceText = passage.notes
     }
     
     

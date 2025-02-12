@@ -6,10 +6,10 @@ struct TextDetail: View {
     // MARK: - (body)
     var body: some View {
         Form {
-            TextFieldSection(.beforeCue, text: .constant(passage.beforeText))
-            TextFieldSection(.goalBeats, text: .constant(passage.goalText))
-            TextFieldSection(.afterCue, text: .constant(passage.afterText))
-            TextFieldSection(.notes, text: .constant(passage.referenceText))
+            TextFieldSection(.beforeCue, text: .constant(passage.beforeCue))
+            TextFieldSection(.goalBeats, text: .constant(passage.goal))
+            TextFieldSection(.afterCue, text: .constant(passage.afterCue))
+            TextFieldSection(.notes, text: .constant(passage.notes))
         }
         .toolbar {
             editButton

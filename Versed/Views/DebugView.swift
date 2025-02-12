@@ -2,8 +2,8 @@ import SwiftUI
 import AVFAudio
 
 // MARK: - (DebugView)
-// (Goal) The dev and tester can tweak stuff.
 struct DebugView: View {
+// (goal) (dev and tester can tweak stuff)
     // MARK: - (body)
     var body: some View {
         Spacer()
@@ -35,22 +35,24 @@ struct DebugView: View {
     
     // MARK: - (buttons)
 
-    // (Goal) The coder can delete all persistent data without going thru Terminal and deleting all preview data. Latter takes 30" to rebuild.
     @ViewBuilder
     private var deleteDataButton: some View {
+    // (goal) (dev can delete all persistent data without going thru Terminal and deleting all preview data. Latter takes 30" to rebuild)
+    // (note) (if model changes) (need to go thru Terminal) (xcrun simctl --set previews delete all)
         Button("Delete all persistent data") {
             do {
-                // Works. But preview may crash.
                 try modelContext.container.erase()
+                // (works) (but preview may crash)
             } catch {
                 print(".erase() failed: \(error)")
             }
+            DataManager.save(modelContext)
         }
     }
 
-    // (Goal) The tester can add a user text of multiple paragraphs.
     @ViewBuilder
     private var addMultiverseButton: some View {
+    // (goal) (tester can add a user text of multiple paragraphs)
         Button("Add multiverse") {
             let text = Passage(
                 before: """
@@ -77,12 +79,13 @@ struct DebugView: View {
                     """
             )
             modelContext.insert(text)
+            DataManager.save(modelContext)
         }
     }
     
-    // (Goal) The tester can add a user text of one paragraph.
     @ViewBuilder
     private var addUniverseButton: some View {
+    // (goal) (tester can add a user text of one paragraph)
         Button("Add universe") {
             let text = Passage(
                 before: """
@@ -110,6 +113,7 @@ struct DebugView: View {
                     """
             )
             modelContext.insert(text)
+            DataManager.save(modelContext)
         }
     }
 

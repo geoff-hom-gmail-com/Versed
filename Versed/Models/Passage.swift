@@ -20,10 +20,10 @@ final class Passage {
     ) {
         self.isExample = isExample
         self.index = index
-        self.beforeText = before
-        self.goalText = goal
-        self.afterText = after
-        self.referenceText = reference
+        self.beforeCue = before
+        self.goal = goal
+        self.afterCue = after
+        self.notes = reference
         
         let rawParagraphs = goal.components(separatedBy: "\n\n")
 //        print(rawParagraphs)
@@ -43,18 +43,18 @@ final class Passage {
     var index: Int
     
     // (Goal) The user can see a cue: what's before her text.
-    var beforeText: String
+    var beforeCue: String
     
     // TODO: - (user can style text to help learn)
     // (e.g., bold, italic) (any part, not just all or none)
     // (Goal) The user can learn a text of arbitrary length. With arbitrary formatting / line breaks.
-    var goalText: String
+    var goal: String
     
     // (Goal) The user can see a cue: what's after her text.
-    var afterText: String
+    var afterCue: String
     
     // (Goal) The user can make notes about her text. Including the source/reference.
-    var referenceText: String
+    var notes: String
     
     // (Goal) The user can be quizzed on each paragraph in a text, independently.
     @Relationship(deleteRule: .cascade)
