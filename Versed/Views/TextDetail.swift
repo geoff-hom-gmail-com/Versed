@@ -1,42 +1,15 @@
 import SwiftUI
 
 // MARK: - (TextDetail)
-// (Goal) The user can see learning stats. She can also edit the text.
 struct TextDetail: View {
+// (goal) (user can see a text) (she can access stats) (she can access editing)
     // MARK: - (body)
     var body: some View {
-        // TODO: - (The user can view text, but to edit it, has to tap button.)
-        // (ToDo) (Goal) The user knows that text here can't be edited. Need to open sheet for that.
-        // Haven't found an ideal solution yet.
-        // For now, using a constant binding.
-        // How can we design our way out of this? Wait until ready to tackle stats view here? What's MVP?
-        // Issues:
-        // - (disabling TextField or TextEditor disables scrolling)
-        // - (constant binding on TextField still allows text to be entered, just not saved) (though no newlines)
-        // - (constant binding on TextEditor still shows cursor, and presumably keyboard)
-        // - (Text in ScrollView works, but not sure how to set frame height in a robust way) (GeometryReader?)
-        // - (Only TextField has placeholder built-in) (would need fake gray placeholders)
-        // - (need to include headers) (while keeping code browsable/DRY)
-        // - (probably do on-device testing to make sure scrolling is acceptable)
         Form {
-            // temp example with Text()
-            ScrollView {
-                Text(goalText)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            // todo; not fond of how it's just a number vs number of lines
-            .frame(maxHeight: 200)
-            
-            // temp example with TextEditor()
-            // this also has some arbitrary default height of like 9 lines
-            Section {
-                TextEditor(text: .constant(goalText))
-            }
-            
-            TextFieldSection(.beforeCue, text: .constant(beforeText))
-            TextFieldSection(.goalBeats, text: .constant(goalText))
-            TextFieldSection(.afterCue, text: .constant(afterText))
-            TextFieldSection(.notes, text: .constant(referenceText))
+            TextFieldSection(.beforeCue, text: .constant(passage.beforeText))
+            TextFieldSection(.goalBeats, text: .constant(passage.goalText))
+            TextFieldSection(.afterCue, text: .constant(passage.afterText))
+            TextFieldSection(.notes, text: .constant(passage.referenceText))
         }
         .toolbar {
             editButton
@@ -44,32 +17,16 @@ struct TextDetail: View {
         .onAppear {
             unNew()
         }
-        // TODO: - add .sheet()
-    }
-    
-    // MARK: - (init(_:))
-    init(_ passage: Passage) {
-        self.passage = passage
-        self.beforeText = passage.beforeText
-        self.goalText = passage.goalText
-        self.afterText = passage.afterText
-        self.referenceText = passage.referenceText
+        // TODO: - add .sheet() to edit
+        // TODO: - (The user can view text, but to edit it, has to tap button.)
+        // (ToDo) (Goal) The user knows that text here can't be edited. Need to open sheet for that.
+        // (figure out how to have scrollable, non-editable text with limited height) (see ExampleDetail)
     }
     
     // MARK: - (properties)
     
-    // todo may not even need/want bindable
-    // we pass in passage, and then it gets edited but with temp vars
-    // if usre taps done/update, then we update/replace
-    // that should work for passage.before/after/ref. goalText is trickier
-    // Will have to do a calc in Passage to compare old and new goalText, or really old and new Paragraphs. Old ones keep interval data.
-    @Bindable var passage: Passage
-    
-    private var beforeText: String
-    private var goalText: String
-    private var afterText: String
-    private var referenceText: String
-    
+    private var passage: Passage
+
     @State private var isShowingSheet = false
 
     // MARK: - (editButton)
@@ -84,8 +41,8 @@ struct TextDetail: View {
     
     // MARK: - (unNew())
     
-    // (Goal) The user sees text as "New," until seen once.
     private func unNew() {
+    // (goal) (user sees text as "New," until seen once)
         if passage.isNew {
             passage.isNew.toggle()
             save()
@@ -93,7 +50,7 @@ struct TextDetail: View {
     }
 
     private func save() {
-        // (Note) Not sure if needed on device. But, in Xcode preview, helps.
+    // (note) (unsure if needed on device. But, in Xcode preview, helps?)
         do {
             try modelContext.save()
         } catch {
@@ -102,6 +59,11 @@ struct TextDetail: View {
     }
     
     @Environment(\.modelContext) private var modelContext
+    
+    // MARK: - (init(_:))
+    init(_ passage: Passage) {
+        self.passage = passage
+    }
 }
 
 // MARK: - (preview)
