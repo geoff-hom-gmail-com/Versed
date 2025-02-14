@@ -1,13 +1,12 @@
 import SwiftUI
+import SwiftData
 
 // MARK: - (KnowView)
 struct KnowView: View {
 // (goal) (user can get quizzed on her texts) (to know them)
     // MARK: - (body)
     var body: some View {
-        Text("Know")
-        // use opacity instead of if/then?
-        // what's most browsable?
+//        Text("Know")
         // how many paragraphs due?
         // if zero, show view for when next one is due
         
@@ -22,29 +21,29 @@ struct KnowView: View {
         
         // so try just jumping into most-due quiz
         // so it's a bool; isParagraphDue (computed or not?)
-        if isParagraphDue {
-//            QuizView()
+        if isAnyParagraphDue {
+            QuizView()
         } else {
-//            WhenIsNextDueView()
+            WhenNextView()
         }
     }
     
     // MARK: - (??)
     
-    private var isParagraphDue: Bool {
-        false
-        //  paragraphs all have due dates
+    private var isAnyParagraphDue: Bool {
+        print("(KnowView) (isAnyParagraphDue) \(Date.now)")
+        // (note) (when a passage is added) (this is called x4) (not sure why)
+        // (but at least it's not called continuously)
+        // TODO: - (what about when a passage is updated? when it's paragraphs are updated?)
+        
+        let mostDue = paragraphs.min { $0.dueDate < $1.dueDate }
+        return mostDue?.dueDate ?? Date.distantFuture < Date.now
     }
     
-    // (Goal) The user can recite her most-due verse.
-    // We'll get all user verses with due dates. Then, we just need the min().
-//    @Query(filter: #Predicate<Verse> {
-//        $0.dueDate != nil
-//    })
-//    private var versesDueSomeday: [Verse]
+    @Query
+    private var paragraphs: [Paragraph]
     
-    @Environment(\.modelContext) private var modelContext
-
+//    @Environment(\.modelContext) private var modelContext
 }
 
 // MARK: - (preview)

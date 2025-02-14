@@ -42,7 +42,7 @@ final class Passage: TextModel {
         self.notes = notes
         
         let rawParagraphs = goal.components(separatedBy: "\n\n")
-//        print(rawParagraphs)
+//        print("(Passage) (rawParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
         self.paragraphs = rawParagraphs.map { Paragraph($0) }
     }
 }

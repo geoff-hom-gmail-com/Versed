@@ -13,7 +13,9 @@ struct DebugView: View {
         Spacer()
         addUniverseButton
         Spacer()
-        
+        addUniverseDistantFutureButton
+        Spacer()
+
 //        // (Goal) The coder can add a user verse with a distant due date.
 //        let verse = Verse("A message from the future", dueDate: Date.distantFuture)
 //
@@ -52,7 +54,7 @@ struct DebugView: View {
 
     @ViewBuilder
     private var addMultiverseButton: some View {
-    // (goal) (tester can add a user text of multiple paragraphs)
+    // (goal) (tester can add user text of multiple paragraphs)
         Button("Add multiverse") {
             let text = Passage(
                 beforeCue: """
@@ -85,37 +87,56 @@ struct DebugView: View {
     
     @ViewBuilder
     private var addUniverseButton: some View {
-    // (goal) (tester can add a user text of one paragraph)
+    // (goal) (tester can add user text of one paragraph)
         Button("Add universe") {
-            let text = Passage(
-                beforeCue: """
-                    \"… he calls his friends and neighbors together and says, 
-                    
-                    ‘Rejoice with me; 
-                    I have found my lost sheep.’ 
-                    
-                    I tell you 
-                    that in the same way …\"
-                    """,
-                goal: """
-                    \"… there will be more 
-                    rejoicing in heaven 
-                    over
-                    one sinner who repents 
-                    than over 
-                    ninety-nine righteous persons …\"
-                    """,
-                afterCue: """
-                    \"… who do not need to repent.\"
-                    """,
-                notes: """
-                    (Luke) (NIV)
-                    """
-            )
-            modelContext.insert(text)
+//            print("(DebugView) (addUni) \(uniPassage.paragraphs.first?.dueDate)")
+            modelContext.insert(uniPassage)
             DataManager.save(modelContext)
         }
     }
+    
+    @ViewBuilder
+    private var addUniverseDistantFutureButton: some View {
+    // (goal) (tester can add user text of one paragraph) (due date: distant future)
+        Button("Add universe: distant future") {
+            uniPassage.paragraphs.forEach {
+                $0.dueDate = Date.distantFuture
+            }
+            modelContext.insert(uniPassage)
+            DataManager.save(modelContext)
+//            print("(DebugView) (addUniFuture) \(uniPassage.paragraphs.first?.dueDate)")
+            // (note) (we're changing uniPassage) (a SwiftData instance)
+            // (but after .insert(), something weird happens)
+            // (it's like after auto-saving, calls to uniPassage return a new one)
+            // (anyway, this is just for debugging)
+        }
+    }
+    
+    private let uniPassage = Passage(
+        beforeCue: """
+            \"… he calls his friends and neighbors together and says, 
+            
+            ‘Rejoice with me; 
+            I have found my lost sheep.’ 
+            
+            I tell you 
+            that in the same way …\"
+            """,
+        goal: """
+            \"… there will be more 
+            rejoicing in heaven 
+            over
+            one sinner who repents 
+            than over 
+            ninety-nine righteous persons …\"
+            """,
+        afterCue: """
+            \"… who do not need to repent.\"
+            """,
+        notes: """
+            (Luke) (NIV)
+            """
+    )
 
     @Environment(\.modelContext) private var modelContext
 }
