@@ -22,9 +22,10 @@ final class Passage: TextModel {
     var afterCue: String
     var notes: String
     
-    @Relationship(deleteRule: .cascade)
-    var paragraphs: [Paragraph]
+    @Relationship(deleteRule: .cascade, inverse: \Paragraph.passage)
+    var paragraphs: [Paragraph] = [Paragraph]()
     // (goal) (user can be quizzed on each paragraph in a text) (independently)
+    // (note) (default value) (so in init(), we can pass self)
 
     // MARK: - (init())
     init(
@@ -43,6 +44,10 @@ final class Passage: TextModel {
         
         let rawParagraphs = goal.components(separatedBy: "\n\n")
 //        print("(Passage) (rawParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
-        self.paragraphs = rawParagraphs.map { Paragraph($0) }
+        
+        self.paragraphs = rawParagraphs.map { Paragraph(passage: self, text: $0) }
+        
+//        self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+        // (note) (keep) (if Paragraph.passage optional)
     }
 }
