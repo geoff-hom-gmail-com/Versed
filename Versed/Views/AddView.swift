@@ -23,12 +23,6 @@ struct AddView: View {
         }
     }
     
-    // MARK: - (text properties)
-    @State private var beforeCue: String = ""
-    @State private var goal: String = ""
-    @State private var afterCue: String = ""
-    @State private var notes: String = ""
-
     // MARK: - (buttons)
     
     private var resetButton: ToolbarItem<Void, some View> {
@@ -86,6 +80,12 @@ struct AddView: View {
     // (note) (why not [String]?) (doesn't work in reset())
         [$beforeCue, $goal, $afterCue, $notes]
     }
+    
+    // MARK: - (text properties)
+    @State private var beforeCue: String = ""
+    @State private var goal: String = ""
+    @State private var afterCue: String = ""
+    @State private var notes: String = ""
 }
 
 // MARK: - (preview)

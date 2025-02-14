@@ -12,10 +12,35 @@ struct QuizView: View {
                 Text("\n…\n")
                 Text(paragraph.passage.afterCue)
             }
+            HStack {
+                sayButton
+                Spacer()
+                typeButton
+            }
         }
     }
     
-    // MARK: - (??)
+    // MARK: - (buttons)
+    
+    @ViewBuilder
+    private var sayButton: some View {
+    // (goal) (user can choose easily to say her answer)
+    // (note) (buttons vs picker) (want to encourage user to try different inputs occasionally) (alt button is tap x1) (alt pick is tap x2)
+        Button("Say", systemImage: AppConstant.SFSymbol.say) {
+            
+        }
+        
+    }
+    
+    @ViewBuilder
+    private var typeButton: some View {
+    // (goal) (user can choose easily to type her answer)
+        Button("Type") {
+            
+        }
+    }
+
+    // MARK: - (paragraph)
 
     private var paragraph: Paragraph? {
         print("(QuizView) (paragraph)")
