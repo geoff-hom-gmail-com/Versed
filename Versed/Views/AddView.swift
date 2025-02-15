@@ -82,10 +82,10 @@ struct AddView: View {
     }
     
     // MARK: - (text properties)
-    @State private var beforeCue: String = ""
-    @State private var goal: String = ""
-    @State private var afterCue: String = ""
-    @State private var notes: String = ""
+    @State private var beforeCue = String()
+    @State private var goal = String()
+    @State private var afterCue = String()
+    @State private var notes = String()
 }
 
 // MARK: - (preview)

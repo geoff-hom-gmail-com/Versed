@@ -6,21 +6,21 @@ struct QuizView: View {
 // (goal) (user can get quizzed on the paragraph most due)
     // MARK: - (body)
     var body: some View {
-        if let paragraph = paragraph {
-            VStack(alignment: .leading) {
-                Text(paragraph.passage.beforeCue)
-                Text("\n…\n")
-                Text(paragraph.passage.afterCue)
-            }
-            HStack {
-                sayButton
-                Spacer()
-                typeButton
-            }
+        VStack(alignment: .leading) {
+            Text(paragraph.passage.beforeCue)
+            Text("\n…\n")
+            Text(paragraph.passage.afterCue)
         }
+        HStack {
+            sayButton
+            Spacer()
+            typeButton
+        }
+        inputTextField
+        checkButton
     }
     
-    // MARK: - (buttons)
+    // MARK: - (layout) (other)
     
     @ViewBuilder
     private var sayButton: some View {
@@ -36,19 +36,34 @@ struct QuizView: View {
     private var typeButton: some View {
     // (goal) (user can choose easily to type her answer)
         Button("Type") {
+            // show text field for input
+            // and a compare button (so is it always there but hidden/transp?
+        }
+    }
+    
+    @ViewBuilder
+    private var inputTextField: some View {
+        TextField("input", text: $input)
+    }
+    
+    @ViewBuilder
+    private var checkButton: some View {
+    // (goal) (??)
+        Button("Check") {
             
         }
     }
 
     // MARK: - (paragraph)
 
-    private var paragraph: Paragraph? {
-        print("(QuizView) (paragraph)")
-        return paragraphs.min { $0.dueDate < $1.dueDate }
-    }
     
-    @Query
-    private var paragraphs: [Paragraph]
-    // TODO: - (after quizzing works) (see how many times called when a text is added/updated)
-    // as long as it doesn't call the compute too often we're fine
+    // MARK: - (?)
+
+    private var paragraph: Paragraph
+    
+    @State private var input = String()
+    
+    init(_ paragraph: Paragraph) {
+        self.paragraph = paragraph
+    }
 }

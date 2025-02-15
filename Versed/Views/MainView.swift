@@ -33,6 +33,7 @@ struct MainView: View {
         // (note) (for nil) (String doesn't work) (Text does)
         // (https://developer.apple.com/forums/thread/766000)
     }
+    // (note) (a badge update causes all tabs to be redone) (x2) (Xcode 16.1)
     
     @Query(filter: #Predicate<Passage> { $0.isNew == true })
     private var newTexts: [Passage]
@@ -68,6 +69,7 @@ private extension View {
         case is DebugView:
             label = AppConstant.Label.debug
         case is HelpView:
+//            print("(MainView) (inTab) (HelpView) \(Date.now)")
             label = AppConstant.Label.help
             symbol = AppConstant.SFSymbol.help
         case is AddView:
@@ -82,7 +84,7 @@ private extension View {
         default:
             symbol = String()
         }
-        
+
         return Tab(label, systemImage: symbol) { self }
     }
 }
