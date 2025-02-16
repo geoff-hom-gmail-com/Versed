@@ -17,6 +17,7 @@ struct TextDetail: View {
         .onAppear {
             unNew()
         }
+        .scrollDismissesKeyboard(.immediately)
         .sheet(isPresented: $isShowingSheet) {
             // TODO: - add .sheet() to edit
         }

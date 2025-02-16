@@ -8,12 +8,14 @@ struct QuizView: View {
     var body: some View {
         Form {
             Section() {
+            // (note) (form section why?) (consistentcy) (e.g., with TextDetail)
                 beforeCue
                 answerHStack
                 afterCue
                 checkButton
             }
         }
+        .scrollDismissesKeyboard(.immediately)
     }
     
     // MARK: - (layout) (next level)
@@ -37,7 +39,6 @@ struct QuizView: View {
         // (goal) (user associates row with adjacents) (visually)
     }
     
-    
     @ViewBuilder
     private var afterCue: some View {
         Text(paragraph.passage.afterCue)
@@ -45,14 +46,13 @@ struct QuizView: View {
     
     @ViewBuilder
     private var checkButton: some View {
-    // (goal) (user can check her answer)
         Button("Check") {
             withAnimation {
                 isCheckingAnswer.toggle()
             }
         }
         .frame(maxWidth: .infinity)
-        // (goal) (user sees this in center)
+        // (goal) (user sees view in center)
         
         //        .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
         // (goal) (align to edge, not text)
@@ -75,25 +75,6 @@ struct QuizView: View {
         Text(paragraph.text)
         // TODO: - (for merge quiz, fix)
     }
-    
-        
-    //    @ViewBuilder
-    //    private var sayButton: some View {
-    //    // (goal) (user can choose easily to say her answer)
-    //    // (note) (buttons vs picker) (want to encourage user to try different inputs occasionally) (alt button is tap x1) (alt pick is tap x2)
-    //        // (it's possible that we won't even need two buttons, and the user will choose by how they work with the text field)
-    //        Button("Say", systemImage: AppConstant.SFSymbol.say) {
-    //        }
-    //    }
-    //
-    //    @ViewBuilder
-    //    private var typeButton: some View {
-    //    // (goal) (user can choose easily to type her answer)
-    //        Button("Type") {
-    //            // show text field for input
-    //            // and a compare button (so is it always there but hidden/transp?
-    //        }
-    //    }
     
     // MARK: - (misc)
 
