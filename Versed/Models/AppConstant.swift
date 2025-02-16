@@ -355,6 +355,7 @@ enum AppConstant {
         
         static let tap = "hand.tap"
         static let tip = "lightbulb.max"
+        static let yes = "hand.thumbsup"
     }
     
     // TODO: - when Verse et al. deprecated, remove?

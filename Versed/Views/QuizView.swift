@@ -14,6 +14,32 @@ struct QuizView: View {
                 afterCue
                 checkButton
             }
+            
+            if isCheckingAnswer {
+                Section() {
+                    HStack {
+                        Text("Mistakes fixed?")
+                        Button(String(), systemImage: AppConstant.SFSymbol.yes) {
+                            
+                        }
+                        // TODO: - (one-time animation/feedback? brain)
+                    }
+                    HStack {
+                        Text("Score:")
+                        Button("Good") {
+                            
+                        }
+                        .buttonStyle(.bordered)
+                        Button("Fail") {
+                            
+                        }
+                        .buttonStyle(.bordered)
+                        // TODO: - (user taps score) (next quiz)
+                    }
+                    .listRowSeparator(.hidden)
+                }
+            }
+            
         }
         .scrollDismissesKeyboard(.immediately)
     }
@@ -65,7 +91,7 @@ struct QuizView: View {
         TextField(
             "input",
             text: $input,
-            prompt: Text("(speak or type)"),
+            prompt: Text("(dictate or type)"),
             axis: .vertical)
         .lineLimit(5...7)
     }
