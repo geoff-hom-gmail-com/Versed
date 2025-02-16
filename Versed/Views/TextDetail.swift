@@ -17,7 +17,9 @@ struct TextDetail: View {
         .onAppear {
             unNew()
         }
-        // TODO: - add .sheet() to edit
+        .sheet(isPresented: $isShowingSheet) {
+            // TODO: - add .sheet() to edit
+        }
         // TODO: - (The user can view text, but to edit it, has to tap button.)
         // (ToDo) (Goal) The user knows that text here can't be edited. Need to open sheet for that.
         // (figure out how to have scrollable, non-editable text with limited height) (see ExampleDetail)

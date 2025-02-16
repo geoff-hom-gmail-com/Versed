@@ -9,24 +9,57 @@ struct QuizView: View {
         Form {
             Section() {
                 beforeCue
-                inputTextField
+                answerHStack
                 afterCue
                 checkButton
             }
         }
-//        .sheet(isPresented: $isShowingSheet) {
-////            CompareView()
-//        }
     }
     
-    // MARK: - (layout) (other)
+    // MARK: - (layout) (next level)
     
     @ViewBuilder
     private var beforeCue: some View {
         Text(paragraph.passage.beforeCue)
-//        Text(paragraph.passage.beforeCue + "\n")
     }
     
+    @ViewBuilder
+    private var answerHStack: some View {
+    // (goal) (user can input answer) (she can check answer)
+        HStack {
+            inputTextField
+            if isCheckingAnswer {
+                goal
+                    .transition(.move(edge: .trailing))
+            }
+        }
+        .listRowSeparator(.hidden)
+        // (goal) (user associates row with adjacents) (visually)
+    }
+    
+    
+    @ViewBuilder
+    private var afterCue: some View {
+        Text(paragraph.passage.afterCue)
+    }
+    
+    @ViewBuilder
+    private var checkButton: some View {
+    // (goal) (user can check her answer)
+        Button("Check") {
+            withAnimation {
+                isCheckingAnswer.toggle()
+            }
+        }
+        .frame(maxWidth: .infinity)
+        // (goal) (user sees this in center)
+        
+        //        .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
+        // (goal) (align to edge, not text)
+    }
+    
+    // MARK: - (layout) (next level)
+
     @ViewBuilder
     private var inputTextField: some View {
         TextField(
@@ -35,31 +68,14 @@ struct QuizView: View {
             prompt: Text("(speak or type)"),
             axis: .vertical)
         .lineLimit(5...7)
-        
-        .listRowSeparator(.hidden)
-        // (goal) (user associates this with adjacent elements) (visually)
     }
     
     @ViewBuilder
-    private var afterCue: some View {
-        Text(paragraph.passage.afterCue)
-//        Text("\n" + paragraph.passage.afterCue)
+    private var goal: some View {
+        Text(paragraph.text)
+        // TODO: - (for merge quiz, fix)
     }
     
-    @ViewBuilder
-    private var checkButton: some View {
-    // (goal) (user can compare her answer)
-        Button("Check") {
-//            isShowingSheet.toggle()
-        }
-        .frame(maxWidth: .infinity)
-        // (goal) (user sees this in center)
-        
-        //        .listRowSeparator(.hidden)
-        
-        //        .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
-        // (goal) (align to edge, not text)
-    }
         
     //    @ViewBuilder
     //    private var sayButton: some View {
@@ -78,10 +94,6 @@ struct QuizView: View {
     //            // and a compare button (so is it always there but hidden/transp?
     //        }
     //    }
-        
-
-    // MARK: - (??)
-
     
     // MARK: - (misc)
 
@@ -89,7 +101,7 @@ struct QuizView: View {
     
     @State private var input = String()
     
-//    @State private var isShowingSheet = false
+    @State private var isCheckingAnswer = false
     
     // MARK: - (init())
 
