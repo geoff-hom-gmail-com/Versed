@@ -8,40 +8,24 @@ struct QuizView: View {
     var body: some View {
         Form {
             Section() {
-                Text(paragraph.passage.beforeCue + "\n")
+                beforeCue
                 inputTextField
-                    .listRowSeparator(.hidden, edges: .bottom)
-                    // (goal) (user associates this with next element) (visually)
+                afterCue
                 checkButton
-                    .frame(maxWidth: .infinity)
-                    // (goal) (user sees this in center)
-                
-                    .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
-                    // (goal) (align to edge, not text)
-                Text("\n" + paragraph.passage.afterCue)
             }
         }
+//        .sheet(isPresented: $isShowingSheet) {
+////            CompareView()
+//        }
     }
     
     // MARK: - (layout) (other)
     
-//    @ViewBuilder
-//    private var sayButton: some View {
-//    // (goal) (user can choose easily to say her answer)
-//    // (note) (buttons vs picker) (want to encourage user to try different inputs occasionally) (alt button is tap x1) (alt pick is tap x2)
-//        // (it's possible that we won't even need two buttons, and the user will choose by how they work with the text field)
-//        Button("Say", systemImage: AppConstant.SFSymbol.say) {
-//        }
-//    }
-//    
-//    @ViewBuilder
-//    private var typeButton: some View {
-//    // (goal) (user can choose easily to type her answer)
-//        Button("Type") {
-//            // show text field for input
-//            // and a compare button (so is it always there but hidden/transp?
-//        }
-//    }
+    @ViewBuilder
+    private var beforeCue: some View {
+        Text(paragraph.passage.beforeCue)
+//        Text(paragraph.passage.beforeCue + "\n")
+    }
     
     @ViewBuilder
     private var inputTextField: some View {
@@ -49,28 +33,66 @@ struct QuizView: View {
             "input",
             text: $input,
             prompt: Text("(speak or type)"),
-            // TODO: - (prompt?)
             axis: .vertical)
-        .lineLimit(3...7)
+        .lineLimit(5...7)
+        
+        .listRowSeparator(.hidden)
+        // (goal) (user associates this with adjacent elements) (visually)
+    }
+    
+    @ViewBuilder
+    private var afterCue: some View {
+        Text(paragraph.passage.afterCue)
+//        Text("\n" + paragraph.passage.afterCue)
     }
     
     @ViewBuilder
     private var checkButton: some View {
     // (goal) (user can compare her answer)
         Button("Check") {
-            
+//            isShowingSheet.toggle()
         }
+        .frame(maxWidth: .infinity)
+        // (goal) (user sees this in center)
+        
+        //        .listRowSeparator(.hidden)
+        
+        //        .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
+        // (goal) (align to edge, not text)
     }
+        
+    //    @ViewBuilder
+    //    private var sayButton: some View {
+    //    // (goal) (user can choose easily to say her answer)
+    //    // (note) (buttons vs picker) (want to encourage user to try different inputs occasionally) (alt button is tap x1) (alt pick is tap x2)
+    //        // (it's possible that we won't even need two buttons, and the user will choose by how they work with the text field)
+    //        Button("Say", systemImage: AppConstant.SFSymbol.say) {
+    //        }
+    //    }
+    //
+    //    @ViewBuilder
+    //    private var typeButton: some View {
+    //    // (goal) (user can choose easily to type her answer)
+    //        Button("Type") {
+    //            // show text field for input
+    //            // and a compare button (so is it always there but hidden/transp?
+    //        }
+    //    }
+        
 
-    // MARK: - (paragraph)
+    // MARK: - (??)
 
     
-    // MARK: - (?)
+    // MARK: - (misc)
 
     private var paragraph: Paragraph
     
     @State private var input = String()
     
+//    @State private var isShowingSheet = false
+    
+    // MARK: - (init())
+
     init(_ paragraph: Paragraph) {
         self.paragraph = paragraph
     }
