@@ -7,6 +7,11 @@ enum AppConstant {
         static let new = "New"
     }
     
+    // MARK: - (Date)
+    enum Date {
+        static let daySeconds: TimeInterval = 86400
+    }
+    
     // MARK: - (Emoji)
     enum Emoji {
 //        static let goalNet = "🥅"
