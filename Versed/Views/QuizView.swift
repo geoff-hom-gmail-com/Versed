@@ -8,7 +8,7 @@ struct QuizView: View {
     var body: some View {
         Form {
             Section() {
-            // (note) (form section why?) (consistentcy) (e.g., with TextDetail)
+            // (note) (form section: why?) (consistentcy) (e.g., with TextDetail)
                 beforeCue
                 answerHStack
                 afterCue
@@ -17,29 +17,9 @@ struct QuizView: View {
             
             if isCheckingAnswer {
                 Section() {
-                    HStack {
-                        Text("Mistakes fixed?")
-                        Button(String(), systemImage: AppConstant.SFSymbol.yes) {
-                            
-                        }
-                        // TODO: - (one-time animation/feedback? brain)
-                    }
-                    HStack {
-                        Text("Score:")
-                        Button("Good") {
-                            
-                        }
-                        .buttonStyle(.bordered)
-                        Button("Fail") {
-                            
-                        }
-                        .buttonStyle(.bordered)
-                        // TODO: - (user taps score) (next quiz)
-                    }
-                    .listRowSeparator(.hidden)
+                    feedbackView
                 }
             }
-            
         }
         .scrollDismissesKeyboard(.immediately)
     }
@@ -72,16 +52,36 @@ struct QuizView: View {
     
     @ViewBuilder
     private var checkButton: some View {
-        Button("Check") {
+        Button(AppConstant.Label.check) {
             withAnimation {
                 isCheckingAnswer.toggle()
             }
         }
         .frame(maxWidth: .infinity)
         // (goal) (user sees view in center)
+    }
+    
+    @ViewBuilder
+    private var feedbackView: some View {
+        Toggle(AppConstant.Label.mistakesFixed, isOn: $areMistakesFixed)
+        // (goal) (user is encouraged/reminded to fix her mistakes) (helps retrieval)
+        // (note) (.checkbox style isn't available in iOS) (Xcode 16.1) (which is asinine) (when available, switch) (pun)
+        // (yes, we could code our own) (https://sarunw.com/posts/swiftui-checkbox/)
         
-        //        .alignmentGuide(.listRowSeparatorLeading) { $0[.leading] }
-        // (goal) (align to edge, not text)
+        HStack {
+            Text(AppConstant.Label.quizFeedback)
+            Button(String(), systemImage: AppConstant.SFSymbol.yes) {
+                paragraph.updateDueDate(feedback: .good)
+            }
+            .buttonStyle(.bordered)
+            Button(String(), systemImage: AppConstant.SFSymbol.retry) {
+                paragraph.updateDueDate(feedback: .retry)
+            }
+            .buttonStyle(.bordered)
+            // TODO: - check buttons same size; center as needed
+            // TODO: - (user taps score) (next quiz)
+        }
+        .listRowSeparator(.hidden)
     }
     
     // MARK: - (views) (next level)
@@ -107,8 +107,8 @@ struct QuizView: View {
     private var paragraph: Paragraph
     
     @State private var input = String()
-    
     @State private var isCheckingAnswer = false
+    @State private var areMistakesFixed = false
     
     // MARK: - (init())
 

@@ -1,8 +1,7 @@
-// (Note) May not need this import, technically. But then we lose pinned preview. (Xcode 16.1)
 import SwiftUI
 
-// (Goal) The dev can edit constants DRY-ly.
 enum AppConstant {
+// (goal) (dev can edit constants DRY-ly)
     // MARK: - (Badge)
     enum Badge {
         static let new = "New"
@@ -239,6 +238,7 @@ enum AppConstant {
         static let add = "Add"
         static let afterCue = "After"
         static let beforeCue = "Before"
+        static let check = "Check"
         static let debug = "Debug"
         static let done = "Done"
         static let edit = "Edit"
@@ -248,7 +248,12 @@ enum AppConstant {
         static let help = "Help"
         static let info = "Info"
         static let know = "Know"
+        static let mistakesFixed = "Mistakes fixed?"
         static let notes = "Reference / notes"
+        
+        static let quizFeedback = "How'd it go?"
+        // (goal) (app can request quiz feedback from user)
+        
         static let reset = "Reset"
         static let texts = "Texts"
         static let tip = "Tip"
@@ -344,6 +349,7 @@ enum AppConstant {
         static let info = "info.circle"
         static let notes = "text.book.closed.fill"
         static let play = "play"
+        static let retry = "arrow.clockwise"
         
         // Or "conversation." (use with "answer")
         static let question = "questionmark.bubble"
@@ -353,6 +359,7 @@ enum AppConstant {
         // Or "read."
         static let see = "eye"
         
+        static let square = "square"
         static let tap = "hand.tap"
         static let tip = "lightbulb.max"
         static let yes = "hand.thumbsup"
