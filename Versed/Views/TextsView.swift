@@ -38,7 +38,7 @@ struct TextsView: View {
     }
 }
 
-// MARK: - (TextsSection)
+// MARK: - (views) (TextsSection)
 private struct TextsSection: View {
 // (goal) (dev can browse the calling body)
     // MARK: - (body)
@@ -59,7 +59,7 @@ private struct TextsSection: View {
         }
     }
     
-    // MARK: - (properties)
+    // MARK: - (non-views) (properties)
     
     @State private var isExpanded = true
     // (goal) (user can focus) (by collapsing an unneeded section)
@@ -69,7 +69,7 @@ private struct TextsSection: View {
     // (goal) (user can see her texts, in order) (newest: top)
 }
 
-// MARK: - (ExamplesSection)
+// MARK: - (views) (ExamplesSection)
 private struct ExamplesSection: View {
 // (goal) (dev can browse the calling body)
     // MARK: - (body)
@@ -86,7 +86,7 @@ private struct ExamplesSection: View {
         .textCase(nil)
     }
 
-    // MARK: - (properties)
+    // MARK: - (non-views) (properties)
 
     @State private var isExpanded = false
     // (goal) (user can focus) (by collapsing an unneeded section)

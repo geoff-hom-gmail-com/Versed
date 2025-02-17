@@ -23,7 +23,7 @@ struct AddView: View {
         }
     }
     
-    // MARK: - (buttons)
+    // MARK: - (views) (toolbar buttons)
     
     private var resetButton: ToolbarItem<Void, some View> {
     // (goal) (dev can browse the calling body)
@@ -46,7 +46,7 @@ struct AddView: View {
         }
     }
     
-    // MARK: - (misc)
+    // MARK: - (non-views)
 
     private func addText() {
         var newIndex = 0
@@ -81,7 +81,7 @@ struct AddView: View {
         [$beforeCue, $goal, $afterCue, $notes]
     }
     
-    // MARK: - (text properties)
+    // MARK: - (non-views) (text properties)
     @State private var beforeCue = String()
     @State private var goal = String()
     @State private var afterCue = String()

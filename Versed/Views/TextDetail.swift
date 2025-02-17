@@ -26,13 +26,7 @@ struct TextDetail: View {
         // (figure out how to have scrollable, non-editable text with limited height) (see ExampleDetail)
     }
     
-    // MARK: - (properties)
-    
-    private var passage: Passage
-
-    @State private var isShowingSheet = false
-
-    // MARK: - (editButton)
+    // MARK: - (views) (editButton)
     
     private var editButton: ToolbarItem<Void, some View> {
     // (goal) (dev can browse the calling body)
@@ -43,7 +37,7 @@ struct TextDetail: View {
         }
     }
     
-    // MARK: - (unNew())
+    // MARK: - (non-views) (unNew())
     
     private func unNew() {
     // (goal) (user sees text as "New," until seen once)
@@ -54,6 +48,12 @@ struct TextDetail: View {
     }
     
     @Environment(\.modelContext) private var modelContext
+    
+    // MARK: - (non-views) (properties)
+    
+    private var passage: Passage
+    
+    @State private var isShowingSheet = false
     
     // MARK: - (init(_:))
     init(_ passage: Passage) {

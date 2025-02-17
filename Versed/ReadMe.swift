@@ -45,15 +45,9 @@
 
 // MARK: - (code marks)
 // (code marks go above code) (because of the separator lines)
-// (mark order) (for a View)
-// - (body)
-// - (layout) (other)
-// - (misc)
-// - (init)
-// - (preview)
-// (for a model)
-// - (properties)
-// - (init)
+// (mark order)
+// - (first: views) (then: non-views)
+// - (each section is top-down) (to aid comparing)
 
 // MARK: - (file location)
 // (note) (this file is here vs README.md in GitHub) (because I want it viewable in Xcode) (I like ReadMe better than README) (I don't like Markdown) (my code/comments are all in Swift files, so this will look the same)

@@ -13,7 +13,7 @@ struct WhenNextView: View {
         }
     }
    
-    // MARK: - (nextParagraph)
+    // MARK: - (non-views) (nextParagraph)
     
     private var nextParagraph: Paragraph? {
     // (goal) (user sees when the next paragraph is due)

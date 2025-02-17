@@ -13,7 +13,7 @@ struct KnowView: View {
         }
     }
     
-    // MARK: - (nextParagraph)
+    // MARK: - (non-views) (nextParagraph)
     
     private var nextParagraph: Paragraph? {
 //        print("(KnowView) (paragraph) \(Date.now)")

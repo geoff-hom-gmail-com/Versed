@@ -24,7 +24,7 @@ struct MainView: View {
         }
     }
     
-    // MARK: - (ifNewTexts)
+    // MARK: - (non-views) (ifNewTexts)
     
     private var ifNewTexts: Text? {
         let hasNewTexts = !newTexts.isEmpty
@@ -38,7 +38,7 @@ struct MainView: View {
     @Query(filter: #Predicate<Passage> { $0.isNew == true })
     private var newTexts: [Passage]
 
-    // MARK: - (paragraphsDue)
+    // MARK: - (non-views) (paragraphsDue)
     
     private var paragraphsDue: Int {
     // TODO: - check if updates in realtime
@@ -57,7 +57,7 @@ struct MainView: View {
     private var texts: [Passage]
 }
 
-// MARK: - (.inTab())
+// MARK: - (views) (.inTab())
 private extension View {
 // (goal) (dev can browse the calling body)
     func inTab() -> Tab<Never, Self, DefaultTabLabel> {

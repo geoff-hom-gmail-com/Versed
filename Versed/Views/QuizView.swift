@@ -44,7 +44,7 @@ struct QuizView: View {
         .scrollDismissesKeyboard(.immediately)
     }
     
-    // MARK: - (layout) (next level)
+    // MARK: - (views) (next level)
     
     @ViewBuilder
     private var beforeCue: some View {
@@ -84,7 +84,7 @@ struct QuizView: View {
         // (goal) (align to edge, not text)
     }
     
-    // MARK: - (layout) (next level)
+    // MARK: - (views) (next level)
 
     @ViewBuilder
     private var inputTextField: some View {
@@ -102,7 +102,7 @@ struct QuizView: View {
         // TODO: - (for merge quiz, fix)
     }
     
-    // MARK: - (misc)
+    // MARK: - (non-views)
 
     private var paragraph: Paragraph
     
