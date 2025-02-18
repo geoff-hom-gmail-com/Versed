@@ -8,6 +8,45 @@ final class Passage: TextModel {
 // (note) (was going to name Text) (but that overwrites Text view) ("Passage" is also a nod to Jason Rohrer)
 // (final) (inheritance not considered)
 // (class) (SwiftData)
+    // MARK: - (functions)
+
+    func updateParagraphs() {
+    // (goal) (user can be quizzed on her goal's paragraphs) (independently)
+        // ??
+        
+//        if let context = ModelContext(self) {
+//                    for paragraph in paragraphs {
+//                        context.delete(paragraph) // Mark for deletion
+//                    }
+//                }
+        
+//        paragraphs.removeAll()
+        paragraphs = [Paragraph]()
+        // (ugh we have to think this thru a bit)
+        // (if it's just one para, we just replace it)
+        // (but with multipara) (we want to keep the stats on the unchanged paras)
+        // (or a hack is to just replace all paras and stats) (and let the user easily update the stats manually)
+        
+        // (and do we have to make paragraph.passage opt? don't fight the framework??
+        
+        print("(Passage) (updateParagraphs)")
+
+        let rawParagraphs = goal.components(separatedBy: "\n\n")
+        print("(Passage) (updateParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
+        
+        let tempPara = rawParagraphs.map { Paragraph(passage: self, text: $0) }
+        
+        print("(Passage) (updateParagraphs) \(tempPara)")
+
+        
+        paragraphs = tempPara
+        
+        print("(Passage) (updateParagraphs) 4")
+
+//        paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+        // (note) (keep) (if Paragraph.passage optional)
+    }
+    
     // MARK: - (properties)
     
     var isNew = true
@@ -18,7 +57,13 @@ final class Passage: TextModel {
     // (note) (SwiftData does not store array order for model objects)
         
     var beforeCue: String
+    
     var goal: String
+    // (note) (tried using didSet to call updateParagraphs())
+    // (but didn't seem to trigger intuitively with bindings)
+    
+    // (check when called) (init?) (updateText?)
+    
     var afterCue: String
     var notes: String
     

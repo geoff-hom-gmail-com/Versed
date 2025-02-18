@@ -251,6 +251,7 @@ enum AppConstant {
         static let add = "Add"
         static let afterCue = "After"
         static let beforeCue = "Before"
+        static let cancel = "Cancel"
         static let check = "Check"
         static let debug = "Debug"
         static let done = "Done"

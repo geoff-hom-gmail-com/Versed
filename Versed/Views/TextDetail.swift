@@ -18,11 +18,12 @@ struct TextDetail: View {
             unNew()
         }
         .scrollDismissesKeyboard(.immediately)
-        .sheet(isPresented: $isShowingSheet) {
-            // TODO: - add .sheet() to edit
+        .fullScreenCover(isPresented: $isShowingSheet) {
+        // (note) (slides up) (Xcode 16.1) (vs Contacts app is instant)
+        // (someday, Apple will have an easy option to appear instantly)
+            EditTextView(passage)
         }
         // TODO: - (The user can view text, but to edit it, has to tap button.)
-        // (ToDo) (Goal) The user knows that text here can't be edited. Need to open sheet for that.
         // (figure out how to have scrollable, non-editable text with limited height) (see ExampleDetail)
     }
     

@@ -4,13 +4,13 @@ import SwiftData
 // MARK: - (Paragraph)
 @Model
 final class Paragraph {
-    // (goal) (user can be quizzed on each paragraph in a text) (independently)
-    // (final) (inheritance not considered)
-    // (class) (SwiftData)
+// (goal) (user can be quizzed on each paragraph in a text) (independently)
+// (final) (inheritance not considered)
+// (class) (SwiftData)
     // MARK: - (functions)
     
     func update(feedback: QuizFeedback) {
-        // (goal) (user can give quiz feedback) (to update her paragraph)
+    // (goal) (user can give quiz feedback) (to update her paragraph)
         let oldInterval = priorQuizDate.timeIntervalSinceNow * -1
         priorQuizDate = Date.now
         
@@ -57,6 +57,7 @@ final class Paragraph {
     var passage: Passage
     // (note) (if optional) (SwiftData will set this automatically) (no need in init())
     // (but prefer non-optional)
+    // (grr https://developer.apple.com/forums/thread/772885?answerId=822395022#822395022)
     
     var text: String
     
