@@ -70,15 +70,9 @@ struct QuizView: View {
         
         HStack {
             Text(AppConstant.Label.quizFeedback)
-            Button(String(), systemImage: AppConstant.SFSymbol.yes) {
-                paragraph.updateDueDate(feedback: .good)
-            }
-            .buttonStyle(.bordered)
-            Button(String(), systemImage: AppConstant.SFSymbol.retry) {
-                paragraph.updateDueDate(feedback: .retry)
-            }
-            .buttonStyle(.bordered)
-            // TODO: - check buttons same size; center as needed
+            goodButton
+            retryButton
+            
             // TODO: - (user taps score) (next quiz)
         }
         .listRowSeparator(.hidden)
@@ -102,6 +96,23 @@ struct QuizView: View {
         // TODO: - (for merge quiz, fix)
     }
     
+    @ViewBuilder
+    private var goodButton: some View {
+        Button(String(), systemImage: AppConstant.SFSymbol.yes) {
+            update(feedback: .good)
+        }
+        .buttonStyle(.bordered)
+        // TODO: - center image as needed
+    }
+    
+    @ViewBuilder
+    private var retryButton: some View {
+        Button(String(), systemImage: AppConstant.SFSymbol.retry) {
+            update(feedback: .retry)
+        }
+        .buttonStyle(.bordered)
+    }
+    
     // MARK: - (non-views)
 
     private var paragraph: Paragraph
@@ -110,9 +121,22 @@ struct QuizView: View {
     @State private var isCheckingAnswer = false
     @State private var areMistakesFixed = false
     
+    private func update(feedback: QuizFeedback) {
+    // (goal) (user sees next quiz)
+        paragraph.updateDueDate(feedback: feedback)
+        resetState()
+    }
+    
+    private func resetState() {
+        input = String()
+        isCheckingAnswer = false
+        areMistakesFixed = false
+    }
+    
     // MARK: - (init())
 
     init(_ paragraph: Paragraph) {
+//        print("(QuizView) (init) \(Date.now)")
         self.paragraph = paragraph
     }
 }

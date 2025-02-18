@@ -25,6 +25,7 @@ final class Paragraph {
                 }
                 // (goal)
                 // (if interval was day < 1) (next interval is day x1)
+                    // (consolidation during sleep)
                 // (if interval was day x1+) (upgrade status) (increase interval)
             case .retry:
                 dueDate = Date.now
@@ -35,6 +36,7 @@ final class Paragraph {
                 let interval = dueDate.timeIntervalSinceNow * -1
                 let newInterval = interval * 2.5
                 // todo: what's the appconstant call? srs? date? alg? quiz
+                // AppConstant.Date.spacingFactor
                 // TODO: - (tidy)
                 dueDate.addTimeInterval(newInterval)
                 // (goal)
