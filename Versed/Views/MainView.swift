@@ -16,7 +16,7 @@ struct MainView: View {
             KnowView().inTab()
                 .badge(2)
                 // TODO: - when user can edit text, switch
-//                .badge(paragraphsDue)
+//                .badge(paragraphsReady)
                 // (goal) (user knows how many quizzes are ready)
 
 //            ReciteView().withTab()
@@ -38,18 +38,18 @@ struct MainView: View {
     @Query(filter: #Predicate<Passage> { $0.isNew == true })
     private var newTexts: [Passage]
 
-    // MARK: - (non-views) (paragraphsDue)
+    // MARK: - (non-views) (paragraphsReady)
     
-    private var paragraphsDue: Int {
+    private var paragraphsReady: Int {
     // TODO: - check if updates in realtime
-    // (e.g. due in 10"; does it change in 10"?)
+    // (e.g. ready in 10"; does it change in 10"?)
     // (if not, set timer to check every x" and then once working, make it 60")
-        print("paragraphsDue computed")
+        print("(MainView) (paragraphsReady)")
         // TODO: - (when working) (delete)
                 
         let paragraphs = texts.flatMap { $0.paragraphs }
         return paragraphs
-            .filter { $0.dueDate < Date.now }
+            .filter { $0.readyDate < Date.now }
             .count
     }
     

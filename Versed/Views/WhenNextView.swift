@@ -6,21 +6,24 @@ struct WhenNextView: View {
 // (goal) (user can see when the next quiz is)
     // MARK: - (body)
     var body: some View {
-        Text("Nothing is due.")
+        Text("Nothing is ready.")
         if let nextParagraph {
             Text("\nNext quiz:")
-            Text("\(nextParagraph.dueDate)")
+            Text("\(nextParagraph.readyDate)")
         }
     }
    
     // MARK: - (non-views) (nextParagraph)
     
     private var nextParagraph: Paragraph? {
-    // (goal) (user sees when the next paragraph is due)
+    // (goal) (user sees when the next paragraph will be ready)
     // (note) (after a user adds their first text, this should always be non-nil)
-        paragraphs.min { $0.dueDate < $1.dueDate }
+        paragraphs.min { $0.readyDate < $1.readyDate }
     }
     
     @Query
     private var paragraphs: [Paragraph]
+    
+    // TODO: - (tidy) (this is done in KnowView already)
+    // (could wait to see if we separate "not ready" from "0 paragraphs added")
 }

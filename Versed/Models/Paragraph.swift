@@ -4,67 +4,70 @@ import SwiftData
 // MARK: - (Paragraph)
 @Model
 final class Paragraph {
-// (goal) (user can be quizzed on each paragraph in a text) (independently)
-// (final) (inheritance not considered)
-// (class) (SwiftData)
+    // (goal) (user can be quizzed on each paragraph in a text) (independently)
+    // (final) (inheritance not considered)
+    // (class) (SwiftData)
     // MARK: - (functions)
     
-    func updateDueDate(feedback: QuizFeedback) {
-    // (goal) (user can give feedback) (to update her paragraph's next due date)
+    func update(feedback: QuizFeedback) {
+        // (goal) (user can give quiz feedback) (to update her paragraph)
+        let oldInterval = priorQuizDate.timeIntervalSinceNow * -1
+        priorQuizDate = Date.now
+        
+        var newInterval = oldInterval * AppConstant.Date.spacing * AppConstant.Date.orderMixer
+        // (goal) (user sees next quiz spaced out) (and not always in same order)
+        
         switch status {
         case .sprout:
             switch feedback {
             case .good:
-                let interval = dueDate.timeIntervalSinceNow * -1
-                if interval < AppConstant.Date.daySeconds {
-                    dueDate.addTimeInterval(AppConstant.Date.daySeconds)
+                if oldInterval < AppConstant.Date.daySeconds {
+                    newInterval = AppConstant.Date.daySeconds * AppConstant.Date.orderMixer
                 } else {
                     status = .rooted
-                    let newInterval = interval * 2.5
-                    dueDate.addTimeInterval(newInterval)
                 }
+                readyDate.addTimeInterval(newInterval)
                 // (goal)
-                // (if interval was day < 1) (next interval is day x1)
-                    // (consolidation during sleep)
-                // (if interval was day x1+) (upgrade status) (increase interval)
+                // (if old interval: < day x1) (next interval: day x1)
+                // (to sleep/consolidate)
+                // (else) (status: upgrade) (next interval: default spacing)
             case .retry:
-                dueDate = Date.now
+                readyDate = Date.now
             }
         case .rooted:
             switch feedback {
             case .good:
-                let interval = dueDate.timeIntervalSinceNow * -1
-                let newInterval = interval * 2.5
-                // todo: what's the appconstant call? srs? date? alg? quiz
-                // AppConstant.Date.spacingFactor
-                // TODO: - (tidy)
-                dueDate.addTimeInterval(newInterval)
-                // (goal)
-                // (increase interval)
+                readyDate.addTimeInterval(newInterval)
             case .retry:
                 status = .sprout
-                dueDate = Date.now
+                readyDate = Date.now
                 // (goal)
-                // (lower status) (due now)
+                // (status: downgrade) (ready: now)
+                
+                // TODO: - (consider adding re-sprouted status or whatever name)
+                // (since it should have been consolidated, so that is a key improvement)
+                // (like buying a bigger tree that you still have to plant) (what do they call that?)
             }
         }
     }
     
     // MARK: - (properties)
-
+    
     @Relationship
     var passage: Passage
     // (note) (if optional) (SwiftData will set this automatically) (no need in init())
     // (but prefer non-optional)
     
     var text: String
-        
-    var dueDate = Date.now
+    
+    var readyDate = Date.now
     // (goal) (user can be quizzed on her paragraph immediately)
+    // (note) (was due date) (but that implies a deadline, a due by) (where earlier is bonus)
+    // (for quizzing, the "deadline" is actually the earliest time you should quiz) (and later can be bonus)
+    
+    var priorQuizDate = Date.now
 
     var status: LearningStatus
-
-    
     
     // MARK: - (init())
 
@@ -86,8 +89,8 @@ enum LearningStatus: Codable {
 // (Codable) (required by SwiftData)
     case sprout
     // (goal) (if rooted paragraph is failed) (user's experience is like a sprout again, just in case)
-    // (note) (no re-sprouted status yet) (but user can always manually increase due date)
-    // TODO: - (add above lol)
+    // (note) (no re-sprouted status yet) (but user can always manually increase ready date)
+    // TODO: - (add above function to quiz/edit lol)
     
     case rooted
 }

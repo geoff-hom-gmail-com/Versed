@@ -16,12 +16,6 @@ struct DebugView: View {
         addUniverseDistantFutureButton
         Spacer()
 
-//        // (Goal) The coder can add a user verse with a distant due date.
-//        let verse = Verse("A message from the future", dueDate: Date.distantFuture)
-//
-//        // (Goal) The coder can add a user verse with a past-due date.
-//        let verse = Verse("A message from the past", dueDate: Date.distantPast)
-//
 //        // (GNT) (Mark 1:40)
 //        // (pity; some manuscripts have anger.)
 //        let text = """
@@ -89,7 +83,7 @@ struct DebugView: View {
     private var addUniverseButton: some View {
     // (goal) (tester can add user text of one paragraph)
         Button("Add universe") {
-//            print("(DebugView) (addUni) \(uniPassage.paragraphs.first?.dueDate)")
+//            print("  (DebugView) (addUni) \(uniPassage.paragraphs.first?.readyDate)")
             modelContext.insert(uniPassage)
             DataManager.save(modelContext)
         }
@@ -97,14 +91,14 @@ struct DebugView: View {
     
     @ViewBuilder
     private var addUniverseDistantFutureButton: some View {
-    // (goal) (tester can add user text of one paragraph) (due date: distant future)
+    // (goal) (tester can add user text of one paragraph) (ready date: distant future)
         Button("Add universe: distant future") {
             uniPassage.paragraphs.forEach {
-                $0.dueDate = Date.distantFuture
+                $0.readyDate = Date.distantFuture
             }
             modelContext.insert(uniPassage)
             DataManager.save(modelContext)
-//            print("(DebugView) (addUniFuture) \(uniPassage.paragraphs.first?.dueDate)")
+//            print("  (DebugView) (addUniFuture) \(uniPassage.paragraphs.first?.readyDate)")
             // (note) (we're changing uniPassage) (a SwiftData instance)
             // (but after .insert(), something weird happens)
             // (it's like after auto-saving, calls to uniPassage return a new one)

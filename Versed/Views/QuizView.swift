@@ -3,7 +3,7 @@ import SwiftData
 
 // MARK: - (QuizView)
 struct QuizView: View {
-// (goal) (user can get quizzed on the paragraph most due)
+// (goal) (user can get quizzed on the paragraph that was ready longest)
     // MARK: - (body)
     var body: some View {
         Form {
@@ -123,7 +123,7 @@ struct QuizView: View {
     
     private func update(feedback: QuizFeedback) {
     // (goal) (user sees next quiz)
-        paragraph.updateDueDate(feedback: feedback)
+        paragraph.update(feedback: feedback)
         resetState()
     }
     
@@ -136,7 +136,7 @@ struct QuizView: View {
     // MARK: - (init())
 
     init(_ paragraph: Paragraph) {
-//        print("(QuizView) (init) \(Date.now)")
+//        print("  (QuizView) (init) \(Date.now)")
         self.paragraph = paragraph
     }
 }
