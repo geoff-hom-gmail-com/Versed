@@ -54,10 +54,9 @@ final class Paragraph {
     // MARK: - (properties)
     
     @Relationship
-    var passage: Passage
-    // (note) (if optional) (SwiftData will set this automatically) (no need in init())
-    // (but prefer non-optional)
-    // (grr https://developer.apple.com/forums/thread/772885?answerId=822395022#822395022)
+    var passage: Passage?
+    // (note) (SwiftData one-to-many relationships) (best practice is as optional)  (https://developer.apple.com/forums/thread/772885?answerId=822395022#822395022)
+    // (tried non-optional) (but then issues deleting paragraphs)
     
     var text: String
     
@@ -72,16 +71,11 @@ final class Paragraph {
     
     // MARK: - (init())
 
-    init(passage: Passage, text: String) {
-        self.passage = passage
+    init(text: String) {
+//        self.passage = passage
         self.text = text
         self.status = .sprout
     }
-    
-    //    init(text: String) {
-    //        self.text = text
-    //    }
-        // (note) (keep) (if passage optional)
 }
 
 // MARK: - (LearningStatus)

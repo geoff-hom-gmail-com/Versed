@@ -28,7 +28,11 @@ struct QuizView: View {
     
     @ViewBuilder
     private var beforeCue: some View {
-        Text(paragraph.passage.beforeCue)
+        Text(paragraph.passage?.beforeCue ?? String())
+        // TODO: - (fix for multiverse)
+        // (if passage has multiple para) (first para uses beforeCue) (aftercue is next para)
+        // (can see if para matches .first) (else use para before)
+        // (similar for afterCue)
     }
     
     @ViewBuilder
@@ -47,7 +51,7 @@ struct QuizView: View {
     
     @ViewBuilder
     private var afterCue: some View {
-        Text(paragraph.passage.afterCue)
+        Text(paragraph.passage?.afterCue ?? String())
     }
     
     @ViewBuilder
