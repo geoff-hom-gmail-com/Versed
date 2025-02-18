@@ -11,8 +11,9 @@ enum AppConstant {
     enum Date {
         static let daySeconds: TimeInterval = 86400
         
-        static let orderMixer = 1.2
+        static let orderMixer = Double.random(in: 1...1.2)
         // (goal) (user sees quizzes not always in same order)
+        // (note) (so we increase an interval by up to 20%) (arbitrarily chosen from Pareto)
         
         static let spacing = 2.5
         // (goal) (user sees quizzes spaced out)
