@@ -10,27 +10,22 @@ final class Passage: TextModel {
 // (class) (SwiftData)
     // MARK: - (functions)
 
-    func updateParagraphs() {
+    func updateParagraphs(_ context: ModelContext) {
     // (goal) (user can be quizzed on her goal's paragraphs) (independently)
-        // ??
+    // (note) (ideally, when goal is updated) (paragraphs would update automatically)
+    // (but for now) (have to manually call this)
+        let rawParagraphs = goal.components(separatedBy: AppConstant.Text.paragraphBreak)
+//        print("(Passage) (updateParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
         
-        // (but with multipara) (we want to keep the stats on the unchanged paras)
-        // (or a hack is to just replace all paras and stats) (and let the user easily update the stats manually)
-                
-        print("(Passage) (updateParagraphs)")
-
-        let rawParagraphs = goal.components(separatedBy: "\n\n")
-        print("(Passage) (updateParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
-                
-//        print("(Passage) (updateParagraphs) \(tempPara)")
-
+        paragraphs.forEach {
+            context.delete($0)
+        }
         
         paragraphs = rawParagraphs.map { Paragraph(text: $0) }
         // TODO: - (fix for multiverse)
         // (wait for multiverse quizzes)
         // (ideally for multi-para) (keep dates for unchanged paras)
-        
-        print("(Passage) (updateParagraphs) 4")
+        // (also TODO let the user easily update the stats manually) (e.g., bring new paras up to neighboring paras)
     }
     
     // MARK: - (properties)
@@ -45,11 +40,9 @@ final class Passage: TextModel {
     var beforeCue: String
     
     var goal: String
-    // (note) (tried using didSet to call updateParagraphs())
-    // (but didn't seem to trigger intuitively with bindings)
-    
-    // (check when called) (init?) (updateText?)
-    
+    // (note) (tried didSet to call updateParagraphs())
+    // (didn't trigger intuitively with bindings)
+        
     var afterCue: String
     var notes: String
     
@@ -73,12 +66,10 @@ final class Passage: TextModel {
         self.afterCue = afterCue
         self.notes = notes
         
-        let rawParagraphs = goal.components(separatedBy: "\n\n")
-//        print("(Passage) (rawParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
-        
+        let rawParagraphs = goal.components(separatedBy: AppConstant.Text.paragraphBreak)
         self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
-        
-//        self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
-        // (note) (keep) (if Paragraph.passage optional)
+        // TODO: - (DRY)
+        // let paragraphs = Paragraph.arrayFrom(_ text)
+//        print("(Passage) (init) \(rawParagraphs.count) \(rawParagraphs)")
     }
 }

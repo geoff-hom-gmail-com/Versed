@@ -72,7 +72,6 @@ final class Paragraph {
     // MARK: - (init())
 
     init(text: String) {
-//        self.passage = passage
         self.text = text
         self.status = .sprout
     }

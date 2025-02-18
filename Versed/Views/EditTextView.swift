@@ -60,7 +60,7 @@ struct EditTextView: View {
         passage.beforeCue = beforeCue
         if passage.goal != goal {
             passage.goal = goal
-            passage.updateParagraphs()
+            passage.updateParagraphs(modelContext)
         }
         passage.afterCue = afterCue
         passage.notes = notes

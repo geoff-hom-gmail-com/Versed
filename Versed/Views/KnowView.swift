@@ -17,6 +17,7 @@ struct KnowView: View {
     
     private var nextParagraph: Paragraph? {
     // (goal) (return paragraph with earliest ready date)
+//        print("(KnowView) (paragraphs) \(paragraphs.count)")
 //        print("(KnowView) (paragraph) \(Date.now)")
         // (note) (when a text is added) (this is called x4)
         // (when quiz feedback given) (called x3)

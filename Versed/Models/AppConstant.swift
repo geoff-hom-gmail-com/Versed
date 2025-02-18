@@ -305,7 +305,7 @@ enum AppConstant {
         // (goal) (user sees a multiline text field. She knows she can enter more than just the prompt)
         // (note) (this is temp and a hack) (tips are for examples, so there is no editing)
     }
-    
+        
     // MARK: - (Prompt)
     enum Prompt {
         static let afterCue = "\"If you do not remain in me, you are like a branch that is thrown away and withers …\""
@@ -430,5 +430,10 @@ enum AppConstant {
         ]
         
         static let allLines = harvardLines2 + bibleLines
+    }
+    
+    // MARK: - (Text)
+    enum Text {
+        static let paragraphBreak = "\n\n"
     }
 }
