@@ -12,13 +12,12 @@ final class Paragraph {
     static func arrayFrom(_ text: String) -> [Paragraph] {
     // (goal) (returns the given text as Paragraphs)
         let rawParagraphs = text.components(separatedBy: AppConstant.Text.paragraphBreak)
-        print("\(rawParagraphs)")
         let paragraphs = rawParagraphs.enumerated().map { index, text in
             Paragraph(index: index, text: text) }
         return paragraphs
     }
     
-    // MARK: - (functions)
+    // MARK: - (instance functions)
     
     func update(feedback: QuizFeedback) {
     // (goal) (user can give quiz feedback) (to update her paragraph)

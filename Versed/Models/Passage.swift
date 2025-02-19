@@ -8,7 +8,7 @@ final class Passage: TextModel {
 // (note) (was going to name Text) (but that overwrites Text view) ("Passage" is also a nod to Jason Rohrer)
 // (final) (inheritance not considered)
 // (class) (SwiftData)
-    // MARK: - (functions)
+    // MARK: - (instance functions)
 
     func updateParagraphs(_ context: ModelContext) {
     // (goal) (user can be quizzed on her goal's paragraphs) (independently)
@@ -21,10 +21,8 @@ final class Passage: TextModel {
         }
         
         paragraphs = newParagraphs
-//        print("(Passage) (updateParagraphs) \(paragraphs.count)")
 
         // TODO: - (fix for multiverse)
-        // (wait for multiverse quizzes)
         // (ideally for multi-para) (keep dates for unchanged paras)
         // (also TODO let the user easily update the stats manually) (e.g., bring new paras up to neighboring paras)
     }
@@ -73,6 +71,5 @@ final class Passage: TextModel {
         self.afterCue = afterCue
         self.notes = notes
         self.paragraphs = Paragraph.arrayFrom(goal)
-        print("(Passage) (init) \(paragraphs.count) \(paragraphs.first?.text)")
     }
 }
