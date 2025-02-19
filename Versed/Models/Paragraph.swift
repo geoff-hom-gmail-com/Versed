@@ -7,6 +7,15 @@ final class Paragraph {
 // (goal) (user can be quizzed on each paragraph in a text) (independently)
 // (final) (inheritance not considered)
 // (class) (SwiftData)
+    // MARK: - (static functions)
+    
+    static func arrayFrom(_ text: String) -> [Paragraph] {
+    // (goal) (returns the given text as paragraphs)
+        let rawParagraphs = text.components(separatedBy: AppConstant.Text.paragraphBreak)
+//        let paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+        return rawParagraphs.map { Paragraph(text: $0) }
+    }
+    
     // MARK: - (functions)
     
     func update(feedback: QuizFeedback) {

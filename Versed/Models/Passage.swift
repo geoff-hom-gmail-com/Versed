@@ -14,14 +14,19 @@ final class Passage: TextModel {
     // (goal) (user can be quizzed on her goal's paragraphs) (independently)
     // (note) (ideally, when goal is updated) (paragraphs would update automatically)
     // (but for now) (have to manually call this)
-        let rawParagraphs = goal.components(separatedBy: AppConstant.Text.paragraphBreak)
+        let newParagraphs = Paragraph.arrayFrom(goal)
+//        let rawParagraphs = goal.components(separatedBy: AppConstant.Text.paragraphBreak)
 //        print("(Passage) (updateParagraphs) \(rawParagraphs.count) \(rawParagraphs)")
         
         paragraphs.forEach {
             context.delete($0)
         }
         
-        paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+//        paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+        paragraphs = newParagraphs
+        
+        print("  (Passage) (updateParagraphs) \(self.paragraphs.first?.passage?.goal)")
+
         // TODO: - (fix for multiverse)
         // (wait for multiverse quizzes)
         // (ideally for multi-para) (keep dates for unchanged paras)
@@ -65,11 +70,16 @@ final class Passage: TextModel {
         self.goal = goal
         self.afterCue = afterCue
         self.notes = notes
+
+//        let paragraphs = Paragraph.arrayFrom(goal)
+//        print("  (Passage) (init2) \(paragraphs.first?.passage?.notes)")
+
+//        let rawParagraphs = goal.components(separatedBy: AppConstant.Text.paragraphBreak)
+//        self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
         
-        let rawParagraphs = goal.components(separatedBy: AppConstant.Text.paragraphBreak)
-        self.paragraphs = rawParagraphs.map { Paragraph(text: $0) }
+        self.paragraphs = Paragraph.arrayFrom(goal)
         // TODO: - (DRY)
-        // let paragraphs = Paragraph.arrayFrom(_ text)
 //        print("(Passage) (init) \(rawParagraphs.count) \(rawParagraphs)")
+        print("  (Passage) (init) \(self.paragraphs.first?.passage?.notes)")
     }
 }
