@@ -12,7 +12,6 @@ final class Paragraph {
     static func arrayFrom(_ text: String) -> [Paragraph] {
     // (goal) (returns the given text as paragraphs)
         let rawParagraphs = text.components(separatedBy: AppConstant.Text.paragraphBreak)
-//        let paragraphs = rawParagraphs.map { Paragraph(text: $0) }
         return rawParagraphs.map { Paragraph(text: $0) }
     }
     
@@ -53,7 +52,8 @@ final class Paragraph {
                 // (goal)
                 // (status: downgrade) (ready: now)
                 
-                // TODO: - (consider adding re-sprouted status or whatever name)
+                // TODO: - (MVP-post)
+                // (consider adding re-sprouted status or whatever name)
                 // (since it should have been consolidated, so that is a key improvement)
                 // (like buying a bigger tree that you still have to plant) (what do they call that?)
             }
