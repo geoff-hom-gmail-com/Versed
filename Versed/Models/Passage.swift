@@ -36,7 +36,7 @@ final class Passage: TextModel {
     
     var index: Int
     // (goal) (user sees listed texts in consistent order) (she can also reorder)
-    // (note) (SwiftData does not store array order for model objects)
+    // (note) (SwiftData does not preserve array order for objects) (Xcode 16.1)
         
     var beforeCue: String
     
@@ -46,6 +46,12 @@ final class Passage: TextModel {
         
     var afterCue: String
     var notes: String
+    
+    var orderedParagraphs: [Paragraph] {
+    // (goal) (returns paragraphs in text order)
+    // (since SwiftData doesn't preserve array order for objects)
+        paragraphs.sorted(by: { $0.index < $1.index })
+    }
     
     @Relationship(deleteRule: .cascade, inverse: \Paragraph.passage)
     var paragraphs: [Paragraph] = [Paragraph]()
@@ -67,6 +73,6 @@ final class Passage: TextModel {
         self.afterCue = afterCue
         self.notes = notes
         self.paragraphs = Paragraph.arrayFrom(goal)
-//        print("(Passage) (init) \(self.paragraphs.count)")
+        print("(Passage) (init) \(paragraphs.count) \(paragraphs.first?.text)")
     }
 }

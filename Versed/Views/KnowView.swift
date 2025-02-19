@@ -8,6 +8,8 @@ struct KnowView: View {
     var body: some View {
         if let nextParagraph = nextParagraph, isParagraphReady(nextParagraph) {
             QuizView(nextParagraph)
+                .id(nextParagraph)
+                // (goal) (user sees a fresh quiz each time)
         } else {
             WhenNextView()
         }

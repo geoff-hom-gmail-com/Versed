@@ -28,7 +28,22 @@ struct QuizView: View {
     
     @ViewBuilder
     private var beforeCue: some View {
-        Text(paragraph.passage?.beforeCue ?? String())
+    // (goal) (user sees text before quiz paragraph)
+        if let passage = paragraph.passage {
+            let paragraphs = passage.orderedParagraphs
+            if let index = paragraphs.firstIndex(of: paragraph),
+               index != paragraphs.indices.first {
+                let _ = print("hi \(paragraphs.indices.first) \(index)")
+
+                let beforeParagraph = paragraphs[index - 1]
+                Text(beforeParagraph.text)
+                let _ = print(beforeParagraph.text)
+            } else {
+                Text(passage.beforeCue)
+            }
+        }
+        
+//        Text(paragraph.passage?.beforeCue ?? String())
         // TODO: - (fix for multiverse)
         // (if passage has multiple para) (first para uses beforeCue) (aftercue is next para)
         // (can see if para matches .first) (else use para before)
@@ -51,7 +66,20 @@ struct QuizView: View {
     
     @ViewBuilder
     private var afterCue: some View {
-        Text(paragraph.passage?.afterCue ?? String())
+    // (goal) (user sees text after quiz paragraph)
+        if let passage = paragraph.passage {
+            let paragraphs = passage.orderedParagraphs
+            if let index = paragraphs.firstIndex(of: paragraph),
+               index != paragraphs.indices.last {
+                let tempNum = paragraphs.indices.last
+                let _ = print("\(tempNum) \(index)")
+                let afterParagraph = paragraphs[index + 1]
+                Text(afterParagraph.text)
+            } else {
+                Text(passage.afterCue)
+            }
+        }
+//        Text(paragraph.passage?.afterCue ?? String())
     }
     
     @ViewBuilder
@@ -132,9 +160,9 @@ struct QuizView: View {
     }
     
     private func resetState() {
-        input = String()
-        isCheckingAnswer = false
-        areMistakesFixed = false
+//        input = String()
+//        isCheckingAnswer = false
+//        areMistakesFixed = false
     }
     
     // MARK: - (init())
@@ -142,5 +170,9 @@ struct QuizView: View {
     init(_ paragraph: Paragraph) {
 //        print("  (QuizView) (init) \(Date.now)")
         self.paragraph = paragraph
+//        
+//        input = String()
+//        isCheckingAnswer = false
+//        areMistakesFixed = false
     }
 }

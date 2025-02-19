@@ -10,9 +10,12 @@ final class Paragraph {
     // MARK: - (static functions)
     
     static func arrayFrom(_ text: String) -> [Paragraph] {
-    // (goal) (returns the given text as paragraphs)
+    // (goal) (returns the given text as Paragraphs)
         let rawParagraphs = text.components(separatedBy: AppConstant.Text.paragraphBreak)
-        return rawParagraphs.map { Paragraph(text: $0) }
+        print("\(rawParagraphs)")
+        let paragraphs = rawParagraphs.enumerated().map { index, text in
+            Paragraph(index: index, text: text) }
+        return paragraphs
     }
     
     // MARK: - (functions)
@@ -67,6 +70,10 @@ final class Paragraph {
     // (note) (SwiftData one-to-many relationships) (best practice is as optional)  (https://developer.apple.com/forums/thread/772885?answerId=822395022#822395022)
     // (tried non-optional) (but then issues deleting paragraphs)
     
+    var index: Int
+    // (goal) (user can see paragraph before/after this one) (e.g., cues)
+    // (note) (SwiftData does not preserve array order for objects) (Xcode 16.1)
+    
     var text: String
     
     var readyDate = Date.now
@@ -80,7 +87,8 @@ final class Paragraph {
     
     // MARK: - (init())
 
-    init(text: String) {
+    init(index: Int = 0, text: String) {
+        self.index = index
         self.text = text
         self.status = .sprout
     }
