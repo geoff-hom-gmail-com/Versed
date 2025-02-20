@@ -14,9 +14,9 @@ struct MainView: View {
                 .badge(ifNewTexts)
                 // (goal) (user adds a text) (she sees a hint where to go next)
             KnowView().inTab()
-                .badge(2)
+//                .badge(2)
                 // TODO: - when user can edit text, switch
-//                .badge(paragraphsReady)
+                .badge(paragraphsReady)
                 // (goal) (user knows how many quizzes are ready)
 
 //            ReciteView().withTab()
@@ -28,6 +28,7 @@ struct MainView: View {
     
     private var ifNewTexts: Text? {
         let hasNewTexts = !newTexts.isEmpty
+        print("(MainView) (ifNewTexts)")
         
         return hasNewTexts ? Text(AppConstant.Badge.new) : nil
         // (note) (for nil) (String doesn't work) (Text does)
@@ -44,17 +45,20 @@ struct MainView: View {
     // TODO: - check if updates in realtime
     // (e.g. ready in 10"; does it change in 10"?)
     // (if not, set timer to check every x" and then once working, make it 60")
-        print("(MainView) (paragraphsReady)")
-        // TODO: - (when working) (delete)
+        print("(MainView) (paragraphsReady) \(Date.now)")
                 
-        let paragraphs = texts.flatMap { $0.paragraphs }
+//        let paragraphs = texts.flatMap { $0.paragraphs }
         return paragraphs
             .filter { $0.readyDate < Date.now }
             .count
     }
+    // todo: should be same with query on paragraphs directly
     
     @Query
-    private var texts: [Passage]
+    private var paragraphs: [Paragraph]
+    
+//    @Query
+//    private var texts: [Passage]
 }
 
 // MARK: - (views) (.inTab())
