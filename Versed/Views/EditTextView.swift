@@ -45,20 +45,22 @@ struct EditTextView: View {
             Button(AppConstant.Label.done) {
                 updateText()
                 dismiss()
-//                reset()??
             }
 //            .disabled(ifNoChanges)
             // TODO: - (if no changes, disable) (Contacts does this)
+            // (note) (this does provide an easy way to refresh Know badge)
+            // (since a text can be updated without any real changes)
         }
     }
-    
-    
     
     // MARK: - (non-views)
 
     private func updateText() {
         passage.beforeCue = beforeCue
         if passage.goal != goal {
+        // (note) (currently) (updateParagraphs(_:) deletes all prior paragraphs and makes new ones)
+        // (later version may be smarter and replace only changed paras)
+        // (then we wouldn't need this check)
             passage.goal = goal
             passage.updateParagraphs(modelContext)
         }
@@ -67,20 +69,10 @@ struct EditTextView: View {
     }
     
     @Environment(\.dismiss) private var dismiss
-
     @Environment(\.modelContext) private var modelContext
     
-    // MARK: - (state properties)
-    
-    // todo may not even need/want bindable
-    // we pass in passage, and then it gets edited but with temp vars
-    // if usre taps done/update, then we update/replace
-    // that should work for passage.before/after/ref. goalText is trickier
-    // Will have to do a calc in Passage to compare old and new goalText, or really old and new Paragraphs. Old ones keep interval data.
-    @Bindable var passage: Passage
+    private var passage: Passage
 
-    
-    
     @State private var beforeCue: String
     @State private var goal: String
     @State private var afterCue: String
@@ -89,6 +81,7 @@ struct EditTextView: View {
     // MARK: - (init(_:))
     init(_ passage: Passage) {
         self.passage = passage
+        
         self.beforeCue = passage.beforeCue
         self.goal = passage.goal
         self.afterCue = passage.afterCue

@@ -49,7 +49,8 @@ struct MainView: View {
     // (e.g. if ready in 5") (badge won't update in 5")
     // (but practically) (it seems to update often enough)
     // (e.g., every 1')
-    // (if issues) (can try adding a timer)
+    // (if issues) (user can edit/done any text) (even without changing)
+    // (also can try adding timer)
     
     @Query
     private var paragraphs: [Paragraph]
