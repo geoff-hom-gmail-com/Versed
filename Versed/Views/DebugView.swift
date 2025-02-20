@@ -29,7 +29,7 @@ struct DebugView: View {
 //                    """
     }
     
-    // MARK: - (buttons)
+    // MARK: - (views) (buttons)
 
     @ViewBuilder
     private var deleteDataButton: some View {
@@ -106,7 +106,7 @@ struct DebugView: View {
         }
     }
     
-    // MARK: - (misc)
+    // MARK: - (non-views)
     
     private let uniPassage = Passage(
         beforeCue: """

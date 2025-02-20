@@ -277,6 +277,17 @@ enum AppConstant {
     
     // MARK: - (LineLimit)
     enum LineLimit {
+        static let textLineX6_5MaxHeight: CGFloat = 146
+        // (goal) (user sees a Text with the last line cut off) (she knows she can scroll)
+        // (note) (use as .frame(maxHeight:))
+        // (line x6.5: why?) (chunk x4 + blank x1) (second line of next para: x1.5)
+        // (assuming standard font size) (but we don't want to scale, else user may have to scroll entire screen too much)
+        
+        static let textLineX11_5MaxHeight: CGFloat = 256
+        // (line x11.5: why?) (chunk x4 + blank x1) (x2) (second line of next para: x1.5)
+        
+        
+        
         // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
         static let after = 3
         
