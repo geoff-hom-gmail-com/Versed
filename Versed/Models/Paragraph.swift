@@ -43,6 +43,8 @@ final class Paragraph {
                 // (else) (status: upgrade) (next interval: default spacing)
             case .retry:
                 readyDate = Date.now
+                // temp test (adding 5")
+//                readyDate = Date.now.addingTimeInterval(5)
             }
         case .rooted:
             switch feedback {
