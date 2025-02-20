@@ -9,7 +9,9 @@ struct WhenNextView: View {
         Text("Nothing is ready.")
         if let nextParagraph {
             Text("\nNext quiz:")
-            Text("\(nextParagraph.readyDate)")
+            Text(nextParagraph.readyDate, format: .dateTime
+                .month().day().year()
+                .hour().minute())
         }
     }
    
