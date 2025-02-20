@@ -254,6 +254,7 @@ enum AppConstant {
         static let cancel = "Cancel"
         static let check = "Check"
         static let debug = "Debug"
+        static let deleteText = "Delete Text"
         static let done = "Done"
         static let edit = "Edit"
         static let examples = "Examples"

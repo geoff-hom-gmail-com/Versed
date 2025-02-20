@@ -12,9 +12,7 @@ struct EditTextView: View {
                 TextFieldSection(.goalBeats, text: $goal)
                 TextFieldSection(.afterCue, text: $afterCue)
                 TextFieldSection(.notes, text: $notes)
-                
-                // TODO: - (user can delete text)
-                // (e.g. Contacts UI) (red button at bottom, with an alert)
+                deleteButton
             }
             .toolbar {
                 cancelButton
@@ -24,13 +22,28 @@ struct EditTextView: View {
         }
     }
     
+    // MARK: - (views) (deleteButton)
+    
+    private var deleteButton: some View {
+    // (goal) (user can delete this text)
+        Button(AppConstant.Label.deleteText, role: .destructive) {
+            isShowingDeleteConfirmation.toggle()
+        }
+        .confirmationDialog(AppConstant.Label.deleteText, isPresented: $isShowingDeleteConfirmation) {
+            Button(AppConstant.Label.deleteText, role: .destructive) {
+                modelContext.delete(passage)
+                dismiss()
+            }
+        }
+    }
+        
     // MARK: - (views) (toolbar buttons)
     
     private var cancelButton: ToolbarItem<Void, some View> {
-        // (goal) (dev can browse the calling body)
-        // (goal) (user can discard text edits)
+    // (goal) (dev can browse the calling body)
+    // (goal) (user can discard edits)
         ToolbarItem(placement: .cancellationAction) {
-            Button(AppConstant.Label.cancel) {
+            Button(AppConstant.Label.cancel, role: .cancel) {
                 dismiss()
                 // (note) (could use SwiftData's rollback())
                 // (or https://www.hackingwithswift.com/quick-start/swiftdata/how-to-discard-changes-to-a-swiftdata-object)
@@ -68,10 +81,12 @@ struct EditTextView: View {
         passage.notes = notes
     }
     
-    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    
+    @Environment(\.dismiss) private var dismiss
+
     private var passage: Passage
+
+    @State private var isShowingDeleteConfirmation = false
 
     @State private var beforeCue: String
     @State private var goal: String

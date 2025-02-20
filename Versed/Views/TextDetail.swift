@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 // MARK: - (TextDetail)
 struct TextDetail: View {
@@ -18,7 +19,7 @@ struct TextDetail: View {
             unNew()
         }
         .scrollDismissesKeyboard(.immediately)
-        .fullScreenCover(isPresented: $isShowingSheet) {
+        .fullScreenCover(isPresented: $isShowingSheet, onDismiss: didDismiss) {
         // (note) (slides up) (Xcode 16.1) (vs Contacts app is instant)
         // (someday, Apple will have an easy option to appear instantly)
             EditTextView(passage)
@@ -48,10 +49,24 @@ struct TextDetail: View {
         }
     }
     
-    @Environment(\.modelContext) private var modelContext
+    // MARK: - (non-views) (didDismiss())
+    
+    private func didDismiss() {
+    // (goal) (if user deleted the text) (she sees texts list)
+        let savedPassage = passages.first { passage.id == $0.id }
+        if savedPassage == nil {
+            dismiss()
+        }
+    }
+    
+    @Query
+    private var passages: [Passage]
     
     // MARK: - (non-views) (properties)
     
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+
     private var passage: Passage
     
     @State private var isShowingSheet = false

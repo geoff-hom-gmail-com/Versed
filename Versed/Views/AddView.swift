@@ -28,7 +28,7 @@ struct AddView: View {
     private var resetButton: ToolbarItem<Void, some View> {
     // (goal) (dev can browse the calling body)
         ToolbarItem(placement: .cancellationAction) {
-            Button(AppConstant.Label.reset) {
+            Button(AppConstant.Label.reset, role: .cancel) {
                 reset()
             }
             .disabled(isNoText)
