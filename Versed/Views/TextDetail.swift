@@ -7,10 +7,15 @@ struct TextDetail: View {
     // MARK: - (body)
     var body: some View {
         Form {
-            TextFieldSection(.beforeCue, text: .constant(passage.beforeCue))
-            TextFieldSection(.goalBeats, text: .constant(passage.goal))
-            TextFieldSection(.afterCue, text: .constant(passage.afterCue))
-            TextFieldSection(.notes, text: .constant(passage.notes))
+            TextSection(type: .beforeCue, text: passage.beforeCue)
+            TextSection(type: .goalBeats, text: passage.goal)
+            TextSection(type: .afterCue, text: passage.afterCue)
+            TextSection(type: .notes, text: passage.notes)
+            // (note) (was trying to use TextField) (to match EditTextView)
+            // (didn't work) (keeping notes in case) (Xcode 16.1)
+            // - (disabling TextField or TextEditor disables scrolling)
+            // - (constant binding on TextField still allows text to be entered, just not saved) (though no newlines)
+            // - (constant binding on TextEditor still shows cursor, and keyboard)
         }
         .toolbar {
             editButton
@@ -24,8 +29,6 @@ struct TextDetail: View {
         // (someday, Apple will have an easy option to appear instantly)
             EditTextView(passage)
         }
-        // TODO: - (The user can view text, but to edit it, has to tap button.)
-        // (figure out how to have scrollable, non-editable text with limited height) (see ExampleDetail)
     }
     
     // MARK: - (views) (editButton)

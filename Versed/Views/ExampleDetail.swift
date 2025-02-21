@@ -13,12 +13,6 @@ struct ExampleDetail: View {
             TextSection(type: .tip, text: example.tip)
         }
         .navigationTitle(example.type)
-        
-        // (note) (was trying to use TextField) (to match EditTextView)
-        // (didn't work) (keeping notes in case) (Xcode 16.1)
-        // - (disabling TextField or TextEditor disables scrolling)
-        // - (constant binding on TextField still allows text to be entered, just not saved) (though no newlines)
-        // - (constant binding on TextEditor still shows cursor, and keyboard)
     }
     
     // MARK: - (non-views)
