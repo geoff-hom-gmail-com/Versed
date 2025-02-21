@@ -7,7 +7,9 @@ struct MainView: View {
     // MARK: - (body)
     var body: some View {
         TabView {
+#if DEBUG
             DebugView().inTab()
+#endif
             HelpView().inTab()
             AddView().inTab()
             TextsView().inTab()
