@@ -5,35 +5,31 @@ import SwiftData
 struct TextsView: View {
 // (goal) (user can manage her texts) (parse into stanzas. Edit. Delete. See learning stats)
 // (goal) (user can see examples) (to properly create texts)
-    
-// TODO: - The user can see at a glance how she's doing with her texts.
-// (ToDo) (Goal) The user can see at a glance how she's doing with her texts.
-// She can see which ones she is reciting well, and maybe deduce why.
-// Which ones she is not reciting well, and deduce why. And know how to improve. E.g., more encoding, better encoding, recitation variety.
-// Which ones are new and still need to be encoded.
-// A custom row with encoding/recite data/scores/gauges? (Understanding? Stamina? symbols? What options are there for Vstack with symbol and text? Maybe Label can already do that, or LabeledContent)
     // MARK: - (body)
     var body: some View {
-        #if DEBUG
-//        let _ = Self._printChanges()
-        #endif
-        
         NavigationStack {
             List {
                 TextsSection()
                 ExamplesSection()
             }
-            .listStyle(.sidebar)
-            // (goal) (user can see disclosure indicators)
-
-            .lineLimit(1)
-            .truncationMode(.tail)
             .navigationDestination(for: Passage.self) {
                 TextDetail($0)
             }
             .navigationDestination(for: Example.self) {
                 ExampleDetail($0)
             }
+            .listStyle(.sidebar)
+            // (goal) (user can see disclosure indicators)
+
+            .lineLimit(1)
+            .truncationMode(.tail)
+            
+            // TODO: - The user can see at a glance how she's doing with her texts.
+            // (ToDo) (Goal) The user can see at a glance how she's doing with her texts.
+            // She can see which ones she is reciting well, and maybe deduce why.
+            // Which ones she is not reciting well, and deduce why. And know how to improve. E.g., more encoding, better encoding, recitation variety.
+            // Which ones are new and still need to be encoded.
+            // A custom row with encoding/recite data/scores/gauges? (Understanding? Stamina? symbols? What options are there for Vstack with symbol and text? Maybe Label can already do that, or LabeledContent)
         }
     }
 }

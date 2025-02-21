@@ -14,9 +14,8 @@ struct ExampleDetail: View {
         }
         .navigationTitle(example.type)
         
-        // TODO: - (goal) (user can't edit user texts, which have prompts)
         // (note) (was trying to use TextField) (to match EditTextView)
-        // (didn't work) (but keeping notes in case) (Xcode 16.1)
+        // (didn't work) (keeping notes in case) (Xcode 16.1)
         // - (disabling TextField or TextEditor disables scrolling)
         // - (constant binding on TextField still allows text to be entered, just not saved) (though no newlines)
         // - (constant binding on TextEditor still shows cursor, and keyboard)
