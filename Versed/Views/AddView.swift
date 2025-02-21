@@ -10,10 +10,10 @@ struct AddView: View {
         NavigationStack {
         // (goal) (dev has buttons to reset/save)
             Form {
-                TextFieldSection(.beforeCue, text: $beforeCue)
-                TextFieldSection(.goal, text: $goal)
-                TextFieldSection(.afterCue, text: $afterCue)
-                TextFieldSection(.notes, text: $notes)
+                TextFieldSection(type: .beforeCue, text: $beforeCue)
+                TextFieldSection(type: .goal, text: $goal)
+                TextFieldSection(type: .afterCue, text: $afterCue)
+                TextFieldSection(type: .notes, text: $notes)
             }
             .toolbar {
                 resetButton

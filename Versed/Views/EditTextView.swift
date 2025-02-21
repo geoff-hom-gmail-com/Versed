@@ -8,10 +8,10 @@ struct EditTextView: View {
         NavigationStack {
         // (goal) (user has button to cancel)
             Form {
-                TextFieldSection(.beforeCue, text: $beforeCue)
-                TextFieldSection(.goalBeats, text: $goal)
-                TextFieldSection(.afterCue, text: $afterCue)
-                TextFieldSection(.notes, text: $notes)
+                TextFieldSection(type: .beforeCue, text: $beforeCue)
+                TextFieldSection(type: .goalBeats, text: $goal)
+                TextFieldSection(type: .afterCue, text: $afterCue)
+                TextFieldSection(type: .notes, text: $notes)
                 deleteButton
             }
             .toolbar {

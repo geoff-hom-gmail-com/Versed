@@ -69,7 +69,7 @@ enum AppConstant {
             tip: """
                 Make a long text easier: parse it into beats, and paragraphs. 
                 
-                Each paragraph is quizzed separately. So, you need to know only a paragraph at a time.
+                Each paragraph is quizzed separately.
                 """
         )
         
@@ -86,11 +86,12 @@ enum AppConstant {
                 that in the same way …\"
                 """,
             goal: """
-                \"… there will be more rejoicing in heaven 
-                over
-                one sinner who repents 
-                than over 
-                ninety-nine righteous persons …\"
+                \"… there will be 
+                more rejoicing in heaven 
+                over one 
+                sinner who repents 
+                than over ninety-nine 
+                righteous persons …\"
                 """,
             afterCue: """
                 \"… who do not need to repent.\"
@@ -109,7 +110,7 @@ enum AppConstant {
         // (goal) (user sees how to update text for a Book's start)
             type: "Book start",
             beforeCue: """
-                How does the Book of John start?
+                The Book of John: starts how?
                 """,
             goal: """
                 In the beginning was 
@@ -126,9 +127,11 @@ enum AppConstant {
                 (John) (NIV)
                 """,
             tip: """
-                A text includes a Book's start. What's the before-cue? 
+                A text includes a Book's start. 
                 
-                Try something simple, like "How does <title> start?"
+                What's the before-cue? 
+                
+                Try something simple.
                 """
         )
         
@@ -149,14 +152,16 @@ enum AppConstant {
                 (Matthew) (NIV)
                 """,
             tip: """
-                A text includes a Book's end. What's the after-cue? 
+                A text includes a Book's end. 
+                
+                What's the after-cue? 
                             
-                Try something simple, like "(end)."
+                Try something simple.
                 """
         )
 
-        // (Goal) The user sees how to update text for a Psalm.
         static let psalm = Passage(
+        // (goal) (user sees how to update text for a Psalm)
             beforeCue: """
                 (Psalm) 
                 
@@ -277,6 +282,15 @@ enum AppConstant {
     
     // MARK: - (LineLimit)
     enum LineLimit {
+        static let min = 3
+        // (goal) (user knows she can enter more than just the prompt)
+
+        static let goalMin = 6
+        // (goal) (user knows this is more important than other fields, by its size)
+        
+        static let notesMin = 2
+        // (goal) (user knows this is less important than other fields, by its size)
+
         static let textLineX6_5MaxHeight: CGFloat = 146
         // (goal) (user sees a Text with the last line cut off) (she knows she can scroll)
         // (note) (use as .frame(maxHeight:))
@@ -285,37 +299,6 @@ enum AppConstant {
         
         static let textLineX11_5MaxHeight: CGFloat = 256
         // (line x11.5: why?) (chunk x4 + blank x1) (x2) (second line of next para: x1.5)
-        
-        
-        
-        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let after = 3
-        
-        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let before = 3
-        
-        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt. She knows this is more important than the other fields, by its size.
-        static let goal = 6
-        
-        // (Goal) If the user has long text, she can still navigate to other fields readily.
-        // (Goal) If the text is long enough to scroll, the user knows that.
-        //
-        // One way is to have orphan text.
-        //
-        // What if the last visible line is a paragraph break? We can at least guess what line limit may avoid that most. Assume the ideal chunking is 4 lines. So paragraph breaks would be mod 5. And the middle would be mod 5 = 2.
-        //
-        // (Note) Another option is having scrollbars always visible. But, that isn't an easy option in iOS. (Xcode 16.1)
-        static let max = 12
-        
-        // (Goal) If the text is long enough to scroll, the user knows that. Because the last line is partly hidden.
-        static let scrollHintPadding: CGFloat = -17
-        
-        // (Goal) The user sees a multiline text field. She knows she can enter more than just the prompt.
-        static let notes = 2
-        
-        static let tip = 2
-        // (goal) (user sees a multiline text field. She knows she can enter more than just the prompt)
-        // (note) (this is temp and a hack) (tips are for examples, so there is no editing)
     }
         
     // MARK: - (Prompt)

@@ -1,8 +1,8 @@
 import SwiftUI
 
-// MARK: - (TextSection(type:text:)
+// MARK: - (TextSection(type:text:))
 extension TextSection {
-// (goal) (dev can make sections with text) (browsable)
+// (goal) (dev can make a section with text) (browsable)
     enum SectionType {
         case beforeCue, goalBeats, afterCue, notes, tip
     }
@@ -14,7 +14,6 @@ extension TextSection {
             headerLabel = AppConstant.Label.beforeCue
             infoText = AppConstant.Info.beforeCue
             self.text = text
-            maxHeight = AppConstant.LineLimit.textLineX6_5MaxHeight
         case .goalBeats:
             headerImage = Image(systemName: AppConstant.SFSymbol.goalText)
             headerLabel = AppConstant.Label.goalBeats
@@ -26,17 +25,14 @@ extension TextSection {
             headerLabel = AppConstant.Label.afterCue
             infoText = AppConstant.Info.afterCue
             self.text = text
-            maxHeight = AppConstant.LineLimit.textLineX6_5MaxHeight
         case .notes:
             headerImage = Image(systemName: AppConstant.SFSymbol.notes)
             headerLabel = AppConstant.Label.notes
             self.text = text
-            maxHeight = AppConstant.LineLimit.textLineX6_5MaxHeight
         case .tip:
             headerImage = Image(systemName: AppConstant.SFSymbol.tip)
             headerLabel = AppConstant.Label.tip
             self.text = text
-            maxHeight = AppConstant.LineLimit.textLineX6_5MaxHeight
         }
     }
 }
@@ -54,6 +50,7 @@ struct TextSection: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .frame(maxHeight: maxHeight)
+            // (goal) (if the text is long enough to scroll, user knows that)
         }
     }
     
@@ -64,5 +61,5 @@ struct TextSection: View {
     private var infoText = String()
     
     private var text: String
-    private var maxHeight: CGFloat
+    private var maxHeight = AppConstant.LineLimit.textLineX6_5MaxHeight
 }
