@@ -284,6 +284,12 @@ enum AppConstant {
         )
     }
     
+    // MARK: - (FAQ)
+    enum FAQ {
+        // static let whatQ = ""
+        // static let whatA = ""
+    }
+    
     // MARK: - (Info)
     enum Info {
         // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
@@ -314,6 +320,7 @@ enum AppConstant {
         static let done = "Done"
         static let edit = "Edit"
         static let examples = "Examples"
+        static let faq = "FAQ"
         static let firstTime = "First time?"
         static let goal = "Goal"
         static let goalBeats = "(parse beats, paragraphs)"

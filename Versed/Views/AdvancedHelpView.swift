@@ -7,24 +7,7 @@ struct AdvancedHelpView: View {
     // MARK: - (body)
     var body: some View {
         DisclosureGroup(AppConstant.Label.advancedHelp) {
-            // a newbie guide under advanced doesn't make sense; move or remove
-//            DisclosureGroup("Newbie Guide") {
-//                Text("""
-//                1. Add a verse.
-//                2. Encode it in your mind.
-//                3. Recite it.
-//                    a. When notified, test. Not before.
-//                """)
-//            }
-            DisclosureGroup("FAQ") {
-                DisclosureGroup("<question 1 here>") {
-                    Text("<answer here>")
-                }
-                DisclosureGroup("<question 2 here>") {
-                    Text("<answer here>")
-                }
-            }
-            // TODO: - (faq) (make view)
+            FAQView()
 
 //            DisclosureGroup("Settings") {
 //                SettingsView()
