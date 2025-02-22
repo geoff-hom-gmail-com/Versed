@@ -1,17 +1,20 @@
 import SwiftUI
 
-// (Goal) If the user has an app question, she can get help here.
-// (MVP) Experts only (not tech newbs) (not learning newbs) (not even newbs to this app =)
+// MARK: - (HelpView)
 struct HelpView: View {
+// (goal) (user sees welcoming start)
+// (goal) (examples didn't answer user's question) (she finds help here)
+    // MARK: - (body)
     var body: some View {
         List {
             WelcomeToView()
             FirstTimeView()
-            HelpAdvancedView()
+            AdvancedHelpView()
         }
     }
 }
 
+// MARK: - (preview)
 #Preview {
     HelpView()
 }

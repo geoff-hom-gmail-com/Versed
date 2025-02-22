@@ -254,6 +254,7 @@ enum AppConstant {
     // MARK: - (Label)
     enum Label {
         static let add = "Add"
+        static let appName = "Versed"
         static let afterCue = "After"
         static let beforeCue = "Before"
         static let cancel = "Cancel"
@@ -263,6 +264,7 @@ enum AppConstant {
         static let done = "Done"
         static let edit = "Edit"
         static let examples = "Examples"
+        static let firstTime = "First time?"
         static let goal = "Goal"
         static let goalBeats = "(parse beats, paragraphs)"
         static let help = "Help"
@@ -278,6 +280,7 @@ enum AppConstant {
         static let texts = "Texts"
         static let tip = "Tip"
         static let unknown = "Unknown"
+        static let welcomeTo = "Welcome to …"
     }
     
     // MARK: - (LineLimit)

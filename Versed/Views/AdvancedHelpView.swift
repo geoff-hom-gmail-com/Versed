@@ -1,9 +1,12 @@
 import SwiftUI
 
-// (Goal) The user can get advanced help. But it doesn't distract a new user.
-struct HelpAdvancedView: View {
+// MARK: - (AdvancedHelpView)
+struct AdvancedHelpView: View {
+// (goal) (examples didn't answer user's question) (she finds help here)
+// (goal) (doesn't distract/overwhelm new user)
+    // MARK: - (body)
     var body: some View {
-        // note: eventually all this should be localized
+        // ToDO: eventually all this should be localized
         DisclosureGroup("Advanced Help") {
             // a newbie guide under advanced doesn't make sense; we may move this or remove
 //            DisclosureGroup("Newbie Guide") {
@@ -47,8 +50,7 @@ struct HelpAdvancedView: View {
                 Text("""
                 Feedback may be sent to: 
                 
-                    (?) geoff.hom@gmail.com? 
-                    versed@gmail.com?
+                    versed.feedback@gmail.com
                 """)
             }
         }

@@ -1,22 +1,20 @@
 import SwiftUI
 
-// (Goal) The user thinks, "This app is for getting text/verses into my brain."
+// MARK: - (WelcomeToView)
 struct WelcomeToView: View {
+// (goal) (user thinks, "This app is for getting text/verses into my brain.")
+    // MARK: - (body)
     var body: some View {
-        // Inspired by "Welcome to …" board games.
-        // (toDo) Maybe old-school font.
-        GroupBox(label: Text("Welcome to …")) {
+        GroupBox(label: Text(AppConstant.Label.welcomeTo)) {
+        // (note) (inspired by logo for board game: "Welcome to …")
+        // TODO: - (maybe) (use old-school font, angle similar to game) (but not same)
             Spacer()
-            // (Keep) (Goal) The dev can see the vertical Spacer.
 //                .background(Color.yellow.frame(minWidth: 10))
-
+                // (keep) (goal) (dev can see the vertical spacer)
             Spacer()
-//                .background(Color.blue.frame(minWidth: 10))
-            Text("Versed")
+            Text(AppConstant.Label.appName)
                 .font(.largeTitle)
-//                .font(.system(size: 36))
             Spacer()
-//                .background(Color.blue.frame(minWidth: 10))
             HStack {
                 Image(systemName: AppConstant.SFSymbol.goalText)
                 Image(systemName: AppConstant.SFSymbol.arrow)
@@ -26,6 +24,7 @@ struct WelcomeToView: View {
     }
 }
 
+// MARK: - (preview)
 #Preview {
     WelcomeToView()
 }
