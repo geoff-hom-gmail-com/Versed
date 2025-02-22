@@ -326,6 +326,7 @@ enum AppConstant {
         static let goalBeats = "(parse beats, paragraphs)"
         static let help = "Help"
         static let info = "Info"
+        static let input = "Input"
         static let know = "Know"
         static let mistakesFixed = "Mistakes fixed?"
         static let notes = "Reference / notes"

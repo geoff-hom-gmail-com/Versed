@@ -32,14 +32,20 @@ struct QuizView: View {
         if let passage = paragraph.passage {
             
             let paragraphs = passage.orderedParagraphs
-            if let index = paragraphs.firstIndex(of: paragraph),
-               index != paragraphs.indices.first {
-                
-                let beforeParagraph = paragraphs[index - 1]
-                Text(beforeParagraph.text)
-            } else {
-                Text(passage.beforeCue)
+            
+            var text: String {
+                if let index = paragraphs.firstIndex(of: paragraph),
+                   index != paragraphs.indices.first {
+                    
+                    let beforeParagraph = paragraphs[index - 1]
+                    return beforeParagraph.text
+                } else {
+                    return passage.beforeCue
+                }
             }
+            
+            Text(text)
+            // (note) (no maxHeight set) (if an issue, add ScrollView)
         }
     }
     
@@ -51,6 +57,8 @@ struct QuizView: View {
             if isCheckingAnswer {
                 goal
                     .transition(.move(edge: .trailing))
+                    // TODO: - (fix transition) (if desired)
+                    // (note) (slide-in worked until feedbackView added)
             }
         }
         .listRowSeparator(.hidden)
@@ -63,14 +71,20 @@ struct QuizView: View {
         if let passage = paragraph.passage {
             
             let paragraphs = passage.orderedParagraphs
-            if let index = paragraphs.firstIndex(of: paragraph),
-               index != paragraphs.indices.last {
-                
-                let afterParagraph = paragraphs[index + 1]
-                Text(afterParagraph.text)
-            } else {
-                Text(passage.afterCue)
+            
+            var text: String {
+                if let index = paragraphs.firstIndex(of: paragraph),
+                   index != paragraphs.indices.last {
+                    
+                    let afterParagraph = paragraphs[index + 1]
+                    return afterParagraph.text
+                } else {
+                    return passage.afterCue
+                }
             }
+            
+            Text(text)
+            // (note) (no maxHeight set) (if an issue, add ScrollView)
         }
     }
     
@@ -105,11 +119,13 @@ struct QuizView: View {
     @ViewBuilder
     private var inputTextField: some View {
         TextField(
-            "input",
+            AppConstant.Label.input,
             text: $input,
             prompt: Text("(dictate or type)"),
             axis: .vertical)
-        .lineLimit(5...7)
+        .lineLimit(AppConstant.LineLimit.goalMin...)
+        // (goal) (user sees plenty of room to enter answer) (which is the focus)
+        // (note) (no maxHeight set) (if an issue, add that or max lineLimit)
     }
     
     @ViewBuilder
