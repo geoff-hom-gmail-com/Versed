@@ -7,6 +7,12 @@ enum AppConstant {
         static let new = "New"
     }
     
+    // MARK: - (Credit)
+    enum Credit {
+        static let dave = "Dave Bradley (production)"
+        static let geoff = "Geoff Hom (design) (code)"
+    }
+    
     // MARK: - (Date)
     enum Date {
         static let daySeconds: TimeInterval = 86400
@@ -18,6 +24,11 @@ enum AppConstant {
         static let spacing = 2.5
         // (goal) (user sees quizzes spaced out)
         // (note) (SM-2 Easy-Factor)
+    }
+    
+    // MARK: - (Email)
+    enum Email {
+        static let feedback: LocalizedStringKey = "versed.feedback@gmail.com"
     }
     
     // MARK: - (Emoji)
@@ -290,11 +301,14 @@ enum AppConstant {
     // MARK: - (Label)
     enum Label {
         static let add = "Add"
+        static let advancedHelp = "Advanced Help"
         static let appName = "Versed"
         static let afterCue = "After"
         static let beforeCue = "Before"
         static let cancel = "Cancel"
         static let check = "Check"
+        static let code = "Code"
+        static let contact = "Contact"
         static let debug = "Debug"
         static let deleteText = "Delete Text"
         static let done = "Done"
@@ -469,5 +483,10 @@ enum AppConstant {
     // MARK: - (Text)
     enum Text {
         static let paragraphBreak = "\n\n"
+    }
+    
+    // MARK: - (URL)
+    enum URL {
+        static let repo: LocalizedStringKey = "https://github.com/geoff-hom-gmail-com/Versed"
     }
 }

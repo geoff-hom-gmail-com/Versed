@@ -6,9 +6,8 @@ struct AdvancedHelpView: View {
 // (goal) (doesn't distract/overwhelm new user)
     // MARK: - (body)
     var body: some View {
-        // ToDO: eventually all this should be localized
-        DisclosureGroup("Advanced Help") {
-            // a newbie guide under advanced doesn't make sense; we may move this or remove
+        DisclosureGroup(AppConstant.Label.advancedHelp) {
+            // a newbie guide under advanced doesn't make sense; move or remove
 //            DisclosureGroup("Newbie Guide") {
 //                Text("""
 //                1. Add a verse.
@@ -25,33 +24,46 @@ struct AdvancedHelpView: View {
                     Text("<answer here>")
                 }
             }
-            DisclosureGroup("Settings") {
-                SettingsView()
-                
-            }
+            // TODO: - (faq) (make view)
+
+//            DisclosureGroup("Settings") {
+//                SettingsView()
+//                
+//            }
+            // TODO: - (settings) (add when needed)
+            
             DisclosureGroup("Donate") {
-                Text("TBD")
-            }
-            DisclosureGroup("Code") {
-                // The URL is automatically made into a working link!
                 Text("""
-                Versed's code is on GitHub:
-                
-                    https://github.com/geoff-hom-gmail-com/Versed.
-                """)
+                If you wish to support us financially, inquire at: 
+                                        
+                    
+                """) +
+                    Text(AppConstant.Email.feedback)
+                // (note) (whitespaced so the link is indented)
             }
-            DisclosureGroup("Contact") {
+            DisclosureGroup(AppConstant.Label.code) {
                 Text("""
-                Versed was created by:
+                \(AppConstant.Label.appName)'s code is on GitHub:
                 
-                    Dave Bradley (production)
-                    Geoff Hom (design) (code)
+                    
+                """) +
+                    Text(AppConstant.URL.repo)
+                // (note) (whitespaced so the link is indented)
+            }
+            DisclosureGroup(AppConstant.Label.contact) {
+                Text("""
+                \(AppConstant.Label.appName) was created by:
+                
+                    \(AppConstant.Credit.dave)
+                    \(AppConstant.Credit.geoff)
                 """)
                 Text("""
                 Feedback may be sent to: 
-                
-                    versed.feedback@gmail.com
-                """)
+                                        
+                    
+                """) +
+                    Text(AppConstant.Email.feedback)
+                // (note) (whitespaced so the link is indented)
             }
         }
     }
