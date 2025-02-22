@@ -7,10 +7,10 @@ struct FAQView: View {
     // MARK: - (body)
     var body: some View {
         DisclosureGroup(AppConstant.Label.faq) {
-            DisclosureGroup("<question 1 here>") {
+            DisclosureGroup("<coming>") {
                 Text("<answer here>")
             }
-            DisclosureGroup("<question 2 here>") {
+            DisclosureGroup("<coming>") {
                 Text("<answer here>")
             }
         }
