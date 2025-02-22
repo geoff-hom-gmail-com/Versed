@@ -33,10 +33,12 @@ enum AppConstant {
             AppConstant.ExampleText.multiverse,
             AppConstant.ExampleText.universe,
             AppConstant.ExampleText.start,
-            AppConstant.ExampleText.end
+            AppConstant.ExampleText.end,
+            AppConstant.ExampleText.psalm,
+            AppConstant.ExampleText.secularShort,
+            AppConstant.ExampleText.secularLong
         ]
         // (note) (example order is intentional) (multiverse is most common use case; related are universe, start, end)
-        // TODO: - finish/fix examples and add here
 
         static let multiverse = Example(
         // (goal) (user sees how to update text for the most common example) (multiple paragraphs)
@@ -64,7 +66,7 @@ enum AppConstant {
                 \"If you do not remain in me, you are like a branch that is thrown away and withers …\"
                 """,
             notes: """
-                (John) (NIV)
+                John (NIV)
                 """,
             tip: """
                 Make a long text easier: parse it into beats, and paragraphs. 
@@ -97,7 +99,7 @@ enum AppConstant {
                 \"… who do not need to repent.\"
                 """,
             notes: """
-                (Luke) (NIV)
+                Luke (NIV)
                 """,
             tip: """
                 Parse your text freely. 
@@ -124,7 +126,7 @@ enum AppConstant {
                 He was with God in the beginning …
                 """,
             notes: """
-                (John) (NIV)
+                John (NIV)
                 """,
             tip: """
                 A text includes a Book's start. 
@@ -149,7 +151,7 @@ enum AppConstant {
                 """,
             afterCue: "(end)",
             notes: """
-                (Matthew) (NIV)
+                Matthew (NIV)
                 """,
             tip: """
                 A text includes a Book's end. 
@@ -160,12 +162,11 @@ enum AppConstant {
                 """
         )
 
-        static let psalm = Passage(
+        static let psalm = Example(
         // (goal) (user sees how to update text for a Psalm)
+            type: "Psalm",
             beforeCue: """
-                (Psalm) 
-                
-                How does Psalm 23 start?
+                Psalm 23: starts how?
                 """,
             goal: """
                 The Lord is my 
@@ -177,64 +178,99 @@ enum AppConstant {
                 He makes me lie down in green pastures …
                 """,
             notes: """
-                In most Books, the chapter numbers are arbitrary and divisive. In Psalms, it makes more sense.
+                Psalm 23 (NIV)
+                """,
+            tip: """
+                In most Bible Books, the chapter divisions are … unoriginal. 
                 
-                (example is from Psalm 23) (NIV)
-                """)
+                In Psalms, they are inherent.
+                """
+        )
         
-        // (Goal) The user sees how to update text for overlapping/consecutive multiverses.
-        // should be long enough to make sense; not so short that it's confusing where the overlap is
         static let serialMultiverse1 = ""
+        // (goal) (user sees how to update text for overlapping/consecutive multiverses)
+        // should be long enough to make sense; not so short that it's confusing where the overlap is
+        // TODO: - (if needed) (serialMultiverse1)
         
         static let serialMultiverse2 = ""
         
-        // (Goal) The user sees how to update text for secular work.
-        static let secularLong = Passage(
+        static let secularShort = Example(
+        // (goal) (user sees how to update text for secular work)
+        // (in this case, an isolated quote) (Bible has none)
+            type: "isolated quote",
             beforeCue: """
-                (secular) (long)
-                
-                (official) 
-                
-
-                It is not the critic who counts; not the man who points out how the strong man stumbles or where the doer of deeds could have done them better. 
-                
-                The credit belongs to the man who is actually in the arena, whose face is marred by dust and sweat and blood; who strives valiantly; who errs, and comes short again and again, because there is no effort without error and shortcoming; but who does actually strive to do the deeds; who knows the great enthusiasms, the great devotions; who spends himself in a worthy cause; who at the best knows in the end the triumph of high achievement, and who at the worst, if he fails, at least fails while daring greatly, so that his place shall never be with those cold and timid souls who know neither victory nor defeat. 
-                
-                Shame on the man of cultivated taste who permits refinement to develop into a fastidiousness that unfits him for doing the rough work of a workaday world! 
-                
-                ”
-                """,
-            goal: """
-                (supermemo) (replace)
-                The credit belongs to the man who’s actually in the arena, whose face is marred by dust and sweat; a man who knows the great enthusiasm and the great devotions, who spends himself in a worthy cause, who in the end knows the triumph of high achievement, so that his place shall never be with those cold and timid souls who know neither victory nor defeat
-                """,
-                                         // TODO: - update each with """
-
-            afterCue: "He makes me lie down in green pastures …",
-            notes: """
-                This app was designed for the Bible. But secular writing can be done.
-                
-                (example is from Teddy Roosevelt)
-                """)
-        
-        // (Goal) The user sees how to update text for secular work. In this case, an isolated quote. (The Bible has none.)
-        static let secularShort = Passage(
-            beforeCue: """
-                (secular) (short)
-                
-                question?
+                FDR quote. Struggle -> growth.
                 """,
             goal: """
                 a smooth sea 
                 never made 
                 a skilled sailor
                 """,
-            afterCue: "",
+            afterCue: """
+                In the end, how might this be better?
+                """,
             notes: """
-                This app was designed for the Bible. But secular writing can be done.
-                """)
+                FDR
+                """,
+            tip: """
+                \(AppConstant.Label.appName) was designed for the Bible. 
+                
+                But as a tool, you can co-opt it as you see fit.
+                """
+        )
         
-        
+        static let secularLong = Example(
+        // (goal) (user sees how to update text for secular work) (long)
+            type: "oratory",
+            beforeCue: """
+                It is not the critic who counts; not the man who points out how the strong man stumbles or where the doer of deeds could have done them better. 
+                """,
+            goal: """
+                The credit belongs to the man who 
+                is actually in the arena, 
+                whose face is marred 
+                by dust and sweat and blood; 
+                
+                who strives valiantly; 
+                who errs, 
+                and comes short again and again, 
+                because there is no 
+                effort without error and shortcoming; 
+                
+                but who does actually 
+                strive to do the deeds; 
+                who knows the great enthusiasms, 
+                the great devotions; 
+                
+                who spends himself in a worthy cause; 
+                who at the best 
+                knows in the end 
+                the triumph of high achievement, 
+                
+                and who at the worst, 
+                if he fails, 
+                at least fails 
+                while daring greatly, 
+                
+                so that his place 
+                shall never be with 
+                those cold and timid souls 
+                who know neither victory nor defeat. 
+                """,
+            afterCue: """
+                Shame on the man of cultivated taste who permits refinement to develop into a fastidiousness that unfits him for doing the rough work of a workaday world! 
+                """,
+            notes: """
+                Teddy Roosevelt
+                
+                (in honor of a Supermemo example)
+                """,
+            tip: """
+                \(AppConstant.Label.appName) was designed for the Bible. 
+                
+                But as a tool, you can co-opt it as you see fit.
+                """
+        )
     }
     
     // MARK: - (Info)
