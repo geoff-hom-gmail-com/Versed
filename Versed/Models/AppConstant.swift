@@ -286,8 +286,10 @@ enum AppConstant {
     
     // MARK: - (FAQ)
     enum FAQ {
-        // static let whatQ = ""
-        // static let whatA = ""
+        static let whatQ = "What is \(Label.appName) all about?"
+        static let whatA = ""
+        static let howQ = "How does \(Label.appName) work?"
+        static let howA = ""
     }
     
     // MARK: - (Info)
@@ -316,8 +318,10 @@ enum AppConstant {
         static let check = "Check"
         static let code = "Code"
         static let contact = "Contact"
+        static let credits = "Credits"
         static let debug = "Debug"
         static let deleteText = "Delete Text"
+        static let donate = "Donate"
         static let done = "Done"
         static let edit = "Edit"
         static let editIntervals = "Edit Intervals"
