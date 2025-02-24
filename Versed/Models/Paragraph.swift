@@ -36,8 +36,7 @@ final class Paragraph {
                 } else {
                     status = .rooted
                 }
-                readyDate.addTimeInterval(newInterval)
-                // TODO: - (fix this bug) (should be priorQuizDate + newInterval)
+                readyDate = priorQuizDate + newInterval
                 // (goal)
                 // (if old interval: < day x1) (next interval: day x1)
                 // (to sleep/consolidate)
@@ -50,9 +49,7 @@ final class Paragraph {
         case .rooted:
             switch feedback {
             case .good:
-                readyDate.addTimeInterval(newInterval)
-                // TODO: - (fix this bug) (should be priorQuizDate + newInterval)
-
+                readyDate = priorQuizDate + newInterval
             case .retry:
                 status = .sprout
                 readyDate = Date.now
