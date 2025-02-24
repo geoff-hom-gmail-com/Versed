@@ -50,18 +50,16 @@ struct TextDetail: View {
             
             Toggle(isOn: $showIntervals) {
                 HStack {
-                    Text("Show Intervals")
-                    // TODO: - (move to app constant)
+                    Text(AppConstant.Label.showIntervals)
                     // TODO: - (prepend sf symbol for intervals?)
 
-                    InfoButton(popoverText: "The time between quizzes. As you grow, this increases exponentially.")
-                    // TODO: - (move to app constant)
+                    InfoButton(popoverText: AppConstant.Info.showIntervals)
                 }
             }
             
-            Button("Edit Intervals") {
-                // TODO: - (move to app constant)
-
+            Button(AppConstant.Label.editIntervals) {
+                // TODO: - (implement)
+                // (also TODO let the user easily update the stats manually) (e.g., bring new paras up to neighboring paras)
             }
         }
     }

@@ -24,7 +24,6 @@ final class Passage: TextModel {
 
         // TODO: - (fix for multiverse)
         // (ideally for multi-para) (keep dates for unchanged paras)
-        // (also TODO let the user easily update the stats manually) (e.g., bring new paras up to neighboring paras)
     }
     
     // MARK: - (properties) (other)

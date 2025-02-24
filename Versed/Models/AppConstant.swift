@@ -302,6 +302,7 @@ enum AppConstant {
         static let goal = "The text you want to know."
         static let goalBeats = "The text you want to know. Each paragraph is quizzed separately. Magically."
         static let myTexts = "Showing: before-cue."
+        static let showIntervals = "The time between quizzes. As you grow, this increases exponentially."
     }
     
     // MARK: - (Label)
@@ -319,6 +320,7 @@ enum AppConstant {
         static let deleteText = "Delete Text"
         static let done = "Done"
         static let edit = "Edit"
+        static let editIntervals = "Edit Intervals"
         static let examples = "Examples"
         static let faq = "FAQ"
         static let firstTime = "First time?"
@@ -335,6 +337,7 @@ enum AppConstant {
         // (goal) (app can request quiz feedback from user)
         
         static let reset = "Reset"
+        static let showIntervals = "Show Intervals"
         static let texts = "Texts"
         static let tip = "Tip"
         static let unknown = "Unknown"
