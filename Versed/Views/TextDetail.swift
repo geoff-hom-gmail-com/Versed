@@ -8,7 +8,7 @@ struct TextDetail: View {
     var body: some View {
         Form {
             TextSection(type: .beforeCue, text: passage.beforeCue)
-            TextSection(type: .goalBeats, text: passage.goal)
+            goalBeatsSection
             TextSection(type: .afterCue, text: passage.afterCue)
             TextSection(type: .notes, text: passage.notes)
             // (note) (was trying to use TextField) (to match EditTextView)
@@ -30,7 +30,42 @@ struct TextDetail: View {
             EditTextView(passage)
         }
     }
+
+    // MARK: - (views) (goalBeatsSection)
     
+    @ViewBuilder
+    private var goalBeatsSection: some View {
+    // (goal) (user can see goal) (she can see intervals)
+        Section(
+            header: SectionHeader(
+                image: Image(systemName: AppConstant.SFSymbol.goalText),
+                label: AppConstant.Label.goalBeats,
+                infoText: AppConstant.Info.goalBeats)
+        ) {
+            ScrollView {
+                goalBeatsText
+            }
+            .frame(maxHeight: AppConstant.LineLimit.textLineX11_5MaxHeight)
+            // (goal) (if the text is long enough to scroll, user knows that)
+            
+            Toggle(isOn: $showIntervals) {
+                HStack {
+                    Text("Show Intervals")
+                    // TODO: - (move to app constant)
+                    // TODO: - (prepend sf symbol for intervals?)
+
+                    InfoButton(popoverText: "The time between quizzes. As you grow, this increases exponentially.")
+                    // TODO: - (move to app constant)
+                }
+            }
+            
+            Button("Edit Intervals") {
+                // TODO: - (move to app constant)
+
+            }
+        }
+    }
+
     // MARK: - (views) (editButton)
     
     private var editButton: ToolbarItem<Void, some View> {
@@ -40,6 +75,16 @@ struct TextDetail: View {
                 isShowingSheet.toggle()
             }
         }
+    }
+    
+    // MARK: - (views) (goalBeatsText)
+    
+    @ViewBuilder
+    private var goalBeatsText: some View {
+    // (goal) (user can see goal) (option: and intervals)
+        let text = showIntervals ? passage.goalWithIntervals : passage.goal
+        Text(text)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     // MARK: - (non-views) (unNew())
@@ -72,6 +117,7 @@ struct TextDetail: View {
 
     private var passage: Passage
     
+    @State private var showIntervals = false
     @State private var isShowingSheet = false
     
     // MARK: - (init(_:))

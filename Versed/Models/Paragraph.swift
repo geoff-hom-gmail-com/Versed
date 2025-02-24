@@ -37,6 +37,7 @@ final class Paragraph {
                     status = .rooted
                 }
                 readyDate.addTimeInterval(newInterval)
+                // TODO: - (fix this bug) (should be priorQuizDate + newInterval)
                 // (goal)
                 // (if old interval: < day x1) (next interval: day x1)
                 // (to sleep/consolidate)
@@ -50,6 +51,8 @@ final class Paragraph {
             switch feedback {
             case .good:
                 readyDate.addTimeInterval(newInterval)
+                // TODO: - (fix this bug) (should be priorQuizDate + newInterval)
+
             case .retry:
                 status = .sprout
                 readyDate = Date.now
@@ -76,6 +79,23 @@ final class Paragraph {
     // (note) (SwiftData does not preserve array order for objects) (Xcode 16.1)
     
     var text: String
+    
+    var intervalAbbr: String {
+    // (goal) (user sees interval value, abbreviated)
+        let formatter = DateComponentsFormatter()
+        formatter.maximumUnitCount = 1
+        formatter.allowsFractionalUnits = true
+        // TODO: - (see if this actually works?) (fractional) (hopefully just one decimal)
+        
+        formatter.allowedUnits = [.minute, .hour, .day, .month, .year]
+        // (goal) (user not stressed by seeing seconds)
+        
+        formatter.unitsStyle = .short
+        // (goal) (user sees like "4 hr" not "4hr")
+        
+        let string = formatter.string(from: priorQuizDate, to: readyDate)
+        return string ?? String()
+    }
     
     var readyDate = Date.now
     // (goal) (user can be quizzed on her paragraph immediately)

@@ -27,7 +27,7 @@ final class Passage: TextModel {
         // (also TODO let the user easily update the stats manually) (e.g., bring new paras up to neighboring paras)
     }
     
-    // MARK: - (properties)
+    // MARK: - (properties) (other)
     
     var isNew = true
     // (goal) (user can easily find the text she just added)
@@ -37,6 +37,13 @@ final class Passage: TextModel {
     // (note) (SwiftData does not preserve array order for objects) (Xcode 16.1)
         
     var beforeCue: String
+    
+    var goalWithIntervals: String {
+    // (goal) (user can see each paragraph, with its interval underneath)
+        orderedParagraphs
+            .map { $0.text + AppConstant.Text.lineBreak + "(" + $0.intervalAbbr + ")" }
+            .joined(separator: AppConstant.Text.paragraphBreak)
+    }
     
     var goal: String
     // (note) (tried didSet to call updateParagraphs())

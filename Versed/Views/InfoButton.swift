@@ -14,8 +14,12 @@ struct InfoButton: View {
         .labelStyle(.iconOnly)
         .popover(isPresented: $isShowingHelp) {
             Text(popoverText)
-                .padding()
                 .presentationCompactAdaptation(.popover)
+            
+                .fixedSize(horizontal: false, vertical: true)
+                // (note) (in toggle, needed to avoid truncation)
+            
+                .padding()
         }
     }
 }

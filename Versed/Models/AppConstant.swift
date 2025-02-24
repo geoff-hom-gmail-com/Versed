@@ -490,6 +490,7 @@ enum AppConstant {
     
     // MARK: - (Text)
     enum Text {
+        static let lineBreak = "\n"
         static let paragraphBreak = "\n\n"
     }
     
