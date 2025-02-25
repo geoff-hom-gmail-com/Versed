@@ -40,7 +40,7 @@ final class Passage: TextModel {
     var goalWithIntervals: String {
     // (goal) (user can see each paragraph, with its interval underneath)
         orderedParagraphs
-            .map { $0.text + AppConstant.Text.lineBreak + "(" + $0.intervalAbbr + ")" }
+            .map { $0.text + AppConstant.Text.lineBreak + "(" + Paragraph.abbr(from: $0.interval) + ")" }
             .joined(separator: AppConstant.Text.paragraphBreak)
     }
     

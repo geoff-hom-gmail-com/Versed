@@ -18,16 +18,21 @@ struct TextDetail: View {
             // - (constant binding on TextEditor still shows cursor, and keyboard)
         }
         .toolbar {
-            editButton
+            editTextButton
         }
+        // TODO: - (make Back button just a symbol) (see Contacts app)
+
         .onAppear {
             unNew()
         }
         .scrollDismissesKeyboard(.immediately)
-        .fullScreenCover(isPresented: $isShowingSheet, onDismiss: didDismiss) {
+        .fullScreenCover(isPresented: $isEditingText, onDismiss: didDismiss) {
         // (note) (slides up) (Xcode 16.1) (vs Contacts app is instant)
         // (someday, Apple will have an easy option to appear instantly)
             EditTextView(passage)
+        }
+        .fullScreenCover(isPresented: $isEditingIntervals) {
+            EditIntervalsView(passage.orderedParagraphs)
         }
     }
 
@@ -58,19 +63,18 @@ struct TextDetail: View {
             }
             
             Button(AppConstant.Label.editIntervals) {
-                // TODO: - (implement)
-                // (also TODO let the user easily update the stats manually) (e.g., bring new paras up to neighboring paras)
+                isEditingIntervals.toggle()
             }
         }
     }
 
     // MARK: - (views) (editButton)
     
-    private var editButton: ToolbarItem<Void, some View> {
+    private var editTextButton: ToolbarItem<Void, some View> {
     // (goal) (dev can browse the calling body)
-        ToolbarItem(placement: .confirmationAction) {
-            Button(AppConstant.Label.edit) {
-                isShowingSheet.toggle()
+        ToolbarItem(placement: .topBarTrailing) {
+            Button(AppConstant.Label.editText) {
+                isEditingText.toggle()
             }
         }
     }
@@ -115,8 +119,9 @@ struct TextDetail: View {
 
     private var passage: Passage
     
+    @State private var isEditingText = false
     @State private var showIntervals = false
-    @State private var isShowingSheet = false
+    @State private var isEditingIntervals = false
     
     // MARK: - (init(_:))
     init(_ passage: Passage) {

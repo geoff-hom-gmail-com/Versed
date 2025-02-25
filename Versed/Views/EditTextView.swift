@@ -6,7 +6,7 @@ struct EditTextView: View {
     // MARK: - (body)
     var body: some View {
         NavigationStack {
-        // (goal) (user has button to cancel)
+        // (goal) (user has toolbar buttons)
             Form {
                 TextFieldSection(type: .beforeCue, text: $beforeCue)
                 TextFieldSection(type: .goalBeats, text: $goal)
@@ -14,6 +14,8 @@ struct EditTextView: View {
                 TextFieldSection(type: .notes, text: $notes)
                 deleteButton
             }
+            .navigationTitle(AppConstant.Label.editText)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 cancelButton
                 doneButton

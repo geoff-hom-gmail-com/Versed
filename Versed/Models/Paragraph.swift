@@ -17,6 +17,50 @@ final class Paragraph {
         return paragraphs
     }
     
+    static func abbr(from interval: TimeInterval) -> String {
+    // (goal) (user sees interval value, abbreviated)
+        let formatter = DateComponentsFormatter()
+        formatter.maximumUnitCount = 1
+        
+        formatter.allowsFractionalUnits = true
+        // (bug) (doesn't work) (Xcode 16.1) (seems that way for years)
+
+        formatter.allowedUnits = [.minute, .hour, .day, .month, .year]
+        // (goal) (user not stressed by seeing seconds)
+        
+        formatter.unitsStyle = .short
+        // (goal) (user sees like "4 hr" not "4hr")
+        
+        let string = formatter.string(from: interval)
+        return string ?? String()
+    }
+    
+    static func newInterval(from current: TimeInterval) -> TimeInterval {
+    // (goal) (user can manually increase quiz interval)
+    // (note) (similar to paragraph.update(feedback:)) (without randomness)
+        let oneDay = AppConstant.Date.daySeconds
+        switch current {
+        case ..<oneDay:
+            return oneDay
+        default:
+            return current * AppConstant.Date.spacing
+        }
+    }
+    
+    static func oldInterval(from current: TimeInterval) -> TimeInterval {
+    // (goal) (user can manually decrease quiz interval)
+    // (note) (similar to paragraph.update(feedback:)) (without randomness)
+        let oneDay = AppConstant.Date.daySeconds
+        switch current {
+        case ...oneDay:
+            return 0
+        case oneDay..<oneDay * AppConstant.Date.spacing:
+            return oneDay
+        default:
+            return current / AppConstant.Date.spacing
+        }
+    }
+    
     // MARK: - (instance functions)
     
     func update(feedback: QuizFeedback) {
@@ -77,22 +121,27 @@ final class Paragraph {
     
     var text: String
     
-    var intervalAbbr: String {
-    // (goal) (user sees interval value, abbreviated)
-        let formatter = DateComponentsFormatter()
-        formatter.maximumUnitCount = 1
-        formatter.allowsFractionalUnits = true
-        // TODO: - (see if this actually works?) (fractional) (hopefully just one decimal)
-        
-        formatter.allowedUnits = [.minute, .hour, .day, .month, .year]
-        // (goal) (user not stressed by seeing seconds)
-        
-        formatter.unitsStyle = .short
-        // (goal) (user sees like "4 hr" not "4hr")
-        
-        let string = formatter.string(from: priorQuizDate, to: readyDate)
-        return string ?? String()
+    var interval: TimeInterval {
+        readyDate.timeIntervalSince(priorQuizDate)
     }
+    
+//    var intervalAbbr: String {
+//    // (goal) (user sees interval value, abbreviated)
+//        let formatter = DateComponentsFormatter()
+//        formatter.maximumUnitCount = 1
+//        formatter.allowsFractionalUnits = true
+//        // TODO: - (see if this actually works?) (fractional) (hopefully just one decimal)
+//        
+//        formatter.allowedUnits = [.minute, .hour, .day, .month, .year]
+//        // (goal) (user not stressed by seeing seconds)
+//        
+//        formatter.unitsStyle = .short
+//        // (goal) (user sees like "4 hr" not "4hr")
+//        
+////        let string = formatter.string(from: priorQuizDate, to: readyDate)
+//        let string = formatter.string(from: interval)
+//        return string ?? String()
+//    }
     
     var readyDate = Date.now
     // (goal) (user can be quizzed on her paragraph immediately)

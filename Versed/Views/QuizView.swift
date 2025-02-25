@@ -30,9 +30,7 @@ struct QuizView: View {
     private var beforeCue: some View {
     // (goal) (user sees text before quiz paragraph)
         if let passage = paragraph.passage {
-            
             let paragraphs = passage.orderedParagraphs
-            
             var text: String {
                 if let index = paragraphs.firstIndex(of: paragraph),
                    index != paragraphs.indices.first {
@@ -43,7 +41,6 @@ struct QuizView: View {
                     return passage.beforeCue
                 }
             }
-            
             Text(text)
             // (note) (no maxHeight set) (if an issue, add ScrollView)
         }
@@ -69,9 +66,7 @@ struct QuizView: View {
     private var afterCue: some View {
     // (goal) (user sees text after quiz paragraph)
         if let passage = paragraph.passage {
-            
             let paragraphs = passage.orderedParagraphs
-            
             var text: String {
                 if let index = paragraphs.firstIndex(of: paragraph),
                    index != paragraphs.indices.last {
@@ -82,7 +77,6 @@ struct QuizView: View {
                     return passage.afterCue
                 }
             }
-            
             Text(text)
             // (note) (no maxHeight set) (if an issue, add ScrollView)
         }
