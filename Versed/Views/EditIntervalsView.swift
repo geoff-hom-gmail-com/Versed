@@ -81,13 +81,11 @@ struct EditIntervalsView: View {
 
     private var paragraphs: [Paragraph]
     
-//    @State private var intervals: [TimeInterval]
     @State private var tempParagraphs: [Paragraph]
 
     // MARK: - (init(_:))
     init(_ paragraphs: [Paragraph]) {
         self.paragraphs = paragraphs
-//        self.intervals = self.paragraphs.map { $0.interval }
         self.tempParagraphs = self.paragraphs.map { Paragraph(text: $0.text, readyDate: $0.readyDate, priorQuizDate: $0.priorQuizDate, status: $0.status) }
     }
 }

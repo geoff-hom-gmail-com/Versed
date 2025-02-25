@@ -35,32 +35,6 @@ final class Paragraph {
         return string ?? String()
     }
     
-//    static func newInterval(from current: TimeInterval) -> TimeInterval {
-//    // (goal) (user can manually increase quiz interval)
-//    // (note) (similar to paragraph.update(feedback:)) (without randomness)
-//        let oneDay = AppConstant.Date.daySeconds
-//        switch current {
-//        case ..<oneDay:
-//            return oneDay
-//        default:
-//            return current * AppConstant.Date.spacing
-//        }
-//    }
-//    
-//    static func oldInterval(from current: TimeInterval) -> TimeInterval {
-//    // (goal) (user can manually decrease quiz interval)
-//    // (note) (similar to paragraph.update(feedback:)) (without randomness)
-//        let oneDay = AppConstant.Date.daySeconds
-//        switch current {
-//        case ...oneDay:
-//            return 0
-//        case oneDay..<oneDay * AppConstant.Date.spacing:
-//            return oneDay
-//        default:
-//            return current / AppConstant.Date.spacing
-//        }
-//    }
-    
     // MARK: - (instance functions)
     
     func update(feedback: QuizFeedback) {
