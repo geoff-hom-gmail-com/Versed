@@ -15,15 +15,21 @@ final class Passage: TextModel {
     // (note) (ideally, when goal is updated) (paragraphs would update automatically)
     // (but for now) (have to manually call this)
         let newParagraphs = Paragraph.arrayFrom(goal)
+        newParagraphs.forEach { newParagraph in
+            if let oldParagraph = paragraphs.first(where: { newParagraph.text == $0.text }) {
+            // (note) (we assume two paras with same text were unchanged)
+            // (could be issue) (blank paras) (really short, repetitive paras)
+                newParagraph.status = oldParagraph.status
+                newParagraph.priorQuizDate = oldParagraph.priorQuizDate
+                newParagraph.readyDate = oldParagraph.readyDate
+            }
+        }
         
         paragraphs.forEach {
             context.delete($0)
         }
         
         paragraphs = newParagraphs
-
-        // TODO: - (fix for multiverse)
-        // (ideally for multi-para) (keep dates for unchanged paras)
     }
     
     // MARK: - (properties) (other)
