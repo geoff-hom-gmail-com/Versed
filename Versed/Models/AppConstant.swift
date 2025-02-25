@@ -17,10 +17,13 @@ enum AppConstant {
     enum Date {
         static let daySeconds: TimeInterval = 86400
         
-        static let orderMixer = Double.random(in: 1...1.2)
+        static let orderMixer = Double.random(in: 1...orderMixerMax)
         // (goal) (user sees quizzes not always in same order)
-        // (note) (so we increase an interval by up to 20%) (arbitrarily chosen from Pareto)
-        
+        // (note) (so increase interval by up to X%)
+
+        static let orderMixerMax = 1.2
+        // (note) (arbitrarily chosen from Pareto)
+
         static let spacing = 2.5
         // (goal) (user sees quizzes spaced out)
         // (note) (SM-2 Easy-Factor)
@@ -294,12 +297,13 @@ enum AppConstant {
     
     // MARK: - (Info)
     enum Info {
-        // (Note) Why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.
         static let afterCue = "Some text after your goal. Why? To cue."
-        
-        // (Note) What's our preferred cue? Some text before the goal. (vs notation like John 3:16) (vs questions) Why? It's contextual. Not arbitrary. Less prone to interference. It scales naturally.
+        // (note) (why do we have an after-cue? It helps the user know when to stop reciting. It's contextual. It may be useful for backward cueing.)
+
         static let beforeCue = "Some text before your goal. Why? To cue."
-        
+        // (note) (what's our preferred cue? Some text before the goal. (vs notation like John 3:16) (vs questions) Why? It's contextual. Not arbitrary. Less prone to interference. It scales naturally.)
+
+        static let editIntervals = "Intervals increase exponentially."
         static let examples = ""
         static let goal = "The text you want to know."
         static let goalBeats = "The text you want to know. Each paragraph is quizzed separately. Magically."

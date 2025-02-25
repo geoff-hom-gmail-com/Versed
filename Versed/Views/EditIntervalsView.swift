@@ -11,18 +11,16 @@ struct EditIntervalsView: View {
                 Section(
                     header: SectionHeader(
                         image: Image(systemName: AppConstant.SFSymbol.goalText),
-                        label: AppConstant.Label.goalBeats,
-                        infoText: AppConstant.Info.goalBeats)
+                        infoText: AppConstant.Info.editIntervals)
                 ) {
-                    ForEach(paragraphs.indices, id: \.self) { index in
-                        Text(paragraphs[index].text)
-                        let interval = intervals[index]
+                    ForEach(tempParagraphs) { paragraph in
+                        Text(paragraph.text)
                         Stepper {
-                            Text("(" + Paragraph.abbr(from: interval) + ")")
+                            Text("(" + Paragraph.abbr(from: paragraph.interval) + ")")
                         } onIncrement: {
-                            intervals[index] = Paragraph.newInterval(from: interval)
+                            paragraph.advance()
                         } onDecrement: {
-                            intervals[index] = Paragraph.oldInterval(from: interval)
+                            paragraph.rewind()
                         }
                         .listRowSeparator(.hidden, edges: .top)
                     }
@@ -57,7 +55,7 @@ struct EditIntervalsView: View {
     // (goal) (dev can browse the calling body)
         ToolbarItem(placement: .confirmationAction) {
             Button(AppConstant.Label.done) {
-                updateIntervals()
+                updateParagraphs()
                 dismiss()
             }
 //            .disabled(ifNoChanges)
@@ -69,36 +67,27 @@ struct EditIntervalsView: View {
     
     // MARK: - (non-views)
     
-    private func updateIntervals() {
-        // how to do this? here or passge? para?
-        // well, we could just go through each para here, then update its interval (i.e. readyDate)
-        // we could find it by id; or enumerate and just go by index
-        // zip
-        
-        // TODO: - (implement)
-
-//        passage.beforeCue = beforeCue
-//        if passage.goal != goal {
-//        // (note) (currently) (updateParagraphs(_:) deletes all prior paragraphs and makes new ones)
-//        // (later version may be smarter and replace only changed paras)
-//        // (then we wouldn't need this check)
-//            passage.goal = goal
-//            passage.updateParagraphs(modelContext)
-//        }
+    private func updateParagraphs() {
+    // (goal) (paragraph with new interval behaves as user expects)
+        zip(paragraphs, tempParagraphs).forEach { paragraph, tempParagraph in
+            if tempParagraph.interval != paragraph.interval {
+                paragraph.status = tempParagraph.status
+                paragraph.readyDate = tempParagraph.readyDate
+            }
+        }
     }
     
     @Environment(\.dismiss) private var dismiss
 
-//    private var text: Passage
-    // TODO: - (if text better than passage) (tidy EditTextView) (else here)
-    
     private var paragraphs: [Paragraph]
     
-    @State private var intervals: [TimeInterval]
+//    @State private var intervals: [TimeInterval]
+    @State private var tempParagraphs: [Paragraph]
 
     // MARK: - (init(_:))
     init(_ paragraphs: [Paragraph]) {
         self.paragraphs = paragraphs
-        self.intervals = self.paragraphs.map { $0.interval }
+//        self.intervals = self.paragraphs.map { $0.interval }
+        self.tempParagraphs = self.paragraphs.map { Paragraph(text: $0.text, readyDate: $0.readyDate, priorQuizDate: $0.priorQuizDate, status: $0.status) }
     }
 }

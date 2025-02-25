@@ -35,31 +35,31 @@ final class Paragraph {
         return string ?? String()
     }
     
-    static func newInterval(from current: TimeInterval) -> TimeInterval {
-    // (goal) (user can manually increase quiz interval)
-    // (note) (similar to paragraph.update(feedback:)) (without randomness)
-        let oneDay = AppConstant.Date.daySeconds
-        switch current {
-        case ..<oneDay:
-            return oneDay
-        default:
-            return current * AppConstant.Date.spacing
-        }
-    }
-    
-    static func oldInterval(from current: TimeInterval) -> TimeInterval {
-    // (goal) (user can manually decrease quiz interval)
-    // (note) (similar to paragraph.update(feedback:)) (without randomness)
-        let oneDay = AppConstant.Date.daySeconds
-        switch current {
-        case ...oneDay:
-            return 0
-        case oneDay..<oneDay * AppConstant.Date.spacing:
-            return oneDay
-        default:
-            return current / AppConstant.Date.spacing
-        }
-    }
+//    static func newInterval(from current: TimeInterval) -> TimeInterval {
+//    // (goal) (user can manually increase quiz interval)
+//    // (note) (similar to paragraph.update(feedback:)) (without randomness)
+//        let oneDay = AppConstant.Date.daySeconds
+//        switch current {
+//        case ..<oneDay:
+//            return oneDay
+//        default:
+//            return current * AppConstant.Date.spacing
+//        }
+//    }
+//    
+//    static func oldInterval(from current: TimeInterval) -> TimeInterval {
+//    // (goal) (user can manually decrease quiz interval)
+//    // (note) (similar to paragraph.update(feedback:)) (without randomness)
+//        let oneDay = AppConstant.Date.daySeconds
+//        switch current {
+//        case ...oneDay:
+//            return 0
+//        case oneDay..<oneDay * AppConstant.Date.spacing:
+//            return oneDay
+//        default:
+//            return current / AppConstant.Date.spacing
+//        }
+//    }
     
     // MARK: - (instance functions)
     
@@ -108,6 +108,41 @@ final class Paragraph {
         }
     }
     
+    func advance() {
+    // (goal) (user can manually increase quiz interval)
+    // (note) (similar to update(feedback: .good)) (without randomness)
+        let oneDay = AppConstant.Date.daySeconds
+        var newInterval = interval * AppConstant.Date.spacing
+        switch status {
+        case .sprout:
+            if interval < oneDay {
+                newInterval = oneDay
+            } else {
+                status = .rooted
+            }
+        case .rooted:
+            break
+        }
+        readyDate = priorQuizDate + newInterval
+    }
+    
+    func rewind() {
+    // (goal) (user can manually decrease quiz interval)
+    // (note) (similar to update(feedback: .good) in reverse) (without randomness)
+        let oneDay = AppConstant.Date.daySeconds
+        var newInterval = interval / AppConstant.Date.spacing
+        switch status {
+        case .sprout:
+            newInterval = 0
+        case .rooted:
+            if interval <= oneDay * AppConstant.Date.spacing * AppConstant.Date.orderMixerMax {
+                newInterval = oneDay
+                status = .sprout
+            }
+        }
+        readyDate = priorQuizDate + newInterval
+    }
+    
     // MARK: - (properties)
     
     @Relationship
@@ -125,39 +160,27 @@ final class Paragraph {
         readyDate.timeIntervalSince(priorQuizDate)
     }
     
-//    var intervalAbbr: String {
-//    // (goal) (user sees interval value, abbreviated)
-//        let formatter = DateComponentsFormatter()
-//        formatter.maximumUnitCount = 1
-//        formatter.allowsFractionalUnits = true
-//        // TODO: - (see if this actually works?) (fractional) (hopefully just one decimal)
-//        
-//        formatter.allowedUnits = [.minute, .hour, .day, .month, .year]
-//        // (goal) (user not stressed by seeing seconds)
-//        
-//        formatter.unitsStyle = .short
-//        // (goal) (user sees like "4 hr" not "4hr")
-//        
-////        let string = formatter.string(from: priorQuizDate, to: readyDate)
-//        let string = formatter.string(from: interval)
-//        return string ?? String()
-//    }
-    
-    var readyDate = Date.now
+    var readyDate: Date
     // (goal) (user can be quizzed on her paragraph immediately)
     // (note) (was due date) (but that implies a deadline, a due by) (where earlier is bonus)
     // (for quizzing, the "deadline" is actually the earliest time you should quiz) (and later can be bonus)
     
-    var priorQuizDate = Date.now
+    var priorQuizDate: Date
 
     var status: LearningStatus
     
     // MARK: - (init())
 
-    init(index: Int = 0, text: String) {
+    init(index: Int = 0,
+         text: String,
+         readyDate: Date = Date.now,
+         priorQuizDate: Date = Date.now,
+         status: LearningStatus = .sprout) {
         self.index = index
         self.text = text
-        self.status = .sprout
+        self.readyDate = readyDate
+        self.priorQuizDate = priorQuizDate
+        self.status = status
     }
 }
 
