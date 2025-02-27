@@ -1,6 +1,7 @@
 // (goal) (dev can track app description, etc. in Xcode)
 // (note) (App Store Connect uses plain text) (so this file is same)
 
+// (description)
 How important are words to you?
 
 Maybe you were having a bad day. Like, a really bad day. And someone said something that pulled you back up.
@@ -45,3 +46,9 @@ Versed is designed to scale to longer texts.
 Feedback: versed.feedback@gmail.com.
 
 Versed. Because words are important.
+
+// (screenshots)
+- (welcome)
+- (add)
+- (example) (multiverse)
+- (quiz) (pre-check)
