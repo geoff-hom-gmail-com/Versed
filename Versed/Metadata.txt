@@ -1,6 +1,30 @@
 // (goal) (dev can track app description, etc. in Xcode)
 // (note) (App Store Connect uses plain text) (so this file is same)
 
+--------------------------
+// (name)
+Versed
+
+// (subtitle)
+Know text.
+
+// (category)
+Education
+Productivity
+
+--------------------------
+// (privacy policy)
+// (App Privacy Policy Generator) (free) (quick) (https://app-privacy-policy-generator.firebaseapp.com/)
+// (requires) (app name) (email)
+
+--------------------------
+// (screenshots)
+// (iPhone, 6.9") (iPad)
+- (welcome)
+- (add)
+- (example) (multiverse)
+- (quiz) (pre-check)
+
 // (description)
 How important are words to you?
 
@@ -47,8 +71,18 @@ Feedback: versed.feedback@gmail.com.
 
 Versed. Because words are important.
 
-// (screenshots)
-- (welcome)
-- (add)
-- (example) (multiverse)
-- (quiz) (pre-check)
+// (keywords)
+Bible,memory,poem,speech,chapter,psalm,song,lines,cloze,srs
+
+// (support URL)
+https://github.com/geoff-hom-gmail-com/Versed/issues
+
+// (copyright)
+2025 Geoffrey Hom
+
+--------------------------
+// (icon)
+// (Canva)
+// (gradient) (#ff7d4d) (#ffcc59)
+// (font) (Fredoka) (size: 622)
+
