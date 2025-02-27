@@ -12,7 +12,6 @@ struct AdvancedHelpView: View {
             contact
             donate
             credits
-            code
         }
     }
     
@@ -61,19 +60,6 @@ struct AdvancedHelpView: View {
                 \(AppConstant.Credit.geoff)
             """)
             // TODO: - (finish)
-        }
-    }
-    
-    @ViewBuilder
-    var code: some View {
-        DisclosureGroup(AppConstant.Label.code) {
-            Text("""
-            \(AppConstant.Label.appName)'s code is on GitHub:
-            
-                
-            """) +
-            Text(AppConstant.URL.repo)
-            // (note) (whitespaced so the link is indented)
         }
     }
 }

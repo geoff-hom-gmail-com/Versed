@@ -13,6 +13,9 @@ struct FAQView: View {
             DisclosureGroup(AppConstant.FAQ.howQ) {
                 Text(AppConstant.FAQ.howA)
             }
+            DisclosureGroup(AppConstant.FAQ.codeQ) {
+                Text(AppConstant.FAQ.codeA)
+            }
         }
     }
 }

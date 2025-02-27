@@ -306,7 +306,7 @@ enum AppConstant {
             You provide the text. Versed helps you memorize it. 
             """
         
-        static let howQ = "How does it work?"
+        static let howQ = "\(AppConstant.Label.appName): how does it work?"
         static let howA = """
             Versed uses ideas from memory research:
 
@@ -326,6 +326,9 @@ enum AppConstant {
                 • So, you win once by spending less time on quizzes. And you win again by remembering the correct answers longer! 
                 • How often to quiz yourself? Versed handles it. 
             """
+        
+        static let codeQ = "\(AppConstant.Label.appName)'s code: where to find?"
+        static let codeA = AppConstant.URL.repo
     }
     
     // MARK: - (Info)
@@ -353,7 +356,7 @@ enum AppConstant {
         static let beforeCue = "Before"
         static let cancel = "Cancel"
         static let check = "Check"
-        static let code = "Code"
+//        static let code = "Code"
         static let contact = "Contact"
         static let credits = "Credits"
         static let debug = "Debug"
@@ -541,5 +544,6 @@ enum AppConstant {
     // MARK: - (URL)
     enum URL {
         static let repo: LocalizedStringKey = "https://github.com/geoff-hom-gmail-com/Versed"
+        // (note) (LocalizedStringKey needed to link)
     }
 }
