@@ -289,10 +289,43 @@ enum AppConstant {
     
     // MARK: - (FAQ)
     enum FAQ {
-        static let whatQ = "What is \(Label.appName) all about?"
-        static let whatA = ""
-        static let howQ = "How does \(Label.appName) work?"
-        static let howA = ""
+        static let whatQ = "Give me the high-level description."
+        static let whatA = """
+            How important are words to you?
+
+            Like, maybe you were having a bad day. A really bad day. And someone said something that pulled you back up.
+
+            Or maybe you were feeling … lost. And you read something. It made you laugh. Or cry.
+
+            Either way, the words were important. 
+
+            Someday, you’ll have another bad day. Or feel lost. It happens. 
+
+            What if those restoring words—what if you could *know* them? Could drive to work while building a mental map? Could lay in bed while turning them over in your mind? Could go to sleep and dream about them?
+
+            You provide the text. Versed helps you memorize it. 
+            """
+        
+        static let howQ = "How does it work?"
+        static let howA = """
+            Versed uses ideas from memory research:
+
+            • The more we challenge ourselves, the more our brain learns.
+                • Consider highlighting, re-reading, and taking notes. How challenging is that, really?
+                • Now consider a fill-in-the-blanks quiz where you have to dictate an entire sentence. That’s where the rubber meets the road. 
+            
+            • Cadence
+                • Why do we recognize songs with just a few notes? Why do we get a tune stuck in our heads? 
+                • There’s something about the added structure of a poem or song that helps our brain stay hooked onto it. With Versed, you can format text to provide the most cadence to you.
+                            
+            • Cramming fails. Sleep.
+                • Repeating something x10 is inefficient. Once you remember something correctly (e.g., a fill-in-the-blanks quiz), get some quality sleep. You need that for long-term memory. And that’s all you need.
+                            
+            • Quiz yourself. But less often.
+                • Here’s a secret win-win: When you quiz yourself less, your brain remembers your answers *more*. Because it’s more challenging. 
+                • So, you win once by spending less time on quizzes. And you win again by remembering the correct answers longer! 
+                • How often to quiz yourself? Versed handles it. 
+            """
     }
     
     // MARK: - (Info)

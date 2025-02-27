@@ -29,9 +29,33 @@
 		EF13544C2D2C61C400062352 /* VersedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VersedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EF50376B2D703531001F7D53 /* Exceptions for "Versed" folder in "Versed" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Metadata.txt,
+			);
+			target = EF13542F2D2C61C200062352 /* Versed */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		EF50376C2D703531001F7D53 /* Exceptions for "Versed" folder in "Compile Sources" phase from "Versed" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = EF13542C2D2C61C200062352 /* Sources */;
+			membershipExceptions = (
+				Metadata.txt,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EF1354322D2C61C200062352 /* Versed */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EF50376B2D703531001F7D53 /* Exceptions for "Versed" folder in "Versed" target */,
+				EF50376C2D703531001F7D53 /* Exceptions for "Versed" folder in "Compile Sources" phase from "Versed" target */,
+			);
 			path = Versed;
 			sourceTree = "<group>";
 		};

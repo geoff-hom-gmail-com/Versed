@@ -14,10 +14,10 @@ struct FAQView: View {
                 Text(AppConstant.FAQ.howA)
             }
         }
-        // TODO: - (finish this)
     }
 }
 
+// TODO: - (newbie guide??)
 // a newbie guide under advanced doesn't make sense; move or remove
 //            DisclosureGroup("Newbie Guide") {
 //                Text("""
@@ -27,3 +27,8 @@ struct FAQView: View {
 //                    a. When notified, test. Not before.
 //                """)
 //            }
+
+// MARK: - (preview)
+#Preview {
+    FAQView()
+}
