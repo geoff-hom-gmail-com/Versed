@@ -9,8 +9,19 @@ enum AppConstant {
     
     // MARK: - (Credit)
     enum Credit {
-        static let dave = "Dave Bradley (production)"
-        static let geoff = "Geoff Hom (design) (code)"
+        static let credits = """
+            \(Label.appName) was created by:
+            
+                \(Credit.daveLine)
+                \(Credit.geoffLine)
+            
+            We thank our Lord Jesus Christ. All glory to him. All bugs to us.
+            
+            \(Credit.geoff) also thanks Piotr Wozniak (Supermemo), Damian Elmes (Anki), Hal Elrod ("The Miracle Equation"); Henry L. Roediger III, Mark A. McDaniel, and Peter C. Brown ("make it stick"); Charan Ranganath ("Why We Remember").
+            """
+        static let daveLine = "Dave Bradley (production)"
+        static let geoffLine = "Geoff Hom (design) (code)"
+        static let geoff = "Geoff"
     }
     
     // MARK: - (Date)
@@ -350,13 +361,12 @@ enum AppConstant {
     // MARK: - (Label)
     enum Label {
         static let add = "Add"
-        static let advancedHelp = "Advanced Help"
+        static let advancedHelp = "Advanced"
         static let appName = "Versed"
         static let afterCue = "After"
         static let beforeCue = "Before"
         static let cancel = "Cancel"
         static let check = "Check"
-//        static let code = "Code"
         static let contact = "Contact"
         static let credits = "Credits"
         static let debug = "Debug"

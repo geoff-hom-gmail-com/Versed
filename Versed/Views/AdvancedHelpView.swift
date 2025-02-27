@@ -27,13 +27,7 @@ struct AdvancedHelpView: View {
     @ViewBuilder
     var contact: some View {
         DisclosureGroup(AppConstant.Label.contact) {
-            Text("""
-            Feedback may be sent to: 
-                                    
-                
-            """) +
             Text(AppConstant.Email.feedback)
-            // (note) (whitespaced so the link is indented)
         }
     }
     
@@ -53,13 +47,7 @@ struct AdvancedHelpView: View {
     @ViewBuilder
     var credits: some View {
         DisclosureGroup(AppConstant.Label.credits) {
-            Text("""
-            \(AppConstant.Label.appName) was created by:
-            
-                \(AppConstant.Credit.dave)
-                \(AppConstant.Credit.geoff)
-            """)
-            // TODO: - (finish)
+            Text(AppConstant.Credit.credits)
         }
     }
 }
